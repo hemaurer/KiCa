@@ -19,10 +19,10 @@ USE `kica`;
 CREATE TABLE IF NOT EXISTS `abwesenheit` (
   `tr_id` int(10) NOT NULL,
   `p_id` int(10) NOT NULL,
-  KEY `tr_id_p_id` (`tr_id`,`p_id`),
+  PRIMARY KEY (`tr_id`,`p_id`),
   KEY `Abwesende` (`p_id`),
-  CONSTRAINT `Trainingseinheit` FOREIGN KEY (`tr_id`) REFERENCES `trainingseinheit` (`tr_id`),
-  CONSTRAINT `Abwesende` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`)
+  CONSTRAINT `Abwesende` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`),
+  CONSTRAINT `Trainingseinheit` FOREIGN KEY (`tr_id`) REFERENCES `trainingseinheit` (`tr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
