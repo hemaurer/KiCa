@@ -48,7 +48,10 @@ CREATE TABLE IF NOT EXISTS `person` (
   `bild` varchar(100) DEFAULT NULL,
   `betreuer` tinyint(1) unsigned zerofill NOT NULL,
   `tel` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`p_id`)
+  `u_id` int(10) NOT NULL,
+  PRIMARY KEY (`p_id`),
+  KEY `User` (`u_id`),
+  CONSTRAINT `User` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
