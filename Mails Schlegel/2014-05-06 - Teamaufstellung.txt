@@ -1,0 +1,16 @@
+Frage:
+---
+
+es ist uns doch noch eine Frage aufgekommen, bezüglich dem Punkt Teamaufstellung für Spiel / Turnier:
+
+Wie soll diese Anforderung verstanden werden? Soll hier eine Aufstellung der Spieler auf dem Platz genommen werden oder die taktische Aufstellung des Teams (z.B. 4-4-3)?
+
+
+Antwort:
+---
+
+Hier wird lediglich festgehalten, wer an einem Spieltag oder Turnier mit teilnimmt.
+In unserem Fall sieht es so aus.
+Wie habe 17 Spieler. Nicht alle können zu einem Zeitpunkt anwesend sein bzw. es können nicht alle eingesetzt werden.
+Also wird im vorraus entschieden/abgefragt wer mit zum Spiel/Turnier kommen wird (Anzahl ist beliebig).
+Eine taktische aufstellung ist im Moment nicht notwendig (wäre aber eine tolle Erweiterung ;-).

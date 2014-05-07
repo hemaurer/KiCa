@@ -1,0 +1,17 @@
+Frage:
+---
+
+wir sind gerade in der Konzeption für die Fallstudie.
+Beim Paperprototyping kam die Meinung auf, dass wenig dynamische Inhalte für die Fallstudie notwendig sind.
+Hierfür wäre nun eine Umsetzung mit JSP/JSF möglicherweise zu viel des Guten.
+Alternativ haben wir uns überlegt, eine Umsetzung mit PHP/Javascript zu machen.  
+Sie erwähnten ja bereits, dass das für Sie prinzipiell in Ordnung ist; da im PDF zur Fallstudie aber von einer Webapplikation gesprochen wird, und unserer Meinung nach dieser Weg keine Webapplikation darstellt, wollten wir nun noch einmal nachfragen, was denn Ihre Meinung dazu ist. 
+
+
+Antwort:
+---
+
+sagen sie dies einmal einmal einem PHP Entwickler ;-).
+Natürlich ist dies auch eine Webanwendung. Der PHP läuft in einem Webserver, das Javascript im Browser.
+Sie dürfen auch PHP verwenden. allerdings sehe ich keinen großen unterschied zwischen JSP's und PHP.
+JSP's + Servlet (MVC) ist eleganter.
