@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   KEY `Turnier` (`tu_id`),
   CONSTRAINT `Auswaertsmannschaft` FOREIGN KEY (`auswaerts`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Heimmannschaft` FOREIGN KEY (`heim`) REFERENCES `mannschaft` (`m_id`),
-  CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat-id`),
+  CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Turnier` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -81,9 +81,9 @@ CREATE TABLE IF NOT EXISTS `spiel` (
 
 -- Exportiere Struktur von Tabelle kica.status
 CREATE TABLE IF NOT EXISTS `status` (
-  `stat-id` int(10) NOT NULL AUTO_INCREMENT,
+  `stat_id` int(10) NOT NULL AUTO_INCREMENT,
   `status` varchar(30) NOT NULL,
-  PRIMARY KEY (`stat-id`)
+  PRIMARY KEY (`stat_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
