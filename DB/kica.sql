@@ -48,10 +48,10 @@ CREATE TABLE IF NOT EXISTS `person` (
   `bild` varchar(100) DEFAULT NULL,
   `betreuer` tinyint(1) unsigned zerofill NOT NULL,
   `tel` varchar(50) DEFAULT NULL,
-  `u_id` int(10) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(32) NOT NULL,
   PRIMARY KEY (`p_id`),
-  KEY `User` (`u_id`),
-  CONSTRAINT `User` FOREIGN KEY (`u_id`) REFERENCES `user` (`u_id`)
+  UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -139,17 +139,6 @@ CREATE TABLE IF NOT EXISTS `turnier` (
   `name` varchar(50) NOT NULL,
   `gewinner` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`tu_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Daten Export vom Benutzer nicht ausgewählt
-
-
--- Exportiere Struktur von Tabelle kica.user
-CREATE TABLE IF NOT EXISTS `user` (
-  `u_id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  PRIMARY KEY (`u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
