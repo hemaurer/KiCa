@@ -11,11 +11,13 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Exportiere Datenbank Struktur für kica
+DROP DATABASE IF EXISTS `kica`;
 CREATE DATABASE IF NOT EXISTS `kica` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `kica`;
 
 
 -- Exportiere Struktur von Tabelle kica.abwesenheit
+DROP TABLE IF EXISTS `abwesenheit`;
 CREATE TABLE IF NOT EXISTS `abwesenheit` (
   `tr_id` int(10) NOT NULL,
   `p_id` int(10) NOT NULL,
@@ -29,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
 
 
 -- Exportiere Struktur von Tabelle kica.mannschaft
+DROP TABLE IF EXISTS `mannschaft`;
 CREATE TABLE IF NOT EXISTS `mannschaft` (
   `m_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -39,12 +42,13 @@ CREATE TABLE IF NOT EXISTS `mannschaft` (
 
 
 -- Exportiere Struktur von Tabelle kica.person
+DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `p_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `v_name` varchar(30) NOT NULL,
   `geb_datum` date NOT NULL,
-  `groesse` tinyint(4) DEFAULT NULL,
+  `groesse` tinyint(4) unsigned DEFAULT NULL,
   `bild` varchar(100) DEFAULT NULL,
   `betreuer` tinyint(1) unsigned zerofill NOT NULL,
   `tel` varchar(50) DEFAULT NULL,
@@ -58,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `person` (
 
 
 -- Exportiere Struktur von Tabelle kica.spiel
+DROP TABLE IF EXISTS `spiel`;
 CREATE TABLE IF NOT EXISTS `spiel` (
   `s_id` int(10) NOT NULL AUTO_INCREMENT,
   `ort` varchar(255) NOT NULL,
@@ -83,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `spiel` (
 
 
 -- Exportiere Struktur von Tabelle kica.status
+DROP TABLE IF EXISTS `status`;
 CREATE TABLE IF NOT EXISTS `status` (
   `stat_id` int(10) NOT NULL AUTO_INCREMENT,
   `status` varchar(30) NOT NULL,
@@ -93,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `status` (
 
 
 -- Exportiere Struktur von Tabelle kica.teilnehmer_tg
+DROP TABLE IF EXISTS `teilnehmer_tg`;
 CREATE TABLE IF NOT EXISTS `teilnehmer_tg` (
   `tg_id` int(10) NOT NULL,
   `p_id` int(10) NOT NULL,
@@ -106,6 +113,7 @@ CREATE TABLE IF NOT EXISTS `teilnehmer_tg` (
 
 
 -- Exportiere Struktur von Tabelle kica.trainingseinheit
+DROP TABLE IF EXISTS `trainingseinheit`;
 CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   `tr_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -121,6 +129,7 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
 
 
 -- Exportiere Struktur von Tabelle kica.trainingsgruppe
+DROP TABLE IF EXISTS `trainingsgruppe`;
 CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
   `tg_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -134,11 +143,14 @@ CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
 
 
 -- Exportiere Struktur von Tabelle kica.turnier
+DROP TABLE IF EXISTS `turnier`;
 CREATE TABLE IF NOT EXISTS `turnier` (
   `tu_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `gewinner` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`tu_id`)
+  `gewinner` int(10) DEFAULT NULL,
+  PRIMARY KEY (`tu_id`),
+  KEY `Gewinner` (`gewinner`),
+  CONSTRAINT `Gewinner` FOREIGN KEY (`gewinner`) REFERENCES `mannschaft` (`m_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
