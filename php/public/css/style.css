@@ -31,3 +31,58 @@ table {
 .bold {
     font-weight: bold;
 }
+
+.navigation ul li {
+    display: inline-block;
+    text-decoration: none;
+}
+
+
+nav {
+    width: 960px;
+}
+nav ul {
+    padding: 0px;
+    margin: 0px;
+}
+nav ul:after {
+    clear: both;
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+}
+    nav ul,nav ul li{
+    background-color: #FAFAFA;
+}
+    nav ul li {
+    list-style: none;
+    float:left;
+}
+nav ul li a {
+    text-decoration: none;
+    display: block;
+    color: #333;
+    padding: 14px 34px 14px 34px;
+}
+nav ul li:hover > ul {
+    visibility: visible;
+}
+nav ul li ul{
+    display: inline;
+    visibility: hidden;
+    position: absolute;
+    padding:0px;
+}
+nav ul li ul li{
+    float: none;
+}
+nav ul li ul li a:hover{
+    color: #333;
+}
+
+.footer ul li{
+        display: inline-block;
+    text-decoration: none;
+}
