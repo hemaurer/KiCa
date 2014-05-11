@@ -3,7 +3,7 @@
 class Application
 {
     /** @var null The controller */
-    private $url_controller = null;
+    public $url_controller = null;
 
     /** @var null The method (of the above controller), often also named "action" */
     private $url_action = null;
@@ -56,7 +56,7 @@ class Application
                 $this->url_controller->index();
             }
         } else {
-            // invalid URL, so simply show home/index
+            echo "invalid URL";// so simply show home/index
             require './application/controller/home.php';
             $home = new Home();
             $home->index();
