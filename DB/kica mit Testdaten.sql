@@ -10,13 +10,13 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Exportiere Datenbank Struktur für kica
-DROP DATABASE IF EXISTS `kica`;
-CREATE DATABASE IF NOT EXISTS `kica` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `kica`;
+-- Exportiere Datenbank Struktur für kica_test
+DROP DATABASE IF EXISTS `kica_test`;
+CREATE DATABASE IF NOT EXISTS `kica_test` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `kica_test`;
 
 
--- Exportiere Struktur von Tabelle kica.abwesenheit
+-- Exportiere Struktur von Tabelle kica_test.abwesenheit
 DROP TABLE IF EXISTS `abwesenheit`;
 CREATE TABLE IF NOT EXISTS `abwesenheit` (
   `tr_id` int(10) NOT NULL,
@@ -27,13 +27,13 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
   CONSTRAINT `Trainingseinheit` FOREIGN KEY (`tr_id`) REFERENCES `trainingseinheit` (`tr_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.abwesenheit: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~0 rows (ungefähr)
 DELETE FROM `abwesenheit`;
 /*!40000 ALTER TABLE `abwesenheit` DISABLE KEYS */;
 /*!40000 ALTER TABLE `abwesenheit` ENABLE KEYS */;
 
 
--- Exportiere Struktur von Tabelle kica.mannschaft
+-- Exportiere Struktur von Tabelle kica_test.mannschaft
 DROP TABLE IF EXISTS `mannschaft`;
 CREATE TABLE IF NOT EXISTS `mannschaft` (
   `m_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `mannschaft` (
   PRIMARY KEY (`m_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.mannschaft: ~18 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.mannschaft: ~18 rows (ungefähr)
 DELETE FROM `mannschaft`;
 /*!40000 ALTER TABLE `mannschaft` DISABLE KEYS */;
 INSERT INTO `mannschaft` (`m_id`, `name`) VALUES
@@ -66,7 +66,7 @@ INSERT INTO `mannschaft` (`m_id`, `name`) VALUES
 /*!40000 ALTER TABLE `mannschaft` ENABLE KEYS */;
 
 
--- Exportiere Struktur von Tabelle kica.person
+-- Exportiere Struktur von Tabelle kica_test.person
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `p_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.person: ~29 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.person: ~29 rows (ungefähr)
 DELETE FROM `person`;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
 INSERT INTO `person` (`p_id`, `name`, `v_name`, `geb_datum`, `groesse`, `bild`, `betreuer`, `tel`, `username`, `password`) VALUES
@@ -119,7 +119,7 @@ INSERT INTO `person` (`p_id`, `name`, `v_name`, `geb_datum`, `groesse`, `bild`, 
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 
--- Exportiere Struktur von Tabelle kica.spiel
+-- Exportiere Struktur von Tabelle kica_test.spiel
 DROP TABLE IF EXISTS `spiel`;
 CREATE TABLE IF NOT EXISTS `spiel` (
   `s_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   CONSTRAINT `Turnier` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.spiel: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.spiel: ~0 rows (ungefähr)
 DELETE FROM `spiel`;
 /*!40000 ALTER TABLE `spiel` DISABLE KEYS */;
 INSERT INTO `spiel` (`s_id`, `ort`, `heim`, `auswaerts`, `h_tore`, `a_tore`, `stat_id`, `zeit`, `tu_id`) VALUES
@@ -150,7 +150,7 @@ INSERT INTO `spiel` (`s_id`, `ort`, `heim`, `auswaerts`, `h_tore`, `a_tore`, `st
 /*!40000 ALTER TABLE `spiel` ENABLE KEYS */;
 
 
--- Exportiere Struktur von Tabelle kica.status
+-- Exportiere Struktur von Tabelle kica_test.status
 DROP TABLE IF EXISTS `status`;
 CREATE TABLE IF NOT EXISTS `status` (
   `stat_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `status` (
   PRIMARY KEY (`stat_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.status: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.status: ~0 rows (ungefähr)
 DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`stat_id`, `status`) VALUES
@@ -171,7 +171,7 @@ INSERT INTO `status` (`stat_id`, `status`) VALUES
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 
 
--- Exportiere Struktur von Tabelle kica.teilnehmer_tg
+-- Exportiere Struktur von Tabelle kica_test.teilnehmer_tg
 DROP TABLE IF EXISTS `teilnehmer_tg`;
 CREATE TABLE IF NOT EXISTS `teilnehmer_tg` (
   `tg_id` int(10) NOT NULL,
@@ -182,13 +182,13 @@ CREATE TABLE IF NOT EXISTS `teilnehmer_tg` (
   CONSTRAINT `Trainigsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.teilnehmer_tg: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.teilnehmer_tg: ~0 rows (ungefähr)
 DELETE FROM `teilnehmer_tg`;
 /*!40000 ALTER TABLE `teilnehmer_tg` DISABLE KEYS */;
 /*!40000 ALTER TABLE `teilnehmer_tg` ENABLE KEYS */;
 
 
--- Exportiere Struktur von Tabelle kica.trainingseinheit
+-- Exportiere Struktur von Tabelle kica_test.trainingseinheit
 DROP TABLE IF EXISTS `trainingseinheit`;
 CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   `tr_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -201,13 +201,13 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.trainingseinheit: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~0 rows (ungefähr)
 DELETE FROM `trainingseinheit`;
 /*!40000 ALTER TABLE `trainingseinheit` DISABLE KEYS */;
 /*!40000 ALTER TABLE `trainingseinheit` ENABLE KEYS */;
 
 
--- Exportiere Struktur von Tabelle kica.trainingsgruppe
+-- Exportiere Struktur von Tabelle kica_test.trainingsgruppe
 DROP TABLE IF EXISTS `trainingsgruppe`;
 CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
   `tg_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -218,13 +218,13 @@ CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
   CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.trainingsgruppe: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.trainingsgruppe: ~0 rows (ungefähr)
 DELETE FROM `trainingsgruppe`;
 /*!40000 ALTER TABLE `trainingsgruppe` DISABLE KEYS */;
 /*!40000 ALTER TABLE `trainingsgruppe` ENABLE KEYS */;
 
 
--- Exportiere Struktur von Tabelle kica.turnier
+-- Exportiere Struktur von Tabelle kica_test.turnier
 DROP TABLE IF EXISTS `turnier`;
 CREATE TABLE IF NOT EXISTS `turnier` (
   `tu_id` int(10) NOT NULL AUTO_INCREMENT,
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `turnier` (
   CONSTRAINT `Gewinner` FOREIGN KEY (`gewinner`) REFERENCES `mannschaft` (`m_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica.turnier: ~1 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.turnier: ~1 rows (ungefähr)
 DELETE FROM `turnier`;
 /*!40000 ALTER TABLE `turnier` DISABLE KEYS */;
 INSERT INTO `turnier` (`tu_id`, `name`, `gewinner`) VALUES
