@@ -71,24 +71,30 @@
                     <?php }
                     ?>
 
-                    <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
-                    <?php
-                        if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
-                    ?>
-                        <li><a href="<?php echo URL; ?>verwaltung/">Verwaltung</a></li>
-                    <?php }
-                    ?>
-
-                    <!-- Wenn man eingeloggt ist, die Profilseite und den Logout Button unter Login anzeigen -->
+                    <!-- Wenn man eingeloggt ist, die Suche, die Profilseite und den Logout Button unter Login anzeigen -->
                     <?php
                         if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
                     ?>
+                        <li>
+                            <form name="search" action="#" method="get">
+                                <input type="text" name="search_query" placeholder="Suchen..." />
+                                <input type="submit" name="login" value="Suchen">
+                            </form>
+                        </li>
                         <li><a href="#">Profil</a></li>
                         <li>
                             <form name="logoutform" action="<?php echo URL; ?>login/doLogout" method="post">
                                 <input type="submit" name="logout" value="Log out" />
                             </form>
                         </li>
+                    <?php }
+                    ?>
+
+                    <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
+                    <?php
+                        if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
+                    ?>
+                        <li><a href="<?php echo URL; ?>verwaltung/">Verwaltung</a></li>
                     <?php }
                     ?>
 
