@@ -22,7 +22,7 @@
     <nav>
         <ul>
             <!-- same like "home" or "home/index" -->
-            <li><a href="<?php echo URL; ?>">Home</a></li>
+            <li><a a href="<?php echo URL; ?>home/">Home</a></li>
             <li><a href="#">Termine</a></li>
             <li><a href="#">Ligatabelle</a>
                 <ul>
@@ -33,19 +33,66 @@
                 </ul>
             </li>
             <li><a href="#">Turniere</a></li>
-            <!-- Login mit Submenü, die die Forms beinhalten (und im registrierten Zustand auch weitere Felder) -->
-            <!-- dies muss eventuell über 2 Header oder sonstige Restriktionen geschehen -->
-			<li><a href="#">Login</a>
+
+            <!-- Login mit Submenü, die die Forms beinhalten -->
+            <!-- Hier wird vom Server anhand von Sessionvariablen über PHP entschieden, wie die Navigation aufgebaut ist -->
+            <!-- 3 Varianten: ausgeloggt, eingeloggt, eingeloggt mit Adminrechten -->
+
+            <!-- Session starten, dass die Session Variablen zum Login-Status ausgelesen werden können -->
+            <!-- "Login" in der Navigation umbennen in den eingeloggten User -->
+            <?php
+                @session_start();
+
+                if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
+            ?>
+                    <li><a href="#"><?php echo $_SESSION['username']; ?></a>
+            <?php
+                }
+                else{
+             ?>
+                    <li><a href="#">Login</a>
+            <?php  }
+            ?>
+
+            <!-- die restliche Navigation, bzw. Submenu von "Login" -->
                 <ul id="login">
-                    <li>
-                        <form name="login" action="<?php echo URL; ?>home/login" method="post">
-                            <input type="text" placeholder="Benutzername" name="username"><br>
-                            <input type="password" placeholder="Passwort" name="password"><br>
-                            <input type="submit" name="Submit">
-                        </form>
-                    </li>
-                    <!-- Verwaltung nur zu Testzwecken hier enthalten - später nur im eingeloggten Zustand an dieser Stelle zu finden -->
-                    <li><a href="<?php echo URL; ?>verwaltung/">Verwaltung</a></li>
+
+                    <!-- Wenn man nicht eingeloggt ist, das Login-Formular in der Navigation anzeigen -->
+                    <?php
+                        if (!isset($_SESSION['user_login_status'])){
+                    ?>
+                        <li>
+                            <form name="loginform" action="<?php echo URL; ?>login/dologinWithPostData" method="post">
+                                <input id="login_input_username" class="login_input" type="text" name="username" placeholder="Benutzername" required /><br>
+                                <input id="login_input_password" class="login_input" type="password" name="password" autocomplete="off" placeholder="Passwort" required /><br>
+                                <input type="submit" name="login" value="Log in">
+                            </form>
+                        </li>
+                    <?php }
+                    ?>
+
+                    <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
+                    <?php
+                        if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
+                    ?>
+                        <li><a href="<?php echo URL; ?>verwaltung/">Verwaltung</a></li>
+                    <?php }
+                    ?>
+
+                    <!-- Wenn man eingeloggt ist, die Profilseite und den Logout Button unter Login anzeigen -->
+                    <?php
+                        if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
+                    ?>
+                        <li><a href="#">Profil</a></li>
+                        <li>
+                            <form name="logoutform" action="<?php echo URL; ?>login/doLogout" method="post">
+                                <input type="submit" name="logout" value="Log out" />
+                            </form>
+                        </li>
+                    <?php }
+                    ?>
+
+
                 </ul>
             </li>
         </ul>

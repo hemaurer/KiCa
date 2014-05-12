@@ -24,3 +24,6 @@ require 'application/libs/controller.php';
 
 // start the application
 $app = new Application();
+
+// load the login
+require_once("application/controller/login.php");
