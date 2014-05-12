@@ -12,7 +12,11 @@ class Verwaltung extends Controller
         $verwaltungs_model = $this->loadModel('VerwaltungsModel');
         $personen = $verwaltungs_model->get_alle_personen();
 		$spiele = $verwaltungs_model->get_alle_spiele();
-        // load another model, perform an action, pass the returned data to a variable
+		$mannschaften = $verwaltungs_model->get_alle_mannschaften();
+        $trainingseinheiten = $verwaltungs_model->get_alle_trainingseinheiten();
+		$trainingsgruppen = $verwaltungs_model->get_alle_trainingsgruppen();
+		$turniere = $verwaltungs_model->get_alle_turniere();
+		// load another model, perform an action, pass the returned data to a variable
         // NOTE: please write the name of the model "LikeThis"
         //$stats_model = $this->loadModel('StatsModel');
         //$amount_of_songs = $stats_model->getAmountOfSongs();
@@ -23,6 +27,8 @@ class Verwaltung extends Controller
         require 'application/views/_templates/footer.php';
     }
 
+/***Person***/	
+	
     public function add_person()
     {
         // simple message to show where you are
@@ -68,7 +74,7 @@ class Verwaltung extends Controller
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->add_spiel($_POST["str_ort"], $_POST["int_heim"], $_POST["int_auswaerts"], $_POST["int_h_tore"], $_POST["int_a_tore"], $_POST["int_stat_id"], $_POST["d_zeit"], $_POST["int_tu_id"]);
         }
-        //header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
     }
 	public function edit_spiel()
     {
@@ -77,7 +83,7 @@ class Verwaltung extends Controller
 
         if (isset($_POST["submit_edit_spiel"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->edit_person($_POST["s_id"], $_POST["str_ort"], $_POST["int_heim"], $_POST["int_auswaerts"], $_POST["int_h_tore"], $_POST["int_a_tore"], $_POST["int_stat_id"], $_POST["d_zeit"], $_POST["int_tu_id"]);
+            $verwaltungs_model->edit_spiel($_POST["s_id"], $_POST["str_ort"], $_POST["int_heim"], $_POST["int_auswaerts"], $_POST["int_h_tore"], $_POST["int_a_tore"], $_POST["int_stat_id"], $_POST["d_zeit"], $_POST["int_tu_id"]);
         }
         header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
     }
@@ -88,9 +94,123 @@ class Verwaltung extends Controller
 
         if (isset($s_id)) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->delete_person($s_id);
+            $verwaltungs_model->delete_spiel($s_id);
         }
         header('location: ' . URL . 'verwaltung/index');
     }
+
+/***Mannschaften***/
+
+    public function add_mannschaft()
+    {
+        if (isset($_POST["submit_add_mannschaft"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->add_mannschaft($_POST["str_name"]);
+        }
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+    }
+	public function edit_mannschaft()
+    {
+        if (isset($_POST["submit_edit_mannschaft"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->edit_mannschaft($_POST["m_id"], $_POST["str_name"]);
+        }
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+    }
+    public function delete_mannschaft($m_id)
+    {
+        if (isset($m_id)) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->delete_mannschaft($m_id);
+        }
+        header('location: ' . URL . 'verwaltung/index');
+    }
+	
+/***Trainingseinheiten***/
+
+    public function add_trainingseinheit()
+    {
+        if (isset($_POST["submit_add_trainingseinheit"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->add_trainingseinheit($_POST["str_name"], $_POST["str_ort"], $_POST["d_zeit"], $_POST["int_tg_id"]);
+        }
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+    }
+	public function edit_trainingseinheit()
+    {
+        if (isset($_POST["submit_edit_trainingseinheit"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->edit_trainingseinheit($_POST["tr_id"], $_POST["str_name"], $_POST["str_ort"], $_POST["d_zeit"], $_POST["int_tg_id"]);
+        }
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+    }
+    public function delete_trainingseinheit($tr_id)
+    {
+        if (isset($tr_id)) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->delete_trainingseinheit($tr_id);
+        }
+        header('location: ' . URL . 'verwaltung/index');
+    }
+	
+/***Trainingsgruppe***/
+
+    public function add_trainingsgruppe()
+    {
+        if (isset($_POST["submit_add_trainingsgruppe"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->add_trainingsgruppe($_POST["str_name"], $_POST["int_trainer"]);
+        }
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+    }
+	public function edit_trainingsgruppe()
+    {
+        if (isset($_POST["submit_edit_trainingsgruppe"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->edit_trainingsgruppe($_POST["tg_id"], $_POST["str_name"], $_POST["int_trainer"]);
+        }
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+    }
+    public function delete_trainingsgruppe($tg_id)
+    {
+        if (isset($tg_id)) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->delete_trainingsgruppe($tg_id);
+        }
+        header('location: ' . URL . 'verwaltung/index');
+    }
+	
+/***Turnier***/	
+	
+    public function add_turnier()
+    {
+        if (isset($_POST["submit_add_turnier"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->add_turnier($_POST["str_name"], $_POST["int_gewinner"]);
+        }
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+    }
+	public function edit_turnier()
+    {
+        if (isset($_POST["submit_edit_turnier"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["int_gewinner"]);
+        }
+        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+    }
+    public function delete_turnier($tu_id)
+    {
+        if (isset($tu_id)) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->delete_turnier($tu_id);
+        }
+        header('location: ' . URL . 'verwaltung/index');
+    }
+	
+	
+	
+	
+	
+	
 }
 ?>

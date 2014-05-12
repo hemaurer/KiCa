@@ -80,10 +80,10 @@ class Login
 
                     // using PHP 5.5's password_verify() function to check if the provided password fits
                     // the hash of that user's password
-                    //
-                    // aktuell wird hier nur nach Klartextpasswort geschaut, bei fertigem Hashing die Zeile verwenden:
-                    // if (password_verify($_POST['password'], $result_row->password_hash)) {
-                    if ($_POST['password'] == $result_row->password) {
+                     if (password_verify($_POST['password'], $result_row->password)) {
+					/***Klartext-Prüfung***/
+					//if ($_POST['password'] == $result_row->password) {
+					//***//
                         // write user data into PHP SESSION (a file on your server)
                         $_SESSION['username'] = $result_row->username;
                         $_SESSION['betreuer'] = $result_row->betreuer;
