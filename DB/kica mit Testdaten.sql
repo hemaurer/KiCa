@@ -78,10 +78,10 @@ CREATE TABLE IF NOT EXISTS `person` (
   `betreuer` tinyint(1) unsigned zerofill NOT NULL,
   `tel` varchar(50) DEFAULT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(60) NOT NULL,
   PRIMARY KEY (`p_id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.person: ~29 rows (ungefähr)
 DELETE FROM `person`;
@@ -115,7 +115,8 @@ INSERT INTO `person` (`p_id`, `name`, `v_name`, `geb_datum`, `groesse`, `bild`, 
 	(26, 'Lewandowski', 'Robert', '1999-05-11', 185, NULL, 0, NULL, 'Robert.Lewandowski', '098f6bcd4621d373cade4e832627b4f6'),
 	(27, 'Schieber', 'Julian', '1999-05-11', 186, NULL, 0, NULL, 'Julian.Schieber', '098f6bcd4621d373cade4e832627b4f6'),
 	(28, 'Ducksch', 'Marvin', '1999-05-11', 188, NULL, 0, NULL, 'Marvin.Ducksch', '098f6bcd4621d373cade4e832627b4f6'),
-	(29, 'Klopp', 'Jürgen', '1967-06-16', 193, NULL, 1, NULL, 'Jürgen.Klopp', '098f6bcd4621d373cade4e832627b4f6');
+	(29, 'Klopp', 'Jürgen', '1967-06-16', 193, NULL, 1, NULL, 'Jürgen.Klopp', '098f6bcd4621d373cade4e832627b4f6'),
+	(30, 'admin', 'admin', '1967-06-16', 193, NULL, 1, NULL, 'admin', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 

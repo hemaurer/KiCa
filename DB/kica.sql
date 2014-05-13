@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `betreuer` tinyint(1) unsigned zerofill NOT NULL,
   `tel` varchar(50) DEFAULT NULL,
   `username` varchar(30) NOT NULL,
-  `password` varchar(32) NOT NULL,
+  `password` varchar(60) NOT NULL,
   PRIMARY KEY (`p_id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
