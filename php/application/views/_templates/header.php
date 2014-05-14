@@ -13,7 +13,7 @@
 </head>
 <body>
 <!-- header -->
-<div class="container">
+<div>
     <!-- KiCa Logo -->
     <div>
         <img src="<?php echo URL; ?>public/img/logo.png" />
@@ -82,6 +82,13 @@
                             </form>
                         </li>
                         <li><a href="#">Profil</a></li>
+						 <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
+						<?php
+							if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
+						?>
+							<li><a href="<?php echo URL; ?>verwaltung/">Verwaltung</a></li>
+						<?php }
+						?>
                         <li>
                             <form name="logoutform" action="<?php echo URL; ?>login/doLogout" method="post">
                                 <input type="submit" name="logout" value="Log out" />
@@ -90,13 +97,7 @@
                     <?php }
                     ?>
 
-                    <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
-                    <?php
-                        if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
-                    ?>
-                        <li><a href="<?php echo URL; ?>verwaltung/">Verwaltung</a></li>
-                    <?php }
-                    ?>
+                   
 
                 </ul>
             </li>

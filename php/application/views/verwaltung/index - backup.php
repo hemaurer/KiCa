@@ -4,13 +4,10 @@
 <?php
 	if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 ?>
-<?php /***Personen-Container** */?>
+<?php /***Personen-Container***/?>
 <div class="container">
-
-<div class="accordion vertical">
-	<section id="person">
-	<div class="insection">
-        <h2><a href="#person">Neue Person hinzufügen</a></h2>
+    <div>
+        <h3>Neue Person hinzufügen</h3>
         <form action="<?php echo URL; ?>verwaltung/add_person" method="POST">
 		    <label>Nachname</label>
             <input type="text" name="str_nachname" value="" required />
@@ -35,6 +32,8 @@
             <input type="password" name="str_password" value="" />
             <input type="submit" name="submit_add_person" value="Speichern" />
         </form>
+    </div>
+    <div>
         <h3>Liste aller Personen (data from first model)</h3>
         <table>
             <thead style="background-color: #ddd; font-weight: bold;">
@@ -58,15 +57,12 @@
             <?php } ?>
             </tbody>
         </table>
-		</div>
-    </section>
-	
+    </div>
+</div>
 <?php /***Spiele-Container***/?>
-
-	<section id="spiel">
-		<div class="insection">
-        <h2><a href="#spiel">Neue Spiele hinzufügen</a></h2>
-		
+<div class="container">
+    <div>
+        <h3>Neue Spiele hinzufügen</h3>
         <form action="<?php echo URL; ?>verwaltung/add_spiel" method="POST">
 		    <label>Spielort</label>
             <input type="text" name="str_ort" value="" required />
@@ -80,6 +76,8 @@
             <input type="text" name="d_zeit" value="" required/>
             <input type="submit" name="submit_add_spiel" value="Speichern" />
         </form>
+    </div>
+    <div>
         <h3>Liste aller Spiele</h3>
         <table>
             <thead style="background-color: #ddd; font-weight: bold;">
@@ -105,21 +103,19 @@
             <?php } ?>
             </tbody>
         </table>
-		</div>
-	</section>
-	
+    </div>
+</div>
 <?php /***Mannschaften-Container***/?>
-
-    <section id="mannschaften">
-		<div class="insection">
-        <h2><a href="#mannschaften" >Neue Mannschaften hinzufügen</a></h2>
-		
+<div class="container">
+    <div>
+        <h3>Neue Mannschaften hinzufügen</h3>
         <form action="<?php echo URL; ?>verwaltung/add_mannschaft" method="POST">
 		    <label>Mannschaftsname</label>
             <input type="text" name="str_name" value="" required />
             <input type="submit" name="submit_add_mannschaft" value="Speichern" />
         </form>
-
+    </div>
+    <div>
         <h3>Liste aller Mannschaften</h3>
         <table>
             <thead style="background-color: #ddd; font-weight: bold;">
@@ -139,16 +135,12 @@
             <?php } ?>
             </tbody>
         </table>
-		</div>
-	</section>
-	
+    </div>
+</div>
 <?php /***Trainingseinheiten-Container***/?>
-
-   <section id="trainingseinheit">
-   <div class="insection">
-        <h2><a href="#trainingseinheit"> Neue Trainingseinheiten hinzufügen</a></h2>
-		
-        
+<div class="container">
+    <div>
+        <h3>Neue Trainingseinheiten hinzufügen</h3>
         <form action="<?php echo URL; ?>verwaltung/add_trainingseinheit" method="POST">
 		    <label>Training(Name oder Beschreibung)</label>
             <input type="text" name="str_name" value="" required />
@@ -160,7 +152,8 @@
             <input type="text" name="int_tg_id" value="" required/>
             <input type="submit" name="submit_add_trainingseinheit" value="Speichern" />
         </form>
-
+    </div>
+    <div>
         <h3>Liste aller Trainingseinheiten</h3>
         <table>
             <thead style="background-color: #ddd; font-weight: bold;">
@@ -186,16 +179,12 @@
             <?php } ?>
             </tbody>
         </table>
-		</div>
-	</section>
-	
+    </div>
+</div>
 <?php /***Trainingsgruppen-Container***/?>
-
-    <section id="trainingsgruppe">
-	<div class="insection">
-        <h2><a href="#trainingsgruppe"> Neue Trainingsgruppen hinzufügen</a></h2>
-		<p>
-        
+<div class="container">
+    <div>
+        <h3>Neue Trainingsgruppe hinzufügen</h3>
         <form action="<?php echo URL; ?>verwaltung/add_trainingsgruppe" method="POST">
 		    <label>Trainingsgruppenname</label>
             <input type="text" name="str_name" value="" required />
@@ -203,7 +192,8 @@
             <input type="text" name="int_trainer" value="" required />
             <input type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
         </form>
-
+    </div>
+    <div>
         <h3>Liste aller Trainingsgruppen</h3>
         <table>
             <thead style="background-color: #ddd; font-weight: bold;">
@@ -225,16 +215,12 @@
             <?php } ?>
             </tbody>
         </table>
-		</div>
-	</section>
-	
+    </div>
+</div>
 <?php /***Turnier-Container***/?>
-
-    <section id="turniere">
-        <div class="insection">
-		<h2><a href="#turniere"> Neues Turnier hinzufügen </a></h2>
-		
-        
+<div class="container">
+    <div>
+        <h3>Neues Turnier hinzufügen</h3>
         <form action="<?php echo URL; ?>verwaltung/add_turnier" method="POST">
 		    <label>Turniername</label>
             <input type="text" name="str_name" value="" required />
@@ -242,7 +228,8 @@
             <input type="text" name="int_gewinner" value="" />
             <input type="submit" name="submit_add_turnier" value="Speichern" />
         </form>
-
+    </div>
+    <div>
         <h3>Liste aller Turniere</h3>
         <table>
             <thead style="background-color: #ddd; font-weight: bold;">
@@ -264,10 +251,7 @@
             <?php } ?>
             </tbody>
         </table>
-		</div>
-	</section>
-</div>
-
+    </div>
 </div>
 <?php }
     else{
