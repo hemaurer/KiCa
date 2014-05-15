@@ -62,10 +62,10 @@
                         if (!isset($_SESSION['user_login_status'])){
                     ?>
                         <li>
-                            <form name="loginform" action="<?php echo URL; ?>login/dologinWithPostData" method="post">
-                                <input id="login_input_username" class="login_input" type="text" name="username" placeholder="Benutzername" required /><br>
-                                <input id="login_input_password" class="login_input" type="password" name="password" autocomplete="off" placeholder="Passwort" required /><br>
-                                <input type="submit" name="login" value="Log in">
+                            <form name="loginform" action="<?php echo URL; ?>login/doLogin" method="post">
+                                <input id="login_input_username" class="login_input" type="text" name="str_username" placeholder="Benutzername" required /><br>
+                                <input id="login_input_password" class="login_input" type="password" name="str_password" autocomplete="off" placeholder="Passwort" required /><br>
+                                <input type="submit" name="submit_login" value="Log in">
                             </form>
                         </li>
                     <?php }
@@ -78,7 +78,7 @@
                         <li>
                             <form name="search" action="#" method="get">
                                 <input type="text" name="search_query" placeholder="Suchen..." />
-                                <input type="submit" name="login" value="Suchen">
+                                <input type="submit" name="submit_search" value="Suchen">
                             </form>
                         </li>
                         <li><a href="#">Profil</a></li>
@@ -90,8 +90,8 @@
 						<?php }
 						?>
                         <li>
-                            <form name="logoutform" action="<?php echo URL; ?>login/doLogout" method="post">
-                                <input type="submit" name="logout" value="Log out" />
+                            <form name="logoutform" action="<?php echo URL; ?>login/doLogout" method="get">
+                                <input type="submit" name="submit_logout" value="Log out" />
                             </form>
                         </li>
                     <?php }

@@ -1,131 +1,61 @@
 <?php
 
-/**
- * Class login
- * handles the user's login and logout process
- */
-class Login
+// Login Model, aufgerufen vom Login Controller (login.php)
+// Behandelt den Login und Logout von Benutzern in der Webanwendung
+class LoginModel
 {
-    /**
-     * @var object The database connection
-     */
-    private $db_connection = null;
-    /**
-     * @var array Collection of error messages
-     */
-    public $errors = array();
-    /**
-     * @var array Collection of success / neutral messages
-     */
-    public $messages = array();
 
-    /**
-     * the function "__construct()" automatically starts whenever an object of this class is created,
-     * you know, when you do "$login = new Login();"
-     */
-    public function __construct()
+    // Konstruktor, um Datenbank zu definieren und Session zu starten
+    public function __construct($db)
     {
-        // create/read session, absolutely necessary
+        try
+        {
+            $this->db = $db;
+        }
+        catch (PDOException $e)
+        {
+            exit('Database connection could not be established.');
+        }
+
+        //Session starten, um Session Variablen zu ermöglichen
         @session_start();
+    }//end __construct($db)
 
-        // check the possible login actions:
-        // if user tried to log out (happen when user clicks logout button)
-        if (isset($_GET["logout"])) {
-            $this->doLogout();
-        }
-        // login via post data (if user just submitted a login form)
-        elseif (isset($_POST["login"])) {
-            $this->dologinWithPostData();
-        }
-    }
 
-    /**
-     * log in with post data
-     */
-    public function dologinWithPostData()
+    // Login Funktion, dass sich Benutzer anmelden können
+    public function doLogin($str_username, $str_password)
     {
-        // check login form contents
-        if (empty($_POST['username'])) {
-            $this->errors[] = "Username field was empty.";
-        } elseif (empty($_POST['password'])) {
-            $this->errors[] = "Password field was empty.";
-        } elseif (!empty($_POST['username']) && !empty($_POST['password'])) {
+        //SQL Abfrage
+        $sql = "SELECT username, betreuer, password
+                FROM person
+                WHERE username = '" . $str_username . "';";
 
-            // create a database connection, using the constants from config/db.php (which we loaded in index.php)
-            $this->db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $query = $this->db->prepare($sql);
+        $query->execute();
 
-            // change character set to utf8 and check it
-            if (!$this->db_connection->set_charset("utf8")) {
-                $this->errors[] = $this->db_connection->error;
-            }
+        //Ergebnis der SQL Abfrage als Objekt zurückgeben, das angesprochen werden kann
+        $result_set = $query->fetch(PDO::FETCH_OBJ);
 
-            // if no connection errors (= working database connection)
-            if (!$this->db_connection->connect_errno) {
+        // using PHP 5.5's password_verify() function to check if the provided password fits
+        // the hash of that user's password
+        if (password_verify($str_password, $result_set->password)) {
 
-                // escape the POST stuff
-                $username = $this->db_connection->real_escape_string($_POST['username']);
+            // write user data into PHP SESSION (a file on your server)
+            // Session Variablen werden zum Aufbau der Navigation mit zusätzlichen Rechten
+            // durch den Login genutzt (header.php)
+            $_SESSION['username'] = $result_set->username;
+            $_SESSION['betreuer'] = $result_set->betreuer;
+            $_SESSION['user_login_status'] = 1;
 
-                // database query, getting all the info of the selected user (allows login via email address in the
-                // username field)
-                $sql = "SELECT username, betreuer, password
-                        FROM person
-                        WHERE username = '" . $username . "';";
-                $result_of_login_check = $this->db_connection->query($sql);
+        }//end if
+    }//end doLogin($username, $passwort)
 
-                // if this user exists
-                if ($result_of_login_check->num_rows == 1) {
-
-                    // get result row (as an object)
-                    $result_row = $result_of_login_check->fetch_object();
-
-                    // using PHP 5.5's password_verify() function to check if the provided password fits
-                    // the hash of that user's password
-                     if (password_verify($_POST['password'], $result_row->password)) {
-					/***Klartext-Prüfung***/
-					//if ($_POST['password'] == $result_row->password) {
-					//***//
-                        // write user data into PHP SESSION (a file on your server)
-                        $_SESSION['username'] = $result_row->username;
-                        $_SESSION['betreuer'] = $result_row->betreuer;
-                        $_SESSION['user_login_status'] = 1;
-
-
-                    } else {
-                        $this->errors[] = "Wrong password. Try again.";
-                    }
-                } else {
-                    $this->errors[] = "This user does not exist.";
-                }
-            } else {
-                $this->errors[] = "Database connection problem.";
-            }
-        }
-        header('location: ' . URL . 'home/index');
-    }
-
-    /**
-     * perform the logout
-     */
+    // Logout Funktion, dass Benutzer sich aus der Webanwendung abmelden können
     public function doLogout()
     {
         // delete the session of the user
         $_SESSION = array();
         session_destroy();
-        // return a little feeedback message
-        $this->messages[] = "You have been logged out.";
-        header('location: ' . URL . 'home/index');
-    }
+    }//end doLogout()
 
-    /**
-     * simply return the current state of the user's login
-     * @return boolean user's login status
-     */
-    public function isUserLoggedIn()
-    {
-        if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1) {
-            return true;
-        }
-        // default return
-        return false;
-    }
-}
+}//end class
