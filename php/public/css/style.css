@@ -65,10 +65,7 @@ nav ul:after {
 nav li{
 z-index: 999;
 }
-nav li:hover {
-	background: #444;
-	z-index: 999;
-}
+
     nav ul,nav ul li{
     background-color: #FAFAFA;
 }
@@ -94,9 +91,9 @@ nav ul li ul{
 nav ul li ul li{
     float: none;
 }
-nav ul li ul li a:hover{
+/*nav ul li ul li a:hover{
     color: #333;
-}
+}*/
 
 /* Verwaltungsaccordion */
 

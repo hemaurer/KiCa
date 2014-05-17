@@ -21,31 +21,20 @@
         <img src="<?php echo URL; ?>public/img/logo.png" />
     </div>
     <!-- navigation -->
-    <nav class="navbar navbar-default" role="navigation">
-		 <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="<?php echo URL; ?>home/">Home</a>
-    </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-        
-            <li><a href="<?php echo URL; ?>termine/">Termine</a></li>
-            <li class="dropdown"><a href="<?php echo URL; ?>ligatabelle/" class="dropdown-toggle" data-toggle="dropdown">Ligatabelle</a>
-                <ul class="dropdown-menu">
+    <nav>
+        <ul>
+            <!-- same like "home" or "home/index" -->
+            <li><a a href="<?php echo URL; ?>home/">Home</a></li>
+            <li><a href="#">Termine</a></li>
+            <li><a href="#">Ligatabelle</a>
+                <ul>
                     <li><a href="#">A-Jugend</a></li>
                     <li><a href="#">B-Jugend</a></li>
                     <li><a href="#">C-Jugend</a></li>
                     <li><a href="#">D-Jugend</a></li>
                 </ul>
             </li>
-            <li><a href="<?php echo URL; ?>turniere/">Turniere</a></li>
+            <li><a href="#">Turniere</a></li>
 
             <!-- Login mit Submenü, die die Forms beinhalten -->
             <!-- Hier wird vom Server anhand von Sessionvariablen über PHP entschieden, wie die Navigation aufgebaut ist -->
@@ -58,31 +47,29 @@
 
                 if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
             ?>
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['username']; ?></a>
+                    <li><a href="#"><?php echo $_SESSION['username']; ?></a>
             <?php
                 }
                 else{
              ?>
-                    <li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Login</a>
+                    <li><a href="#">Login</a>
             <?php  }
             ?>
 
             <!-- die restliche Navigation, bzw. Submenu von "Login" -->
-                <ul id="login" class="dropdown-menu">
+                <ul id="login">
 
                     <!-- Wenn man nicht eingeloggt ist, das Login-Formular in der Navigation anzeigen -->
                     <?php
                         if (!isset($_SESSION['user_login_status'])){
                     ?>
-                        
-                            <form class="navbar-form" name="loginform" action="<?php echo URL; ?>login/doLogin" method="post">
-                                <div class="form-group">
-								<input id="login_input_username" class="form-control" type="text" name="str_username" placeholder="Benutzername" required /><br>
-                                <input id="login_input_password" class="form-control" type="password" name="str_password" autocomplete="off" placeholder="Passwort" required /><br>
-                                </div>
-								<button type="submit" class="btn btn-default" name="submit_login">Login</button>
+                        <li>
+                            <form name="loginform" action="<?php echo URL; ?>login/doLogin" method="post">
+                                <input id="login_input_username" class="login_input" type="text" name="str_username" placeholder="Benutzername" required /><br>
+                                <input id="login_input_password" class="login_input" type="password" name="str_password" autocomplete="off" placeholder="Passwort" required /><br>
+                                <input type="submit" name="submit_login" value="Log in">
                             </form>
-                        
+                        </li>
                     <?php }
                     ?>
 
@@ -90,30 +77,25 @@
                     <?php
                         if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
                     ?>
-                        
-                            <form class="navbar-form" role="search" name="search" action="#" method="get">
-								
-									<input class="form-control" type="text" name="search_query" placeholder="Suchen..." />
-								
-                                <button class="btn btn-default" type="submit" name="submit_search">Suchen</button>
-								
+                        <li>
+                            <form name="search" action="#" method="get">
+                                <input type="text" name="search_query" placeholder="Suchen..." />
+                                <input type="submit" name="submit_search" value="Suchen">
                             </form>
-                        
+                        </li>
                         <li><a href="#">Profil</a></li>
 						 <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
 						<?php
 							if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 						?>
-							<li class="divider"></li>
 							<li><a href="<?php echo URL; ?>verwaltung/">Verwaltung</a></li>
 						<?php }
 						?>
-						<li class="divider"></li>
-                        
-                            <form class="navbar-form" name="logoutform" action="<?php echo URL; ?>login/doLogout" method="get">
-                                <button class="btn btn-default" type="submit" name="submit_logout" />Logout</button>
+                        <li>
+                            <form name="logoutform" action="<?php echo URL; ?>login/doLogout" method="get">
+                                <input type="submit" name="submit_logout" value="Log out" />
                             </form>
-                        
+                        </li>
                     <?php }
                     ?>
 

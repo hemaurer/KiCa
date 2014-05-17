@@ -26,6 +26,6 @@ define('URL', 'http://kica.tld/'); /************** define('URL', 'http://127.0.0
  */
 define('DB_TYPE', 'mysql');
 define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'kica');
+define('DB_NAME', 'kica_test');
 define('DB_USER', 'root');
 define('DB_PASS', '');

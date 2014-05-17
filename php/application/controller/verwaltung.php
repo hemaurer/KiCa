@@ -5,7 +5,7 @@ class Verwaltung extends Controller
     public function index()
     {
         // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: Verwaltung, using the method index().';
+        //echo 'Message from Controller: You are in the Controller: Verwaltung, using the method index().';
 
         // load a model, perform an action, pass the returned data to a variable
         // NOTE: please write the name of the model "LikeThis"
