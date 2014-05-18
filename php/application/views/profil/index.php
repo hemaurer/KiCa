@@ -38,13 +38,13 @@
 
 			<p>
 			<strong>Größe: </strong><span id="groesse_value"><?php echo $_SESSION['groesse']; ?></span> cm
-			<button id="button_editGroesse" onclick="editGroesse()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+			<button id="button_editGroesse" onclick="editGroesse()" class="btn btn-default btn-sm"><span></span></button>
 			<button id="button_saveGroesse" onclick="saveGroesse()" class="btn btn-default btn-sm">Speichern</button>
 			</p>
 
 			<p>
 			<strong>Telefon: </strong><span id="tel_value"><?php echo $_SESSION['tel']; ?></span>
-			<button id="button_editTel" onclick="editTel()" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></button>
+			<button id="button_editTel" onclick="editTel()" class="btn btn-default btn-sm"><span></span></button>
 			<button id="button_saveTel" onclick="saveTel()" class="btn btn-default btn-sm">Speichern</button>
 			</p>
 		</div>

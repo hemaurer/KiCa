@@ -2,6 +2,9 @@
 $(function(){
     $("#button_saveGroesse").hide();
     $("#button_saveTel").hide();
+    //Icons zu den Buttons hinzufügen
+    $('#button_editGroesse').addClass('glyphicon glyphicon-pencil');
+    $('#button_editTel').addClass('glyphicon glyphicon-pencil');
 });
 
 
@@ -17,7 +20,6 @@ function editGroesse() {
 	    var input = $('<input value="'+text+'" />')
 	    groesse_value.text('').append(input);
 	    input.select();
-	    //geht nicht richtig:
 	    $('#button_editGroesse').removeClass('glyphicon glyphicon-pencil').addClass('glyphicon glyphicon-ok');
 
 	    //Wird neben das Textfeld von Groesse geklickt, wird es wieder in statischen Text geändert
@@ -63,7 +65,6 @@ function editTel() {
 	    tel_value.text('').append(input);
 	    input.select();
 
- 		//geht nicht richtig:
 	    $('#button_editTel').removeClass('glyphicon glyphicon-pencil').addClass('glyphicon glyphicon-ok');
 
 	    //Wird neben das Textfeld von Groesse geklickt, wird es wieder in statischen Text geändert
