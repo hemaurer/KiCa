@@ -35,7 +35,7 @@
     </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-        
+
             <li><a href="<?php echo URL; ?>termine/">Termine</a></li>
             <li class="dropdown"><a href="<?php echo URL; ?>ligatabelle/" class="dropdown-toggle" data-toggle="dropdown">Ligatabelle</a>
                 <ul class="dropdown-menu">
@@ -74,7 +74,7 @@
                     <?php
                         if (!isset($_SESSION['user_login_status'])){
                     ?>
-                        
+
                             <form class="navbar-form" name="loginform" action="<?php echo URL; ?>login/doLogin" method="post">
                                 <div class="form-group">
 								<input id="login_input_username" class="form-control" type="text" name="str_username" placeholder="Benutzername" required /><br>
@@ -82,7 +82,7 @@
                                 </div>
 								<button type="submit" class="btn btn-default" name="submit_login">Login</button>
                             </form>
-                        
+
                     <?php }
                     ?>
 
@@ -90,16 +90,20 @@
                     <?php
                         if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
                     ?>
-                        
-                            <form class="navbar-form" role="search" name="search" action="#" method="get">
-								
-									<input class="form-control" type="text" name="search_query" placeholder="Suchen..." />
-								
-                                <button class="btn btn-default" type="submit" name="submit_search">Suchen</button>
-								
-                            </form>
-                        
-                        <li><a href="#">Profil</a></li>
+
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="input-group">
+                                  <input type="text" class="form-control">
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" action="#">Suchen</button>
+                                  </span>
+                                </div><!-- /input-group -->
+                              </div><!-- /.col-lg-6 -->
+                            </div><!-- /.row -->
+
+
+                        <li><a href="<?php echo URL; ?>profil/">Profil</a></li>
 						 <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
 						<?php
 							if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
@@ -109,15 +113,15 @@
 						<?php }
 						?>
 						<li class="divider"></li>
-                        
+
                             <form class="navbar-form" name="logoutform" action="<?php echo URL; ?>login/doLogout" method="get">
                                 <button class="btn btn-default" type="submit" name="submit_logout" />Logout</button>
                             </form>
-                        
+
                     <?php }
                     ?>
 
-                   
+
 
                 </ul>
             </li>

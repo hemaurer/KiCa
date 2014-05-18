@@ -20,6 +20,7 @@ table {
 	background:#FFF;
 	padding:20px;
 	box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.3);
+    overflow: hidden;
 }
 /*.contentbox{
 	background:#FFF;
@@ -46,6 +47,22 @@ table {
 }
 
 
+#profilBild{
+    float: left;
+    overflow: hidden;
+    margin-right: 20px;
+    padding-bottom: 100px;
+}
+
+
+
+#bild img{
+    display: inline-block;
+    width: 250px;
+    height: auto;
+}
+
+
 nav {
     width: 100%;
 	z-index: 999;
@@ -65,7 +82,10 @@ nav ul:after {
 nav li{
 z-index: 999;
 }
-
+nav li:hover {
+	background: #444;
+	z-index: 999;
+}
     nav ul,nav ul li{
     background-color: #FAFAFA;
 }
@@ -91,9 +111,9 @@ nav ul li ul{
 nav ul li ul li{
     float: none;
 }
-/*nav ul li ul li a:hover{
+nav ul li ul li a:hover{
     color: #333;
-}*/
+}
 
 /* Verwaltungsaccordion */
 

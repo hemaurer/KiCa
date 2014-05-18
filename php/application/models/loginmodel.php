@@ -26,7 +26,7 @@ class LoginModel
     public function doLogin($str_username, $str_password)
     {
         //SQL Abfrage
-        $sql = "SELECT username, betreuer, password
+        $sql = "SELECT p_id, username, betreuer, password, name, v_name, geb_datum, groesse, bild, tel
                 FROM person
                 WHERE username = '" . $str_username . "';";
 
@@ -43,8 +43,16 @@ class LoginModel
             // write user data into PHP SESSION (a file on your server)
             // Session Variablen werden zum Aufbau der Navigation mit zusätzlichen Rechten
             // durch den Login genutzt (header.php)
+            // Außerdem werden diese Session Variablen zum Aufbau der Profilseite benötigt
+            $_SESSION['p_id'] = $result_set->p_id;
             $_SESSION['username'] = $result_set->username;
             $_SESSION['betreuer'] = $result_set->betreuer;
+            $_SESSION['name'] = $result_set->name;
+            $_SESSION['v_name'] = $result_set->v_name;
+            $_SESSION['geb_datum'] = $result_set->geb_datum;
+            $_SESSION['groesse'] = $result_set->groesse;
+            $_SESSION['bild'] = $result_set->bild;
+            $_SESSION['tel'] = $result_set->tel;
             $_SESSION['user_login_status'] = 1;
 
         }//end if
