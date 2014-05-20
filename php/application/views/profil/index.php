@@ -27,8 +27,8 @@
 				    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
 				    <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
 				    Bild hochladen:<br>
-				    <input name="userfile" type="file" class="btn btn-default btn-sm"/>
-				    <input type="submit" value="Hochladen" class="btn btn-default btn-sm"/>
+				    <input name="userfile" type="file"  class="btn btn-default btn-sm" required/>
+				    <input type="submit" name="submit_change_profilbild" value="Hochladen" class="btn btn-default btn-sm"/>
 				</form>
 
 		</div>

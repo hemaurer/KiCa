@@ -12,7 +12,7 @@ class Login extends Controller
 			$login_model = $this->loadModel('LoginModel');
             $login_model->doLogin($_POST["str_username"], $_POST["str_password"]);
 		}
-		header('location: ' . URL );
+		header('location: ' . URL . 'home/');
 	}//end doLogin()
 
 

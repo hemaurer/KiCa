@@ -62,6 +62,7 @@ table {
     display: inline-block;
     width: 250px;
     height: auto;
+    max-height: 400px;
 }
 
 /*NAVIGATION / MENU*/
