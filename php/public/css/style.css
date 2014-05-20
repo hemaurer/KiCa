@@ -16,17 +16,12 @@ table {
 }
 
 .container {
-    margin: 50px;
+    margin-bottom: 10px;
 	background:#FFF;
 	padding:20px;
 	box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.3);
-    overflow: hidden;
 }
-/*.contentbox{
-	background:#FFF;
-	padding:20px;
-	box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.3);
-}*/
+
 .where-are-we-box {
     position: relative;
     left: -20px;
@@ -40,21 +35,28 @@ table {
     font-weight: bold;
 }
 
-.navigation ul li {
-    display: inline-block;
-    text-decoration: none;
-	z-index: 999;
-}
 
+/*PROFIL*/
+
+#personenDaten{
+    width: 75%;
+    overflow: hidden;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 #profilBild{
-    float: left;
-    overflow: hidden;
-    margin-right: 20px;
-    padding-bottom: 100px;
+    margin-bottom: 25px;
+    width: 250px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
-
+#profilDaten{
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+}
 
 #bild img{
     display: inline-block;
@@ -62,15 +64,23 @@ table {
     height: auto;
 }
 
+/*NAVIGATION / MENU*/
+
+
+.navigation ul li {
+    display: inline-block;
+    text-decoration: none;
+}
 
 nav {
     width: 100%;
-	z-index: 999;
 }
+
 nav ul {
     padding: 0px;
     margin: 0px;
 }
+
 nav ul:after {
     clear: both;
     content: " ";
@@ -79,39 +89,60 @@ nav ul:after {
     height: 0;
     visibility: hidden;
 }
+
 nav li{
-z-index: 999;
 }
+
 nav li:hover {
 	background: #444;
-	z-index: 999;
 }
+
     nav ul,nav ul li{
     background-color: #FAFAFA;
 }
+
     nav ul li {
     list-style: none;
     float:left;
 }
+
 nav ul li a {
     text-decoration: none;
     display: block;
     color: #333;
     padding: 14px 34px 14px 34px;
 }
+
 nav ul li:hover > ul {
     visibility: visible;
 }
+
 nav ul li ul{
     display: inline;
     visibility: hidden;
     position: absolute;
     padding:0px;
 }
+
 nav ul li ul li{
     float: none;
 }
+
 nav ul li ul li a:hover{
+    color: #333;
+}
+
+/*FOOTER*/
+
+#footer ul{
+    text-align: center;
+    margin: 0;
+}
+
+#footer ul li{
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 10px;
     color: #333;
 }
 

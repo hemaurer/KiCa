@@ -15,7 +15,7 @@
 </head>
 <body>
 <!-- header -->
-<div>
+<div class="container">
     <!-- KiCa Logo -->
     <div>
         <img src="<?php echo URL; ?>public/img/logo.png" />
@@ -91,6 +91,7 @@
                         if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
                     ?>
 
+                        <li>
                             <div class="row">
                               <div class="col-lg-6">
                                 <div class="input-group">
@@ -101,7 +102,7 @@
                                 </div><!-- /input-group -->
                               </div><!-- /.col-lg-6 -->
                             </div><!-- /.row -->
-
+                        </li></br>
 
                         <li><a href="<?php echo URL; ?>profil/">Profil</a></li>
 						 <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->

@@ -4,9 +4,6 @@ class Profil extends Controller
 {
     public function index()
     {
-        // simple message to show where you are
-        echo 'Message from Controller: You are in the Controller: Profil, using the method index().';
-
         // load a model, perform an action, pass the returned data to a variable
         // NOTE: please write the name of the model "LikeThis"
         $profil_model = $this->loadModel('ProfilModel');

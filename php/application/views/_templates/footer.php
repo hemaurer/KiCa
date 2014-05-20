@@ -1,6 +1,6 @@
-	<div class="footer">
+	<div class="container" id="footer">
 		<ul>
-		   <li>Copyright KiCa 2014</li>
+		   <li>&copy; KiCa 2014</li>
 		   <li><a href="#">Impressum</a></li>
 		</ul>
 	</div>
