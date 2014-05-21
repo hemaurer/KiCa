@@ -14,9 +14,13 @@ body {
 table {
     font-size: 13px;
 }
-
+.template {
+    margin:10px;
+	padding:20px;
+}
 .container {
-    margin-bottom: 10px;
+	border-radius: 5px;
+    margin: 10px;
 	background:#FFF;
 	padding:20px;
 	box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.3);
@@ -146,48 +150,3 @@ nav ul li ul li a:hover{
     margin-right: 10px;
     color: #333;
 }
-
-/* Verwaltungsaccordion */
-
-/*Define Accordion box*/
-.accordion {  width:auto; overflow:hidden; margin:10px, auto; color:#474747; background:#414141; padding:10px; }
-
-/*General Accordion****************************************************************************/
-/*Set style of open slide*/
-.accordion section:target {z-index:1; width:100%; background:#FFF; padding:0px;}
-.accordion section:target:hover {z-index:1; background:#fff; }
-.accordion section:target h2 {width:auto;}
-.accordion section:target h2 a{z-index:1; color:#333; padding:0;}
-.accordion section:target p {display:block;}
-.accordion section h2 a{padding:0px;display:block; font-size:16px; font-weight:normal;color:#eee; text-decoration:none; }
-
-/*set style of closed slide*/
-.accordion section{z-index:1; float:left;	overflow:hidden; color:#333; cursor:pointer; background: #333; margin:3px; }
-.accordion section:hover {z-index:1; background:#444;}
-.accordion section h2 {width:auto;}
-.accordion section p {display:none; }
-.accordion section:after{position:relative;font-size:24px;color:#000;font-weight:bold;}
-/*.accordion section:nth-child(1):after{content:'1';}
-.accordion section:nth-child(2):after{content:'2';}
-.accordion section:nth-child(3):after{content:'3';}
-.accordion section:nth-child(4):after{content:'4';}
-.accordion section:nth-child(5):after{content:'5';}*/
-/*End General Accordion****************************************************************************/
-
-/*Vertical Accordion *************************************************************************/
-.vertical section{width:100%; height:40px; margin:0px;
-	-webkit-transition:height 0.2s ease-out;
-	-moz-transition:height 0.2s ease-out;
-  	-o-transition:height 0.2s ease-out;
-	-ms-transition:height 0.2s ease-out;
-  	transition:height 0.2s ease-out;
-}
-/*Set height of the slide*/
-.vertical :target{height: auto;}
-
-.vertical section h2 { position:relative; left:0; top:-15px; }
-
-/*Set position of the number on the slide*/
-/*.vertical section:after{ left:100%;}
-.vertical section:target:after{ left:-9999px;}*/
-.insection{padding:10px;}

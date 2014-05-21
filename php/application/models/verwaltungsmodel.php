@@ -27,22 +27,13 @@ class VerwaltungsModel
         // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return $query->fetchAll();
     }
-    public function add_person($str_nachname, $str_vorname, $d_gebdatum, $int_groesse, $str_bild, $b_betreuer, $int_tel, $str_user, $str_password)
+    public function add_person($str_nachname, $str_vorname, $d_date, $int_groesse, $b_betreuer, $int_tel)
     {
-        // clean the input from javascript code for example
-        // $artist = strip_tags($artist);
-        // $track = strip_tags($track);
-        // $link = strip_tags($link);
-		// $str_nachname = strip_tags(str_nachname);
-		// $str_vorname = strip_tags($str_vorname);
-		// $d_gebdatum = strip_tags($d_gebdatum);
-		// $int_groesse = strip_tags($int_groesse);
-		// $str_bild = strip_tags($str_bild);
-		// $b_betreuer = strip_tags($b_betreuer);
-		// $int_tel = strip_tags($int_tel);
-		// $str_user = strip_tags($str_user);
-		$str_password = password_hash($str_password, PASSWORD_DEFAULT);
-		
+		$str_bild = "../public/img/profilbilder/_noimage.jpg";
+		$str_user = $str_vorname.".".$str_nachname;
+		$str_password = password_hash("kica", PASSWORD_DEFAULT);
+		$d_obj = new DateTime($d_date);
+		$d_gebdatum = $d_obj->format('Y-m-d');
         $sql = "INSERT INTO person (name, v_name, geb_datum, groesse, bild, betreuer, tel, username, password) VALUES (:name, :v_name, :geb_datum, :groesse, :bild, :betreuer, :tel, :username, :password)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_nachname, ':v_name' => $str_vorname, ':geb_datum' => $d_gebdatum, ':groesse' => $int_groesse, ':bild' => $str_bild, ':betreuer' => $b_betreuer, ':tel' => $int_tel, ':username' => $str_user, ':password' => $str_password ));
@@ -69,17 +60,49 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_spiel($str_ort, $int_heim, $int_auswaerts, $int_h_tore, $int_a_tore, $int_stat_id, $d_zeit, $int_tu_id)
+	public function add_spiel($str_ort, $str_heim, $str_auswaerts, $int_h_tore, $int_a_tore, $str_stat_name, $d_date, $d_time, $str_tu_name)
     {
-		// $str_ort = strip_tags($str_ort);
-		// $int_heim = strip_tags($int_heim);
-		// $int_auswaerts = strip_tags($int_auswaerts);
-		// $int_h_tore = strip_tags($int_h_tore);
-		// $int_a_tore = strip_tags($int_a_tore);
-		// $int_stat_id = strip_tags($int_stat_id);
-		// $d_zeit = strip_tags($d_zeit);
-		// $int_tu_id = strip_tags($int_tu_id);
+		/**Heimmannschaft auslesen und ID aus Datenbank heraussuchen und Array splitten**/
+		$sql = "Select m_id FROM mannschaft WHERE  name = ?"; 	
+        $query = $this->db->prepare($sql);						
+		$query->execute(array($str_heim));						
+		$arr_heim = $query->fetchAll();							
+		foreach($arr_heim as $int_heim){						
+			$int_heim = $int_heim->m_id;						
+		};
 		
+		/**Auswaertsmannschaft auslesen und ID aus Datenbank heraussuchen und Array splitten**/
+		$sql = "Select m_id FROM mannschaft WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_auswaerts));					
+		$arr_auswaerts = $query->fetchAll();					
+		foreach($arr_auswaerts as $int_auswaerts){				
+			$int_auswaerts = $int_auswaerts->m_id;				
+		};
+		
+		/**Turnier auslesen und ID aus Datenbank heraussuchen und Array splitten**/
+		$sql = "Select tu_id FROM turnier WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_tu_name));					
+		$arr_tu_id = $query->fetchAll();					
+		foreach($arr_tu_id as $int_tu_id){				
+			$int_tu_id = $int_tu_id->tu_id;				
+		};
+		
+		/**Status auslesen und ID aus Datenbank heraussuchen und Array splitten**/
+		$sql = "Select stat_id FROM status WHERE  status = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_stat_name));					
+		$arr_stat_id = $query->fetchAll();					
+		foreach($arr_stat_id as $int_stat_id){				
+			$int_stat_id = $int_stat_id->stat_id;				
+		};
+		
+		/**Zeit formatieren**/
+		$d_obj = new DateTime($d_date." ".$d_time);
+		$d_zeit = $d_obj->format('Y-m-d H:i:s'); 
+		
+		/**Neues Spiel in Datenbank schreiben**/
         $sql = "INSERT INTO spiel (ort, heim, auswaerts, h_tore, a_tore, stat_id, zeit, tu_id) VALUES (:ort, :heim, :auswaerts, :h_tore, :a_tore, :stat_id, :zeit, :tu_id)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':ort' => $str_ort, ':heim' => $int_heim, ':auswaerts' => $int_auswaerts, ':h_tore' => $int_h_tore, ':a_tore' => $int_a_tore, ':stat_id' => $int_stat_id, ':zeit' => $d_zeit, ':tu_id' => $int_tu_id));
@@ -134,8 +157,22 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_trainingseinheit($str_name, $str_ort, $d_zeit, $int_tg_id)
+	public function add_trainingseinheit($str_name, $str_ort, $d_date, $d_time, $str_tg_name)
     {
+		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
+		$sql = "Select tg_id FROM trainingsgruppe WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_tg_name));					
+		$arr_tg_id = $query->fetchAll();					
+		foreach($arr_tg_id as $int_tg_id){				
+			$int_tg_id = $int_tg_id->tg_id;				
+		};
+		
+		/**Zeit formatieren**/
+		$d_obj = new DateTime($d_date." ".$d_time);
+		$d_zeit = $d_obj->format('Y-m-d H:i:s');
+		
+		
         $sql = "INSERT INTO trainingseinheit (name, ort, zeit, tg_id) VALUES (:name, :ort, :zeit, :tg_id)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':tg_id' => $int_tg_id));
@@ -162,8 +199,17 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_trainingsgruppe($str_name, $int_trainer)
-    {
+	public function add_trainingsgruppe($str_name, $str_trainer)
+    {	
+	/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
+		$sql = "Select p_id FROM person WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_trainer));					
+		$arr_trainer = $query->fetchAll();					
+		foreach($arr_trainer as $int_trainer){				
+			$int_trainer = $int_trainer->p_id;				
+		};
+		
         $sql = "INSERT INTO trainingsgruppe (name, trainer) VALUES (:name, :trainer)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name, ':trainer' => $int_trainer));
@@ -209,4 +255,13 @@ class VerwaltungsModel
         $query->execute(array(':tu_id' => $tu_id));
     }
 
+/***Status***/
+public function get_alle_stats()
+    {
+        $sql = "SELECT * FROM status";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+	
 }?>

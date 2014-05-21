@@ -1,5 +1,7 @@
 <head>   
    <title>KiCa - Verwaltung</title>
+   <script type="text/javascript">$('#timepicker1').timepicker();</script>
+   
 </head>
 <?php
 	if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
@@ -18,22 +20,26 @@
 				<div class="panel-body">
 					<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_person" method="POST">
 						<div class="form-group">
-							<label class="control-label col-md-4">Nachname</label>
+							<label class="control-label col-md-4">Nachname*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="str_nachname" value="" required placeholder="Nachname"/>
+								<input class="form-control" type="text" name="str_nachname" value="" placeholder="Nachname" required/>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Vorname</label>
+							<label class="control-label col-md-4">Vorname*</label>
 							<div class="col-md-4">
 								<input class="form-control" type="text" name="str_vorname" value="" placeholder="Vorname" required />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Geburtsdatum</label>
+							<label class="control-label col-md-4">Geburtsdatum*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="date" name="d_gebdatum" value="" required/>
+								<div class="sandbox-container input-group ">
+									<input class="form-control" name="d_date" type="text">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								</div>
 							</div>
+							<script> $('.sandbox-container input').datepicker();</script>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-4">Groesse</label>
@@ -42,9 +48,9 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Betreuer?</label>
+							<label class="control-label col-md-4">Betreuer?*</label>
 							<div class="col-md-4">
-								<select class="form-control" name="b_betreuer" size="1">
+								<select class="form-control" name="b_betreuer" size="1" required>
 									<option value="0">Nein</option>
 									<option value="1">Ja</option>
 								</select>
@@ -53,7 +59,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">Telefonnummer</label>
 							<div class="col-md-4">
-								<input class="form-control" type="tel" name="int_tel" value="" placeholder="Telefonnummer" />
+								<input class="form-control" type="number" name="int_tel" value="" placeholder="Telefonnummer" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -88,6 +94,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<?php /***Spiele-Container***/?>
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -99,33 +106,70 @@
 				<div class="panel-body">
 					<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_spiel" method="POST">
 						<div class="form-group">
-							<label class="control-label col-md-4">Spielort</label>
+							<label class="control-label col-md-4">Spielort*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="str_ort" value="" required />
+								<input class="form-control" type="text" name="str_ort" value="" placeholder="Spielort" required />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Heim Team</label>
+							<label class="control-label col-md-4">Heim Team*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="int_heim" value="" required />
+								<select class="form-control" name="str_heim" size="1" required>
+									<option></option>
+									<?php foreach ($mannschaften as $mannschaft) { ?>
+									<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
+									<?php } ?>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Gegnerisches Team</label>
+							<label class="control-label col-md-4">Gegnerisches Team*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="int_auswaerts" value="" required/>
+								<select class="form-control" name="str_auswaerts" size="1" required>
+									<option></option>
+									<?php foreach ($mannschaften as $mannschaft) { ?>
+									<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
+									<?php } ?>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Status</label>
+							<label class="control-label col-md-4">Status*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="int_stat_id" value="" required/>
+								<select class="form-control" name="str_stat_name" size="1" required>
+									<option></option>
+									<?php foreach ($stats as $status) { ?>
+									<option><?php if (isset($status->status)) echo $status->status; ?></option>
+									<?php } ?>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Zeit</label>
+							<label class="control-label col-md-4">Zeit*</label>
+							<div class="col-md-3">
+								<div class="sandbox-container input-group ">
+									<input class="form-control" name="d_date" type="text">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								</div>
+							</div>
+							<script> $('.sandbox-container input').datepicker();</script>
+							<div class="col-md-2">
+								<div class="input-group">
+									<input class="form-control" id="timepicker1" name="d_time" type="text">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+								</div>
+							</div>
+							<script> $('#timepicker1').timepicker({showMeridian: false});</script>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">Turnier*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="datetime-local" name="d_zeit" value="" required/>
+								<select class="form-control" name="str_tu_name" size="1" required>
+									<option></option>
+									<?php foreach ($turniere as $turnier) { ?>
+									<option><?php if (isset($turnier->name)) echo $turnier->name; ?></option>
+									<?php } ?>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -174,9 +218,9 @@
 				<div class="panel-body">	
 					<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_mannschaft" method="POST">
 						<div class="form-group">
-							<label class="control-label col-md-4">Mannschaftsname</label>
+							<label class="control-label col-md-4">Mannschaftsname*</label>
 							<div class="col-md-4">	
-								<input class="form-control" type="text" name="str_name" value="" required />
+								<input class="form-control" type="text" name="str_name" value="" placeholder="Mannschaftsname" required />
 							</div>
 						</div>
 						<div class="form-group">
@@ -220,27 +264,44 @@
 				<div class="panel-body">	
 					<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingseinheit" method="POST">
 						<div class="form-group">
-							<label class="control-label col-md-4">Training(Name oder Beschreibung)</label>
+							<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="str_name" value="" required />
+								<input class="form-control" type="text" name="str_name" value="" placeholder="Training" required />
 							</div>
 						</div>	
 						<div class="form-group">
-							<label class="control-label col-md-4">Trainingsort</label>
+							<label class="control-label col-md-4">Trainingsort*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="str_ort" value="" required />
+								<input class="form-control" type="text" name="str_ort" value="" placeholder="Trainingsort" required />
 							</div>
 						</div>	
 						<div class="form-group">
-							<label class="control-label col-md-4">Zeit</label>
-							<div class="col-md-4">	
-								<input class="form-control" type="text" name="d_zeit" value="" required/>
+							<label class="control-label col-md-4">Zeit*</label>
+							<div class="col-md-3">
+								<div class="sandbox-container input-group ">
+									<input class="form-control" name="d_date" type="text">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+								</div>
 							</div>
+							<script> $('.sandbox-container input').datepicker();</script>
+							<div class="col-md-2">
+								<div class="input-group">
+									<input class="form-control" id="timepicker2" name="d_time" type="text">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+								</div>
+							</div>
+							<script> $('#timepicker2').timepicker({showMeridian: false});</script>
+						
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Trainingsgruppe</label>
+							<label class="control-label col-md-4">Trainingsgruppe*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="int_tg_id" value="" required/>
+								<select class="form-control" name="str_tg_name" size="1" required>
+									<option></option>
+									<?php foreach ($trainingsgruppen as $trainingsgruppe) { ?>
+									<option><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></option>
+									<?php } ?>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -278,8 +339,8 @@
 				</div>
 			</div>
 		</div>	
+		
 		<?php /***Trainingsgruppen-Container***/?>
-
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -290,15 +351,20 @@
 				<div class="panel-body">	
 					<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingsgruppe" method="POST">
 						<div class="form-group">
-							<label class="control-label col-md-4">Trainingsgruppenname</label>
+							<label class="control-label col-md-4">Trainingsgruppenname*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="str_name" value="" required />
+								<input class="form-control" type="text" name="str_name" value="" placeholder="Trainingsgruppenname" required />
 							</div>
 						</div>	
 						<div class="form-group">
-							<label class="control-label col-md-4">Trainer</label>
+							<label class="control-label col-md-4">Trainer*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="int_trainer" value="" required />
+								<select class="form-control" name="str_trainer" size="1" required>
+									<option></option>
+									<?php foreach ($personen as $person) { ?>
+									<option><?php if ((isset($person->name))&&($person->betreuer = 1)) echo $person->name; ?></option>
+									<?php } ?>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">
@@ -332,8 +398,8 @@
 				</div>
 			</div>
 		</div>	
+		
 		<?php /***Turnier-Container***/?>
-
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h4 class="panel-title">
@@ -344,15 +410,15 @@
 				<div class="panel-body">	
 					<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_turnier" method="POST">
 						<div class="form-group">
-							<label class="control-label col-md-4">Turniername</label>
+							<label class="control-label col-md-4">Turniername*</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="str_name" value="" required />
+								<input class="form-control" type="text" name="str_name" value="" placeholder="Turniername" required />
 							</div>
 						</div>	
 						<div class="form-group">
 							<label class="control-label col-md-4">Gewinner</label>
 							<div class="col-md-4">
-								<input class="form-control" type="text" name="int_gewinner" value="" />
+								<input class="form-control" type="text" name="int_gewinner" value="" placeholder="Gewinner" />
 							</div>
 						</div>	
 						<div class="form-group">
