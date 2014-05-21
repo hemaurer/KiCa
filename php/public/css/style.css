@@ -56,17 +56,28 @@ table {
     margin-left: auto;
 }
 
-#profilDaten{
-    width: 60%;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 #bild img{
     display: inline-block;
     width: 250px;
     height: auto;
     max-height: 400px;
+}
+
+#profilHeadline{
+    margin-bottom: 20px;
+}
+
+#profilDaten{
+    margin-bottom: 25px;
+}
+
+#trainingsDaten{
+}
+
+.profilContent{
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 /*NAVIGATION / MENU*/

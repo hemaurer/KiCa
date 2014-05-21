@@ -14,6 +14,7 @@
 	<!-- Beinhaltet alle Daten zur Person des Profils -->
 	<div id="personenDaten">
 
+		<div class="profilContent" id="profilHeadline"><h4>Mein Profil</h4></div>
 		<?php //Standardpfad Profilbilder: ../public/img/profilbilder/_noimage.jpg ?>
 		<div id="profilBild">
 			<div id="bild">
@@ -33,11 +34,11 @@
 
 		</div>
 
-		<div id="profilDaten">
+		<div id="profilDaten" class="profilContent">
 			<table class="table">
 				<thead style="background-color: #ddd; font-weight: bold;">
 				<tr>
-					<td></td>
+					<td>Meine Daten</td>
 					<td></td>
 					<td></td>
 				</tr>
@@ -77,14 +78,29 @@
 				</tbody>
 			</table>
 	</div><!-- End profilDaten -->
-	</div><!-- End personenDaten -->
 
-	<!-- Beinhaltet Daten zu Trainingsgruppen etc. -->
-	<div id="trainingsDaten">
-
-
+	<div class="profilContent" id="profilPasswordContent">
+		<!-- Stub für die Passwort Ändern Funktion -->
 	</div>
 
+	<!-- Beinhaltet Daten zu Trainingsgruppen etc. -->
+	<div id="trainingsDaten" class="profilContent">
+		<table class="table">
+			<thead style="background-color: #ddd; font-weight: bold;">
+				<tr>
+					<td>Meine Trainingsgruppen</td>
+				</tr>
+			</thead>
+			<tbody>
+			<?php foreach ($trainingsDaten as $trainingsgruppe) { ?>
+				<tr>
+					<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td>
+				</tr>
+			<?php } ?>
+			</tbody>
+		</table>
+	</div>
+</div><!-- End personenDaten -->
 </div><!-- End Container  -->
 <?php }
     else{

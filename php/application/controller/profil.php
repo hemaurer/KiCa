@@ -6,7 +6,9 @@ class Profil extends Controller
     {
         // load a model, perform an action, pass the returned data to a variable
         // NOTE: please write the name of the model "LikeThis"
+        @session_start();
         $profil_model = $this->loadModel('ProfilModel');
+        $trainingsDaten = $profil_model->getTrainingsdaten($_SESSION["p_id"]);
 
         // load views. within the views we can echo out $songs and $amount_of_songs easily
         require 'application/views/_templates/header.php';
@@ -41,5 +43,16 @@ class Profil extends Controller
             $profil_model->doChangeTel($_SESSION["p_id"], $_POST["str_tel"]);
         }
     }//end doChangeTel()
+
+    public function doChangePassword()
+    {
+        //noch zu implementieren
+        // if (isset($_POST["str_password"])) {
+        //     @session_start();
+        //     $profil_model = $this->loadModel('ProfilModel');
+        //     $profil_model->doChangePassword($_SESSION["p_id"], $_POST["str_password"]);
+        // }
+    }//end doChangeTel()
+
 }
 ?>
