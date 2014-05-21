@@ -84,6 +84,11 @@
 .bootstrap-timepicker-widget a.btn,
 .bootstrap-timepicker-widget input {
   border-radius: 4px;
+  border: 1px solid #ccc;
+  
+  height: 34px;
+  font-size: 14px;
+  color: #555;
 }
 .bootstrap-timepicker-widget table {
   width: 100%;
@@ -123,7 +128,7 @@
   font-size: 18px;
 }
 .bootstrap-timepicker-widget table td input {
-  width: 25px;
+  width: 62px;
   margin: 0;
   text-align: center;
 }
