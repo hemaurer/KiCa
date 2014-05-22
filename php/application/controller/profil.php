@@ -6,8 +6,13 @@ class Profil extends Controller
     {
         // load a model, perform an action, pass the returned data to a variable
         // NOTE: please write the name of the model "LikeThis"
-        @session_start();
+
         $profil_model = $this->loadModel('ProfilModel');
+
+        //Session Variable wird gesetzt, dass die Headline der jeweiligen Subseite angezeigt werden kann
+        @session_start();
+        $_SESSION['subpage'] = "Profil";
+
         $trainingsDaten = $profil_model->getTrainingsdaten($_SESSION["p_id"]);
 
         // load views. within the views we can echo out $songs and $amount_of_songs easily

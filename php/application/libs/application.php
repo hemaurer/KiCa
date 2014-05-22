@@ -56,7 +56,7 @@ class Application
                 $this->url_controller->index();
             }
         } else {
-            echo "invalid URL";// so simply show home/index
+            // echo "invalid URL";// so simply show home/index
             require './application/controller/home.php';
             $home = new Home();
             $home->index();

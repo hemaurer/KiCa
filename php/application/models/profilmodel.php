@@ -78,7 +78,7 @@ class ProfilModel
 
     public function getTrainingsdaten($p_id)
     {
-        $sql = "SELECT trainingsgruppe.name FROM trainingsgruppe RIGHT JOIN teilnehmer_tg ON trainingsgruppe.tg_id = teilnehmer_tg.tg_id WHERE teilnehmer_tg.p_id = (SELECT person.p_id FROM person WHERE person.p_id=?)";
+        $sql = "SELECT trainingsgruppe.name FROM trainingsgruppe RIGHT JOIN teilnehmer_tg ON trainingsgruppe.tg_id = teilnehmer_tg.tg_id WHERE teilnehmer_tg.p_id =?";
         $query = $this->db->prepare($sql);
         $query->execute(array($p_id));
 

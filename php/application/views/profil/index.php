@@ -8,13 +8,11 @@
 <!-- Das Javascript um Felder der Personendaten editierbar zu machen -->
 <script src="<?php echo URL; ?>public/js/profil.js"> </script>
 
-
 <div class="container">
 
 	<!-- Beinhaltet alle Daten zur Person des Profils -->
 	<div id="personenDaten">
 
-		<div class="profilContent" id="profilHeadline"><h4>Mein Profil</h4></div>
 		<?php //Standardpfad Profilbilder: ../public/img/profilbilder/_noimage.jpg ?>
 		<div id="profilBild">
 			<div id="bild">

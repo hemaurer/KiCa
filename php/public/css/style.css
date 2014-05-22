@@ -14,13 +14,15 @@ body {
 table {
     font-size: 13px;
 }
-.template {
-    margin:10px;
-	padding:20px;
+
+#header{
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 20px;
 }
+
 .container {
-	border-radius: 5px;
-    margin: 10px;
 	background:#FFF;
 	padding:20px;
 	box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.3);
@@ -39,6 +41,11 @@ table {
     font-weight: bold;
 }
 
+#headline{
+    border-radius: 5px 5px 0px 0px;
+    background: #F8F8F8;
+    color:#777;
+}
 
 /*PROFIL*/
 
@@ -63,10 +70,6 @@ table {
     max-height: 400px;
 }
 
-#profilHeadline{
-    margin-bottom: 20px;
-}
-
 #profilDaten{
     margin-bottom: 25px;
 }
@@ -82,6 +85,9 @@ table {
 
 /*NAVIGATION / MENU*/
 
+#navigation{
+    border-radius: 5px;
+}
 
 .navigation ul li {
     display: inline-block;
@@ -150,6 +156,13 @@ nav ul li ul li a:hover{
 
 /*FOOTER*/
 
+#footer{
+    margin-top: 0;
+    border-radius: 0px 0px 5px 5px;
+    background: #F8F8F8;
+    margin-bottom: 20px;
+}
+
 #footer ul{
     text-align: center;
     margin: 0;
@@ -159,5 +172,5 @@ nav ul li ul li a:hover{
     text-decoration: none;
     display: inline-block;
     margin-right: 10px;
-    color: #333;
+    color: #777;
 }

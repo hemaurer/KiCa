@@ -1,10 +1,8 @@
 <?php
 
-
-
 class Verwaltung extends Controller
 {
-	
+
     public function index()
     {
         // simple message to show where you are
@@ -21,24 +19,28 @@ class Verwaltung extends Controller
 		$turniere = $verwaltungs_model->get_alle_turniere();
 		$stats = $verwaltungs_model->get_alle_stats();
 
+        //Session Variable wird gesetzt, dass die Headline der jeweiligen Subseite angezeigt werden kann
+        @session_start();
+        $_SESSION['subpage'] = "Verwaltung";
+
         // load views
         require 'application/views/_templates/header.php';
         require 'application/views/verwaltung/index.php';
         require 'application/views/_templates/footer.php';
     }
 
-/***Person***/	
-	
+/***Person***/
+
     public function add_person()
-    {	
+    {
 
         if (isset($_POST["submit_add_person"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->add_person($_POST["str_nachname"], $_POST["str_vorname"], $_POST["d_date"], $_POST["int_groesse"], $_POST["b_betreuer"], $_POST["int_tel"]);
 		}
 		header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
-		  
-	
+
+
     }
 	public function edit_person()
     {
@@ -63,7 +65,7 @@ class Verwaltung extends Controller
 			echo "Diese Seite ist für Sie gesperrt";}
     }
 
-/***Spiele***/	
+/***Spiele***/
 
     public function add_spiel()
     {
@@ -118,7 +120,7 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/');
     }
-	
+
 /***Trainingseinheiten***/
 
     public function add_trainingseinheit()
@@ -145,7 +147,7 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/');
     }
-	
+
 /***Trainingsgruppe***/
 
     public function add_trainingsgruppe()
@@ -172,9 +174,9 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/');
     }
-	
-/***Turnier***/	
-	
+
+/***Turnier***/
+
     public function add_turnier()
     {
         if (isset($_POST["submit_add_turnier"])) {
@@ -199,12 +201,12 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/');
     }
-	
-	
-	
-	
-	
+
+
+
+
+
 }
-              
+
 
 ?>
