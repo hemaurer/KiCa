@@ -49,6 +49,11 @@ table {
 
 /*PROFIL*/
 
+.profilContent{
+    margin-right: auto;
+    margin-left: auto;
+}
+
 #personenDaten{
     width: 75%;
     overflow: hidden;
@@ -71,18 +76,29 @@ table {
 }
 
 #profilDaten{
-    margin-bottom: 25px;
+    margin-right: 5%;
+    width: 60%;
+    float: left;
 }
 
 #trainingsDaten{
+    width: 35%;
+    float: clear;
+    overflow: hidden;
 }
 
-.profilContent{
+#profilDatenWrapper{
+    overflow: hidden;
+}
+
+#profilPasswordContent{
     width: 60%;
-    margin-right: auto;
-    margin-left: auto;
+    float: left;
 }
 
+#profilAlerts{
+    width: 75%;
+}
 /*NAVIGATION / MENU*/
 
 #navigation{

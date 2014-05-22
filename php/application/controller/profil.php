@@ -51,12 +51,13 @@ class Profil extends Controller
 
     public function doChangePassword()
     {
-        //noch zu implementieren
-        // if (isset($_POST["str_password"])) {
-        //     @session_start();
-        //     $profil_model = $this->loadModel('ProfilModel');
-        //     $profil_model->doChangePassword($_SESSION["p_id"], $_POST["str_password"]);
-        // }
+        if (isset($_POST["submit_change_password"])) {
+            @session_start();
+            $profil_model = $this->loadModel('ProfilModel');
+            $profil_model->doChangePassword($_SESSION["p_id"], $_POST["str_altesPassword"], $_POST["str_neuesPassword"], $_POST["str_neuesPasswordWiederholt"]);
+
+            header('location: ' . URL . 'profil/index'); //Weiterleitung nach Ausführen der Methode
+        }
     }//end doChangeTel()
 
 }

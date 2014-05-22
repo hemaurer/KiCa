@@ -5,6 +5,9 @@ $(function(){
     //Icons zu den Buttons hinzufügen
     $('#button_editGroesse').addClass('glyphicon glyphicon-pencil');
     $('#button_editTel').addClass('glyphicon glyphicon-pencil');
+
+    //den Button disablen bevor nicht das Passwort korrekt wiederholt wurde
+    document.form1.submit_change_password.disabled=true;
 });
 
 
@@ -40,7 +43,7 @@ function editGroesse() {
 //Über den Button "Speichern" nach dem Ändern der Größe den neuen Wert in die DB schreiben
 function saveGroesse() {
 
-			var groesse_value = $('#groesse_value');
+		var groesse_value = $('#groesse_value');
 
 		alert("Größe gespeichert.");
 
@@ -58,7 +61,7 @@ function saveGroesse() {
 
 function editTel() {
 
-			var tel_value = $('#tel_value');
+		var tel_value = $('#tel_value');
 
 	    var text = tel_value.text();
 	    var input = $('<input value="'+text+'" />')
@@ -85,7 +88,7 @@ function editTel() {
 //Über den Button "Speichern" nach dem Ändern der Größe den neuen Wert in die DB schreiben
 function saveTel() {
 
-			var tel_value = $('#tel_value');
+		var tel_value = $('#tel_value');
 
 		alert("Telefonnummer gespeichert.");
 
@@ -100,3 +103,28 @@ function saveTel() {
 		$.post("doChangeTel", {"str_tel": text});
 }
 
+//prüft, ob das eingegebene Passwort bei einer Passwortänderung korrekt wiederholt wurde
+function checkPassword() {
+
+	var neuesPassword = document.form1.str_neuesPassword.value;
+	var neuesPasswordWiederholt = document.form1.str_neuesPasswordWiederholt.value;
+	var altesPasswort = document.form1.str_altesPassword.value;
+
+	if(neuesPasswordWiederholt != "" ){
+		if(neuesPassword != neuesPasswordWiederholt){
+
+		document.form1.str_neuesPassword.style.backgroundColor = "#E98383";
+		document.form1.str_neuesPasswordWiederholt.style.backgroundColor = "#E98383";
+		document.form1.submit_change_password.disabled=true;
+		}else{
+		document.form1.str_neuesPassword.style.backgroundColor = '#83E983';
+		document.form1.str_neuesPasswordWiederholt.style.backgroundColor = '#83E983';
+
+			if (altesPasswort != ""){
+				document.form1.submit_change_password.disabled=false;
+			}
+		}
+
+	}
+
+}

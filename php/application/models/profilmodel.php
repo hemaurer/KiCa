@@ -40,7 +40,7 @@ class ProfilModel
 
         $_SESSION['bild'] = $str_bild;
 
-        //Infos fürs Debugging:
+        //Zusätzliche Infos fürs Debugging:
             // echo '<pre>';
             // print_r($_FILES);
             // print "</pre>";
@@ -67,12 +67,44 @@ class ProfilModel
     }//end doChangeTel()
 
 
-    public function doChangePassword($p_id, $str_password)
+    public function doChangePassword($p_id, $str_altesPassword, $str_neuesPassword, $str_neuesPasswordWiederholt)
     {
-        //noch zu implementieren
-        // $sql = "UPDATE person SET password=? WHERE p_id=?";
-        // $query = $this->db->prepare($sql);
-        // $query->execute(array($str_password,$p_id));
+        //erneute Serverseitige Überprüfung, falls Clientprüfung umgangen wurde
+        if ($str_neuesPassword == $str_neuesPasswordWiederholt){
+
+            //SQL Abfrage auf aktuelles Passwort
+            $sql = "SELECT password
+                    FROM person
+                    WHERE p_id = '" . $p_id . "';";
+
+            $query = $this->db->prepare($sql);
+            $query->execute();
+
+            //Ergebnis der SQL Abfrage als Objekt zurückgeben, das angesprochen werden kann
+            $result_set = $query->fetch(PDO::FETCH_OBJ);
+
+            // using PHP 5.5's password_verify() function to check if the provided password fits
+            // the hash of that user's password
+            if (password_verify($str_altesPassword, $result_set->password)) {
+
+                $str_neuesPasswordHash = password_hash($str_neuesPassword, PASSWORD_DEFAULT);
+
+                $sql = "UPDATE person SET password=? WHERE p_id=?";
+                $query = $this->db->prepare($sql);
+                $query->execute(array($str_neuesPasswordHash,$p_id));
+
+                // return true;
+                $_SESSION['successChangePW'] = true;
+            }
+            else{
+                // return false;
+                $_SESSION['successChangePW'] = false;
+            }
+        }
+        else{
+            // return false;
+            $_SESSION['successChangePW'] = false;
+        }
     }//end doChangeTel()
 
 
