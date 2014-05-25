@@ -17,7 +17,7 @@ class VerwaltungsModel
 	
 	public function get_alle_personen()
     {
-        $sql = "SELECT * FROM person";
+        $sql = "SELECT * FROM person ORDER BY name";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -55,7 +55,8 @@ class VerwaltungsModel
 	
 	public function get_alle_spiele()
     {
-        $sql = "SELECT * FROM spiel";
+        //$sql = "SELECT * FROM spiel ORDER BY zeit DESC";
+		$sql = "SELECT s.s_id, s.ort, s.heim, s.auswaerts, s.h_tore, s.a_tore, s.stat_id, s.zeit, s.tu_id, m.name as heimname, mm.auswaertsname FROM spiel s LEFT JOIN mannschaft m ON (s.heim = m.m_id) LEFT JOIN (SELECT spiel.auswaerts, mannschaft.m_id, mannschaft.name as auswaertsname FROM spiel, mannschaft WHERE spiel.auswaerts = mannschaft.m_id) mm ON (s.auswaerts = mm.m_id) ORDER BY s.zeit DESC  ";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -124,7 +125,7 @@ class VerwaltungsModel
 
 	public function get_alle_mannschaften()
     {
-        $sql = "SELECT * FROM mannschaft";
+        $sql = "SELECT * FROM mannschaft ORDER BY name";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -152,7 +153,7 @@ class VerwaltungsModel
 
 	public function get_alle_trainingseinheiten()
     {
-        $sql = "SELECT * FROM trainingseinheit";
+        $sql = "SELECT * FROM trainingseinheit ORDER BY name";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -194,7 +195,8 @@ class VerwaltungsModel
 
 	public function get_alle_trainingsgruppen()
     {
-        $sql = "SELECT * FROM trainingsgruppe";
+		$sql = "SELECT tg.tg_id, tg.name, p.name as tr_name FROM trainingsgruppe tg LEFT JOIN person p ON (tg.trainer=p.p_id)";
+        //$sql = "SELECT * FROM trainingsgruppe ORDER BY name";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
@@ -236,11 +238,11 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_turnier($str_name, $int_gewinner)
+	public function add_turnier($str_name)
     {
-        $sql = "INSERT INTO turnier (name, gewinner) VALUES (:name, :gewinner)";
+        $sql = "INSERT INTO turnier (name) VALUES (:name)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':name' => $str_name, ':gewinner' => $int_gewinner));
+        $query->execute(array(':name' => $str_name));
     }
 	public function edit_turnier($tu_id, $str_name, $int_gewinner)
     {
