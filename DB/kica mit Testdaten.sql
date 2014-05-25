@@ -28,7 +28,6 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~0 rows (ungefähr)
-DELETE FROM `abwesenheit`;
 /*!40000 ALTER TABLE `abwesenheit` DISABLE KEYS */;
 /*!40000 ALTER TABLE `abwesenheit` ENABLE KEYS */;
 
@@ -42,7 +41,6 @@ CREATE TABLE IF NOT EXISTS `mannschaft` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.mannschaft: ~18 rows (ungefähr)
-DELETE FROM `mannschaft`;
 /*!40000 ALTER TABLE `mannschaft` DISABLE KEYS */;
 INSERT INTO `mannschaft` (`m_id`, `name`) VALUES
 	(1, 'Bayern München'),
@@ -66,6 +64,44 @@ INSERT INTO `mannschaft` (`m_id`, `name`) VALUES
 /*!40000 ALTER TABLE `mannschaft` ENABLE KEYS */;
 
 
+-- Exportiere Struktur von Tabelle kica_test.mannschaft_turnier_sparte
+DROP TABLE IF EXISTS `mannschaft_turnier_sparte`;
+CREATE TABLE IF NOT EXISTS `mannschaft_turnier_sparte` (
+  `m_id` int(10) NOT NULL,
+  `tu_id` int(10) NOT NULL,
+  `sparte_id` int(10) NOT NULL,
+  PRIMARY KEY (`m_id`,`tu_id`,`sparte_id`),
+  KEY `Turnier1` (`tu_id`),
+  KEY `Sparte` (`sparte_id`),
+  CONSTRAINT `Sparte` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
+  CONSTRAINT `Mannschaft` FOREIGN KEY (`m_id`) REFERENCES `mannschaft` (`m_id`),
+  CONSTRAINT `Turnier1` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Exportiere Daten aus Tabelle kica_test.mannschaft_turnier_sparte: ~18 rows (ungefähr)
+/*!40000 ALTER TABLE `mannschaft_turnier_sparte` DISABLE KEYS */;
+INSERT INTO `mannschaft_turnier_sparte` (`m_id`, `tu_id`, `sparte_id`) VALUES
+	(1, 1, 1),
+	(2, 1, 1),
+	(3, 1, 1),
+	(4, 1, 1),
+	(5, 1, 1),
+	(6, 1, 1),
+	(7, 1, 1),
+	(8, 1, 1),
+	(9, 1, 1),
+	(10, 1, 1),
+	(11, 1, 1),
+	(12, 1, 1),
+	(13, 1, 1),
+	(14, 1, 1),
+	(15, 1, 1),
+	(16, 1, 1),
+	(17, 1, 1),
+	(18, 1, 1);
+/*!40000 ALTER TABLE `mannschaft_turnier_sparte` ENABLE KEYS */;
+
+
 -- Exportiere Struktur von Tabelle kica_test.person
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
@@ -83,41 +119,58 @@ CREATE TABLE IF NOT EXISTS `person` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.person: ~29 rows (ungefähr)
-DELETE FROM `person`;
+-- Exportiere Daten aus Tabelle kica_test.person: ~30 rows (ungefähr)
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
 INSERT INTO `person` (`p_id`, `name`, `v_name`, `geb_datum`, `groesse`, `bild`, `betreuer`, `tel`, `username`, `password`) VALUES
-	(1, 'Weidenfeller', 'Roman', '1999-05-11', 188, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Roman.Weidenfeller', '098f6bcd4621d373cade4e832627b4f6'),
-	(2, 'Langerak', 'Mitchell', '1999-05-11', 193, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Mitchell.Langerak', '098f6bcd4621d373cade4e832627b4f6'),
-	(3, 'Alomerovic', 'Zlatan', '1999-05-11', 187, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Zlatan.Alomerovic', '098f6bcd4621d373cade4e832627b4f6'),
-	(4, 'Friedrich', 'Manuel', '1999-05-11', 189, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Manuel.Friedrich', '098f6bcd4621d373cade4e832627b4f6'),
-	(5, 'Subotic', 'Neven', '1999-05-11', 192, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Neven.Subotic', '098f6bcd4621d373cade4e832627b4f6'),
-	(6, 'Hummels', 'Mats', '1999-05-11', 192, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Mats.Hummels', '098f6bcd4621d373cade4e832627b4f6'),
-	(7, 'Sarr', 'Marian', '1999-05-11', 187, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Marian.Sarr', '098f6bcd4621d373cade4e832627b4f6'),
-	(8, 'Papastathopoulos', 'Sokratis', '1999-05-11', 185, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Sokratis', '098f6bcd4621d373cade4e832627b4f6'),
-	(9, 'Schmelzer', 'Marcel', '1999-05-11', 181, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Marcel.Schmelzer', '098f6bcd4621d373cade4e832627b4f6'),
-	(10, 'Bandowski', 'Jannik', '1999-05-11', 190, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Jannik.Bandowski', '098f6bcd4621d373cade4e832627b4f6'),
-	(11, 'Durm', 'Erik', '1999-05-11', 183, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Erik.Durm', '098f6bcd4621d373cade4e832627b4f6'),
-	(12, 'Piszczek', 'Lukasz', '1999-05-11', 184, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Lukasz.Piszczek', '098f6bcd4621d373cade4e832627b4f6'),
-	(13, 'Kehl', 'Sebastian', '1999-05-11', 188, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Sebastian.Kehl', '098f6bcd4621d373cade4e832627b4f6'),
-	(14, 'Bender', 'Sven', '1999-05-11', 186, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Sven.Bender', '098f6bcd4621d373cade4e832627b4f6'),
-	(15, 'Kirch', 'Oliver', '1999-05-11', 182, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Oliver.Kirch', '098f6bcd4621d373cade4e832627b4f6'),
-	(16, 'Gündogan', 'Ilkay', '1999-05-11', 179, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Ilkay.Gündogan', '098f6bcd4621d373cade4e832627b4f6'),
-	(17, 'Jojic', 'Milos', '1999-05-11', 177, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Milos.Jojic', '098f6bcd4621d373cade4e832627b4f6'),
-	(18, 'Sahin', 'Nuri', '1999-05-11', 180, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Nuri.Sahin', '098f6bcd4621d373cade4e832627b4f6'),
-	(19, 'Amini', 'Mustafa', '1999-05-11', 175, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Mustafa.Amini', '098f6bcd4621d373cade4e832627b4f6'),
-	(20, 'Mkhitaryan', 'Henrikh', '1999-05-11', 178, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Henrikh.Mkhitaryan', '098f6bcd4621d373cade4e832627b4f6'),
-	(21, 'Reus', 'Marco', '1999-05-11', 182, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Marco.Reus', '098f6bcd4621d373cade4e832627b4f6'),
-	(22, 'Großkreutz', 'Kevin', '1999-05-11', 186, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Kevin.Großkreutz', '098f6bcd4621d373cade4e832627b4f6'),
-	(23, 'Hofmann', 'Jonas', '1999-05-11', 176, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Jonas.Hofmann', '098f6bcd4621d373cade4e832627b4f6'),
-	(24, 'Blaszczykowski', 'Jakub', '1999-05-11', 176, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Jakub.Blaszczykowski', '098f6bcd4621d373cade4e832627b4f6'),
-	(25, 'Aubameyang', 'Pierre-Emerick', '1999-05-11', 185, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Pierre-Emerick.Aubameyang', '098f6bcd4621d373cade4e832627b4f6'),
-	(26, 'Lewandowski', 'Robert', '1999-05-11', 185, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Robert.Lewandowski', '098f6bcd4621d373cade4e832627b4f6'),
-	(27, 'Schieber', 'Julian', '1999-05-11', 186, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Julian.Schieber', '098f6bcd4621d373cade4e832627b4f6'),
-	(28, 'Ducksch', 'Marvin', '1999-05-11', 188, "../public/img/profilbilder/_noimage.jpg", 0, NULL, 'Marvin.Ducksch', '098f6bcd4621d373cade4e832627b4f6'),
-	(29, 'Klopp', 'Jürgen', '1967-06-16', 193, "../public/img/profilbilder/_noimage.jpg", 1, NULL, 'Jürgen.Klopp', '098f6bcd4621d373cade4e832627b4f6'),
-	(30, 'admin', 'admin', '1967-06-16', 193, "../public/img/profilbilder/_noimage.jpg", 1, NULL, 'admin', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC');
+	(1, 'Weidenfeller', 'Roman', '1999-05-11', 188, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Roman.Weidenfeller', '098f6bcd4621d373cade4e832627b4f6'),
+	(2, 'Langerak', 'Mitchell', '1999-05-11', 193, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mitchell.Langerak', '098f6bcd4621d373cade4e832627b4f6'),
+	(3, 'Alomerovic', 'Zlatan', '1999-05-11', 187, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Zlatan.Alomerovic', '098f6bcd4621d373cade4e832627b4f6'),
+	(4, 'Friedrich', 'Manuel', '1999-05-11', 189, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Manuel.Friedrich', '098f6bcd4621d373cade4e832627b4f6'),
+	(5, 'Subotic', 'Neven', '1999-05-11', 192, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Neven.Subotic', '098f6bcd4621d373cade4e832627b4f6'),
+	(6, 'Hummels', 'Mats', '1999-05-11', 192, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mats.Hummels', '098f6bcd4621d373cade4e832627b4f6'),
+	(7, 'Sarr', 'Marian', '1999-05-11', 187, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marian.Sarr', '098f6bcd4621d373cade4e832627b4f6'),
+	(8, 'Papastathopoulos', 'Sokratis', '1999-05-11', 185, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sokratis', '098f6bcd4621d373cade4e832627b4f6'),
+	(9, 'Schmelzer', 'Marcel', '1999-05-11', 181, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marcel.Schmelzer', '098f6bcd4621d373cade4e832627b4f6'),
+	(10, 'Bandowski', 'Jannik', '1999-05-11', 190, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jannik.Bandowski', '098f6bcd4621d373cade4e832627b4f6'),
+	(11, 'Durm', 'Erik', '1999-05-11', 183, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Erik.Durm', '098f6bcd4621d373cade4e832627b4f6'),
+	(12, 'Piszczek', 'Lukasz', '1999-05-11', 184, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Lukasz.Piszczek', '098f6bcd4621d373cade4e832627b4f6'),
+	(13, 'Kehl', 'Sebastian', '1999-05-11', 188, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sebastian.Kehl', '098f6bcd4621d373cade4e832627b4f6'),
+	(14, 'Bender', 'Sven', '1999-05-11', 186, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sven.Bender', '098f6bcd4621d373cade4e832627b4f6'),
+	(15, 'Kirch', 'Oliver', '1999-05-11', 182, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Oliver.Kirch', '098f6bcd4621d373cade4e832627b4f6'),
+	(16, 'Gündogan', 'Ilkay', '1999-05-11', 179, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Ilkay.Gündogan', '098f6bcd4621d373cade4e832627b4f6'),
+	(17, 'Jojic', 'Milos', '1999-05-11', 177, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Milos.Jojic', '098f6bcd4621d373cade4e832627b4f6'),
+	(18, 'Sahin', 'Nuri', '1999-05-11', 180, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Nuri.Sahin', '098f6bcd4621d373cade4e832627b4f6'),
+	(19, 'Amini', 'Mustafa', '1999-05-11', 175, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mustafa.Amini', '098f6bcd4621d373cade4e832627b4f6'),
+	(20, 'Mkhitaryan', 'Henrikh', '1999-05-11', 178, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Henrikh.Mkhitaryan', '098f6bcd4621d373cade4e832627b4f6'),
+	(21, 'Reus', 'Marco', '1999-05-11', 182, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marco.Reus', '098f6bcd4621d373cade4e832627b4f6'),
+	(22, 'Großkreutz', 'Kevin', '1999-05-11', 186, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Kevin.Großkreutz', '098f6bcd4621d373cade4e832627b4f6'),
+	(23, 'Hofmann', 'Jonas', '1999-05-11', 176, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jonas.Hofmann', '098f6bcd4621d373cade4e832627b4f6'),
+	(24, 'Blaszczykowski', 'Jakub', '1999-05-11', 176, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jakub.Blaszczykowski', '098f6bcd4621d373cade4e832627b4f6'),
+	(25, 'Aubameyang', 'Pierre-Emerick', '1999-05-11', 185, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Pierre-Emerick.Aubameyang', '098f6bcd4621d373cade4e832627b4f6'),
+	(26, 'Lewandowski', 'Robert', '1999-05-11', 185, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Robert.Lewandowski', '098f6bcd4621d373cade4e832627b4f6'),
+	(27, 'Schieber', 'Julian', '1999-05-11', 186, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Julian.Schieber', '098f6bcd4621d373cade4e832627b4f6'),
+	(28, 'Ducksch', 'Marvin', '1999-05-11', 188, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marvin.Ducksch', '098f6bcd4621d373cade4e832627b4f6'),
+	(29, 'Klopp', 'Jürgen', '1967-06-16', 193, '../public/img/profilbilder/_noimage.jpg', 1, NULL, 'Jürgen.Klopp', '098f6bcd4621d373cade4e832627b4f6'),
+	(30, 'admin', 'admin', '1967-06-16', 193, '../public/img/profilbilder/_noimage.jpg', 1, '', 'admin', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
+
+
+-- Exportiere Struktur von Tabelle kica_test.sparte
+DROP TABLE IF EXISTS `sparte`;
+CREATE TABLE IF NOT EXISTS `sparte` (
+  `sparte_id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`sparte_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- Exportiere Daten aus Tabelle kica_test.sparte: ~4 rows (ungefähr)
+/*!40000 ALTER TABLE `sparte` DISABLE KEYS */;
+INSERT INTO `sparte` (`sparte_id`, `name`) VALUES
+	(1, 'A-Jugend'),
+	(2, 'B-Jugend'),
+	(3, 'C-Jugend'),
+	(4, 'D-Jugend');
+/*!40000 ALTER TABLE `sparte` ENABLE KEYS */;
 
 
 -- Exportiere Struktur von Tabelle kica_test.spiel
@@ -132,22 +185,28 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   `stat_id` int(10) NOT NULL,
   `zeit` datetime NOT NULL,
   `tu_id` int(10) NOT NULL,
+  `sparte_id` int(10) NOT NULL,
   PRIMARY KEY (`s_id`),
   KEY `Heimmannschaft` (`heim`),
   KEY `Auswaertsmannschaft` (`auswaerts`),
   KEY `Status` (`stat_id`),
   KEY `Turnier` (`tu_id`),
+  KEY `Sparte1` (`sparte_id`),
+  CONSTRAINT `Sparte1` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
   CONSTRAINT `Auswaertsmannschaft` FOREIGN KEY (`auswaerts`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Heimmannschaft` FOREIGN KEY (`heim`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Turnier` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.spiel: ~0 rows (ungefähr)
-DELETE FROM `spiel`;
+-- Exportiere Daten aus Tabelle kica_test.spiel: ~5 rows (ungefähr)
 /*!40000 ALTER TABLE `spiel` DISABLE KEYS */;
-INSERT INTO `spiel` (`s_id`, `ort`, `heim`, `auswaerts`, `h_tore`, `a_tore`, `stat_id`, `zeit`, `tu_id`) VALUES
-	(1, 'Berliner Olympiastadion', 1, 2, NULL, NULL, 6, '2014-05-17 20:00:00', 2);
+INSERT INTO `spiel` (`s_id`, `ort`, `heim`, `auswaerts`, `h_tore`, `a_tore`, `stat_id`, `zeit`, `tu_id`, `sparte_id`) VALUES
+	(1, 'Berliner Olympiastadion', 1, 2, NULL, NULL, 6, '2014-05-17 20:00:00', 2, 1),
+	(2, 'Heimstadion', 17, 9, NULL, NULL, 1, '2014-06-25 20:00:00', 1, 1),
+	(3, 'Allianzarena', 1, 2, 1, 0, 1, '2014-05-25 15:30:00', 1, 1),
+	(4, 'Allianzarena', 1, 2, 1, 1, 1, '2014-06-25 15:30:00', 1, 2),
+	(5, 'Signal-Iduna-Park', 2, 1, 0, 1, 1, '2014-05-26 18:30:00', 1, 1);
 /*!40000 ALTER TABLE `spiel` ENABLE KEYS */;
 
 
@@ -159,8 +218,7 @@ CREATE TABLE IF NOT EXISTS `status` (
   PRIMARY KEY (`stat_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.status: ~0 rows (ungefähr)
-DELETE FROM `status`;
+-- Exportiere Daten aus Tabelle kica_test.status: ~6 rows (ungefähr)
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`stat_id`, `status`) VALUES
 	(1, 'Liga'),
@@ -183,9 +241,11 @@ CREATE TABLE IF NOT EXISTS `teilnehmer_tg` (
   CONSTRAINT `Trainigsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.teilnehmer_tg: ~0 rows (ungefähr)
-DELETE FROM `teilnehmer_tg`;
+-- Exportiere Daten aus Tabelle kica_test.teilnehmer_tg: ~2 rows (ungefähr)
 /*!40000 ALTER TABLE `teilnehmer_tg` DISABLE KEYS */;
+INSERT INTO `teilnehmer_tg` (`tg_id`, `p_id`) VALUES
+	(1, 19),
+	(2, 19);
 /*!40000 ALTER TABLE `teilnehmer_tg` ENABLE KEYS */;
 
 
@@ -196,15 +256,20 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   `name` varchar(50) NOT NULL,
   `ort` varchar(200) NOT NULL,
   `zeit` datetime NOT NULL,
+  `trainer` int(10) NOT NULL,
   `tg_id` int(10) NOT NULL,
   PRIMARY KEY (`tr_id`),
   KEY `Trainingsgruppe` (`tg_id`),
+  KEY `Trainer` (`trainer`),
+  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`),
   CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~0 rows (ungefähr)
-DELETE FROM `trainingseinheit`;
+-- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~2 rows (ungefähr)
 /*!40000 ALTER TABLE `trainingseinheit` DISABLE KEYS */;
+INSERT INTO `trainingseinheit` (`tr_id`, `name`, `ort`, `zeit`, `trainer`, `tg_id`) VALUES
+	(1, 'Testspiel', 'Platz 1', '2014-05-25 18:49:49', 29, 1),
+	(2, 'Ausdauer', 'Wald', '2014-05-26 18:50:05', 29, 2);
 /*!40000 ALTER TABLE `trainingseinheit` ENABLE KEYS */;
 
 
@@ -213,15 +278,15 @@ DROP TABLE IF EXISTS `trainingsgruppe`;
 CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
   `tg_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `trainer` int(10) NOT NULL,
-  PRIMARY KEY (`tg_id`),
-  KEY `Trainer` (`trainer`),
-  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`tg_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.trainingsgruppe: ~0 rows (ungefähr)
-DELETE FROM `trainingsgruppe`;
+-- Exportiere Daten aus Tabelle kica_test.trainingsgruppe: ~3 rows (ungefähr)
 /*!40000 ALTER TABLE `trainingsgruppe` DISABLE KEYS */;
+INSERT INTO `trainingsgruppe` (`tg_id`, `name`) VALUES
+	(1, 'Gruppe A'),
+	(2, 'Gruppe B'),
+	(3, 'Gruppe C');
 /*!40000 ALTER TABLE `trainingsgruppe` ENABLE KEYS */;
 
 
@@ -236,8 +301,7 @@ CREATE TABLE IF NOT EXISTS `turnier` (
   CONSTRAINT `Gewinner` FOREIGN KEY (`gewinner`) REFERENCES `mannschaft` (`m_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.turnier: ~1 rows (ungefähr)
-DELETE FROM `turnier`;
+-- Exportiere Daten aus Tabelle kica_test.turnier: ~2 rows (ungefähr)
 /*!40000 ALTER TABLE `turnier` DISABLE KEYS */;
 INSERT INTO `turnier` (`tu_id`, `name`, `gewinner`) VALUES
 	(1, 'Bundesliga 2013/14', 1),

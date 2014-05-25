@@ -1,4 +1,4 @@
--- --------------------------------------------------------
+﻿-- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server Version:               5.5.28 - MySQL Community Server (GPL)
 -- Server Betriebssystem:        Win64
@@ -41,6 +41,23 @@ CREATE TABLE IF NOT EXISTS `mannschaft` (
 -- Daten Export vom Benutzer nicht ausgewählt
 
 
+-- Exportiere Struktur von Tabelle kica.mannschaft_turnier_sparte
+DROP TABLE IF EXISTS `mannschaft_turnier_sparte`;
+CREATE TABLE IF NOT EXISTS `mannschaft_turnier_sparte` (
+  `m_id` int(10) NOT NULL,
+  `tu_id` int(10) NOT NULL,
+  `sparte_id` int(10) NOT NULL,
+  PRIMARY KEY (`m_id`,`tu_id`,`sparte_id`),
+  KEY `Turnier1` (`tu_id`),
+  KEY `Sparte` (`sparte_id`),
+  CONSTRAINT `Sparte` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
+  CONSTRAINT `Mannschaft` FOREIGN KEY (`m_id`) REFERENCES `mannschaft` (`m_id`),
+  CONSTRAINT `Turnier1` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+
 -- Exportiere Struktur von Tabelle kica.person
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
@@ -61,6 +78,17 @@ CREATE TABLE IF NOT EXISTS `person` (
 -- Daten Export vom Benutzer nicht ausgewählt
 
 
+-- Exportiere Struktur von Tabelle kica.sparte
+DROP TABLE IF EXISTS `sparte`;
+CREATE TABLE IF NOT EXISTS `sparte` (
+  `sparte_id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`sparte_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+
 -- Exportiere Struktur von Tabelle kica.spiel
 DROP TABLE IF EXISTS `spiel`;
 CREATE TABLE IF NOT EXISTS `spiel` (
@@ -73,11 +101,14 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   `stat_id` int(10) NOT NULL,
   `zeit` datetime NOT NULL,
   `tu_id` int(10) NOT NULL,
+  `sparte_id` int(10) NOT NULL,
   PRIMARY KEY (`s_id`),
   KEY `Heimmannschaft` (`heim`),
   KEY `Auswaertsmannschaft` (`auswaerts`),
   KEY `Status` (`stat_id`),
   KEY `Turnier` (`tu_id`),
+  KEY `Sparte1` (`sparte_id`),
+  CONSTRAINT `Sparte1` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
   CONSTRAINT `Auswaertsmannschaft` FOREIGN KEY (`auswaerts`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Heimmannschaft` FOREIGN KEY (`heim`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
@@ -119,9 +150,12 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   `name` varchar(50) NOT NULL,
   `ort` varchar(200) NOT NULL,
   `zeit` datetime NOT NULL,
+  `trainer` int(10) NOT NULL,
   `tg_id` int(10) NOT NULL,
   PRIMARY KEY (`tr_id`),
   KEY `Trainingsgruppe` (`tg_id`),
+  KEY `Trainer` (`trainer`),
+  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`),
   CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -133,10 +167,7 @@ DROP TABLE IF EXISTS `trainingsgruppe`;
 CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
   `tg_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `trainer` int(10) NOT NULL,
-  PRIMARY KEY (`tg_id`),
-  KEY `Trainer` (`trainer`),
-  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`)
+  PRIMARY KEY (`tg_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
