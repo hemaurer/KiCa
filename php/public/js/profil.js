@@ -1,130 +1,168 @@
-//Speichern Buttons zum Datenändern ausblenden beim Laden der Seite
 $(function(){
-    $("#button_saveGroesse").hide();
-    $("#button_saveTel").hide();
-    //Icons zu den Buttons hinzufügen
-    $('#button_editGroesse').addClass('glyphicon glyphicon-pencil');
-    $('#button_editTel').addClass('glyphicon glyphicon-pencil');
 
-    //den Button disablen bevor nicht das Passwort korrekt wiederholt wurde
-    document.form1.submit_change_password.disabled=true;
+    //Buttons ausschalten (beim Laden der Seite)
+    document.getElementById('submit_change_password').disabled = true;
+    document.getElementById('submit_saveTel').disabled = true;
+    document.getElementById('submit_saveGroesse').disabled = true;
 });
 
+//prüft, ob im Modal der Passwortänderung etwas als altes Passwort eingegeben wurde
+function checkPassword_alt(){
+	var altesPasswort = document.form1.str_altesPassword.value;
 
+	if (altesPasswort != ""){
+		//die restlichen Felder des neuen Passworts prüfen
+		checkPassword_neu();
+	}
+	else{
+		document.getElementById('submit_change_password').disabled = true;
 
-
-
-//Das Groesse Feld editierbar machen, um es ändern zu können
-function editGroesse() {
-
-			var groesse_value = $('#groesse_value');
-
-	    var text = groesse_value.text();
-	    var input = $('<input value="'+text+'" />')
-	    groesse_value.text('').append(input);
-	    input.select();
-	    $('#button_editGroesse').removeClass('glyphicon glyphicon-pencil').addClass('glyphicon glyphicon-ok');
-
-	    //Wird neben das Textfeld von Groesse geklickt, wird es wieder in statischen Text geändert
-	    //Buttons werden dementsprechend wieder angepasst
-		input.blur(function() {
-	        var text = $(this).val();
-	        $(this).parent().text(text);
-	        $(this).remove();
-
-	        //geht nicht richtig:
-	    	$('#button_editGroesse').removeClass('glyphicon glyphicon-ok').addClass('glyphicon glyphicon-pencil');
-
-			$("#button_editGroesse").hide();
-			$("#button_saveGroesse").show();
-	    });
-}
-
-//Über den Button "Speichern" nach dem Ändern der Größe den neuen Wert in die DB schreiben
-function saveGroesse() {
-
-		var groesse_value = $('#groesse_value');
-
-		alert("Größe gespeichert.");
-
-		//Umweg über Variable muss gesetzt werden - das Script funktioniert nicht, wenn der Post Request direkt getätigt wird
-		var text = groesse_value.text();
-
-		//Buttons anzeigen / verstecken
-		$("#button_editGroesse").show();
-		$("#button_saveGroesse").hide();
-
-		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
-		$.post("doChangeGroesse", {"int_groesse": text});
-}
-
-
-function editTel() {
-
-		var tel_value = $('#tel_value');
-
-	    var text = tel_value.text();
-	    var input = $('<input value="'+text+'" />')
-	    tel_value.text('').append(input);
-	    input.select();
-
-	    $('#button_editTel').removeClass('glyphicon glyphicon-pencil').addClass('glyphicon glyphicon-ok');
-
-	    //Wird neben das Textfeld von Groesse geklickt, wird es wieder in statischen Text geändert
-	    //Buttons werden dementsprechend wieder angepasst
-		input.blur(function() {
-	        var text = $(this).val();
-	        $(this).parent().text(text);
-	        $(this).remove();
-
-	        //geht nicht richtig:
-	    	$('#button_editTel').removeClass('glyphicon glyphicon-ok').addClass('glyphicon glyphicon-pencil');
-
-			$("#button_editTel").hide();
-			$("#button_saveTel").show();
-	    });
-}
-
-//Über den Button "Speichern" nach dem Ändern der Größe den neuen Wert in die DB schreiben
-function saveTel() {
-
-		var tel_value = $('#tel_value');
-
-		alert("Telefonnummer gespeichert.");
-
-		//Umweg über Variable muss gesetzt werden - das Script funktioniert nicht, wenn der Post Request direkt getätigt wird
-		var text = tel_value.text();
-
-		//Buttons anzeigen / verstecken
-		$("#button_editTel").show();
-		$("#button_saveTel").hide();
-
-		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
-		$.post("doChangeTel", {"str_tel": text});
+	}
 }
 
 //prüft, ob das eingegebene Passwort bei einer Passwortänderung korrekt wiederholt wurde
-function checkPassword() {
-
+function checkPassword_neu() {
 	var neuesPassword = document.form1.str_neuesPassword.value;
 	var neuesPasswordWiederholt = document.form1.str_neuesPasswordWiederholt.value;
-	var altesPasswort = document.form1.str_altesPassword.value;
 
-	if(neuesPasswordWiederholt != "" ){
+	if(neuesPasswordWiederholt != "" && neuesPassword != ""){
 		if(neuesPassword != neuesPasswordWiederholt){
-
-		document.form1.str_neuesPassword.style.backgroundColor = "#E98383";
-		document.form1.str_neuesPasswordWiederholt.style.backgroundColor = "#E98383";
-		document.form1.submit_change_password.disabled=true;
+			document.form1.str_neuesPassword.style.backgroundColor = "#E98383";
+			document.form1.str_neuesPasswordWiederholt.style.backgroundColor = "#E98383";
+			document.getElementById('submit_change_password').disabled = true;
 		}else{
-		document.form1.str_neuesPassword.style.backgroundColor = '#83E983';
-		document.form1.str_neuesPasswordWiederholt.style.backgroundColor = '#83E983';
-
-			if (altesPasswort != ""){
-				document.form1.submit_change_password.disabled=false;
-			}
+			document.form1.str_neuesPassword.style.backgroundColor = '#83E983';
+			document.form1.str_neuesPasswordWiederholt.style.backgroundColor = '#83E983';
+			document.getElementById('submit_change_password').disabled = false;
 		}
-
 	}
+	else{
+		document.getElementById('submit_change_password').disabled = true;
+	}
+}
 
+//prüft, ob eine Größe eingegeben wurde und ob der Wert annehmbar ist
+function checkGroesse(){
+
+	 var groesse = document.getElementById('neueGroesse').value
+
+	 if (!isNaN(groesse) && groesse > 0 && groesse < 251 && groesse != ""){
+	 	 document.getElementById('submit_saveGroesse').disabled = false;
+	 }
+	 else{
+	 	 document.getElementById('submit_saveGroesse').disabled = true;
+	 }
+
+}
+
+//prüft, ob eine Größe eingegeben wurde und ob der Wert annehmbar ist
+function checkTel(){
+
+	 var tel = document.getElementById('neueTel').value
+
+	 if (!isNaN(tel) && tel > 0 && tel < 999999999999999 && tel != ""){
+	 	 document.getElementById('submit_saveTel').disabled = false;
+	 }
+	 else{
+	 	 document.getElementById('submit_saveTel').disabled = true;
+	 }
+
+}
+
+//Über den Button "Ändern" des Modals der Größe, um den neuen Wert in die DB schreiben
+function saveGroesse() {
+
+		var groesse_value = $('#neueGroesse');
+
+		//Umweg über Variable muss gesetzt werden - das Script funktioniert nicht, wenn der Post Request direkt getätigt wird
+		var groesse = groesse_value.val();
+
+		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
+		// $.post("doChangeGroesse", {"int_groesse": groesse});
+		$.post("doChangeGroesse", {"int_groesse": groesse})
+			 .done(function( data ) {
+			 	if (data == 1){
+			 			$('#successModal_head').html("Erfolgreich");
+			 			$('#successModal_body').html("Größe erfolgreich geändert!");
+			 			$('#successModal').modal('toggle');
+					}
+					else{
+						$('#successModal_head').html("Fehler");
+			 			$('#successModal_body').html("Größe konnte nicht geändert werden!");
+						$('#successModal').modal('toggle');
+					}
+				});
+}
+
+//Über den Button "Ändern" des Modals der Telefonnummer, um den neuen Wert in die DB schreiben
+function saveTel() {
+
+		var tel_value = $('#neueTel');
+
+		//Umweg über Variable muss gesetzt werden - das Script funktioniert nicht, wenn der Post Request direkt getätigt wird
+		var tel = tel_value.val();
+
+		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
+		$.post("doChangeTel", {"str_tel": tel})
+			 .done(function( data ) {
+			 	if (data == 1){
+			 			$('#successModal_head').html("Erfolgreich");
+			 			$('#successModal_body').html("Telefonnummer erfolgreich geändert!");
+			 			$('#successModal').modal('toggle');
+					}
+					else{
+						$('#successModal_head').html("Fehler");
+			 			$('#successModal_body').html("Telefonnummer konnte nicht geändert werden!");
+						$('#successModal').modal('toggle');
+					}
+				});
+}
+
+//Über den Button "Ändern" des Modals des Passworts, um den neuen Wert in die DB schreiben
+function savePassword() {
+
+		var pw_value_1 = $('#altesPW');
+		var pw_value_2 = $('#neuesPW');
+		var pw_value_3 = $('#neuesPW_2');
+
+		//Umweg über Variable muss gesetzt werden - das Script funktioniert nicht, wenn der Post Request direkt getätigt wird
+		var pw_alt = pw_value_1.val();
+		var pw_neu = pw_value_2.val();
+		var pw_neu_2 = pw_value_3.val();
+
+		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
+		$.post("doChangePassword", {"str_altesPassword": pw_alt, "str_neuesPassword": pw_neu, "str_neuesPasswordWiederholt": pw_neu_2})
+			 .done(function( data ) {
+			 	if (data == 1){
+			 			$('#successModal_head').html("Erfolgreich");
+			 			$('#successModal_body').html("Passwort erfolgreich geändert!");
+			 			$('#successModal').modal('toggle');
+					}
+					else{
+						$('#successModal_head').html("Fehler");
+			 			$('#successModal_body').html("Passwort konnte nicht geändert werden!\nBitte überprüfen Sie Ihre Eingaben.");
+						$('#successModal').modal('toggle');
+					}
+				});
+
+}
+
+
+//Wenn auf Abbrechen gedrückt wird im Modal, das Größe Ändern Modal zurücksetzen
+function dismissGroesse() {
+	document.getElementById('neueGroesse').value = "";
+}
+
+//Wenn auf Abbrechen gedrückt wird im Modal, das Telefon Ändern Modal zurücksetzen
+function dismissTel() {
+	document.getElementById('neueTel').value = "";
+}
+
+//Wenn auf Abbrechen gedrückt wird im Modal, das PW Ändern Modal zurücksetzen
+function dismissPW() {
+	document.getElementById('altesPW').value = "";
+	document.getElementById('neuesPW').value = "";
+	document.getElementById('neuesPW_2').value = "";
+	document.form1.str_neuesPassword.style.backgroundColor = "#fff";
+	document.form1.str_neuesPasswordWiederholt.style.backgroundColor = "#fff";
 }

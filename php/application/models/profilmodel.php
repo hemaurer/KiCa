@@ -49,11 +49,15 @@ class ProfilModel
 
     public function doChangeGroesse($p_id, $int_groesse)
     {
-        $sql = "UPDATE person SET groesse=? WHERE p_id=?";
-        $query = $this->db->prepare($sql);
-        $query->execute(array($int_groesse,$p_id));
 
-        $_SESSION['groesse'] = $int_groesse;
+            $sql = "UPDATE person SET groesse=? WHERE p_id=?";
+            $query = $this->db->prepare($sql);
+            $query->execute(array($int_groesse,$p_id));
+
+            $_SESSION['groesse'] = $int_groesse;
+
+            echo true;
+
     }//end doChangeGroesse()
 
 
@@ -64,6 +68,8 @@ class ProfilModel
         $query->execute(array($str_tel,$p_id));
 
         $_SESSION['tel'] = $str_tel;
+
+        echo true;
     }//end doChangeTel()
 
 
@@ -93,17 +99,14 @@ class ProfilModel
                 $query = $this->db->prepare($sql);
                 $query->execute(array($str_neuesPasswordHash,$p_id));
 
-                // return true;
-                $_SESSION['successChangePW'] = true;
+                echo true;
             }
             else{
-                // return false;
-                $_SESSION['successChangePW'] = false;
+                echo false;
             }
         }
         else{
-            // return false;
-            $_SESSION['successChangePW'] = false;
+            echo false;
         }
     }//end doChangeTel()
 

@@ -40,10 +40,10 @@
 				<li><a href="<?php echo URL; ?>termine/">Termine</a></li>
 				<li class="dropdown"><a href="<?php echo URL; ?>ligatabelle/" class="dropdown-toggle" data-toggle="dropdown">Ligatabelle</a>
 					<ul class="dropdown-menu">
-						<li><a href="#">A-Jugend</a></li>
-						<li><a href="#">B-Jugend</a></li>
-						<li><a href="#">C-Jugend</a></li>
-						<li><a href="#">D-Jugend</a></li>
+						<li><a href="<?php echo URL; ?>liga/">A-Jugend</a></li>
+						<li><a href="<?php echo URL; ?>liga/">B-Jugend</a></li>
+						<li><a href="<?php echo URL; ?>liga/">C-Jugend</a></li>
+						<li><a href="<?php echo URL; ?>liga/">D-Jugend</a></li>
 					</ul>
 				</li>
 				<li><a href="<?php echo URL; ?>turniere/">Turniere</a></li>
