@@ -151,11 +151,13 @@ function savePassword() {
 //Wenn auf Abbrechen gedrückt wird im Modal, das Größe Ändern Modal zurücksetzen
 function dismissGroesse() {
 	document.getElementById('neueGroesse').value = "";
+    document.getElementById('submit_saveGroesse').disabled = true;
 }
 
 //Wenn auf Abbrechen gedrückt wird im Modal, das Telefon Ändern Modal zurücksetzen
 function dismissTel() {
 	document.getElementById('neueTel').value = "";
+    document.getElementById('submit_saveTel').disabled = true;
 }
 
 //Wenn auf Abbrechen gedrückt wird im Modal, das PW Ändern Modal zurücksetzen
