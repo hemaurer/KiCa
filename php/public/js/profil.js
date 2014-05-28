@@ -3,8 +3,16 @@ $(function(){
     //Buttons ausschalten (beim Laden der Seite)
     document.getElementById('submit_change_password').disabled = true;
     document.getElementById('submit_saveTel').disabled = true;
-    document.getElementById('submit_saveGroesse').disabled = true;
 });
+
+function toggleModal(){
+	$('#modalhead').html("Größe ändern");
+	$('#modalbody').html('Bitte tragen Sie die neue Größe in cm ein: </p> <input class="form-control" type="text" id="neueGroesse" name="str_neueGroesse" onkeyup="checkGroesse()" value="" />');
+	$('#modalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismissGroesse()">Abbrechen</button> <button type="button" id="submit_saveGroesse" class="btn btn-primary" data-dismiss="modal" onclick="saveGroesse()">Ändern</button>');
+
+	document.getElementById('submit_saveGroesse').disabled = true;
+}
+
 
 //prüft, ob im Modal der Passwortänderung etwas als altes Passwort eingegeben wurde
 function checkPassword_alt(){

@@ -79,29 +79,11 @@
 							<tr>
 								<td><strong>Größe: </strong></td>
 								<td><span id="groesse_value"><?php echo $_SESSION['groesse']; ?></span> cm</td>
-								<td> <a data-toggle="modal" data-target="#groesseModal"><span class="glyphicon glyphicon-pencil"></span></a> </td>
+								<td> <a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal()"><span class="glyphicon glyphicon-pencil"></span></a> </td>
 							</tr>
-									<!-- sModal -->
-									<div class="modal fade" id="groesseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h4 class="modal-title" id="pModalLabel">Größe ändern</h4>
-												</div>
-												<div class="modal-body">
 
-													Bitte tragen Sie die neue Größe in cm ein:
-													</p>
-													<input class="form-control" type="text" id="neueGroesse" name="str_neueGroesse" onkeyup="checkGroesse()" value="" />
+								<?php require 'application/views/_templates/bootstrap_modal.php'; ?>
 
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismissGroesse()">Abbrechen</button>
-													<button type="button" id="submit_saveGroesse" class="btn btn-primary" data-dismiss="modal" onclick="saveGroesse()">Ändern</button>
-												</div>
-											</div>
-										</div>
-									</div>
 							<tr>
 								<td><strong>Telefon: </strong></td>
 								<td><span id="tel_value"><?php echo $_SESSION['tel']; ?></span></td>
