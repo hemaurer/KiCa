@@ -13,14 +13,10 @@
 *.doc	 diff=astextplain
 *.DOC	 diff=astextplain
 *.docx diff=astextplain
-*.DOCX diff=docx
+*.DOCX diff=astextplain
 *.dot  diff=astextplain
 *.DOT  diff=astextplain
 *.pdf  diff=astextplain
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-
-[diff "docx"]
-    binary = true
-    textconv = /usr/bin/docx2txt
