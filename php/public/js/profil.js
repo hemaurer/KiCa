@@ -165,4 +165,5 @@ function dismissPW() {
 	document.getElementById('neuesPW_2').value = "";
 	document.form1.str_neuesPassword.style.backgroundColor = "#fff";
 	document.form1.str_neuesPasswordWiederholt.style.backgroundColor = "#fff";
+	document.getElementById('submit_change_password').disabled = true;
 }
