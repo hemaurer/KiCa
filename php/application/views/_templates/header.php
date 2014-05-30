@@ -130,6 +130,8 @@
 	    	if ($_SESSION['subpage']== "Home"){ echo "<h4>Home</h4>"; }
 	    	if ($_SESSION['subpage']== "Profil"){ echo "<h4>Mein Profil</h4>"; }
 	    	if ($_SESSION['subpage']== "Verwaltung"){ echo "<h4>Verwaltung</h4>"; }
+	    	if ($_SESSION['subpage']== "Termine"){ echo "<h4>Termine</h4>"; }
+	    	if ($_SESSION['subpage']== "Liga"){ echo "<h4>Ligatabelle</h4>"; }
 
     	}
     	else{
