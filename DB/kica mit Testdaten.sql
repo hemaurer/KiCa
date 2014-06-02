@@ -32,6 +32,22 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
 /*!40000 ALTER TABLE `abwesenheit` ENABLE KEYS */;
 
 
+-- Exportiere Struktur von Tabelle kica_test.aufstellung
+DROP TABLE IF EXISTS `aufstellung`;
+CREATE TABLE IF NOT EXISTS `aufstellung` (
+  `s_id` int(10) NOT NULL,
+  `p_id` int(10) NOT NULL,
+  PRIMARY KEY (`s_id`,`p_id`),
+  KEY `Spieler` (`p_id`),
+  CONSTRAINT `Spiel` FOREIGN KEY (`s_id`) REFERENCES `spiel` (`s_id`),
+  CONSTRAINT `Spieler` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Exportiere Daten aus Tabelle kica_test.aufstellung: ~0 rows (ungefähr)
+/*!40000 ALTER TABLE `aufstellung` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aufstellung` ENABLE KEYS */;
+
+
 -- Exportiere Struktur von Tabelle kica_test.mannschaft
 DROP TABLE IF EXISTS `mannschaft`;
 CREATE TABLE IF NOT EXISTS `mannschaft` (
@@ -156,6 +172,7 @@ INSERT INTO `mannschaft_turnier_sparte` (`m_id`, `tu_id`, `sparte_id`) VALUES
 	(50, 1, 2),
 	(1, 2, 1),
 	(2, 2, 1),
+	(1, 3, 3),
 	(5, 3, 3),
 	(10, 3, 3),
 	(11, 3, 3),
@@ -166,7 +183,6 @@ INSERT INTO `mannschaft_turnier_sparte` (`m_id`, `tu_id`, `sparte_id`) VALUES
 	(24, 3, 3),
 	(26, 3, 3),
 	(33, 3, 3),
-	(35, 3, 3),
 	(36, 3, 3),
 	(38, 3, 3),
 	(39, 3, 3),
@@ -292,9 +308,9 @@ CREATE TABLE IF NOT EXISTS `status` (
   `stat_id` int(10) NOT NULL AUTO_INCREMENT,
   `status` varchar(30) NOT NULL,
   PRIMARY KEY (`stat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.status: ~6 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.status: ~7 rows (ungefähr)
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`stat_id`, `status`) VALUES
 	(1, 'Liga'),
@@ -302,7 +318,8 @@ INSERT INTO `status` (`stat_id`, `status`) VALUES
 	(3, 'Achtelfinale'),
 	(4, 'Viertelfinale'),
 	(5, 'Halbfinale'),
-	(6, 'Finale');
+	(6, 'Finale'),
+	(7, 'Testspiel');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 
 
@@ -371,16 +388,17 @@ DROP TABLE IF EXISTS `turnier`;
 CREATE TABLE IF NOT EXISTS `turnier` (
   `tu_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `liga` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`tu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.turnier: ~5 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.turnier: ~4 rows (ungefähr)
 /*!40000 ALTER TABLE `turnier` DISABLE KEYS */;
-INSERT INTO `turnier` (`tu_id`, `name`) VALUES
-	(1, 'Bundesliga 2013/14'),
-	(2, 'DFB-Pokal 2013/14'),
-	(3, '2. Liga 2013/14'),
-	(4, '3. Liga 2013/14');
+INSERT INTO `turnier` (`tu_id`, `name`, `liga`) VALUES
+	(1, 'Bundesliga 2013/14', 1),
+	(2, 'DFB-Pokal 2013/14', 0),
+	(3, '2. Liga 2013/14', 1),
+	(4, '3. Liga 2013/14', 1);
 /*!40000 ALTER TABLE `turnier` ENABLE KEYS */;
 
 
@@ -389,7 +407,7 @@ DROP TABLE IF EXISTS `turnier_sparte`;
 CREATE TABLE IF NOT EXISTS `turnier_sparte` (
   `tu_id` int(10) NOT NULL,
   `sparte_id` int(10) NOT NULL,
-  `gewinner` int(10) NOT NULL,
+  `gewinner` int(10) DEFAULT NULL,
   PRIMARY KEY (`tu_id`,`sparte_id`),
   KEY `Sparte2` (`sparte_id`),
   KEY `Gewinner` (`gewinner`),
