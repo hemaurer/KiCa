@@ -30,6 +30,20 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
 -- Daten Export vom Benutzer nicht ausgewählt
 
 
+-- Exportiere Struktur von Tabelle kica.aufstellung
+DROP TABLE IF EXISTS `aufstellung`;
+CREATE TABLE IF NOT EXISTS `aufstellung` (
+  `s_id` int(10) NOT NULL,
+  `p_id` int(10) NOT NULL,
+  PRIMARY KEY (`s_id`,`p_id`),
+  KEY `Spieler` (`p_id`),
+  CONSTRAINT `Spiel` FOREIGN KEY (`s_id`) REFERENCES `spiel` (`s_id`),
+  CONSTRAINT `Spieler` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+
 -- Exportiere Struktur von Tabelle kica.mannschaft
 DROP TABLE IF EXISTS `mannschaft`;
 CREATE TABLE IF NOT EXISTS `mannschaft` (
@@ -83,7 +97,8 @@ DROP TABLE IF EXISTS `sparte`;
 CREATE TABLE IF NOT EXISTS `sparte` (
   `sparte_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`sparte_id`)
+  PRIMARY KEY (`sparte_id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -178,6 +193,7 @@ DROP TABLE IF EXISTS `turnier`;
 CREATE TABLE IF NOT EXISTS `turnier` (
   `tu_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
+  `liga` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -189,13 +205,13 @@ DROP TABLE IF EXISTS `turnier_sparte`;
 CREATE TABLE IF NOT EXISTS `turnier_sparte` (
   `tu_id` int(10) NOT NULL,
   `sparte_id` int(10) NOT NULL,
-  `gewinner` int(10) NOT NULL,
+  `gewinner` int(10) DEFAULT NULL,
   PRIMARY KEY (`tu_id`,`sparte_id`),
   KEY `Sparte2` (`sparte_id`),
   KEY `Gewinner` (`gewinner`),
-  CONSTRAINT `Turnier2` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`),
+  CONSTRAINT `Gewinner` FOREIGN KEY (`gewinner`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Sparte2` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
-  CONSTRAINT `Gewinner` FOREIGN KEY (`gewinner`) REFERENCES `mannschaft` (`m_id`)
+  CONSTRAINT `Turnier2` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt

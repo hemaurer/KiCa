@@ -11,12 +11,17 @@
 	<link href="<?php echo URL; ?>public/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/datepicker3.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/bootstrap-timepicker.css" rel="stylesheet">
+	<link href="<?php echo URL; ?>public/css/fullcalendar.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../public/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/moment.min.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/fullcalendar.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/de.js"></script>
+
 </head>
 <body>
 <!-- header -->
@@ -40,10 +45,16 @@
 				<li><a href="<?php echo URL; ?>termine/">Termine</a></li>
 				<li class="dropdown"><a href="<?php echo URL; ?>ligatabelle/" class="dropdown-toggle" data-toggle="dropdown">Ligatabelle</a>
 					<ul class="dropdown-menu">
-						<li><a href="<?php echo URL; ?>liga/">A-Jugend</a></li>
-						<li><a href="<?php echo URL; ?>liga/">B-Jugend</a></li>
-						<li><a href="<?php echo URL; ?>liga/">C-Jugend</a></li>
-						<li><a href="<?php echo URL; ?>liga/">D-Jugend</a></li>
+
+						<?php
+							// Sparten aus der DB laden und in der Liste anzeigen
+							$sparten_model = $this->loadModel('SpartenModel');
+	        				$spartenDaten = $sparten_model->getSparten();
+
+						foreach ($spartenDaten as $sparte) { ?>
+								<li><a href="<?php echo URL; echo 'liga/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+						<?php } ?>
+
 					</ul>
 				</li>
 				<li><a href="<?php echo URL; ?>turniere/">Turniere</a></li>
@@ -124,6 +135,8 @@
 	    	if ($_SESSION['subpage']== "Home"){ echo "<h4>Home</h4>"; }
 	    	if ($_SESSION['subpage']== "Profil"){ echo "<h4>Mein Profil</h4>"; }
 	    	if ($_SESSION['subpage']== "Verwaltung"){ echo "<h4>Verwaltung</h4>"; }
+	    	if ($_SESSION['subpage']== "Termine"){ echo "<h4>Termine</h4>"; }
+	    	if ($_SESSION['subpage']== "Liga"){ echo "<h4>Ligatabelle</h4>"; }
 
     	}
     	else{

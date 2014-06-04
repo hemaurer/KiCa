@@ -11,6 +11,10 @@ class Termine extends Controller
         $termine_spiele = $termine_model->get_alle_spiele();
         $termine_trainingseinheiten = $termine_model->get_alle_trainingseinheiten();
 
+        //Session Variable wird gesetzt, dass die Headline der jeweiligen Subseite angezeigt werden kann
+        @session_start();
+        $_SESSION['subpage'] = "Termine";
+
         require 'application/views/_templates/header.php';
         require 'application/views/termine/index.php';
         require 'application/views/_templates/footer.php';

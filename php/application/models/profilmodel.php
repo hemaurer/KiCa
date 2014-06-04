@@ -27,10 +27,15 @@ class ProfilModel
         $uploadfile = $uploaddir . $p_id . "_profilbild." . $filenameext;
         $str_bild = "." . $uploaddir . $p_id . "_profilbild." . $filenameext;
 
+        //Bild hochladen
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-            echo "Datei ist valide und wurde erfolgreich hochgeladen.\n";
+            //bereits vorhandes Bild löschen
+            if ($_SESSION['bild'] != "../public/img/profilbilder/_noimage.jpg"){
+                unlink(substr($_SESSION['bild'],3));
+            }
+            // echo "Datei ist valide und wurde erfolgreich hochgeladen.\n";
         } else {
-            echo "Datei konnte nicht hochgeladen werden.\n";
+            // echo "Datei konnte nicht hochgeladen werden.\n";
         }
 
         //Den Pfad zum hochgeladenen Bild in der DB der Person eintragen, dass es angezeigt wird
@@ -38,6 +43,7 @@ class ProfilModel
         $query = $this->db->prepare($sql);
         $query->execute(array($str_bild,$p_id));
 
+        //Session Variable neu setzen, dass das neue Bild auf der Profilseite angezeigt wird
         $_SESSION['bild'] = $str_bild;
 
         //Zusätzliche Infos fürs Debugging:
