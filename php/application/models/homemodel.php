@@ -67,4 +67,11 @@ class HomeModel
 
         return json_encode($query->fetchAll());
     }//end getKalendarDaten()
+
+    // Funktion, um die JSON zu formatieren, dass Zeilenumbrüche im Kalender angezeigt werden
+    public function calendarBreakLines($trainingseinheitenDaten)
+    {
+        $newstr = str_replace('"title":"', '"title":"\n', $trainingseinheitenDaten);
+        return $newstr;
+    }
 }?>

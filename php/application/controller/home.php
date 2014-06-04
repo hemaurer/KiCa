@@ -14,6 +14,12 @@ class Home extends Controller
         $freundschaftsDaten = $home_model->getFreundschaftsDaten();
     	$turnierDaten = $home_model->getTurnierDaten();
 
+        //JSON formatieren, dass ein Zeilenumbruch im Kalender zwischen Uhrzeit und Titel angezeigt wird
+        $trainingseinheitenDaten = $home_model->calendarBreakLines($trainingseinheitenDaten);
+        $ligaDaten = $home_model->calendarBreakLines($ligaDaten);
+        $freundschaftsDaten = $home_model->calendarBreakLines($freundschaftsDaten);
+        $turnierDaten = $home_model->calendarBreakLines($turnierDaten);
+
     	//Session Variable wird gesetzt, dass die Headline der jeweiligen Subseite angezeigt werden kann
     	@session_start();
     	$_SESSION['subpage'] = "Home";
@@ -24,3 +30,4 @@ class Home extends Controller
     }
 
 }
+

@@ -1,22 +1,33 @@
 <div class="container">
-    <div id='calendar'></div>
-</div>
 
-<script type="text/javascript">
-	$(document).ready(function() {
+	<!-- Kalender Div - wird mit dem Kalender befüllt -->
+    <div id='calendar'>
 
-		 $('#calendar').fullCalendar({
-		 editable: true,
-		 eventSources:[
+		<!-- Script zum Generieren des Kalenders beim Laden der Seite -->
+		<script type="text/javascript">
+			$(document).ready(function() {
 
-		 	{events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#3C763D', borderColor : '#3C763D', textColor:'#fff'},
-		 	{events:<?php echo $ligaDaten;?>,backgroundColor: '#428BCA', borderColor: '#428BCA'},
-		 	{events:<?php echo $turnierDaten;?>,backgroundColor: '#A94442', borderColor:'#A94442', textColor:'#fff'},
-		 	{events:<?php echo $freundschaftsDaten;?>,backgroundColor: '#B80591', borderColor:'#B80591', textColor:'#fff'},
+				 $('#calendar').fullCalendar({
+				 editable: true,
+				 eventSources:[
 
-			]
-		 });
+				 	// Kalender mit Events (bzw. Daten) füllen - ausgelesen über controller bzw. model
+				 	{events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff'},
+				 	{events:<?php echo $ligaDaten;?>,backgroundColor: '#3276B1', borderColor: '#3276B1'},
+				 	{events:<?php echo $turnierDaten;?>,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff'},
+				 	{events:<?php echo $freundschaftsDaten;?>,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff'},
 
-	 });
-</script>
+					]
+				 });
 
+			 });
+		</script>
+
+		<br>
+			<!-- Legende über die Farben im Kalender -->
+			<span class="label label-primary">Liga</span>
+			<span class="label label-success">Trainingseinheiten</span>
+			<span class="label label-danger">Turnier</span>
+			<span class="label label-warning">Freundschaftsspiele</span>
+	</div> <!-- End calender -->
+</div> <!-- End container -->
