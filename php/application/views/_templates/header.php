@@ -11,12 +11,17 @@
 	<link href="<?php echo URL; ?>public/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/datepicker3.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/bootstrap-timepicker.css" rel="stylesheet">
+	<link href="<?php echo URL; ?>public/css/fullcalendar.css" rel="stylesheet">
 
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../public/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/moment.min.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/fullcalendar.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/de.js"></script>
+
 </head>
 <body>
 <!-- header -->
