@@ -31,6 +31,23 @@ class VerwaltungsModel
     {
 		$str_bild = "../public/img/profilbilder/_noimage.jpg";
 		$str_user = $str_vorname.".".$str_nachname;
+		
+		/*Benutzername prüfen ob bereits vorhanden*/
+		$sql = "SELECT username FROM person";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+		$personen = $query->fetchAll();
+		$i="1"; 
+		foreach ($personen as $person){
+			if ($str_user == $person->username){
+				echo "If Schleife erfolgreich";
+				while ($str_user == $person->username){
+					$str_user = $str_vorname.".".$str_nachname.$i;
+					$i++;
+				}
+			}
+		}
+		
 		$str_password = password_hash("kica", PASSWORD_DEFAULT);
 		$d_obj = new DateTime($d_date);
 		$d_gebdatum = $d_obj->format('Y-m-d');
@@ -46,7 +63,7 @@ class VerwaltungsModel
         $query->execute(array($p_id));
 		$person = $query->fetch(PDO::FETCH_OBJ);
 		
-		/*Prüfung des Vornamens & Nachnamens & Benutzernamens, ob bereits vorhanden fehlt noch*/
+		/*Prüfung des Vornamens & Nachnamens & Benutzernamens*/
 		if (($str_vorname == null) && ($str_nachname == null)){
 			$str_vorname =	$person->v_name;
 			$str_nachname =	$person->name;
@@ -54,13 +71,60 @@ class VerwaltungsModel
 		}else if(($str_vorname == null) && ($str_nachname != null)){
 			$str_vorname =	$person->v_name;
 			$str_user = $str_vorname.".".$str_nachname;
+			/*Benutzername prüfen ob bereits vorhanden*/
+			$sql = "SELECT username FROM person";
+			$query = $this->db->prepare($sql);
+			$query->execute();
+			$usernames = $query->fetchAll();
+			$i="1"; 
+			foreach ($usernames as $username){
+				if ($str_user == $username->username){
+					
+					while ($str_user == $username->username){
+						$str_user = $str_vorname.".".$str_nachname.$i;
+						$i++;
+					}
+				}
+			}
 		}else if(($str_vorname != null) && ($str_nachname == null)){
 			$str_nachname =	$person->name;
 			$str_user = $str_vorname.".".$str_nachname;
+			/*Benutzername prüfen ob bereits vorhanden*/
+			$sql = "SELECT username FROM person";
+			$query = $this->db->prepare($sql);
+			$query->execute();
+			$usernames = $query->fetchAll();
+			$i="1"; 
+			foreach ($usernames as $username){
+				if ($str_user == $username->username){
+					
+					while ($str_user == $username->username){
+						$str_user = $str_vorname.".".$str_nachname.$i;
+						$i++;
+					}
+				}
+			}
 		}else
 		{
 			$str_user = $str_vorname.".".$str_nachname;
+			/*Benutzername prüfen ob bereits vorhanden*/
+			$sql = "SELECT username FROM person";
+			$query = $this->db->prepare($sql);
+			$query->execute();
+			$usernames = $query->fetchAll();
+			$i="1"; 
+			foreach ($usernames as $username){
+				if ($str_user == $username->username){
+					
+					while ($str_user == $username->username){
+						$str_user = $str_vorname.".".$str_nachname.$i;
+						$i++;
+					}
+				}
+			}
 		}
+		
+		
 		
 		/*Datumsfeld prüfen*/
 		if ($d_date == null){
@@ -252,7 +316,7 @@ class VerwaltungsModel
 
 	public function get_alle_trainingsgruppen()
     {
-		$sql = "SELECT tg.tg_id, tg.name, p.name as tr_name FROM trainingsgruppe tg LEFT JOIN person p ON (tg.trainer=p.p_id)";
+		$sql = "SELECT tg.tg_id, tg.name FROM trainingsgruppe tg";
         //$sql = "SELECT * FROM trainingsgruppe ORDER BY name";
         $query = $this->db->prepare($sql);
         $query->execute();
@@ -302,7 +366,7 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name));
     }
-	public function edit_turnier($tu_id, $str_name, $str_gewinner)
+	public function edit_turnier($tu_id, $str_name, $int_liga)
     {
 		$sql = "SELECT * FROM turnier WHERE tu_id=?";
         $query = $this->db->prepare($sql);
@@ -310,15 +374,9 @@ class VerwaltungsModel
 		$turnier = $query->fetch(PDO::FETCH_OBJ);
 		if ($str_name == null){
 			$str_name = $turnier->name;
-		}
-		$sql = "Select m_id FROM mannschaft WHERE  name = ?"; 	
-        $query = $this->db->prepare($sql);						
-		$query->execute(array($str_gewinner));						
-		$gewinner = $query->fetch(PDO::FETCH_OBJ);							
-		if ($str_gewinner == null){
-			$int_gewinner = $turnier->gewinner;
-		}else{
-			$int_gewinner = $gewinner->m_id;
+		}							
+		if ($int_liga == null){
+			$int_liga = $turnier->liga;
 		}
 		
 		// /*Backup*/
@@ -326,9 +384,9 @@ class VerwaltungsModel
 		// $query = $this->db->prepare($sql);
 		// $query->execute(array($str_name, $int_gewinner, $tu_id));
 		
-		$sql = "UPDATE turnier SET name=?, gewinner=? WHERE tu_id=?";
+		$sql = "UPDATE turnier SET name=?, liga=? WHERE tu_id=?";
 		$query = $this->db->prepare($sql);
-		$query->execute(array($str_name, $int_gewinner, $tu_id));
+		$query->execute(array($str_name, $int_liga, $tu_id));
 		echo true;
 	}
     public function delete_turnier($tu_id)
@@ -340,12 +398,20 @@ class VerwaltungsModel
     }
 
 /***Status***/
-public function get_alle_stats()
+	public function get_alle_stats()
     {
         $sql = "SELECT * FROM status";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
+    }
+	
+	/***Sparte***/
+	public function add_sparte($str_name)
+    {
+        $sql = "INSERT INTO sparte (name) VALUES (:name)";
+        $query = $this->db->prepare($sql);
+        $query->execute(array(':name' => $str_name));
     }
 	
 }?>

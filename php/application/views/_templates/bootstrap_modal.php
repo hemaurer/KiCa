@@ -7,7 +7,7 @@
 				</div>
 				<div class="modal-body" id="modalbody">
 				</div>
-				<div class="modal-footer" id="modalfooter">
+				<div class="personenfooter" id="modalfooter">
 				</div>
 			</div>
 		</div>
@@ -35,13 +35,12 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Gewinner</label>
+							<label class="control-label col-md-4">Ligaturnier?</label>
 							<div class="col-md-6">
-								<select class="form-control" id="str_gewinner" size="1">
+								<select class="form-control" id="int_liga" size="1">
 									<option></option>
-									<?php foreach ($mannschaften as $mannschaft) { ?>
-										<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
-									<?php } ?>
+									<option value="1">Ja</option>
+									<option value="0">Nein</option>
 								</select>
 							</div>
 						</div>

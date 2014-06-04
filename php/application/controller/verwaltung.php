@@ -191,7 +191,7 @@ class Verwaltung extends Controller
     {
         //if (isset($_POST["submit_edit_turnier"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["str_gewinner"]);
+            $verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["int_liga"]);
         // }
         // header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
@@ -207,7 +207,14 @@ class Verwaltung extends Controller
         }
         //header('location: ' . URL . 'verwaltung/');
     }
-
+	public function add_sparte()
+    {
+        if (isset($_POST["submit_add_sparte"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->add_sparte($_POST["str_name"]);
+        }
+        header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
+    }
 
 
 

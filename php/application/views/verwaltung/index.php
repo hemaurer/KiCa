@@ -319,6 +319,35 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				
+				
+				<?php /***Sparte-Add***/?>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Neue Sparte hinzufügen </a>
+						</h4>
+					</div>
+					<div id="collapseSeven" class="panel-collapse collapse">
+						<div class="panel-body">	
+							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_sparte" method="POST">
+								<div class="form-group">
+									<label class="control-label col-md-4">Sparte*</label>
+									<div class="col-md-4">
+										<input class="form-control" type="text" name="str_name" value="" placeholder="Sparte" required />
+									</div>
+								</div>	
+								<div class="form-group">
+									<div class="col-md-offset-4 col-md-4">
+										<input class="btn btn-default" type="submit" name="submit_add_sparte" value="Speichern" />
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>	
 	<?php /***Edit-Tab***/?>
@@ -536,7 +565,7 @@
 								<thead style="background-color: #ddd; font-weight: bold;">
 									<tr>
 										<td>Turnier</td>
-										<td>Gewinner</td>
+										<td>Liga</td>
 										<td align="right" width="1%">Bearbeiten</td>
 										<td align="right" width="1%">Löschen</td>
 									</tr>
@@ -545,7 +574,10 @@
 								<?php foreach ($turniere as $turnier) { ?>
 									<tr>
 										<td><?php if (isset($turnier->name)) echo $turnier->name; ?></td>
-										<td><?php if (isset($turnier->gewinner)) echo $turnier->gewinner; ?></td>
+										<td><?php if (isset($turnier->liga)){
+											if ($turnier->liga == 1){
+											echo "ja"; }else
+											{ echo "nein"; }}?></td>
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/edit_turnier/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->tu_id; ?>','<?php echo $turnier->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->tu_id; ?>','<?php echo $turnier->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>

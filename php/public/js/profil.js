@@ -90,14 +90,22 @@ function saveGroesse() {
 		$.post("doChangeGroesse", {"int_groesse": groesse})
 			 .done(function( data ) {
 			 	if (data == 1){
-			 			$('#successModal_head').html("Erfolgreich");
+			 			/*$('#successModal_head').html("Erfolgreich");
 			 			$('#successModal_body').html("Größe erfolgreich geändert!");
-			 			$('#successModal').modal('toggle');
+			 			$('#successModal').modal('toggle');*/
+						
+						$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Größe erfolgreich geändert!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},4000);
 					}
 					else{
-						$('#successModal_head').html("Fehler");
+						/*$('#successModal_head').html("Fehler");
 			 			$('#successModal_body').html("Größe konnte nicht geändert werden!");
+						$('#successModal').modal('toggle');*/
+						
+						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},4000);
 					}
 				});
 }
@@ -114,8 +122,9 @@ function saveTel() {
 		$.post("doChangeTel", {"str_tel": tel})
 			 .done(function( data ) {
 			 	if (data == 1){
-			 			$('#successModal_head').html("Erfolgreich");
-			 			$('#successModal_body').html("Telefonnummer erfolgreich geändert!");
+			 			/*$('#successModal_head').html("Erfolgreich");
+			 			$('#successModal_body').html("Telefonnummer erfolgreich geändert!");*/
+						$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Telefonnummer erfolgreich geändert!</div>');
 			 			$('#successModal').modal('toggle');
 					}
 					else{
