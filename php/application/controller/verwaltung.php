@@ -33,33 +33,35 @@ class Verwaltung extends Controller
 
     public function add_person()
     {
-
         if (isset($_POST["submit_add_person"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->add_person($_POST["str_nachname"], $_POST["str_vorname"], $_POST["d_date"], $_POST["int_groesse"], $_POST["b_betreuer"], $_POST["int_tel"]);
 		}
 		header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
-
-
     }
 	public function edit_person()
     {
 
-        if (isset($_POST["submit_edit_person"])) {
+        //if (isset($_POST["submit_edit_person"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->edit_person($_POST["p_id"], $_POST["str_nachname"], $_POST["str_vorname"], $_POST["d_gebdatum"], $_POST["int_groesse"], $_POST["str_bild"], $_POST["b_betreuer"], $_POST["int_tel"], $_POST["str_user"], $_POST["str_password"]);
-        }
-        header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
+            $verwaltungs_model->edit_person($_POST["p_id"], $_POST["str_nachname"], $_POST["str_vorname"], $_POST["d_date"], $_POST["int_groesse"], $_POST["b_betreuer"], $_POST["int_tel"]);
+        //}
+        //header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
-    public function delete_person($p_id)
+	public function reset_password()
+	{
+		$verwaltungs_model = $this->loadModel('VerwaltungsModel');
+        $verwaltungs_model->reset_password($_POST["p_id"]);
+	}
+    public function delete_person()
     {	@session_start();
 		if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 
-        if (isset($p_id)) {
+        if (isset($_POST["del_id"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->delete_person($p_id);
+            $verwaltungs_model->delete_person($_POST["del_id"]);
         }
-        header('location: ' . URL . 'verwaltung/');
+        //header('location: ' . URL . 'verwaltung/');
 		}
 		else{
 			echo "Diese Seite ist für Sie gesperrt";}
@@ -85,13 +87,13 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
     }
-    public function delete_spiel($s_id)
+    public function delete_spiel()
     {
-        if (isset($s_id)) {
+        if (isset($_POST["del_id"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->delete_spiel($s_id);
+            $verwaltungs_model->delete_spiel($_POST["del_id"]);
         }
-        header('location: ' . URL . 'verwaltung/');
+        //header('location: ' . URL . 'verwaltung/');
     }
 
 /***Mannschaften***/
@@ -112,13 +114,13 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
-    public function delete_mannschaft($m_id)
+    public function delete_mannschaft()
     {
-        if (isset($m_id)) {
+        if (isset($_POST["del_id"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->delete_mannschaft($m_id);
+            $verwaltungs_model->delete_mannschaft($_POST["del_id"]);
         }
-        header('location: ' . URL . 'verwaltung/');
+        //header('location: ' . URL . 'verwaltung/');
     }
 
 /***Trainingseinheiten***/
@@ -139,13 +141,13 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
-    public function delete_trainingseinheit($tr_id)
+    public function delete_trainingseinheit()
     {
-        if (isset($tr_id)) {
+        if (isset($_POST["del_id"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->delete_trainingseinheit($tr_id);
+            $verwaltungs_model->delete_trainingseinheit($_POST["del_id"]);
         }
-        header('location: ' . URL . 'verwaltung/');
+        //header('location: ' . URL . 'verwaltung/');
     }
 
 /***Trainingsgruppe***/
@@ -166,13 +168,13 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
-    public function delete_trainingsgruppe($tg_id)
+    public function delete_trainingsgruppe()
     {
-        if (isset($tg_id)) {
+        if (isset($_POST["del_id"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->delete_trainingsgruppe($tg_id);
+            $verwaltungs_model->delete_trainingsgruppe($_POST["del_id"]);
         }
-        header('location: ' . URL . 'verwaltung/');
+        //header('location: ' . URL . 'verwaltung/');
     }
 
 /***Turnier***/
@@ -187,19 +189,23 @@ class Verwaltung extends Controller
     }
 	public function edit_turnier()
     {
-        if (isset($_POST["submit_edit_turnier"])) {
+        //if (isset($_POST["submit_edit_turnier"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["int_gewinner"]);
-        }
-        header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
+            $verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["str_gewinner"]);
+        // }
+        // header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
-    public function delete_turnier($tu_id)
+    public function delete_turnier(/*$tu_id*/)
     {
-        if (isset($tu_id)) {
-            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->delete_turnier($tu_id);
+        // if (isset($tu_id)) {
+            // $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            // $verwaltungs_model->delete_turnier($tu_id);
+        // }
+		if (isset($_POST["del_id"])) {
+			$verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->delete_turnier($_POST["del_id"]);
         }
-        header('location: ' . URL . 'verwaltung/');
+        //header('location: ' . URL . 'verwaltung/');
     }
 
 

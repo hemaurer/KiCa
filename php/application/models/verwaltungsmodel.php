@@ -38,17 +38,71 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_nachname, ':v_name' => $str_vorname, ':geb_datum' => $d_gebdatum, ':groesse' => $int_groesse, ':bild' => $str_bild, ':betreuer' => $b_betreuer, ':tel' => $int_tel, ':username' => $str_user, ':password' => $str_password ));
     }
-	public function edit_person($p_id, $str_nachname, $str_vorname, $d_gebdatum, $int_groesse, $str_bild, $b_betreuer, $int_tel, $str_user, $str_password)
-    {
-		$sql = "UPDATE person SET name=?, v_name=?, geb_datum=?, groesse=?, bild=?, betreuer=?, tel=?, username=?, password=? WHERE p_id=?";
-		$query = $this->db->prepare($sql);
-		$query->execute(array($str_nachname, $str_vorname, $d_gebdatum, $int_groesse, $str_bild, $b_betreuer, $int_tel, $str_user, $str_password, $p_id));
-	}
-    public function delete_person($p_id)
-    {
-        $sql = "DELETE FROM person WHERE p_id = :p_id";
+	public function edit_person($p_id, $str_nachname, $str_vorname, $d_date, $int_groesse, $b_betreuer, $int_tel)
+    {	
+		/*Vergleichsdaten der Person*/
+		$sql = "SELECT * FROM person WHERE p_id=?";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':p_id' => $p_id));
+        $query->execute(array($p_id));
+		$person = $query->fetch(PDO::FETCH_OBJ);
+		
+		/*Prüfung des Vornamens & Nachnamens & Benutzernamens, ob bereits vorhanden fehlt noch*/
+		if (($str_vorname == null) && ($str_nachname == null)){
+			$str_vorname =	$person->v_name;
+			$str_nachname =	$person->name;
+			$str_user = $person->username;
+		}else if(($str_vorname == null) && ($str_nachname != null)){
+			$str_vorname =	$person->v_name;
+			$str_user = $str_vorname.".".$str_nachname;
+		}else if(($str_vorname != null) && ($str_nachname == null)){
+			$str_nachname =	$person->name;
+			$str_user = $str_vorname.".".$str_nachname;
+		}else
+		{
+			$str_user = $str_vorname.".".$str_nachname;
+		}
+		
+		/*Datumsfeld prüfen*/
+		if ($d_date == null){
+			$d_gebdatum = $person->geb_datum;
+		}else{
+			$d_obj = new DateTime($d_date);
+			$d_gebdatum = $d_obj->format('Y-m-d');
+		}
+		
+		/*Groessefeld prüfen*/
+		if ($int_groesse == null){
+			$int_groesse = $person->groesse;
+		}
+		
+		/*Telefonfeld prüfen*/
+		if ($int_tel == null){
+			$int_tel = $person->tel;
+		}
+		
+		$str_bild = $person->bild;
+		
+		/*Updaten der Person*/
+		$sql = "UPDATE person SET name=?, v_name=?, geb_datum=?, groesse=?, bild=?, betreuer=?, tel=?, username=? WHERE p_id=?";
+		$query = $this->db->prepare($sql);
+		$query->execute(array($str_nachname, $str_vorname, $d_gebdatum, $int_groesse, $str_bild, $b_betreuer, $int_tel, $str_user, $p_id));
+		echo true;
+	}
+    public function reset_password($p_id)
+    {
+		$str_password = password_hash("kica", PASSWORD_DEFAULT);
+		/*Updaten der Person*/
+		$sql = "UPDATE person SET password=? WHERE p_id=?";
+		$query = $this->db->prepare($sql);
+		$query->execute(array($str_password, $p_id));
+		echo true;
+	}
+	public function delete_person($p_id)
+    {
+        $sql = "DELETE FROM person WHERE p_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($p_id));
+		echo true;
     }
 
 /***Spiele***/
@@ -116,9 +170,10 @@ class VerwaltungsModel
 	}
     public function delete_spiel($s_id)
     {
-        $sql = "DELETE FROM spiel WHERE s_id = :s_id";
+        $sql = "DELETE FROM spiel WHERE s_id =?";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':s_id' => $s_id));
+        $query->execute(array($s_id));
+		echo true;
     }
 
 /***Mannschaften***/
@@ -144,9 +199,10 @@ class VerwaltungsModel
 	}
     public function delete_mannschaft($m_id)
     {
-        $sql = "DELETE FROM mannschaft WHERE m_id = :m_id";
+        $sql = "DELETE FROM mannschaft WHERE m_id =?";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':m_id' => $m_id));
+        $query->execute(array($m_id));
+		echo true;
     }
 
 /***Trainingseinheit***/
@@ -186,9 +242,10 @@ class VerwaltungsModel
 	}
     public function delete_trainingseinheit($tr_id)
     {
-        $sql = "DELETE FROM trainingseinheit WHERE tr_id = :tr_id";
+        $sql = "DELETE FROM trainingseinheit WHERE tr_id =?";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':tr_id' => $tr_id));
+        $query->execute(array($tr_id));
+		echo true;
     }
 
 /***Trainingsgruppe***/
@@ -224,9 +281,10 @@ class VerwaltungsModel
 	}
     public function delete_trainingsgruppe($tg_id)
     {
-        $sql = "DELETE FROM trainingsgruppe WHERE tg_id = :tg_id";
+        $sql = "DELETE FROM trainingsgruppe WHERE tg_id =?";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':tg_id' => $tg_id));
+        $query->execute(array($tg_id));
+		echo true;
     }
 
 /***Turnier***/
@@ -244,17 +302,41 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name));
     }
-	public function edit_turnier($tu_id, $str_name, $int_gewinner)
+	public function edit_turnier($tu_id, $str_name, $str_gewinner)
     {
+		$sql = "SELECT * FROM turnier WHERE tu_id=?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tu_id));
+		$turnier = $query->fetch(PDO::FETCH_OBJ);
+		if ($str_name == null){
+			$str_name = $turnier->name;
+		}
+		$sql = "Select m_id FROM mannschaft WHERE  name = ?"; 	
+        $query = $this->db->prepare($sql);						
+		$query->execute(array($str_gewinner));						
+		$gewinner = $query->fetch(PDO::FETCH_OBJ);							
+		if ($str_gewinner == null){
+			$int_gewinner = $turnier->gewinner;
+		}else{
+			$int_gewinner = $gewinner->m_id;
+		}
+		
+		// /*Backup*/
+		// $sql = "UPDATE turnier SET name=?, gewinner=? WHERE tu_id=?";
+		// $query = $this->db->prepare($sql);
+		// $query->execute(array($str_name, $int_gewinner, $tu_id));
+		
 		$sql = "UPDATE turnier SET name=?, gewinner=? WHERE tu_id=?";
 		$query = $this->db->prepare($sql);
 		$query->execute(array($str_name, $int_gewinner, $tu_id));
+		echo true;
 	}
     public function delete_turnier($tu_id)
     {
-        $sql = "DELETE FROM turnier WHERE tu_id = :tu_id";
+        $sql = "DELETE FROM turnier WHERE tu_id =?";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':tu_id' => $tu_id));
+        $query->execute(array($tu_id));
+		echo true;
     }
 
 /***Status***/
