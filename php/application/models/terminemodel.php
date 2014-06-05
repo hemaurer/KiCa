@@ -15,7 +15,7 @@ class TermineModel
     }
 
 
-    public function get_alle_spiele()
+    public function get_alle_ar_spiele()
     {
 
         $sql = "SELECT spiel.s_id, spiel.ort as Ort, heim.name as Heim, auswaerts.name as Auswaerts, spiel.h_tore as Heimtore, spiel.a_tore as Auswaertstore, `status`.`status` as Status, spiel.zeit as Uhrzeit, turnier.name as Turnier , sparte.name AS Sparte
@@ -39,10 +39,10 @@ class TermineModel
     }
 
 
-    public function get_alle_trainingseinheiten()
+    public function get_alle_ar_trainingseinheiten()
     {
 
-         $sql = "SELECT trainingseinheit.tr_id, trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Uhrzeit, trainingsgruppe.name as Trainingsgruppe, CONCAT (person.name, ', ', person.v_name ) as Trainer
+         $sql = "SELECT trainingseinheit.tr_id, trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Uhrzeit, trainingsgruppe.name as trainingsgruppe, CONCAT (person.name, ', ', person.v_name ) as Trainer
                 FROM trainingseinheit
                 JOIN trainingsgruppe ON trainingseinheit.tg_id = trainingsgruppe.tg_id
                 JOIN person ON trainingseinheit.trainer = person.p_id
@@ -57,91 +57,95 @@ class TermineModel
 	// Baue ein zweidimensionales Array für Termine an jedem Tag
 	public function bau_terminplan()
     {
-		// Hole alle relevanten Spiele und Trainingseinheiten
-		$spiele = $this->get_alle_spiele();
-		$trainings = $this->get_alle_trainingseinheiten();
+		// Hole alle relevanten ar_spiele und ar_trainingseinheiten
+		$ar_spiele = $this->get_alle_ar_spiele();
+		$ar_trainings = $this->get_alle_ar_trainingseinheiten();
 		// Alle Zaehlvariablen initialisieren
-		$zaehlerSpiele = 0;
-		$zaehlerTrainings = 0;
-		$terminplan = array();
-		$zaehlerTag = 0;	
-		$zaehlerTermine = 0;
-		$dateCounter = 0;
-		if (count($spiele < 1) || count($trainings) < 1) {
+		$i_zaehlerar_spiele = 0;
+		$i_zaehlerar_trainings = 0;
+		$ar_terminplan = array();
+		$i_zaehlerTag = 0;	
+		$i_zaehlerTermine = 0;
+		$d_zeigerDatum = 0;
+		if (count($ar_spiele < 1) || count($ar_trainings) < 1) {
 			// Mindestens eine Kategorie nicht vorhanden
-			if (count($trainings) < 1 && count($spiele) < 1) {
+			if (count($ar_trainings) < 1 && count($ar_spiele) < 1) {
 				// Kein Termin vorhanden, also nichts machen
-			} else if (count($trainings) < 1) {
+			} else if (count($ar_trainings) < 1) {
 				// Kein Training vorhanden, daher nur die Spieleliste einfügen
-				foreach ($spiele as $spiel){
-					if ($dateCounter != substr($spiel->Uhrzeit, 0, 10)) {
-						$zaehlerTag++;
-						$zaehlerTermine = 0;
-						$dateCounter = substr($spiel->Uhrzeit, 0, 10);
+				foreach ($ar_spiele as $spiel){
+					if ($d_zeigerDatum != substr($spiel->Uhrzeit, 0, 10)) {
+						$i_zaehlerTag++;
+						$i_zaehlerTermine = 0;
+						$d_zeigerDatum = substr($spiel->Uhrzeit, 0, 10);
 					}
-					$terminplan[$zaehlerTag][$zaehlerTermine] = $spiel;
+					$ar_terminplan[$i_zaehlerTag][$i_zaehlerTermine] = $spiel;
 				}
 			} else {
 				// Kein Spiel vorhanden, daher nur die Trainingsliste einfügen
-				foreach ($trainings as $training){
-					if ($dateCounter != substr($training->Uhrzeit, 0, 10)) {
-						$zaehlerTag++;
-						$zaehlerTermine = 0;
-						$dateCounter = substr($training->Uhrzeit, 0, 10);
+				foreach ($ar_trainings as $training){
+					if ($d_zeigerDatum != substr($training->Uhrzeit, 0, 10)) {
+						$i_zaehlerTag++;
+						$i_zaehlerTermine = 0;
+						$d_zeigerDatum = substr($training->Uhrzeit, 0, 10);
 					}
-					$terminplan[$zaehlerTag][$zaehlerTermine] = $training;
+					$ar_terminplan[$i_zaehlerTag][$i_zaehlerTermine] = $training;
 				}
 			}
 		} else {
-			// 
-			if ($spiele[0]->Uhrzeit < $trainings[0]->Uhrzeit){
-				$dateCounter = substr($spiele[0]->Uhrzeit, 0, 10);
+			// Alle Spiele und Trainingseinheiten laden
+			
+			// Frühsten Termin ermitteln, um das Datum somit die erste Dimension zu bestimmen
+			if ($ar_spiele[0]->Uhrzeit < $ar_trainings[0]->Uhrzeit){
+				$d_zeigerDatum = substr($ar_spiele[0]->Uhrzeit, 0, 10);
 			} else {
-				$dateCounter = substr($trainings[0]->Uhrzeit, 0, 10);
+				$d_zeigerDatum = substr($ar_trainings[0]->Uhrzeit, 0, 10);
 			}
-			while ($zaehlerSpiele < count($spiele) || $zaehlerTrainings < count($trainings)){
-				if ($zaehlerSpiele >= count($spiele)) {
-					if ($dateCounter != substr($trainings[$zaehlerTrainings]->Uhrzeit, 0, 10)) {
-						$zaehlerTag++;
-						$zaehlerTermine = 0;
-						$dateCounter = substr($trainings[$zaehlerTrainings]->Uhrzeit, 0, 10);
+			// Solange noch Spiele oder Trainingseinheiten vorhanden sind, fülle die Liste
+			while ($i_zaehlerSpiele < count($ar_spiele) || $i_zaehlerTrainings < count($ar_trainings)){
+				if ($i_zaehlerSpiele >= count($ar_spiele)) {
+					// Prüfen, ob ein neuer Tag ist
+					if ($d_zeigerDatum != substr($ar_trainings[$i_zaehlerTrainings]->Uhrzeit, 0, 10)) {
+						$i_zaehlerTag++;
+						$i_zaehlerTermine = 0;
+						$d_zeigerDatum = substr($ar_trainings[$i_zaehlerTrainings]->Uhrzeit, 0, 10);
 					}
-					$terminplan[$zaehlerTag][$zaehlerTermine] = $trainings[$zaehlerTrainings];
-					$zaehlerTrainings++;
-					$zaehlerTermine++;
-				} else if ($zaehlerTrainings >= count($trainings)){
-					if ($dateCounter != substr($spiele[$zaehlerSpiele]->Uhrzeit, 0, 10)) {
-						$zaehlerTag++;
-						$zaehlerTermine = 0;
-						$dateCounter = substr($spiele[$zaehlerSpiele]->Uhrzeit, 0, 10);
+					// Termin hinzufügen und Zähler erhöhen
+					$ar_terminplan[$i_zaehlerTag][$i_zaehlerTermine] = $ar_trainings[$i_zaehlerTrainings];
+					$i_zaehlerTrainings++;
+					$i_zaehlerTermine++;
+				} else if ($i_zaehlerTrainings >= count($ar_trainings)){
+					if ($d_zeigerDatum != substr($ar_spiele[$i_zaehlerSpiele]->Uhrzeit, 0, 10)) {
+						$i_zaehlerTag++;
+						$i_zaehlerTermine = 0;
+						$d_zeigerDatum = substr($ar_spiele[$i_zaehlerSpiele]->Uhrzeit, 0, 10);
 					}
-					$terminplan[$zaehlerTag][$zaehlerTermine] = $spiele[$zaehlerSpiele];
-					$zaehlerSpiele++;
-					$zaehlerTermine++;
+					$ar_terminplan[$i_zaehlerTag][$i_zaehlerTermine] = $ar_spiele[$i_zaehlerSpiele];
+					$i_zaehlerSpiele++;
+					$i_zaehlerTermine++;
 				} else {
-					if ($spiele[$zaehlerSpiele]->Uhrzeit < $trainings[$zaehlerTrainings]->Uhrzeit){
-						if ($dateCounter != substr($trainings[$zaehlerTrainings]->Uhrzeit, 0, 10)) {
-							$zaehlerTag++;
-							$zaehlerTermine = 0;
-							$dateCounter = substr($trainings[$zaehlerTrainings]->Uhrzeit, 0, 10);
+					if ($ar_spiele[$i_zaehlerSpiele]->Uhrzeit < $ar_trainings[$i_zaehlerTrainings]->Uhrzeit){
+						if ($d_zeigerDatum != substr($ar_trainings[$i_zaehlerTrainings]->Uhrzeit, 0, 10)) {
+							$i_zaehlerTag++;
+							$i_zaehlerTermine = 0;
+							$d_zeigerDatum = substr($ar_trainings[$i_zaehlerTrainings]->Uhrzeit, 0, 10);
 						}
-						$terminplan[$zaehlerTag][$zaehlerTermine] = $spiele[$zaehlerSpiele];
-						$zaehlerSpiele++;
-						$zaehlerTermine++;
+						$ar_terminplan[$i_zaehlerTag][$i_zaehlerTermine] = $ar_spiele[$i_zaehlerSpiele];
+						$i_zaehlerSpiele++;
+						$i_zaehlerTermine++;
 					} else {
-						if ($dateCounter != substr($trainings[$zaehlerTrainings]->Uhrzeit, 0, 10)) {
-							$zaehlerTag++;
-							$zaehlerTermine = 0;
-							$dateCounter = substr($spiele[$zaehlerSpiele]->Uhrzeit, 0, 10);
+						if ($d_zeigerDatum != substr($ar_trainings[$i_zaehlerTrainings]->Uhrzeit, 0, 10)) {
+							$i_zaehlerTag++;
+							$i_zaehlerTermine = 0;
+							$d_zeigerDatum = substr($ar_spiele[$i_zaehlerSpiele]->Uhrzeit, 0, 10);
 						}
-						$terminplan[$zaehlerTag][$zaehlerTermine] = $trainings[$zaehlerTrainings];
-						$zaehlerTrainings++;	
-						$zaehlerTermine++;
+						$ar_terminplan[$i_zaehlerTag][$i_zaehlerTermine] = $ar_trainings[$i_zaehlerTrainings];
+						$i_zaehlerTrainings++;	
+						$i_zaehlerTermine++;
 					}
 				}
 			}
 		}
-        return $terminplan;
+        return $ar_terminplan;
     }
-
 }?>
