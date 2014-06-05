@@ -162,6 +162,17 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="control-label col-md-4">Sparte*</label>
+									<div class="col-md-4">
+										<select class="form-control" name="str_sparte" size="1" required>
+											<option></option>
+											<?php foreach ($sparten as $sparte) { ?>
+											<option><?php if (isset($sparte->name)) echo $sparte->name; ?></option>
+											<?php } ?>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input type="submit" class="btn btn-default" name="submit_add_spiel" value="Speichern"/>
 									</div>
@@ -237,6 +248,17 @@
 									<script> $('#timepicker2').timepicker({showMeridian: false});</script>
 								</div>
 								<div class="form-group">
+									<label class="control-label col-md-4">Trainer*</label>
+									<div class="col-md-4">
+										<select class="form-control" name="str_trainer" size="1" required>
+											<option></option>
+											<?php foreach ($personen as $person) { ?>
+											<?php if ((isset($person->name))&&($person->betreuer == 1)){?><option><?php echo $person->name; }?></option>
+											<?php } ?>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsgruppe*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_tg_name" size="1" required>
@@ -274,17 +296,6 @@
 									</div>
 								</div>	
 								<div class="form-group">
-									<label class="control-label col-md-4">Trainer*</label>
-									<div class="col-md-4">
-										<select class="form-control" name="str_trainer" size="1" required>
-											<option></option>
-											<?php foreach ($personen as $person) { ?>
-											<option><?php if ((isset($person->name))&&($person->betreuer = 1)) echo $person->name; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
 									</div>
@@ -309,7 +320,17 @@
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Turniername" required />
 									</div>
-								</div>	
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4">Ligaturnier?</label>
+									<div class="col-md-4">
+										<select class="form-control" name="int_liga" size="1">
+											<option></option>
+											<option value="1">Ja</option>
+											<option value="0">Nein</option>
+										</select>
+									</div>
+								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_turnier" value="Speichern" />
@@ -381,7 +402,7 @@
 										<td><?php if (isset($person->v_name)) echo $person->v_name; ?></td>
 										<td><?php if (isset($person->geb_datum)) echo $person->geb_datum; ?></td>
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#person_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_person/' . $person->p_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 										<!--td><a data-toggle="modal" data-target="#pModal<?php echo $person->p_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>

@@ -3,11 +3,11 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="pModalLabel"><div id="modalheader"></div></h4>
+					<h4 class="modal-title" id="ModalLabel"><div id="modalheader"></div></h4>
 				</div>
 				<div class="modal-body" id="modalbody">
 				</div>
-				<div class="personenfooter" id="modalfooter">
+				<div class="modal-footer" id="modalfooter">
 				</div>
 			</div>
 		</div>
@@ -18,13 +18,26 @@
 		<div class="modal-dialog" id="successModal_dialog">
 		</div>
 	</div>
-
+	<!-- Personen-Modal -->
+	<div class="modal fade" id="person_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="ModalLabel"><div id="personmodalheader"></div></h4>
+				</div>
+				<div class="modal-body" id="personmodalbody">
+				</div>
+				<div class="personenfooter" id="personmodalfooter">
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Turnier-Modal -->
 	<div class="modal fade" id="turnier_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="pModalLabel"><div id="turniermodalheader"></div></h4>
+					<h4 class="modal-title" id="ModalLabel"><div id="turniermodalheader"></div></h4>
 				</div>
 				<div class="modal-body" id="modalbody">
 					<div class="form-horizontal">

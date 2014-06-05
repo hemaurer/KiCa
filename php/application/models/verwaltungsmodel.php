@@ -20,11 +20,6 @@ class VerwaltungsModel
         $sql = "SELECT * FROM person ORDER BY name";
         $query = $this->db->prepare($sql);
         $query->execute();
-
-        // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
-        // libs/controller.php! If you prefer to get an associative array as the result, then do
-        // $query->fetchAll(PDO::FETCH_ASSOC); or change libs/controller.php's PDO options to
-        // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return $query->fetchAll();
     }
     public function add_person($str_nachname, $str_vorname, $d_date, $int_groesse, $b_betreuer, $int_tel)
@@ -179,7 +174,7 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_spiel($str_ort, $str_heim, $str_auswaerts, $int_h_tore, $int_a_tore, $str_stat_name, $d_date, $d_time, $str_tu_name)
+	public function add_spiel($str_ort, $str_heim, $str_auswaerts, $int_h_tore, $int_a_tore, $str_stat_name, $d_date, $d_time, $str_tu_name, $str_sparte_name)
     {
 		/**Heimmannschaft auslesen und ID aus Datenbank heraussuchen und Array splitten**/
 		$sql = "Select m_id FROM mannschaft WHERE  name = ?"; 	
@@ -216,15 +211,22 @@ class VerwaltungsModel
 		foreach($arr_stat_id as $int_stat_id){				
 			$int_stat_id = $int_stat_id->stat_id;				
 		};
-		
+		/**Sparte auslesen und ID aus Datenbank heraussuchen und Array splitten**/
+		$sql = "Select sparte_id FROM sparte WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_sparte_name));					
+		$arr_sparte_id = $query->fetchAll();					
+		foreach($arr_sparte_id as $int_sparte_id){				
+			$int_sparte_id = $int_sparte_id->sparte_id;				
+		};
 		/**Zeit formatieren**/
 		$d_obj = new DateTime($d_date." ".$d_time);
 		$d_zeit = $d_obj->format('Y-m-d H:i:s'); 
 		
 		/**Neues Spiel in Datenbank schreiben**/
-        $sql = "INSERT INTO spiel (ort, heim, auswaerts, h_tore, a_tore, stat_id, zeit, tu_id) VALUES (:ort, :heim, :auswaerts, :h_tore, :a_tore, :stat_id, :zeit, :tu_id)";
+        $sql = "INSERT INTO spiel (ort, heim, auswaerts, h_tore, a_tore, stat_id, zeit, tu_id, sparte_id) VALUES (:ort, :heim, :auswaerts, :h_tore, :a_tore, :stat_id, :zeit, :tu_id, :sparte_id)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':ort' => $str_ort, ':heim' => $int_heim, ':auswaerts' => $int_auswaerts, ':h_tore' => $int_h_tore, ':a_tore' => $int_a_tore, ':stat_id' => $int_stat_id, ':zeit' => $d_zeit, ':tu_id' => $int_tu_id));
+        $query->execute(array(':ort' => $str_ort, ':heim' => $int_heim, ':auswaerts' => $int_auswaerts, ':h_tore' => $int_h_tore, ':a_tore' => $int_a_tore, ':stat_id' => $int_stat_id, ':zeit' => $d_zeit, ':tu_id' => $int_tu_id, ':sparte_id' => $int_sparte_id));
     }
 	public function edit_spiel($s_id, $str_ort, $int_heim, $int_auswaerts, $int_h_tore, $int_a_tore, $int_stat_id, $d_zeit, $int_tu_id)
     {
@@ -278,7 +280,7 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_trainingseinheit($str_name, $str_ort, $d_date, $d_time, $str_tg_name)
+	public function add_trainingseinheit($str_name, $str_ort, $d_date, $d_time, $str_tg_name, $str_trainer)
     {
 		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
 		$sql = "Select tg_id FROM trainingsgruppe WHERE  name = ?";	
@@ -293,16 +295,33 @@ class VerwaltungsModel
 		$d_obj = new DateTime($d_date." ".$d_time);
 		$d_zeit = $d_obj->format('Y-m-d H:i:s');
 		
+		/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
+		$sql = "Select p_id FROM person WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_trainer));					
+		$arr_trainer = $query->fetchAll();					
+		foreach($arr_trainer as $int_trainer){				
+			$int_trainer = $int_trainer->p_id;				
+		};
 		
-        $sql = "INSERT INTO trainingseinheit (name, ort, zeit, tg_id) VALUES (:name, :ort, :zeit, :tg_id)";
+        $sql = "INSERT INTO trainingseinheit (name, ort, zeit, trainer, tg_id) VALUES (:name, :ort, :zeit, :trainer, :tg_id)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':tg_id' => $int_tg_id));
+        $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer, ':tg_id' => $int_tg_id));
     }
-	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_zeit, $int_tg_id)
+	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_zeit, $int_tg_id, $str_trainer)
     {
-		$sql = "UPDATE trainingseinheit SET name=?, ort=?, zeit=?, tg_id=? WHERE tr_id=?";
+		/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
+		$sql = "Select p_id FROM person WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_trainer));					
+		$arr_trainer = $query->fetchAll();					
+		foreach($arr_trainer as $int_trainer){				
+			$int_trainer = $int_trainer->p_id;				
+		};
+		
+		$sql = "UPDATE trainingseinheit SET name=?, ort=?, zeit=?, trainer=?, tg_id=? WHERE tr_id=?";
 		$query = $this->db->prepare($sql);
-		$query->execute(array($str_name, $str_ort, $d_zeit, $int_tg_id, $tr_id));
+		$query->execute(array($str_name, $str_ort, $d_zeit, $int_trainer, $int_tg_id, $tr_id));
 	}
     public function delete_trainingseinheit($tr_id)
     {
@@ -322,26 +341,19 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_trainingsgruppe($str_name, $str_trainer)
+	public function add_trainingsgruppe($str_name)
     {	
-	/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
-		$sql = "Select p_id FROM person WHERE  name = ?";	
-        $query = $this->db->prepare($sql);						
-        $query->execute(array($str_trainer));					
-		$arr_trainer = $query->fetchAll();					
-		foreach($arr_trainer as $int_trainer){				
-			$int_trainer = $int_trainer->p_id;				
-		};
 		
-        $sql = "INSERT INTO trainingsgruppe (name, trainer) VALUES (:name, :trainer)";
+		
+        $sql = "INSERT INTO trainingsgruppe (name) VALUES (:name)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':name' => $str_name, ':trainer' => $int_trainer));
+        $query->execute(array(':name' => $str_name));
     }
-	public function edit_trainingsgruppe($tg_id, $str_name, $int_trainer)
+	public function edit_trainingsgruppe($tg_id, $str_name)
     {
-		$sql = "UPDATE trainingsgruppe SET name=?, trainer=? WHERE tg_id=?";
+		$sql = "UPDATE trainingsgruppe SET name=? WHERE tg_id=?";
 		$query = $this->db->prepare($sql);
-		$query->execute(array($str_name, $int_trainer, $tg_id));
+		$query->execute(array($str_name, $tg_id));
 	}
     public function delete_trainingsgruppe($tg_id)
     {
@@ -360,11 +372,11 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_turnier($str_name)
+	public function add_turnier($str_name, $int_liga)
     {
-        $sql = "INSERT INTO turnier (name) VALUES (:name)";
+        $sql = "INSERT INTO turnier (name, liga) VALUES (:name, :liga)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':name' => $str_name));
+        $query->execute(array(':name' => $str_name, ':liga' => $int_liga));
     }
 	public function edit_turnier($tu_id, $str_name, $int_liga)
     {
@@ -407,6 +419,13 @@ class VerwaltungsModel
     }
 	
 	/***Sparte***/
+	public function get_alle_sparten()
+    {
+        $sql = "SELECT * FROM sparte";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
 	public function add_sparte($str_name)
     {
         $sql = "INSERT INTO sparte (name) VALUES (:name)";
