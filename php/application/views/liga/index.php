@@ -1,8 +1,3 @@
-<head>
-   <title>KiCa - Ligatabelle</title>
-</head>
-
-
 <div class="container">
 	<!-- Beinhaltet alle Daten zu eintragen -->
 

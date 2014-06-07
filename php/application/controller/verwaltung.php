@@ -20,10 +20,6 @@ class Verwaltung extends Controller
 		$stats = $verwaltungs_model->get_alle_stats();
 		$sparten = $verwaltungs_model->get_alle_sparten();
 
-        //Session Variable wird gesetzt, dass die Headline der jeweiligen Subseite angezeigt werden kann
-        @session_start();
-        $_SESSION['subpage'] = "Verwaltung";
-
         // load views
         require 'application/views/_templates/header.php';
         require 'application/views/verwaltung/index.php';

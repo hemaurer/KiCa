@@ -1,6 +1,3 @@
-<head>
-   <title>KiCa - Profil</title>
-</head>
 <?php
 	if (isset($_SESSION['user_login_status'])){
 ?>

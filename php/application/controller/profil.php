@@ -9,9 +9,8 @@ class Profil extends Controller
 
         $profil_model = $this->loadModel('ProfilModel');
 
-        //Session Variable wird gesetzt, dass die Headline der jeweiligen Subseite angezeigt werden kann
+        //Session Variable wird gesetzt
         @session_start();
-        $_SESSION['subpage'] = "Profil";
 
         $trainingsDaten = $profil_model->getTrainingsdaten($_SESSION["p_id"]);
 

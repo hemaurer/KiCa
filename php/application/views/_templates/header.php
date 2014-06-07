@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+	<title><?php echo "KiCa - ".ucfirst(Application::$subpage); ?></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
@@ -129,18 +130,7 @@
 <!-- Anzeige der Überschrift des Seiteninhalts -->
 <div class="container" id="headline">
     <?php
-   		// Headline wird generiert über eine Abfrage einer Session Variable, die beim Laden des jeweiligen Subseiten-Controllers gesetzt wird
-    	if (isset($_SESSION['user_login_status'])){
-
-	    	if ($_SESSION['subpage']== "Home"){ echo "<h4>Home</h4>"; }
-	    	if ($_SESSION['subpage']== "Profil"){ echo "<h4>Mein Profil</h4>"; }
-	    	if ($_SESSION['subpage']== "Verwaltung"){ echo "<h4>Verwaltung</h4>"; }
-	    	if ($_SESSION['subpage']== "Termine"){ echo "<h4>Termine</h4>"; }
-	    	if ($_SESSION['subpage']== "Liga"){ echo "<h4>Ligatabelle</h4>"; }
-
-    	}
-    	else{
-	    		echo "<h4>Home</h4>";
-	    }
+   		// Headline wird aus der Variable aus application.php gelesen
+	    echo "<h4>".ucfirst(Application::$subpage)."</h4>";
     ?>
 </div>

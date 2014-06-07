@@ -1,6 +1,3 @@
-<head>
-   <title>KiCa - Verwaltung</title>
-</head>
 <?php
 	if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 ?>
@@ -83,7 +80,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<?php /***Spiele-Add***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -180,8 +177,8 @@
 							</form>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Mannschaften-Add***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -190,11 +187,11 @@
 						</h4>
 					</div>
 					<div id="collapseThree" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_mannschaft" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Mannschaftsname*</label>
-									<div class="col-md-4">	
+									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Mannschaftsname" required />
 									</div>
 								</div>
@@ -206,30 +203,30 @@
 							</form>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Trainingseinheiten-Add***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Neue Trainingseinheit hinzufügen</a>
 						</h4>
-					</div>	
+					</div>
 					<div id="collapseFour" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingseinheit" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Training" required />
 									</div>
-								</div>	
+								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsort*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_ort" value="" placeholder="Trainingsort" required />
 									</div>
-								</div>	
+								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Zeit*</label>
 									<div class="col-md-3">
@@ -277,8 +274,8 @@
 							</form>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Trainingsgruppen-Add***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -287,14 +284,14 @@
 						</h4>
 					</div>
 					<div id="collapseFive" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingsgruppe" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsgruppenname*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Trainingsgruppenname" required />
 									</div>
-								</div>	
+								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
@@ -303,8 +300,8 @@
 							</form>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Turnier-Add***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -313,7 +310,7 @@
 						</h4>
 					</div>
 					<div id="collapseSix" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_turnier" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Turniername*</label>
@@ -340,10 +337,10 @@
 						</div>
 					</div>
 				</div>
-				
-				
-				
-				
+
+
+
+
 				<?php /***Sparte-Add***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -352,14 +349,14 @@
 						</h4>
 					</div>
 					<div id="collapseSeven" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_sparte" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Sparte" required />
 									</div>
-								</div>	
+								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_sparte" value="Speichern" />
@@ -370,11 +367,11 @@
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	<?php /***Edit-Tab***/?>
 		<div id="edit" class="tab-pane fade">
 			<div class="panel-group" id="edit-accordion">
-			
+
 				<?php /***Personen-Edit***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -407,14 +404,14 @@
 										<!--td><a data-toggle="modal" data-target="#pModal<?php echo $person->p_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
-									
+
 								<?php } ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-				
+
 				<?php /***Spiele-Edit***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -454,14 +451,14 @@
 										<!--td align="center"><a data-toggle="modal" data-target="#sModal<?php echo $spiel->s_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->heimname; ?> gegen <?php echo $spiel->auswaertsname;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
-									
+
 								<?php } ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Mannschaften-Edit***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -470,7 +467,7 @@
 						</h4>
 					</div>
 					<div id="medit" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<h3>Liste aller Mannschaften</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -492,17 +489,17 @@
 							</table>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Trainingseinheiten-Edit***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-toggle="collapse" data-parent="#edit-accordion" href="#tredit">Trainingseinheiten bearbeiten</a>
 						</h4>
-					</div>	
+					</div>
 					<div id="tredit" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<h3>Liste aller Trainingseinheiten</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -524,17 +521,17 @@
 										<td><?php if (isset($trainingseinheit->tg_id)) echo $trainingseinheit->tg_id; ?></td>
 										<td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
-										
+
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_trainingseinheit/' . $trainingseinheit->tr_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 									</tr>
-									
+
 								<?php } ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Trainingsgruppen-Edit***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -543,7 +540,7 @@
 						</h4>
 					</div>
 					<div id="tgedit" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<h3>Liste aller Trainingsgruppen</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -564,14 +561,14 @@
 										<!--td align="center"><a data-toggle="modal" data-target="#tgModal<?php echo $trainingsgruppe->tg_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_trainingsgruppe/' . $trainingsgruppe->tg_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 									</tr>
-									
+
 								<?php } ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Turnier-Edit***/?>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -580,7 +577,7 @@
 						</h4>
 					</div>
 					<div id="tuedit" class="panel-collapse collapse">
-						<div class="panel-body">	
+						<div class="panel-body">
 							<h3>Liste aller Turniere</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -606,15 +603,15 @@
 										<!--<td><a href="<?php echo URL . 'verwaltung/delete_turnier/' . $turnier->tu_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td>-->
 									</tr>
 								<?php } ?>
-								
-											
+
+
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-			</div>						
-		</div>	
+			</div>
+		</div>
 	</div>
 	<?php require 'application/views/_templates/bootstrap_modal.php'; ?>
 </div>
@@ -622,7 +619,7 @@
  <?php }
     else{ ?>
 		<div class="container"> <?php
-			echo "Diese Seite ist für Sie gesperrt"; ?> 
-		</div> 
+			echo "Diese Seite ist für Sie gesperrt"; ?>
+		</div>
 	<?php } ?>
 

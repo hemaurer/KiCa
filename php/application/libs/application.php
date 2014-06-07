@@ -5,6 +5,9 @@ class Application
     /** @var null The controller */
     public $url_controller = null;
 
+    //Variable um die Unterseite zu definieren (z.B. im Header)
+    public static $subpage = null;
+
     /** @var null The method (of the above controller), often also named "action" */
     private $url_action = null;
 
@@ -29,14 +32,15 @@ class Application
         // check for controller: does such a controller exist ?
         if (file_exists('./application/controller/' . $this->url_controller . '.php')) {
 
+            // Variable aus der gesplitteten URL generieren, die im Header verwendet werden kann
+            self::$subpage = $this->url_controller;
+
             // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
             require './application/controller/' . $this->url_controller . '.php';
             $this->url_controller = new $this->url_controller();
-
             // check for method: does such a method exist in the controller ?
             if (method_exists($this->url_controller, $this->url_action)) {
-
                 // call the method and pass the arguments to it
                 if (isset($this->url_parameter_3)) {
                     // will translate to something like $this->home->method($param_1, $param_2, $param_3);
