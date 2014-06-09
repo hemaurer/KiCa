@@ -1,6 +1,3 @@
-<head>
-   <title>KiCa - Verwaltung</title>
-</head>
 <?php
 	if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 ?>
@@ -83,7 +80,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<?php /***Spiele-Add***/?>
 				<div class="panel panel-default">
 					<div id="s_add_glyph" onclick="change_chevron('#s_add_glyph','#s_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#s_add">
@@ -180,8 +177,8 @@
 							</form>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Mannschaften-Add***/?>
 				<div class="panel panel-default">
 					<div id="m_add_glyph" onclick="change_chevron('#m_add_glyph','#m_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#m_add">
@@ -189,12 +186,17 @@
 							<a class="collapse_title" >Neue Mannschaft hinzufügen</a><div id="m_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
+<<<<<<< HEAD
 					<div id="m_add" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					<div id="collapseThree" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_mannschaft" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Mannschaftsname*</label>
-									<div class="col-md-4">	
+									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Mannschaftsname" required />
 									</div>
 								</div>
@@ -206,30 +208,36 @@
 							</form>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Trainingseinheiten-Add***/?>
 				<div class="panel panel-default">
 					<div id="tr_add_glyph" onclick="change_chevron('#tr_add_glyph','#tr_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tr_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neue Trainingseinheit hinzufügen</a><div id="tr_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
+<<<<<<< HEAD
 					</div>	
 					<div id="tr_add" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					</div>
+					<div id="collapseFour" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingseinheit" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Training" required />
 									</div>
-								</div>	
+								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsort*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_ort" value="" placeholder="Trainingsort" required />
 									</div>
-								</div>	
+								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Zeit*</label>
 									<div class="col-md-3">
@@ -277,8 +285,8 @@
 							</form>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Trainingsgruppen-Add***/?>
 				<div class="panel panel-default">
 					<div id="tg_add_glyph" onclick="change_chevron('#tg_add_glyph','#tg_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tg_add">
@@ -286,15 +294,20 @@
 							<a class="collapse_title" >Neue Trainingsgruppe hinzufügen</a><div id="tg_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
+<<<<<<< HEAD
 					<div id="tg_add" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					<div id="collapseFive" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingsgruppe" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsgruppenname*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Trainingsgruppenname" required />
 									</div>
-								</div>	
+								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
@@ -303,8 +316,8 @@
 							</form>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Turnier-Add***/?>
 				<div class="panel panel-default">
 					<div id="tu_add_glyph" onclick="change_chevron('#tu_add_glyph','#tu_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tu_add">
@@ -312,8 +325,13 @@
 							<a class="collapse_title" >Neues Turnier hinzufügen</a><div id="tu_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
+<<<<<<< HEAD
 					<div id="tu_add" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					<div id="collapseSix" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_turnier" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Turniername*</label>
@@ -340,7 +358,14 @@
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
 				
+=======
+
+
+
+
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 				<?php /***Sparte-Add***/?>
 				<div class="panel panel-default">
 					<div id="sparte_add_glyph" onclick="change_chevron('#sparte_add_glyph','#sparte_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#sparte_add">
@@ -348,15 +373,20 @@
 							<a class="collapse_title" >Neue Sparte hinzufügen</a><div id="sparte_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
+<<<<<<< HEAD
 					<div id="sparte_add" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					<div id="collapseSeven" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_sparte" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_name" value="" placeholder="Sparte" required />
 									</div>
-								</div>	
+								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_sparte" value="Speichern" />
@@ -367,12 +397,16 @@
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 		</div>	
 		
+=======
+		</div>
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 	<?php /***Edit-Tab***/?>
 		<div id="edit" class="tab-pane fade">
 			<div class="panel-group" id="edit-accordion">
-			
+
 				<?php /***Personen-Edit***/?>
 				<div class="panel panel-default">
 					<div id="p_edit_glyph" onclick="change_chevron('#p_edit_glyph','#p_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#p_edit">
@@ -405,14 +439,14 @@
 										<!--td><a data-toggle="modal" data-target="#pModal<?php echo $person->p_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
-									
+
 								<?php } ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-				
+
 				<?php /***Spiele-Edit***/?>
 				<div class="panel panel-default">
 					<div id="s_edit_glyph" onclick="change_chevron('#s_edit_glyph','#s_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#s_edit">
@@ -453,14 +487,14 @@
 										<!--td align="center"><a data-toggle="modal" data-target="#sModal<?php echo $spiel->s_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->heimname; ?> gegen <?php echo $spiel->auswaertsname;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
-									
+
 								<?php } ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Mannschaften-Edit***/?>
 				<div class="panel panel-default">
 					<div id="m_edit_glyph" onclick="change_chevron('#m_edit_glyph','#m_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#m_edit">
@@ -468,8 +502,13 @@
 							<a class="collapse_title" >Mannschaften bearbeiten</a><div id="m_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
+<<<<<<< HEAD
 					<div id="m_edit" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					<div id="medit" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<h3>Liste aller Mannschaften</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -491,17 +530,23 @@
 							</table>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Trainingseinheiten-Edit***/?>
 				<div class="panel panel-default">
 					<div id="tr_edit_glyph" onclick="change_chevron('#tr_edit_glyph','#tr_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tr_edit">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Trainingseinheiten bearbeiten</a><div id="tr_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
+<<<<<<< HEAD
 					</div>	
 					<div id="tr_edit" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					</div>
+					<div id="tredit" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<h3>Liste aller Trainingseinheiten</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -523,17 +568,17 @@
 										<td><?php if (isset($trainingseinheit->tg_id)) echo $trainingseinheit->tg_id; ?></td>
 										<td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
-										
+
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_trainingseinheit/' . $trainingseinheit->tr_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 									</tr>
-									
+
 								<?php } ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Trainingsgruppen-Edit***/?>
 				<div class="panel panel-default">
 					<div id="tg_edit_glyph" onclick="change_chevron('#tg_edit_glyph','#tg_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion" href="#tg_edit">
@@ -541,8 +586,13 @@
 							<a class="collapse_title">Trainingsgruppen bearbeiten</a><div id="tg_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
+<<<<<<< HEAD
 					<div id="tg_edit" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					<div id="tgedit" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<h3>Liste aller Trainingsgruppen</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -563,14 +613,14 @@
 										<!--td align="center"><a data-toggle="modal" data-target="#tgModal<?php echo $trainingsgruppe->tg_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_trainingsgruppe/' . $trainingsgruppe->tg_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 									</tr>
-									
+
 								<?php } ?>
 								</tbody>
 							</table>
 						</div>
 					</div>
-				</div>	
-				
+				</div>
+
 				<?php /***Turnier-Edit***/?>
 				<div class="panel panel-default">
 					<div id="tu_edit_glyph" onclick="change_chevron('#tu_edit_glyph','#tu_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion" href="#tu_edit">
@@ -578,8 +628,13 @@
 							<a class="collapse_title">Turniere bearbeiten</a><div id="tu_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
+<<<<<<< HEAD
 					<div id="tu_edit" class="panel-collapse collapse">
 						<div class="panel-body">	
+=======
+					<div id="tuedit" class="panel-collapse collapse">
+						<div class="panel-body">
+>>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<h3>Liste aller Turniere</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -605,15 +660,15 @@
 										<!--<td><a href="<?php echo URL . 'verwaltung/delete_turnier/' . $turnier->tu_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td>-->
 									</tr>
 								<?php } ?>
-								
-											
+
+
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
-			</div>						
-		</div>	
+			</div>
+		</div>
 	</div>
 	<?php require 'application/views/_templates/bootstrap_modal.php'; ?>
 </div>
@@ -621,7 +676,7 @@
  <?php }
     else{ ?>
 		<div class="container"> <?php
-			echo "Diese Seite ist für Sie gesperrt"; ?> 
-		</div> 
+			echo "Diese Seite ist für Sie gesperrt"; ?>
+		</div>
 	<?php } ?>
 
