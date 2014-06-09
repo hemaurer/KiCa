@@ -96,7 +96,7 @@ function saveGroesse() {
 						
 						$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Größe erfolgreich geändert!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},4000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 					else{
 						/*$('#successModal_head').html("Fehler");
@@ -105,7 +105,7 @@ function saveGroesse() {
 						
 						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},4000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 				});
 }
@@ -126,11 +126,13 @@ function saveTel() {
 			 			$('#successModal_body').html("Telefonnummer erfolgreich geändert!");*/
 						$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Telefonnummer erfolgreich geändert!</div>');
 			 			$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
 					}
 					else{
 						$('#successModal_head').html("Fehler");
-			 			$('#successModal_body').html("Telefonnummer konnte nicht geändert werden!");
+			 			$('#successModal_dialog').html("Telefonnummer konnte nicht geändert werden!");
 						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
 					}
 				});
 }
@@ -152,12 +154,12 @@ function savePassword() {
 			 .done(function( data ) {
 			 	if (data == 1){
 			 			$('#successModal_head').html("Erfolgreich");
-			 			$('#successModal_body').html("Passwort erfolgreich geändert!");
+			 			$('#successModal_dialog').html("Passwort erfolgreich geändert!");
 			 			$('#successModal').modal('toggle');
 					}
 					else{
 						$('#successModal_head').html("Fehler");
-			 			$('#successModal_body').html("Passwort konnte nicht geändert werden!\nBitte überprüfen Sie Ihre Eingaben.");
+			 			$('#successModal_dialog').html("Passwort konnte nicht geändert werden!\nBitte überprüfen Sie Ihre Eingaben.");
 						$('#successModal').modal('toggle');
 					}
 				});

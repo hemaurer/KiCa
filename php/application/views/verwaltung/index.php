@@ -23,12 +23,12 @@
 			<div class="panel-group" id="accordion">
 				<?php /***Personen-Add***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="p_add_glyph" onclick="change_chevron('#p_add_glyph','#p_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#p_add">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Neue Person hinzufügen</a>
+							<a class="collapse_title" >Neue Person hinzufügen</a><div id="p_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse">
+					<div id="p_add" class="panel-collapse collapse">
 						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_person" method="POST">
 								<div class="form-group">
@@ -86,12 +86,12 @@
 				
 				<?php /***Spiele-Add***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="s_add_glyph" onclick="change_chevron('#s_add_glyph','#s_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#s_add">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Neues Spiel hinzufügen</a>
+							<a class="collapse_title" >Neues Spiel hinzufügen</a><div id="s_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="collapseTwo" class="panel-collapse collapse">
+					<div id="s_add" class="panel-collapse collapse">
 						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_spiel" method="POST">
 								<div class="form-group">
@@ -184,12 +184,12 @@
 				
 				<?php /***Mannschaften-Add***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="m_add_glyph" onclick="change_chevron('#m_add_glyph','#m_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#m_add">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Neue Mannschaft hinzufügen</a>
+							<a class="collapse_title" >Neue Mannschaft hinzufügen</a><div id="m_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="collapseThree" class="panel-collapse collapse">
+					<div id="m_add" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_mannschaft" method="POST">
 								<div class="form-group">
@@ -210,12 +210,12 @@
 				
 				<?php /***Trainingseinheiten-Add***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="tr_add_glyph" onclick="change_chevron('#tr_add_glyph','#tr_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tr_add">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Neue Trainingseinheit hinzufügen</a>
+							<a class="collapse_title" >Neue Trainingseinheit hinzufügen</a><div id="tr_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>	
-					<div id="collapseFour" class="panel-collapse collapse">
+					<div id="tr_add" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingseinheit" method="POST">
 								<div class="form-group">
@@ -281,12 +281,12 @@
 				
 				<?php /***Trainingsgruppen-Add***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="tg_add_glyph" onclick="change_chevron('#tg_add_glyph','#tg_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tg_add">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">Neue Trainingsgruppe hinzufügen</a>
+							<a class="collapse_title" >Neue Trainingsgruppe hinzufügen</a><div id="tg_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="collapseFive" class="panel-collapse collapse">
+					<div id="tg_add" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingsgruppe" method="POST">
 								<div class="form-group">
@@ -307,12 +307,12 @@
 				
 				<?php /***Turnier-Add***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="tu_add_glyph" onclick="change_chevron('#tu_add_glyph','#tu_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tu_add">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">Neues Turnier hinzufügen </a>
+							<a class="collapse_title" >Neues Turnier hinzufügen</a><div id="tu_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="collapseSix" class="panel-collapse collapse">
+					<div id="tu_add" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_turnier" method="POST">
 								<div class="form-group">
@@ -341,17 +341,14 @@
 					</div>
 				</div>
 				
-				
-				
-				
 				<?php /***Sparte-Add***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="sparte_add_glyph" onclick="change_chevron('#sparte_add_glyph','#sparte_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#sparte_add">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">Neue Sparte hinzufügen </a>
+							<a class="collapse_title" >Neue Sparte hinzufügen</a><div id="sparte_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="collapseSeven" class="panel-collapse collapse">
+					<div id="sparte_add" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_sparte" method="POST">
 								<div class="form-group">
@@ -371,18 +368,19 @@
 				</div>
 			</div>
 		</div>	
+		
 	<?php /***Edit-Tab***/?>
 		<div id="edit" class="tab-pane fade">
 			<div class="panel-group" id="edit-accordion">
 			
 				<?php /***Personen-Edit***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="p_edit_glyph" onclick="change_chevron('#p_edit_glyph','#p_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#p_edit">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#edit-accordion" href="#personedit">Personen bearbeiten</a>
+							<a class="collapse_title" >Personen bearbeiten</a><div id="p_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="personedit" class="panel-collapse collapse">
+					<div id="p_edit" class="panel-collapse collapse">
 						<div class="panel-body">
 							<h3>Liste aller Personen</h3>
 							<table class="table">
@@ -417,12 +415,12 @@
 				
 				<?php /***Spiele-Edit***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="s_edit_glyph" onclick="change_chevron('#s_edit_glyph','#s_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#s_edit">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#edit-accordion" href="#spieledit">Spiele bearbeiten</a>
+							<a class="collapse_title" >Spiele bearbeiten</a><div id="s_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="spieledit" class="panel-collapse collapse">
+					<div id="s_edit" class="panel-collapse collapse">
 						<div class="panel-body">
 							<h3>Liste aller Spiele</h3>
 							<table class="table">
@@ -449,7 +447,8 @@
 										<td><?php if (isset($spiel->stat_id)) echo $spiel->stat_id; ?></td>
 										<td><?php if (isset($spiel->ort)) echo $spiel->ort; ?></td>
 										<td><?php if (isset($spiel->zeit)) echo $spiel->zeit; ?></td>
-										<td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->heimname; ?> gegen <?php echo $spiel->auswaertsname;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_spiel/' . $spiel->s_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 										<!--td align="center"><a data-toggle="modal" data-target="#sModal<?php echo $spiel->s_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->heimname; ?> gegen <?php echo $spiel->auswaertsname;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
@@ -464,12 +463,12 @@
 				
 				<?php /***Mannschaften-Edit***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="m_edit_glyph" onclick="change_chevron('#m_edit_glyph','#m_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#m_edit">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#edit-accordion" href="#medit">Mannschaften bearbeiten</a>
+							<a class="collapse_title" >Mannschaften bearbeiten</a><div id="m_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="medit" class="panel-collapse collapse">
+					<div id="m_edit" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<h3>Liste aller Mannschaften</h3>
 							<table class="table">
@@ -496,12 +495,12 @@
 				
 				<?php /***Trainingseinheiten-Edit***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="tr_edit_glyph" onclick="change_chevron('#tr_edit_glyph','#tr_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tr_edit">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#edit-accordion" href="#tredit">Trainingseinheiten bearbeiten</a>
+							<a class="collapse_title" >Trainingseinheiten bearbeiten</a><div id="tr_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>	
-					<div id="tredit" class="panel-collapse collapse">
+					<div id="tr_edit" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<h3>Liste aller Trainingseinheiten</h3>
 							<table class="table">
@@ -537,12 +536,12 @@
 				
 				<?php /***Trainingsgruppen-Edit***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="tg_edit_glyph" onclick="change_chevron('#tg_edit_glyph','#tg_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion" href="#tg_edit">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#edit-accordion" href="#tgedit">Trainingsgruppen bearbeiten</a>
+							<a class="collapse_title">Trainingsgruppen bearbeiten</a><div id="tg_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="tgedit" class="panel-collapse collapse">
+					<div id="tg_edit" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<h3>Liste aller Trainingsgruppen</h3>
 							<table class="table">
@@ -574,12 +573,12 @@
 				
 				<?php /***Turnier-Edit***/?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div id="tu_edit_glyph" onclick="change_chevron('#tu_edit_glyph','#tu_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion" href="#tu_edit">
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#edit-accordion" href="#tuedit">Turniere bearbeiten </a>
+							<a class="collapse_title">Turniere bearbeiten</a><div id="tu_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-					<div id="tuedit" class="panel-collapse collapse">
+					<div id="tu_edit" class="panel-collapse collapse">
 						<div class="panel-body">	
 							<h3>Liste aller Turniere</h3>
 							<table class="table">

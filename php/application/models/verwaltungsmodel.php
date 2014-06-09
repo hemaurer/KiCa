@@ -169,8 +169,16 @@ class VerwaltungsModel
 	public function get_alle_spiele()
     {
         //$sql = "SELECT * FROM spiel ORDER BY zeit DESC";
-		$sql = "SELECT s.s_id, s.ort, s.heim, s.auswaerts, s.h_tore, s.a_tore, s.stat_id, s.zeit, s.tu_id, m.name as heimname, mm.auswaertsname FROM spiel s LEFT JOIN mannschaft m ON (s.heim = m.m_id) LEFT JOIN (SELECT spiel.auswaerts, mannschaft.m_id, mannschaft.name as auswaertsname FROM spiel, mannschaft WHERE spiel.auswaerts = mannschaft.m_id) mm ON (s.auswaerts = mm.m_id) ORDER BY s.zeit DESC  ";
-        $query = $this->db->prepare($sql);
+		//$sql = "SELECT s.s_id, s.ort, s.heim, s.auswaerts, s.h_tore, s.a_tore, s.stat_id, s.zeit, s.tu_id, m.name as heimname, mm.auswaertsname FROM spiel s LEFT JOIN mannschaft m ON (s.heim = m.m_id) LEFT JOIN (SELECT spiel.auswaerts, mannschaft.m_id, mannschaft.name as auswaertsname FROM spiel, mannschaft WHERE spiel.auswaerts = mannschaft.m_id) mm ON (s.auswaerts = mm.m_id) ORDER BY s.zeit DESC  ";
+        $sql = "SELECT spiel.s_id, spiel.ort, heim.name, auswaerts.name, spiel.h_tore, spiel.a_tore, `status`.`status`, spiel.zeit, turnier.name, sparte.name
+				FROM spiel 
+					JOIN mannschaft as heim ON spiel.heim = heim.m_id
+					JOIN mannschaft as auswaerts ON spiel.auswaerts = auswaerts.m_id
+					JOIN `status` ON spiel.stat_id =`status`.stat_id
+					JOIN turnier ON spiel.tu_id = turnier.tu_id
+					JOIN sparte ON spiel.sparte_id = sparte.sparte_id
+					ORDER BY spiel.zeit ASC";
+		$query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }

@@ -4,6 +4,14 @@
     // document.getElementById('submit_change_password').disabled = true;
     // document.getElementById('submit_saveTel').disabled = true;
 //});
+function change_chevron($panel_id,$glyph){
+	if($( $panel_id ).hasClass( "collapsed" )){
+		$( $glyph ).children("span").removeClass( "glyphicon glyphicon-chevron-left" ).addClass( "glyphicon glyphicon-chevron-down" );
+	}else{
+		$( $glyph ).children("span").removeClass( "glyphicon glyphicon-chevron-down" ).addClass( "glyphicon glyphicon-chevron-left" );
+	}
+}
+
 
 function toggleModal(modal_id, type, x_id, x_name){
 	if (modal_id == 1){ //ID für Add
@@ -11,11 +19,13 @@ function toggleModal(modal_id, type, x_id, x_name){
 	}else if (modal_id == 2){ //ID für Bearbeiten
 		if (type == 'person'){
 			$('#personmodalheader').html('Person "'+x_name+'" bearbeiten');
-			$('#personmodalbody').html('<div class="form-horizontal"><div class="form-group"><label class="control-label col-md-4">Nachname</label><div class="col-md-6"><input class="form-control" type="text" id="str_nachname" value="" placeholder="Nachname" /></div></div><div class="form-group"><label class="control-label col-md-4">Vorname</label><div class="col-md-6"><input class="form-control" type="text" id="str_vorname" value="" placeholder="Vorname" /></div></div><div class="form-group"><label class="control-label col-md-4">Geburtsdatum</label><div class="col-md-6"><div class="sandbox-container input-group "><input class="form-control" id="d_date" type="text"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span></div></div><script> $(\'.sandbox-container input\').datepicker();</script></div><div class="form-group"><label class="control-label col-md-4">Groesse</label><div class="col-md-6"><input class="form-control" type="number" id="int_groesse" value="" placeholder="Beispiel 158cm" /></div></div><div class="form-group"><label class="control-label col-md-4">Betreuer?</label><div class="col-md-6"><select class="form-control" id="b_betreuer" size="1" ><option></option><option value="0">Nein</option><option value="1">Ja</option></select></div></div><div class="form-group"><label class="control-label col-md-4">Telefonnummer</label><div class="col-md-6"><input class="form-control" type="number" id="int_tel" value="" placeholder="Telefonnummer" /></div></div></div>');
+			$('#personmodalbody').html('<div class="form-horizontal"><div class="form-group"><label class="control-label col-md-4">Nachname</label><div class="col-md-6"><input class="form-control" type="text" id="str_nachname" value="" placeholder="Nachname" /></div></div><div class="form-group"><label class="control-label col-md-4">Vorname</label><div class="col-md-6"><input class="form-control" type="text" id="str_vorname" value="" placeholder="Vorname" /></div></div><div class="form-group"><label class="control-label col-md-4">Geburtsdatum</label><div class="col-md-6"><div class="sandbox-container input-group "><input class="form-control" id="d_date" type="text"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span></div></div><script> $(\'.sandbox-container input\').datepicker();</script></div><div class="form-group"><label class="control-label col-md-4">Groesse</label><div class="col-md-6"><input class="form-control" id="int_groesse" value="" placeholder="Beispiel 158cm" /></div></div><div class="form-group"><label class="control-label col-md-4">Betreuer?</label><div class="col-md-6"><select class="form-control" id="b_betreuer" size="1" ><option></option><option value="0">Nein</option><option value="1">Ja</option></select></div></div><div class="form-group"><label class="control-label col-md-4">Telefonnummer</label><div class="col-md-6"><input class="form-control" type="number" id="int_tel" value="" placeholder="Telefonnummer" /></div></div></div>');
 			$('#personmodalfooter').html('<div class="pwresbtn"><a type="submit" class="btn btn-danger" data-dismiss="modal" onclick="passwordModal(\'reset_password\',\''+x_id+'\',\''+x_name+'\')">Passwort zurücksetzen</a></div><div class="footerbtn"><button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit"  class="btn btn-primary" data-dismiss="modal" onclick="editSuccess(\''+type+'\',\''+x_id+'\')">Speichern</a></div>');
 		}
 		if (type == 'spiel'){
-		
+			
+			$('#spielmodalheader').html('Spiel "'+x_name+'" bearbeiten');
+			$('#spielmodalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="editSuccess(\''+type+'\',\''+x_id+'\')">Speichern</a>');
 		}
 		if (type == 'mannschaft'){
 		
@@ -98,6 +108,32 @@ function editSuccess(type, x_id) {
 				}
 			});
 	}
+	
+	if (type == "spiel"){
+		/*var str_name_in = $('#str_name');
+		var str_name = str_name_in.val();
+		var int_liga_in = $('#int_liga');
+		var int_liga = int_liga_in.val();
+		$.post("edit_"+type+"",{"tu_id":x_id, "str_name":str_name, "int_liga":int_liga})
+			.done(function( data ) {
+			 	if (data == 1){
+			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},3000);
+					}
+					else{
+						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},3000);
+					}
+				}
+			);*/
+	
+	}
+	
+	
+	
+	
 	if (type == "turnier"){
 		var str_name_in = $('#str_name');
 		var str_name = str_name_in.val();
