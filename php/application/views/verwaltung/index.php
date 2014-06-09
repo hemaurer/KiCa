@@ -186,13 +186,8 @@
 							<a class="collapse_title" >Neue Mannschaft hinzufügen</a><div id="m_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-<<<<<<< HEAD
 					<div id="m_add" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					<div id="collapseThree" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_mannschaft" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Mannschaftsname*</label>
@@ -216,15 +211,9 @@
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neue Trainingseinheit hinzufügen</a><div id="tr_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
-<<<<<<< HEAD
 					</div>	
 					<div id="tr_add" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					</div>
-					<div id="collapseFour" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingseinheit" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
@@ -294,13 +283,9 @@
 							<a class="collapse_title" >Neue Trainingsgruppe hinzufügen</a><div id="tg_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-<<<<<<< HEAD
+
 					<div id="tg_add" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					<div id="collapseFive" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingsgruppe" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsgruppenname*</label>
@@ -325,13 +310,9 @@
 							<a class="collapse_title" >Neues Turnier hinzufügen</a><div id="tu_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-<<<<<<< HEAD
+
 					<div id="tu_add" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					<div id="collapseSix" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_turnier" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Turniername*</label>
@@ -358,14 +339,7 @@
 						</div>
 					</div>
 				</div>
-<<<<<<< HEAD
-				
-=======
 
-
-
-
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 				<?php /***Sparte-Add***/?>
 				<div class="panel panel-default">
 					<div id="sparte_add_glyph" onclick="change_chevron('#sparte_add_glyph','#sparte_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#sparte_add">
@@ -373,13 +347,9 @@
 							<a class="collapse_title" >Neue Sparte hinzufügen</a><div id="sparte_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-<<<<<<< HEAD
+
 					<div id="sparte_add" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					<div id="collapseSeven" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_sparte" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Sparte*</label>
@@ -397,12 +367,9 @@
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
 		</div>	
+	
 		
-=======
-		</div>
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 	<?php /***Edit-Tab***/?>
 		<div id="edit" class="tab-pane fade">
 			<div class="panel-group" id="edit-accordion">
@@ -502,13 +469,8 @@
 							<a class="collapse_title" >Mannschaften bearbeiten</a><div id="m_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-<<<<<<< HEAD
 					<div id="m_edit" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					<div id="medit" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<h3>Liste aller Mannschaften</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -538,15 +500,9 @@
 						<h4 class="panel-title">
 							<a class="collapse_title" >Trainingseinheiten bearbeiten</a><div id="tr_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
-<<<<<<< HEAD
 					</div>	
 					<div id="tr_edit" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					</div>
-					<div id="tredit" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<h3>Liste aller Trainingseinheiten</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -586,13 +542,8 @@
 							<a class="collapse_title">Trainingsgruppen bearbeiten</a><div id="tg_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-<<<<<<< HEAD
 					<div id="tg_edit" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					<div id="tgedit" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<h3>Liste aller Trainingsgruppen</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
@@ -628,13 +579,8 @@
 							<a class="collapse_title">Turniere bearbeiten</a><div id="tu_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
 					</div>
-<<<<<<< HEAD
 					<div id="tu_edit" class="panel-collapse collapse">
-						<div class="panel-body">	
-=======
-					<div id="tuedit" class="panel-collapse collapse">
 						<div class="panel-body">
->>>>>>> 1ece1b63957056a16a33050f5e05025b55450094
 							<h3>Liste aller Turniere</h3>
 							<table class="table">
 								<thead style="background-color: #ddd; font-weight: bold;">
