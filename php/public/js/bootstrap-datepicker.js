@@ -95,8 +95,8 @@
 		this.isInput = this.element.is('input');
 		this.component = this.element.is('.date') ? this.element.find('.add-on, .input-group-addon, .btn') : false;
 		this.hasInput = this.component && this.element.find('input').length;
-		if (this.component && this.component.length === 0)
-			this.component = false;
+		/*if (this.component && this.component.length === 0)
+			this.component = false;*/ //Hat Fehler verursacht deswegen ausgeklammert
 
 		this.picker = $(DPGlobal.template);
 		this._buildEvents();

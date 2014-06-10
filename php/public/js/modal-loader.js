@@ -1,9 +1,4 @@
-// $(function(){
 
-    //Buttons ausschalten (beim Laden der Seite)
-    // document.getElementById('submit_change_password').disabled = true;
-    // document.getElementById('submit_saveTel').disabled = true;
-//});
 function change_chevron($panel_id,$glyph){
 	if($( $panel_id ).hasClass( "collapsed" )){
 		$( $glyph ).children("span").removeClass( "glyphicon glyphicon-chevron-left" ).addClass( "glyphicon glyphicon-chevron-down" );
@@ -11,7 +6,6 @@ function change_chevron($panel_id,$glyph){
 		$( $glyph ).children("span").removeClass( "glyphicon glyphicon-chevron-down" ).addClass( "glyphicon glyphicon-chevron-left" );
 	}
 }
-
 
 function toggleModal(modal_id, type, x_id, x_name){
 	if (modal_id == 1){ //ID für Add
@@ -82,12 +76,12 @@ function editSuccess(type, x_id) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Person bearbeiten erfolgreich abgeschlossen!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},4000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 					else{
 						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},4000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 				}
 			);
@@ -99,12 +93,12 @@ function editSuccess(type, x_id) {
 			if (data == 1){
 					$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Passwort erfolgreich zurückgesetzt!</div>');
 					$('#successModal').modal('toggle');
-					window.setTimeout(function(){location.reload();},4000);
+					window.setTimeout(function(){location.reload();},2000);
 				}
 				else{
 					$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 					$('#successModal').modal('toggle');
-					window.setTimeout(function(){location.reload();},4000);
+					window.setTimeout(function(){location.reload();},2000);
 				}
 			});
 	}
@@ -119,12 +113,12 @@ function editSuccess(type, x_id) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},3000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 					else{
 						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},3000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 				}
 			);*/
@@ -144,12 +138,12 @@ function editSuccess(type, x_id) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},3000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 					else{
 						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},3000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 				}
 			);
@@ -170,12 +164,12 @@ function successModal(type, x_id) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Löschen erfolgreich abgeschlossen!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},4000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 					else{
 						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},4000);
+						window.setTimeout(function(){location.reload();},2000);
 					}
 				});
 		

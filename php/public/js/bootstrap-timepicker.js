@@ -38,14 +38,14 @@
     constructor: Timepicker,
     _init: function() {
       var self = this;
-
-      if (this.showWidgetOnAddonClick && (this.$element.parent().hasClass('input-append') || this.$element.parent().hasClass('input-prepend'))) {
-        this.$element.parent('.input-append, .input-prepend').find('.add-on').on({
+	/*Auf Bootstrap 3 aktualisiert, indem .input-group eingeführt wurde. By Hermann Maurer */
+      if (this.showWidgetOnAddonClick && (this.$element.parent().hasClass('input-group') || this.$element.parent().hasClass('input-prepend'))) {
+        this.$element.parent('.input-group, input-prepend').find('.input-group-addon').on({
           'click.timepicker': $.proxy(this.showWidget, this)
         });
-        this.$element.on({
-          'focus.timepicker': $.proxy(this.highlightUnit, this),
-          'click.timepicker': $.proxy(this.highlightUnit, this),
+        this.$element.on({//jetzt öffnet sich das Widget bei Klick auf Btn und input. Ursprünglich nur Btn. By Hermann Maurer
+		  'focus.timepicker': $.proxy(this.showWidget, this),
+          'click.timepicker': $.proxy(this.showWidget, this),
           'keydown.timepicker': $.proxy(this.elementKeydown, this),
           'blur.timepicker': $.proxy(this.blurElement, this),
           'mousewheel.timepicker DOMMouseScroll.timepicker': $.proxy(this.mousewheel, this)

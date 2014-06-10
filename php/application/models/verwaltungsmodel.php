@@ -35,7 +35,6 @@ class VerwaltungsModel
 		$i="1"; 
 		foreach ($personen as $person){
 			if ($str_user == $person->username){
-				echo "If Schleife erfolgreich";
 				while ($str_user == $person->username){
 					$str_user = $str_vorname.".".$str_nachname.$i;
 					$i++;
@@ -170,7 +169,7 @@ class VerwaltungsModel
     {
         //$sql = "SELECT * FROM spiel ORDER BY zeit DESC";
 		//$sql = "SELECT s.s_id, s.ort, s.heim, s.auswaerts, s.h_tore, s.a_tore, s.stat_id, s.zeit, s.tu_id, m.name as heimname, mm.auswaertsname FROM spiel s LEFT JOIN mannschaft m ON (s.heim = m.m_id) LEFT JOIN (SELECT spiel.auswaerts, mannschaft.m_id, mannschaft.name as auswaertsname FROM spiel, mannschaft WHERE spiel.auswaerts = mannschaft.m_id) mm ON (s.auswaerts = mm.m_id) ORDER BY s.zeit DESC  ";
-        $sql = "SELECT spiel.s_id, spiel.ort, heim.name, auswaerts.name, spiel.h_tore, spiel.a_tore, `status`.`status`, spiel.zeit, turnier.name, sparte.name
+        $sql = "SELECT spiel.s_id, spiel.ort as Ort, heim.name as Heim, auswaerts.name as Auswaerts, spiel.h_tore as Heimtore, spiel.a_tore as Auswaertstore, `status`.`status` as Status, spiel.zeit as Uhrzeit, turnier.name as Turnier , sparte.name AS Sparte
 				FROM spiel 
 					JOIN mannschaft as heim ON spiel.heim = heim.m_id
 					JOIN mannschaft as auswaerts ON spiel.auswaerts = auswaerts.m_id

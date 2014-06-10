@@ -2,8 +2,7 @@
 	if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 ?>
 <script src="<?php echo URL; ?>public/js/modal-loader.js"> </script>
-<script type="text/javascript">$('#timepicker1').timepicker();</script>
-
+<script src="<?php echo URL; ?>public/js/verwaltung.js"> </script>
 
 <div class="container">
 	<ul class="nav nav-tabs">
@@ -20,7 +19,7 @@
 			<div class="panel-group" id="accordion">
 				<?php /***Personen-Add***/?>
 				<div class="panel panel-default">
-					<div id="p_add_glyph" onclick="change_chevron('#p_add_glyph','#p_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#p_add">
+					<div id="p_add_glyph" onclick="change_chevron('#p_add_glyph','#p_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion" href="#p_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neue Person hinzufügen</a><div id="p_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
@@ -29,26 +28,25 @@
 						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_person" method="POST">
 								<div class="form-group">
-									<label class="control-label col-md-4">Nachname*</label>
-									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_nachname" value="" placeholder="Nachname" required/>
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="control-label col-md-4">Vorname*</label>
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_vorname" value="" placeholder="Vorname" required />
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="control-label col-md-4">Nachname*</label>
+									<div class="col-md-4">
+										<input class="form-control" type="text" name="str_nachname" value="" placeholder="Nachname" required/>
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="control-label col-md-4">Geburtsdatum*</label>
 									<div class="col-md-4">
-										<div class="sandbox-container input-group ">
-											<input class="form-control" name="d_date" type="text">
+										<div data-provide="datepicker" class="input-group date">
+											<input class="form-control" name="d_date" type="text" placeholder="Beispiel 01.01.2011" required>
 											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 										</div>
 									</div>
-									<script> $('.sandbox-container input').datepicker();</script>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Groesse</label>
@@ -57,18 +55,24 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-4">Betreuer?*</label>
-									<div class="col-md-4">
-										<select class="form-control" name="b_betreuer" size="1" required>
-											<option value="0">Nein</option>
-											<option value="1">Ja</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="control-label col-md-4">Telefonnummer</label>
 									<div class="col-md-4">
 										<input class="form-control" type="number" name="int_tel" value="" placeholder="Telefonnummer" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4">Betreuer?*</label>
+									<div class="col-md-1">
+										<label>
+											<input type="radio" name="b_betreuer" id="optionsRadios2" value="1">
+											Ja
+										</label>
+									</div>
+									<div class="col-md-2">
+										<label>
+											<input type="radio" name="b_betreuer" id="optionsRadios1" value="0" checked>
+											Nein
+										</label>
 									</div>
 								</div>
 								<div class="form-group">
@@ -83,7 +87,7 @@
 
 				<?php /***Spiele-Add***/?>
 				<div class="panel panel-default">
-					<div id="s_add_glyph" onclick="change_chevron('#s_add_glyph','#s_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#s_add">
+					<div id="s_add_glyph" onclick="change_chevron('#s_add_glyph','#s_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion"href="#s_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neues Spiel hinzufügen</a><div id="s_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
@@ -92,16 +96,43 @@
 						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_spiel" method="POST">
 								<div class="form-group">
-									<label class="control-label col-md-4">Spielort*</label>
+									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_ort" value="" placeholder="Spielort" required />
+										<select class="form-control" name="str_sparte" id="str_sparte" size="1" onchange="activateInput('str_sparte', 'str_status')" required>
+											<option value="0" disabled>Sparte wählen</option>
+											<?php foreach ($sparten as $sparte) { ?>
+											<option><?php if (isset($sparte->name)) echo $sparte->name; ?></option>
+											<?php } ?>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4">Status*</label>
+									<div class="col-md-4">
+										<select class="form-control" name="str_stat_name" id="str_status" size="1" onchange="activateInput('str_status', 'str_tu_name')" disabled required>
+											<option value="0" selected disabled>Status wählen</option>
+											<?php foreach ($stats as $status) { ?>
+											<option><?php if (isset($status->status)) echo $status->status; ?></option>
+											<?php } ?>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4">Turnier*</label>
+									<div class="col-md-4">
+										<select class="form-control" name="str_tu_name" id="str_tu_name" size="1" onchange="activateInput('str_tu_name', 'str_heim')" disabled required>
+											<option value="0" selected disabled>Turnier wählen</option>
+											<?php foreach ($turniere as $turnier) { ?>
+											<option><?php if (isset($turnier->name)) echo $turnier->name; ?></option>
+											<?php } ?>
+										</select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Heim Team*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_heim" size="1" required>
-											<option></option>
+										<select class="form-control" name="str_heim" id="str_heim" size="1" onchange="activateInput('str_heim', 'str_auswaerts')" disabled required>
+											<option value="0" selected disabled>Team wählen</option>
 											<?php foreach ($mannschaften as $mannschaft) { ?>
 											<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
 											<?php } ?>
@@ -111,8 +142,8 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Gegnerisches Team*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_auswaerts" size="1" required>
-											<option></option>
+										<select class="form-control" name="str_auswaerts" id="str_auswaerts" size="1" disabled required>
+											<option value="0" selected disabled>Gegner wählen</option>
 											<?php foreach ($mannschaften as $mannschaft) { ?>
 											<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
 											<?php } ?>
@@ -120,54 +151,29 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-md-4">Status*</label>
+									<label class="control-label col-md-4">Spielort*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_stat_name" size="1" required>
-											<option></option>
-											<?php foreach ($stats as $status) { ?>
-											<option><?php if (isset($status->status)) echo $status->status; ?></option>
-											<?php } ?>
-										</select>
+										<input class="form-control" type="text" name="str_ort" value="" placeholder="Spielort" required />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4">Datum*</label>
+									<div class="col-md-4">
+										<div data-provide="datepicker" class="input-group date">
+											<input class="form-control" name="d_date" type="text" placeholder="Beispiel 01.01.2011" required>
+											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+										</div>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Zeit*</label>
-									<div class="col-md-3">
-										<div class="sandbox-container input-group ">
-											<input class="form-control" name="d_date" type="text">
-											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-										</div>
-									</div>
-									<script> $('.sandbox-container input').datepicker();</script>
-									<div class="col-md-2">
+									<div align="right" class="col-md-4">
 										<div class="input-group">
-											<input class="form-control" id="timepicker1" name="d_time" type="text">
+											<input class="form-control" id="timepicker1" name="d_time" type="text" placeholder="Beispiel 12:00" required>
 											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 										</div>
 									</div>
-									<script> $('#timepicker1').timepicker({showMeridian: false});</script>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-4">Turnier*</label>
-									<div class="col-md-4">
-										<select class="form-control" name="str_tu_name" size="1" required>
-											<option></option>
-											<?php foreach ($turniere as $turnier) { ?>
-											<option><?php if (isset($turnier->name)) echo $turnier->name; ?></option>
-											<?php } ?>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-4">Sparte*</label>
-									<div class="col-md-4">
-										<select class="form-control" name="str_sparte" size="1" required>
-											<option></option>
-											<?php foreach ($sparten as $sparte) { ?>
-											<option><?php if (isset($sparte->name)) echo $sparte->name; ?></option>
-											<?php } ?>
-										</select>
-									</div>
+									<script> $('#timepicker1').timepicker({showMeridian: false, defaultTime: false});</script>
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
@@ -181,7 +187,7 @@
 
 				<?php /***Mannschaften-Add***/?>
 				<div class="panel panel-default">
-					<div id="m_add_glyph" onclick="change_chevron('#m_add_glyph','#m_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#m_add">
+					<div id="m_add_glyph" onclick="change_chevron('#m_add_glyph','#m_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion"href="#m_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neue Mannschaft hinzufügen</a><div id="m_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
@@ -207,7 +213,7 @@
 
 				<?php /***Trainingseinheiten-Add***/?>
 				<div class="panel panel-default">
-					<div id="tr_add_glyph" onclick="change_chevron('#tr_add_glyph','#tr_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tr_add">
+					<div id="tr_add_glyph" onclick="change_chevron('#tr_add_glyph','#tr_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion"href="#tr_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neue Trainingseinheit hinzufügen</a><div id="tr_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
@@ -226,24 +232,7 @@
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_ort" value="" placeholder="Trainingsort" required />
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-4">Zeit*</label>
-									<div class="col-md-3">
-										<div class="sandbox-container input-group ">
-											<input class="form-control" name="d_date" type="text">
-											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-										</div>
-									</div>
-									<script> $('.sandbox-container input').datepicker();</script>
-									<div class="col-md-2">
-										<div class="input-group">
-											<input class="form-control" id="timepicker2" name="d_time" type="text">
-											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-										</div>
-									</div>
-									<script> $('#timepicker2').timepicker({showMeridian: false});</script>
-								</div>
+								</div>							
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainer*</label>
 									<div class="col-md-4">
@@ -267,6 +256,25 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="control-label col-md-4">Datum*</label>
+									<div class="col-md-4">
+										<div data-provide="datepicker" class="input-group date">
+											<input class="form-control" name="d_date" type="text" placeholder="Beispiel 01.01.2011" required>
+											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-4">Zeit*</label>
+									<div class="col-md-4">
+										<div class="input-group">
+											<input class="form-control" id="timepicker2" name="d_time" type="text" placeholder="Beispiel 12:00" required>
+											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+										</div>
+									</div>
+									<script> $('#timepicker2').timepicker({showMeridian: false, defaultTime: false});</script>
+								</div>	
+								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_trainingseinheit" value="Speichern" />
 									</div>
@@ -278,7 +286,7 @@
 
 				<?php /***Trainingsgruppen-Add***/?>
 				<div class="panel panel-default">
-					<div id="tg_add_glyph" onclick="change_chevron('#tg_add_glyph','#tg_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tg_add">
+					<div id="tg_add_glyph" onclick="change_chevron('#tg_add_glyph','#tg_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion"href="#tg_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neue Trainingsgruppe hinzufügen</a><div id="tg_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
@@ -305,7 +313,7 @@
 
 				<?php /***Turnier-Add***/?>
 				<div class="panel panel-default">
-					<div id="tu_add_glyph" onclick="change_chevron('#tu_add_glyph','#tu_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#tu_add">
+					<div id="tu_add_glyph" onclick="change_chevron('#tu_add_glyph','#tu_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion"href="#tu_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neues Turnier hinzufügen</a><div id="tu_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
@@ -322,12 +330,17 @@
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Ligaturnier?</label>
-									<div class="col-md-4">
-										<select class="form-control" name="int_liga" size="1">
-											<option></option>
-											<option value="1">Ja</option>
-											<option value="0">Nein</option>
-										</select>
+									<div class="col-md-1">
+										<label>
+											<input type="radio" name="int_liga" id="radiobtn2" value="1">
+											Ja
+										</label>
+									</div>
+									<div class="col-md-2">
+										<label>
+											<input type="radio" name="int_liga" id="optionsRadios1" value="0" checked>
+											Nein
+										</label>
 									</div>
 								</div>
 								<div class="form-group">
@@ -342,7 +355,7 @@
 
 				<?php /***Sparte-Add***/?>
 				<div class="panel panel-default">
-					<div id="sparte_add_glyph" onclick="change_chevron('#sparte_add_glyph','#sparte_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion"href="#sparte_add">
+					<div id="sparte_add_glyph" onclick="change_chevron('#sparte_add_glyph','#sparte_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion"href="#sparte_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neue Sparte hinzufügen</a><div id="sparte_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
@@ -441,18 +454,18 @@
 								<tbody>
 								<?php foreach ($spiele as $spiel) { ?>
 									<tr>
-										<td><?php if (isset($spiel->heimname)) echo $spiel->heimname; ?></td>
-										<td><?php if (isset($spiel->auswaertsname)) echo $spiel->auswaertsname; ?></td>
-										<td><?php if (isset($spiel->h_tore)) echo $spiel->h_tore; ?></td>
-										<td><?php if (isset($spiel->a_tore)) echo $spiel->a_tore; ?></td>
-										<td><?php if (isset($spiel->stat_id)) echo $spiel->stat_id; ?></td>
-										<td><?php if (isset($spiel->ort)) echo $spiel->ort; ?></td>
-										<td><?php if (isset($spiel->zeit)) echo $spiel->zeit; ?></td>
+										<td><?php if (isset($spiel->Heim)) echo $spiel->Heim; ?></td>
+										<td><?php if (isset($spiel->Auswaerts)) echo $spiel->Auswaerts; ?></td>
+										<td><?php if (isset($spiel->Heimtore)) echo $spiel->Heimtore; ?></td>
+										<td><?php if (isset($spiel->Auswaertstore)) echo $spiel->Auswaertstore; ?></td>
+										<td><?php if (isset($spiel->Status)) echo $spiel->Status; ?></td>
+										<td><?php if (isset($spiel->Ort)) echo $spiel->Ort; ?></td>
+										<td><?php if (isset($spiel->Uhrzeit)) echo $spiel->Uhrzeit; ?></td>
 										<td align="center"><a data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->heimname; ?> gegen <?php echo $spiel->auswaertsname;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_spiel/' . $spiel->s_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 										<!--td align="center"><a data-toggle="modal" data-target="#sModal<?php echo $spiel->s_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->heimname; ?> gegen <?php echo $spiel->auswaertsname;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>

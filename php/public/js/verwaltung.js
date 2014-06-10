@@ -1,0 +1,1 @@
+function activateInput($clickedInput, $nextInput){	if(document.getElementById($clickedInput).value != '0'){	document.getElementById($nextInput).disabled = false;}	else{document.getElementById($nextInput).disabled = true;}}
