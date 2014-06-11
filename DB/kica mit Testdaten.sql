@@ -289,16 +289,21 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   CONSTRAINT `Sparte1` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
   CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Turnier` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.spiel: ~5 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.spiel: ~10 rows (ungefähr)
 /*!40000 ALTER TABLE `spiel` DISABLE KEYS */;
 INSERT INTO `spiel` (`s_id`, `ort`, `heim`, `auswaerts`, `h_tore`, `a_tore`, `stat_id`, `zeit`, `tu_id`, `sparte_id`) VALUES
 	(1, 'Berliner Olympiastadion', 1, 2, NULL, NULL, 6, '2014-05-17 20:00:00', 2, 1),
 	(2, 'Heimstadion', 17, 9, NULL, NULL, 1, '2014-06-25 20:00:00', 1, 1),
-	(3, 'Allianzarena', 1, 2, 1, 0, 1, '2014-05-25 15:30:00', 1, 1),
+	(3, 'Allianzarena', 1, 2, 1, 0, 1, '2014-05-28 15:30:00', 1, 1),
 	(4, 'Allianzarena', 1, 2, 1, 1, 1, '2014-06-25 15:30:00', 1, 2),
-	(5, 'Signal-Iduna-Park', 2, 1, 0, 1, 1, '2014-05-26 18:30:00', 1, 1);
+	(5, 'Signal-Iduna-Park', 2, 1, 0, 1, 1, '2014-05-26 18:30:00', 1, 1),
+	(6, 'Stadion der Freundschaft', 22, 55, NULL, NULL, 1, '2014-06-12 20:00:00', 3, 2),
+	(7, 'Heimstadion', 1, 35, NULL, NULL, 3, '2014-06-14 21:00:00', 2, 1),
+	(8, 'Platz der Jugend', 10, 1, NULL, NULL, 1, '2014-06-17 17:00:00', 1, 3),
+	(9, 'Signal Iduna Park', 2, 1, NULL, NULL, 5, '2014-06-19 18:15:00', 2, 2),
+	(10, 'Signal Iduna Park', 2, 1, NULL, NULL, 7, '2014-07-03 19:45:00', 1, 1);
 /*!40000 ALTER TABLE `spiel` ENABLE KEYS */;
 
 
@@ -356,13 +361,19 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   KEY `Trainer` (`trainer`),
   CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`),
   CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~2 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~8 rows (ungefähr)
 /*!40000 ALTER TABLE `trainingseinheit` DISABLE KEYS */;
 INSERT INTO `trainingseinheit` (`tr_id`, `name`, `ort`, `zeit`, `trainer`, `tg_id`) VALUES
 	(1, 'Testspiel', 'Platz 1', '2014-05-25 18:49:49', 29, 1),
-	(2, 'Ausdauer', 'Wald', '2014-05-26 18:50:05', 29, 2);
+	(2, 'Ausdauer', 'Wald', '2014-05-26 18:50:05', 29, 2),
+	(3, 'Ausdauer G2', 'Heimstadion', '2014-06-14 18:00:00', 29, 1),
+	(4, 'Kraft', 'Heimstadion', '2014-06-19 15:45:00', 29, 3),
+	(5, 'Ausdauer ', 'Heimstadion', '2014-06-26 12:45:00', 29, 1),
+	(6, 'Torwarttraining', 'Stadtwald', '2014-06-29 12:45:00', 29, 2),
+	(7, 'Spielzüge', 'Heimstadion', '2014-06-30 18:45:00', 29, 1),
+	(8, 'Vorbereitungstraining', 'Signal Iduna Park', '2014-07-03 17:45:00', 29, 1);
 /*!40000 ALTER TABLE `trainingseinheit` ENABLE KEYS */;
 
 
