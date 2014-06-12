@@ -45,8 +45,19 @@ table {
     border-radius: 5px 5px 0px 0px;
     background: #F8F8F8;
     color:#777;
+	padding: 15px 15px 10px 15px;
 }
-
+.headline-title {
+   	display: inline-block; 
+}
+.headline-title h1{
+	margin:0px;
+}
+.headline-title img{
+	padding:0px;
+	margin:0px;
+	height: 79px;
+}
 /*VERWALTUNG*/
 
 /*Tabs über dem Collapse*/
@@ -73,10 +84,6 @@ table {
 	width:50%; 
 	text-align:right;
 	color: inherit;
-
-}
-.collapse_chevron:hover{
-	
 
 }
 /*Personen-Modal*/

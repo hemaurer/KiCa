@@ -127,8 +127,16 @@
 </div>
 <!-- Anzeige der Überschrift des Seiteninhalts -->
 <div class="container" id="headline">
-    <?php
-   		// Headline wird aus der Variable aus application.php gelesen
-	    echo "<h4>".ucfirst(Application::$subpage)."</h4>";
-    ?>
+	
+	<div class="headline-title">
+		<h1>
+			<img src="<?php echo URL; ?>public/img/football-icon.png" alt="Fussball">
+			KiCa
+		   <?php
+				// Headline wird aus der Variable aus application.php gelesen
+				echo "<small> - ".ucfirst(Application::$subpage)."</small>";
+			?>
+		</h1>
+	</div>
+	
 </div>
