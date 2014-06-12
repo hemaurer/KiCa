@@ -6,7 +6,7 @@ class Application
     public $url_controller = null;
 
     //Variable um die Unterseite zu definieren (z.B. im Header)
-    public static $subpage = null;
+    public static $subpage = "Home";
 
     /** @var null The method (of the above controller), often also named "action" */
     private $url_action = null;

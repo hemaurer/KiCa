@@ -14,12 +14,6 @@ class Home extends Controller
         $freundschaftsDaten = $home_model->getFreundschaftsDaten();
     	$turnierDaten = $home_model->getTurnierDaten();
 
-        //JSON formatieren, dass ein Zeilenumbruch im Kalender zwischen Uhrzeit und Titel angezeigt wird
-        $trainingseinheitenDaten = $home_model->calendarBreakLines($trainingseinheitenDaten);
-        $ligaDaten = $home_model->calendarBreakLines($ligaDaten);
-        $freundschaftsDaten = $home_model->calendarBreakLines($freundschaftsDaten);
-        $turnierDaten = $home_model->calendarBreakLines($turnierDaten);
-
         require 'application/views/_templates/header.php';
         require 'application/views/home/index.php';
         require 'application/views/_templates/footer.php';

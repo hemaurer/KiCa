@@ -69,7 +69,7 @@
 
 					if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
 				?>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['v_name']; echo " "; echo $_SESSION['name']; ?></a>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['v_name']; echo " "; echo $_SESSION['name']; ?><img id="profilbild_header" src="<?php echo $_SESSION['bild']; ?>"></a>
 				<?php
 					}
 					else{
@@ -97,13 +97,13 @@
 						<?php }
 						?>
 
-						<!-- Wenn man eingeloggt ist, die Suche, die Profilseite und den Logout Button unter Login anzeigen -->
+						<!-- Wenn man eingeloggt ist, die Profilseite und den Logout Button unter Login anzeigen -->
 						<?php
 							if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
 						?>
 
 							<li><a href="<?php echo URL; ?>profil/">Profil</a></li>
-							 <!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
+						<!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
 							<?php
 								if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 							?>

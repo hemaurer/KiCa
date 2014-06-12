@@ -29,5 +29,9 @@
 			<span class="label label-success">Trainingseinheiten</span>
 			<span class="label label-danger">Turnier</span>
 			<span class="label label-warning">Freundschaftsspiele</span>
+		<br><br>
+			<!-- Legende über die Anzeige von (A) und (H) -->
+			<span class="label label-default">(H): Heimspiel</span>
+			<span class="label label-default">(A): Auswärtsspiel</span>
 	</div> <!-- End calender -->
 </div> <!-- End container -->

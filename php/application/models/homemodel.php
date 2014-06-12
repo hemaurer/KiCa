@@ -19,7 +19,7 @@ class HomeModel
     {
         $json = array();
 
-        $sql = "SELECT name AS title, zeit AS start FROM trainingseinheit";
+        $sql = "SELECT CONCAT('\\n',name) AS title, zeit AS start FROM trainingseinheit";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -36,7 +36,11 @@ class HomeModel
     {
         $json = array();
 
-        $sql = "SELECT ort AS title, zeit AS start FROM spiel WHERE (heim = 1 OR auswaerts = 1) AND stat_id = 1";
+        $sql = "SELECT IF(spiel.heim=1,CONCAT(' (H)','\\n',auswaerts.name),CONCAT(' (A)','\\n',heim.name)) AS title, spiel.zeit AS start
+                FROM spiel
+                 JOIN mannschaft AS heim ON heim.m_id=spiel.heim
+                 JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 1";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -49,7 +53,11 @@ class HomeModel
     {
         $json = array();
 
-        $sql = "SELECT ort AS title, zeit AS start FROM spiel WHERE (heim = 1 OR auswaerts = 1) AND stat_id = 7";
+        $sql = "SELECT IF(spiel.heim=1,CONCAT(' (H)','\\n',auswaerts.name),CONCAT(' (A)','\\n',heim.name)) AS title, spiel.zeit AS start
+                FROM spiel
+                 JOIN mannschaft AS heim ON heim.m_id=spiel.heim
+                 JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 7";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -61,17 +69,15 @@ class HomeModel
     {
         $json = array();
 
-        $sql = "SELECT ort AS title, zeit AS start FROM spiel WHERE (heim = 1 OR auswaerts = 1) AND (stat_id <> 1 AND stat_id <> 7)";
+        $sql = "SELECT IF(spiel.heim=1,CONCAT(' (H)','\\n',auswaerts.name),CONCAT(' (A)','\\n',heim.name)) AS title, spiel.zeit AS start
+                FROM spiel
+                 JOIN mannschaft AS heim ON heim.m_id=spiel.heim
+                 JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND (stat_id <> 1 AND stat_id <> 7)";
         $query = $this->db->prepare($sql);
         $query->execute();
 
         return json_encode($query->fetchAll());
     }//end getKalendarDaten()
 
-    // Funktion, um die JSON zu formatieren, dass Zeilenumbrüche im Kalender angezeigt werden
-    public function calendarBreakLines($trainingseinheitenDaten)
-    {
-        $newstr = str_replace('"title":"', '"title":"\n', $trainingseinheitenDaten);
-        return $newstr;
-    }
 }?>
