@@ -22,6 +22,18 @@ table {
     margin-top: 20px;
 }
 
+#profilbild_header{
+    margin-left: 10px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.navbar-nav > li > a {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    line-height: 55px !important;
+}
+
 .container {
 	background:#FFF;
 	padding:20px;
@@ -56,8 +68,8 @@ table {
 /*Collapse*/
 .collapse_title, .collapse_title:hover{
 	display: inline-block;
-	width:50%; 
-	
+	width:50%;
+
 	text-decoration: none;
 }
 .panel-heading:hover{
@@ -70,13 +82,13 @@ table {
 .collapse_chevron{
 	opacity: 0;
 	display: inline-block;
-	width:50%; 
+	width:50%;
 	text-align:right;
 	color: inherit;
 
 }
 .collapse_chevron:hover{
-	
+
 
 }
 /*Personen-Modal*/
@@ -97,13 +109,13 @@ table {
 }
 .pwresbtn{
 	display: inline-block;
-	width:50%; 
+	width:50%;
 }
 .footerbtn{
 	display: inline-block;
-	width:50%; 
+	width:50%;
 	text-align:right;
-	
+
 }
 
 /*HOME*/

@@ -37,10 +37,10 @@ class HomeModel
         $json = array();
 
         $sql = "SELECT IF(spiel.heim=1,CONCAT(' (H)','\\n',auswaerts.name),CONCAT(' (A)','\\n',heim.name)) AS title, spiel.zeit AS start
-FROM spiel
- JOIN mannschaft AS heim ON heim.m_id=spiel.heim
- JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
-WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 1";
+                FROM spiel
+                 JOIN mannschaft AS heim ON heim.m_id=spiel.heim
+                 JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 1";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -54,10 +54,10 @@ WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 1";
         $json = array();
 
         $sql = "SELECT IF(spiel.heim=1,CONCAT(' (H)','\\n',auswaerts.name),CONCAT(' (A)','\\n',heim.name)) AS title, spiel.zeit AS start
-FROM spiel
- JOIN mannschaft AS heim ON heim.m_id=spiel.heim
- JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
-WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 7";
+                FROM spiel
+                 JOIN mannschaft AS heim ON heim.m_id=spiel.heim
+                 JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 7";
         $query = $this->db->prepare($sql);
         $query->execute();
 
@@ -70,10 +70,10 @@ WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 7";
         $json = array();
 
         $sql = "SELECT IF(spiel.heim=1,CONCAT(' (H)','\\n',auswaerts.name),CONCAT(' (A)','\\n',heim.name)) AS title, spiel.zeit AS start
-FROM spiel
- JOIN mannschaft AS heim ON heim.m_id=spiel.heim
- JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
-WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND (stat_id <> 1 AND stat_id <> 7)";
+                FROM spiel
+                 JOIN mannschaft AS heim ON heim.m_id=spiel.heim
+                 JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND (stat_id <> 1 AND stat_id <> 7)";
         $query = $this->db->prepare($sql);
         $query->execute();
 
