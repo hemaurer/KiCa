@@ -48,12 +48,12 @@
 					<ul class="dropdown-menu">
 
 						<?php
-							// Sparten aus der DB laden und in der Liste anzeigen
-							$sparten_model = $this->loadModel('SpartenModel');
-	        				$spartenDaten = $sparten_model->getSparten();
+							//Sparten aus der DB laden und in der Liste anzeigen
+	        				$verwaltungs_model = $this->loadModel('VerwaltungsModel');
+	        				$spartenDaten = $verwaltungs_model->get_alle_sparten();
 
 						foreach ($spartenDaten as $sparte) { ?>
-								<li><a href="<?php echo URL; echo 'liga/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+								<li><a href="<?php echo URL; echo 'liga/index/'; if (isset($sparte->sparte_id)) echo $sparte->sparte_id; ?>"><?php if (isset($sparte->name)) echo $sparte->name; ?></a></li>
 						<?php } ?>
 
 					</ul>
