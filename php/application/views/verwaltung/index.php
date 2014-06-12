@@ -239,7 +239,7 @@
 										<select class="form-control" name="str_trainer" size="1" required>
 											<option></option>
 											<?php foreach ($personen as $person) { ?>
-											<?php if ((isset($person->name))&&($person->betreuer == 1)){?><option><?php echo $person->name; }?></option>
+											<?php if ((isset($person->name))&&($person->betreuer == 1)){?><option><?php echo $person->name; ?></option><?php } ?>
 											<?php } ?>
 										</select>
 									</div>
