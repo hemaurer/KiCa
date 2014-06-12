@@ -87,7 +87,7 @@
 
 				<?php /***Spiele-Add***/?>
 				<div class="panel panel-default">
-					<div id="s_add_glyph" onclick="change_chevron('#s_add_glyph','#s_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion"href="#s_add">
+					<div id="s_add_glyph" onclick="change_chevron('#s_add_glyph','#s_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion" href="#s_add">
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neues Spiel hinzufügen</a><div id="s_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
@@ -99,7 +99,7 @@
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_sparte" id="str_sparte" size="1" onchange="activateInput('str_sparte', 'str_status')" required>
-											<option value="0" disabled>Sparte wählen</option>
+											<option value="0" selected disabled>Sparte wählen</option>
 											<?php foreach ($sparten as $sparte) { ?>
 											<option><?php if (isset($sparte->name)) echo $sparte->name; ?></option>
 											<?php } ?>
@@ -403,6 +403,7 @@
 										<td>Nachname</td>
 										<td>Vorname</td>
 										<td>Geburtsdatum</td>
+										<td>Benutzername</td>
 										<td align="right" width="1%">Bearbeiten</td>
 										<td align="right" width="1%">Löschen</td>
 									</tr>
@@ -413,6 +414,7 @@
 										<td><?php if (isset($person->name)) echo $person->name; ?></td>
 										<td><?php if (isset($person->v_name)) echo $person->v_name; ?></td>
 										<td><?php if (isset($person->geb_datum)) echo $person->geb_datum; ?></td>
+										<td><?php if (isset($person->username)) echo $person->username; ?></td>
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#person_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_person/' . $person->p_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
@@ -442,8 +444,7 @@
 								<tr>
 									<td>Heim Team</td>
 									<td>Gegnerisches Team</td>
-									<td>Heim Tore</td>
-									<td>Gegner Tore</td>
+									<td>Ergebnis</td>
 									<td>Spielart</td>
 									<td>Ort</td>
 									<td>Zeit</td>
@@ -456,11 +457,10 @@
 									<tr>
 										<td><?php if (isset($spiel->Heim)) echo $spiel->Heim; ?></td>
 										<td><?php if (isset($spiel->Auswaerts)) echo $spiel->Auswaerts; ?></td>
-										<td><?php if (isset($spiel->Heimtore)) echo $spiel->Heimtore; ?></td>
-										<td><?php if (isset($spiel->Auswaertstore)) echo $spiel->Auswaertstore; ?></td>
+										<td><?php if ((isset($spiel->Heimtore)) && (isset($spiel->Auswaertstore))) echo $spiel->Heimtore." : ".$spiel->Auswaertstore; ?></td>
 										<td><?php if (isset($spiel->Status)) echo $spiel->Status; ?></td>
 										<td><?php if (isset($spiel->Ort)) echo $spiel->Ort; ?></td>
-										<td><?php if (isset($spiel->Uhrzeit)) echo $spiel->Uhrzeit; ?></td>
+										<td><?php if (isset($spiel->Uhrzeit)){$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.Y H:i');} ?></td>
 										<td align="center"><a data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->heimname; ?> gegen <?php echo $spiel->auswaertsname;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_spiel/' . $spiel->s_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
@@ -524,6 +524,7 @@
 										<td>Ort</td>
 										<td>Zeit</td>
 										<td>Trainingsgruppe</td>
+										<td>Trainer</td>
 										<td align="right" width="1%">Bearbeiten</td>
 										<td align="right" width="1%">Löschen</td>
 									</tr>
@@ -531,10 +532,11 @@
 								<tbody>
 								<?php foreach ($trainingseinheiten as $trainingseinheit) { ?>
 									<tr>
-										<td><?php if (isset($trainingseinheit->name)) echo $trainingseinheit->name; ?></td>
-										<td><?php if (isset($trainingseinheit->ort)) echo $trainingseinheit->ort; ?></td>
-										<td><?php if (isset($trainingseinheit->zeit)) echo $trainingseinheit->zeit; ?></td>
-										<td><?php if (isset($trainingseinheit->tg_id)) echo $trainingseinheit->tg_id; ?></td>
+										<td><?php if (isset($trainingseinheit->Name)) echo $trainingseinheit->Name; ?></td>
+										<td><?php if (isset($trainingseinheit->Ort)) echo $trainingseinheit->Ort; ?></td>
+										<td><?php if (isset($trainingseinheit->Uhrzeit)){$date = new DateTime($trainingseinheit->Uhrzeit); echo $date->format('d.m.Y H:i');} ?></td>
+										<td><?php if (isset($trainingseinheit->Trainingsgruppe)) echo $trainingseinheit->Trainingsgruppe; ?></td>
+										<td><?php if (isset($trainingseinheit->Trainer)) echo $trainingseinheit->Trainer; ?></td>
 										<td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 
@@ -562,7 +564,6 @@
 								<thead style="background-color: #ddd; font-weight: bold;">
 									<tr>
 										<td>Trainingsgruppe</td>
-										<td>Trainer</td>
 										<td align="right" width="1%">Bearbeiten</td>
 										<td align="right" width="1%">Löschen</td>
 									</tr>
@@ -570,9 +571,7 @@
 								<tbody>
 								<?php foreach ($trainingsgruppen as $trainingsgruppe) { ?>
 									<tr>
-										<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td>
-										<td><?php if (isset($trainingsgruppe->tr_name)) echo $trainingsgruppe->tr_name; ?></td>
-										<td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td><td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 										<!--td align="center"><a data-toggle="modal" data-target="#tgModal<?php echo $trainingsgruppe->tg_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_trainingsgruppe/' . $trainingsgruppe->tg_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->

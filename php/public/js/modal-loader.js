@@ -1,11 +1,5 @@
 
-function change_chevron($panel_id,$glyph){
-	if($( $panel_id ).hasClass( "collapsed" )){
-		$( $glyph ).children("span").removeClass( "glyphicon glyphicon-chevron-left" ).addClass( "glyphicon glyphicon-chevron-down" );
-	}else{
-		$( $glyph ).children("span").removeClass( "glyphicon glyphicon-chevron-down" ).addClass( "glyphicon glyphicon-chevron-left" );
-	}
-}
+
 
 function toggleModal(modal_id, type, x_id, x_name){
 	if (modal_id == 1){ //ID für Add
