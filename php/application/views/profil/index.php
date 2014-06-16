@@ -9,10 +9,10 @@
 	<!-- Beinhaltet alle Daten zur Person des Profils -->
 	<div id="personenDaten">
 
-			<?php //Standardpfad Profilbilder: ../public/img/profilbilder/_noimage.jpg ?>
+			<?php //Standardpfad Profilbilder: /public/img/profilbilder/_noimage.jpg ?>
 			<div id="profilBild">
 				<div id="bild">
-					<p><img src="<?php echo $_SESSION['bild']; ?>" ></p>
+					<p><img src="<?php echo URL . $_SESSION['bild']; ?>" ></p>
 				</div>
 
 				<div align="center">

@@ -19,5 +19,12 @@ class Home extends Controller
         require 'application/views/_templates/footer.php';
     }
 
+    //Kalender Details nach dem Klick auf einen Eintrag im Home-Kalendar laden
+    public function getKalenderDetails()
+    {
+        $home_model = $this->loadModel('HomeModel');
+        $home_model->getKalenderDetails($_POST["className"], $_POST["id"]);
+    }//end getKalenderDetails()
+
 }
 

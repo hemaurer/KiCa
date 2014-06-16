@@ -17,7 +17,7 @@
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../public/js/bootstrap-timepicker.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/moment.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/fullcalendar.js"></script>
@@ -69,7 +69,7 @@
 
 					if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
 				?>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['v_name']; echo " "; echo $_SESSION['name']; ?><img id="profilbild_header" src="<?php echo $_SESSION['bild']; ?>"></a>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['v_name']; echo " "; echo $_SESSION['name']; ?><img id="profilbild_header" src="<?php echo URL . $_SESSION['bild']; ?>" ></a>
 				<?php
 					}
 					else{
@@ -127,7 +127,7 @@
 </div>
 <!-- Anzeige der Überschrift des Seiteninhalts -->
 <div class="container" id="headline">
-	
+
 	<div class="headline-title">
 		<h1>
 			<img src="<?php echo URL; ?>public/img/football-icon.png" alt="Fussball">
@@ -138,5 +138,5 @@
 			?>
 		</h1>
 	</div>
-	
+
 </div>
