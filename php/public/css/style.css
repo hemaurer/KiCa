@@ -98,13 +98,6 @@ table {
 	color: inherit;
 
 }
-<<<<<<< HEAD
-=======
-.collapse_chevron:hover{
-
-
-}
->>>>>>> origin/master
 /*Personen-Modal*/
 .personenfooter{
 	padding: 19px 20px 20px;
@@ -132,6 +125,18 @@ table {
 
 }
 
+#checkboxSelect{
+	height: 81px;
+	overflow: auto;
+	/*border: 1px solid #e5e5e5;*/
+	list-style-type: none;
+	padding: 6px 12px;
+	margin: 0px;
+}
+#checkboxSelect .checkbox{
+	padding: 0px 0px 0px 20px;
+	min-height: 0px;
+}
 /*HOME*/
 #calendar{
     width: 70%;

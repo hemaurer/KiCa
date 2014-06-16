@@ -378,16 +378,43 @@ class VerwaltungsModel
 
 	public function get_alle_turniere()
     {
-        $sql = "SELECT * FROM turnier";
+        //$sql = "SELECT * FROM turnier";
+		$sql = "SELECT turnier.name AS Turnier, turnier.liga AS Liga, sparte.name AS Sparte, IFNULL(mannschaft.name,'noch nicht ermittelt') AS Gewinner FROM turnier_sparte JOIN turnier ON turnier.tu_id = turnier_sparte.tu_id JOIN sparte ON sparte.sparte_id = turnier_sparte.sparte_id LEFT JOIN mannschaft ON mannschaft.m_id = turnier_sparte.gewinner ORDER BY Turnier";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_turnier($str_name, $int_liga)
+	public function add_turnier($str_name, $int_liga, $arr_sparte_option)
     {
-        $sql = "INSERT INTO turnier (name, liga) VALUES (:name, :liga)";
+		/*Neues Turnier mit Name und Ligawert in tbl Turnier anlegen*/
+		$sql = "INSERT INTO turnier (name, liga) VALUES (:name, :liga)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name, ':liga' => $int_liga));
+		
+		/*Nur wenn eine Sparte (Checkbox) gewählt wurde, wird auch eine Verknüpfung erstellt.*/
+		if(isset($arr_sparte_option)){
+			/*neu angelegte Turnier-ID auslesen*/
+			$sql = "SELECT tu_id FROM turnier WHERE name = ?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_name));
+			$turnier = $query->fetch(PDO::FETCH_OBJ);
+			
+			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
+			if (is_array($arr_sparte_option)) {
+				foreach($arr_sparte_option as $option){
+					/*Sparten ID auslesen*/
+					$sql = "SELECT sparte_id FROM sparte WHERE name = ?";
+					$query = $this->db->prepare($sql);
+					$query->execute(array($option));
+					$sparte = $query->fetch(PDO::FETCH_OBJ);
+			
+					/*neue Verknüpfung in tbl turnier_sparte ohne gewinner anlegen*/
+					$sql = "INSERT INTO turnier_sparte (tu_id, sparte_id) VALUES (:tu_id, :sparte_id)";
+					$query = $this->db->prepare($sql);
+					$query->execute(array(':tu_id' => $turnier->tu_id, ':sparte_id' => $sparte->sparte_id));
+				}
+			} 
+		}
     }
 	public function edit_turnier($tu_id, $str_name, $int_liga)
     {

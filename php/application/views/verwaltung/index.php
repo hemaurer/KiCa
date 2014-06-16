@@ -343,6 +343,43 @@
 										</label>
 									</div>
 								</div>
+								<!--div class="form-group">
+									<label class="control-label col-md-4">Sparten wählen*</label>
+									<div class="col-md-4">
+										<select class="form-control" id="str_sparten" name="str_sparten" size="1" multiple required>
+											<?php 
+											$i = 1;
+											foreach ($sparten as $sparte) { ?>
+											<option value="sparte_option<?php echo $i?>" onclick="selectOption('str_sparten','sparte_option<?php echo $i?>')">
+											
+													<?php if (isset($sparte->name)) echo $sparte->name; ?>
+												
+											
+											</option>
+											<?php 
+												$i++;} ?>
+										</select>
+									</div>
+								</div-->
+								<div class="form-group">
+									<label class="control-label col-md-4">Sparten wählen*</label>
+									<div class="col-md-4">
+										<ul class="form-control" id="checkboxSelect">
+										<div class="checkbox">
+											<?php 
+											$i = 1;
+											foreach ($sparten as $sparte) { ?>
+											<li>
+													<label>
+														<input type="checkbox" name="arr_sparte_option[]" value="<?php if (isset($sparte->name)) echo $sparte->name; ?>"><?php echo $sparte->name; ?>
+													</label>
+											</li>
+											<?php 
+											$i++;} ?>
+										</div>
+										</ul>
+									</div>
+								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_turnier" value="Speichern" />
@@ -599,6 +636,8 @@
 									<tr>
 										<td>Turnier</td>
 										<td>Liga</td>
+										<td>Sparte</td>
+										<td>Gewinner</td>
 										<td align="right" width="1%">Bearbeiten</td>
 										<td align="right" width="1%">Löschen</td>
 									</tr>
@@ -606,11 +645,20 @@
 								<tbody>
 								<?php foreach ($turniere as $turnier) { ?>
 									<tr>
-										<td><?php if (isset($turnier->name)) echo $turnier->name; ?></td>
-										<td><?php if (isset($turnier->liga)){
-											if ($turnier->liga == 1){
+										<td><?php if (isset($turnier->Turnier)){ 
+											/*$next[] = (next($turniere[1]));
+											if (($turnier->Turnier) == ($next[0]->Turnier)){*/
+												echo $turnier->Turnier;
+											//}
+										 
+										}?></td>
+										<td><?php if (isset($turnier->Liga)){
+											if ($turnier->Liga == 1){
 											echo "ja"; }else
 											{ echo "nein"; }}?></td>
+										<td><?php if (isset($turnier->Sparte)) echo $turnier->Sparte; ?></td>
+										<td><?php if (isset($turnier->Gewinner)) echo $turnier->Gewinner; ?></td>
+										
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/edit_turnier/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->tu_id; ?>','<?php echo $turnier->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->tu_id; ?>','<?php echo $turnier->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>

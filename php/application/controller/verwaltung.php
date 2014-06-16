@@ -180,7 +180,7 @@ class Verwaltung extends Controller
     {
         if (isset($_POST["submit_add_turnier"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->add_turnier($_POST["str_name"], $_POST["int_liga"]);
+            $verwaltungs_model->add_turnier($_POST["str_name"], $_POST["int_liga"], $_POST["arr_sparte_option"]);
         }
         header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }

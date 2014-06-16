@@ -13,6 +13,7 @@
 	<link href="<?php echo URL; ?>public/css/datepicker3.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/bootstrap-timepicker.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/fullcalendar.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo URL; ?>public/img/favicon.ico" />
 
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
