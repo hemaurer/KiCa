@@ -2,22 +2,27 @@
 
 	<!-- Kalender Div - wird mit dem Kalender befüllt -->
     <div id='calendar'>
-
 		<!-- Script zum Generieren des Kalenders beim Laden der Seite -->
+		<script type="text/javascript" src="<?php echo URL; ?>public/js/modal-loader.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 
 				 $('#calendar').fullCalendar({
-				 editable: true,
 				 eventSources:[
 
 				 	// Kalender mit Events (bzw. Daten) füllen - ausgelesen über controller bzw. model
-				 	{events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff'},
-				 	{events:<?php echo $ligaDaten;?>,backgroundColor: '#3276B1', borderColor: '#3276B1'},
-				 	{events:<?php echo $turnierDaten;?>,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff'},
-				 	{events:<?php echo $freundschaftsDaten;?>,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff'},
+				 	{events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'},
+				 	{events:<?php echo $ligaDaten;?>,backgroundColor: '#3276B1', borderColor: '#3276B1', textColor:'#fff', className:'liga'},
+				 	{events:<?php echo $turnierDaten;?>,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff', className:'turnier'},
+				 	{events:<?php echo $freundschaftsDaten;?>,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff', className:'freundschaft'},
 
-					]
+					],
+
+					eventClick: function(event) {
+				    	//in modal-loader.js
+				    	kalenderModal(event.source.className, event.ID);
+				    }
+
 				 });
 
 			 });
@@ -34,4 +39,20 @@
 			<span class="label label-default">(H): Heimspiel</span>
 			<span class="label label-default">(A): Auswärtsspiel</span>
 	</div> <!-- End calender -->
+	<!-- sModal -->
+	<div class="modal fade" id="kalenderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="pModalLabel"><div id="kalendermodalheader"></div></h4>
+				</div>
+				<div class="modal-body" id="kalendermodalbody">
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div> <!-- End container -->

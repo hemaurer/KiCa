@@ -60,7 +60,7 @@ table {
 	padding: 15px 15px 10px 15px;
 }
 .headline-title {
-   	display: inline-block; 
+   	display: inline-block;
 }
 .headline-title h1{
 	margin:0px;
@@ -98,6 +98,10 @@ table {
 	color: inherit;
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 /*Personen-Modal*/
 .personenfooter{
 	padding: 19px 20px 20px;
