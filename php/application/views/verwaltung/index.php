@@ -98,7 +98,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_sparte" id="str_sparte" size="1" onchange="activateInput('str_sparte', 'str_status')" required>
+										<select class="form-control" name="str_sparte" id="str_sparte" size="1" onchange="selectFiller('str_sparte', 'str_status')" required>
 											<option value="0" selected disabled>Sparte wählen</option>
 											<?php foreach ($sparten as $sparte) { ?>
 											<option><?php if (isset($sparte->name)) echo $sparte->name; ?></option>
@@ -109,29 +109,24 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Status*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_stat_name" id="str_status" size="1" onchange="activateInput('str_status', 'str_tu_name')" disabled required>
+										<select class="form-control" name="str_stat_name" id="str_status" size="1" onchange="selectFiller('str_status', 'str_tu_name')" disabled required>
 											<option value="0" selected disabled>Status wählen</option>
-											<?php foreach ($stats as $status) { ?>
-											<option><?php if (isset($status->status)) echo $status->status; ?></option>
-											<?php } ?>
+											
 										</select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Turnier*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_tu_name" id="str_tu_name" size="1" onchange="activateInput('str_tu_name', 'str_heim')" disabled required>
+										<select class="form-control" name="str_tu_name" id="str_tu_name" size="1" onchange="selectFiller('str_tu_name', 'str_heim')" disabled required>
 											<option value="0" selected disabled>Turnier wählen</option>
-											<?php foreach ($turniere as $turnier) { ?>
-											<option><?php if (isset($turnier->name)) echo $turnier->name; ?></option>
-											<?php } ?>
 										</select>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Heim Team*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_heim" id="str_heim" size="1" onchange="activateInput('str_heim', 'str_auswaerts')" disabled required>
+										<select class="form-control" name="str_heim" id="str_heim" size="1" onchange="selectFiller('str_heim', 'str_auswaerts')" disabled required>
 											<option value="0" selected disabled>Team wählen</option>
 											<?php foreach ($mannschaften as $mannschaft) { ?>
 											<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
@@ -660,8 +655,8 @@
 										<td><?php if (isset($turnier->Gewinner)) echo $turnier->Gewinner; ?></td>
 										
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/edit_turnier/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
-										<td align="center"><a data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->tu_id; ?>','<?php echo $turnier->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->tu_id; ?>','<?php echo $turnier->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 										<!--td><a data-toggle="modal" data-target="#tuModal<?php echo $turnier->tu_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<!--<td><a href="<?php echo URL . 'verwaltung/delete_turnier/' . $turnier->tu_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td>-->
 									</tr>

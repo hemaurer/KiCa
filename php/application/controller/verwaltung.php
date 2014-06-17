@@ -92,6 +92,12 @@ class Verwaltung extends Controller
         }
         //header('location: ' . URL . 'verwaltung/');
     }
+	public function get_select_options()
+	{
+		$verwaltungs_model = $this->loadModel('VerwaltungsModel');
+        $verwaltungs_model->get_select_options($_POST["str_selectedOption"], $_POST["nextSelectId"], $_POST["str_sparteValue"], $_POST["str_statusValue"], $_POST["str_turnierValue"], $_POST["str_heimValue"], $_POST["str_auswaertsValue"]);
+		//$verwaltungs_model->get_select_options($_POST["json_values"]);
+	}
 
 /***Mannschaften***/
 

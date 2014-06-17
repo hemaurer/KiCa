@@ -248,6 +248,54 @@ class VerwaltungsModel
         $query->execute(array($s_id));
 		echo true;
     }
+	public function get_select_options($selectedOption, $nextSelectId, $str_sparteValue, $str_statusValue, $str_turnierValue, $str_heimValue, $str_auswaertsValue)
+	{
+		/*Sparten ID herauslesen*/
+		$sql = "Select sparte_id FROM sparte WHERE  name = ?";	
+		$query = $this->db->prepare($sql);						
+		$query->execute(array($str_sparteValue));					
+		$arr_sparte_id = $query->fetchAll();					
+		foreach($arr_sparte_id as $int_sparte_id){				
+			$int_sparte_id = $int_sparte_id->sparte_id;				
+		};
+		/**Turnier auslesen und ID aus Datenbank heraussuchen und Array splitten**/
+		$sql = "Select tu_id FROM turnier WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_turnierValue));					
+		$arr_tu_id = $query->fetchAll();					
+		foreach($arr_tu_id as $int_tu_id){				
+			$int_tu_id = $int_tu_id->tu_id;				
+		};
+		/*Wenn die nächste Selectbox str_status ist, soll folgendes aus der db ausgelesen werden */
+		if ($nextSelectId == "str_status"){
+			$sql = "SELECT status.status AS value FROM status";
+		}
+		
+		/*Wenn die nächste Selectbox str_tu_name ist, soll folgendes aus der db ausgelesen werden */
+		if ($nextSelectId == "str_tu_name"){
+			if ($str_statusValue == "Liga"){
+				$int_liga = 1;
+			}else{
+				$int_liga = 0;
+			}
+			
+			$sql = "SELECT turnier.name AS value FROM turnier RIGHT JOIN turnier_sparte ON turnier_sparte.tu_id = turnier.tu_id WHERE turnier_sparte.sparte_id = ".$int_sparte_id." AND turnier.liga = ".$int_liga."";
+		}
+		
+		if ($nextSelectId == "str_heim"){
+			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id."";
+		}
+		if ($nextSelectId == "str_auswaerts"){
+			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id." AND mannschaft.name <> '".$str_heimValue."'";
+		}
+		$query = $this->db->prepare($sql);
+		$query->execute();
+        $result = json_encode($query->fetchAll());
+        $json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
+        return $result;
+	}
 
 /***Mannschaften***/
 
@@ -379,7 +427,7 @@ class VerwaltungsModel
 	public function get_alle_turniere()
     {
         //$sql = "SELECT * FROM turnier";
-		$sql = "SELECT turnier.name AS Turnier, turnier.liga AS Liga, sparte.name AS Sparte, IFNULL(mannschaft.name,'noch nicht ermittelt') AS Gewinner FROM turnier_sparte JOIN turnier ON turnier.tu_id = turnier_sparte.tu_id JOIN sparte ON sparte.sparte_id = turnier_sparte.sparte_id LEFT JOIN mannschaft ON mannschaft.m_id = turnier_sparte.gewinner ORDER BY Turnier";
+		$sql = "SELECT turnier.tu_id AS ID, turnier.name AS Turnier, turnier.liga AS Liga, sparte.name AS Sparte, IFNULL(mannschaft.name,'noch nicht ermittelt') AS Gewinner FROM turnier_sparte JOIN turnier ON turnier.tu_id = turnier_sparte.tu_id JOIN sparte ON sparte.sparte_id = turnier_sparte.sparte_id LEFT JOIN mannschaft ON mannschaft.m_id = turnier_sparte.gewinner ORDER BY Turnier";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
