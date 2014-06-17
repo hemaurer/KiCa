@@ -24,7 +24,7 @@ class VerwaltungsModel
     }
     public function add_person($str_nachname, $str_vorname, $d_date, $int_groesse, $b_betreuer, $int_tel)
     {
-		$str_bild = "../public/img/profilbilder/_noimage.jpg";
+		$str_bild = "public/img/profilbilder/_noimage.jpg";
 		$str_user = $str_vorname.".".$str_nachname;
 		
 		/*Benutzername prüfen ob bereits vorhanden*/

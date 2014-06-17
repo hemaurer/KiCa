@@ -22,10 +22,10 @@ class ProfilModel
         $filenameext = pathinfo($filename, PATHINFO_EXTENSION);
 
         //Verzeichnis zur Ablage des hochgeladenen Bildes setzen
-        $uploaddir = './public/img/profilbilder/';
+        $uploaddir = 'public/img/profilbilder/';
         //Namen des Bildes definieren
-        $uploadfile = $uploaddir . $p_id . "_profilbild." . $filenameext;
-        $str_bild = "." . $uploaddir . $p_id . "_profilbild." . $filenameext;
+        $uploadfile = "./" .$uploaddir . $p_id . "_profilbild." . $filenameext;
+        $str_bild = $uploaddir . $p_id . "_profilbild." . $filenameext;
 
         //Bild hochladen
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
