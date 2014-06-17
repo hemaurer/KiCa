@@ -166,19 +166,32 @@ function successModal(type, x_id) {
 }
 
 //Wird aufgerufen, wenn auf ein Event im HomeKalender geklickt wird
-//öffnet ein Modal und befüllt es über ein Ajax Request mit den passenden Daten aus der DB
+//öffnet ein Modal und befüllt es über einen Ajax Request mit den passenden Daten aus der DB
 function kalenderModal(className, id){
+	//className von Array in String umwandeln
+	className = className.toString();
+	//className formatieren, dass nur eine Variable genutzt werden muss
+	str_prefix = className.substring(0, 1).toUpperCase() + className.substring(1);
 
-	if (className == "training"){
+		//Ajax Request auf Home Controller getKalenderDetails()
 		$.post("getKalenderDetails", {"className": className, "id": id})
 			.done(function( data ) {
+				//Rückgabearray als JSON transformieren
 			 	var returnedData = JSON.parse(data);
 
-				$('#kalendermodalheader').html('Info zu "'+className+'" #' +id);
-				$('#kalendermodalbody').html('<strong>Art: </strong>'+returnedData.name+'<br><strong>Ort: </strong>'+returnedData.ort+'<br><strong>Uhrzeit: </strong>'+returnedData.zeit+'<br><strong>Trainer: </strong>'+returnedData.trainer+'<br><strong>Trainingsgruppe: </strong>'+returnedData.tg_id);
+			 	//Modal zur Anzeige der Details mit den Werten aus dem Post Request befüllen
+				if (className == "training"){
+					$('#kalendermodalheader').html('Details zur Trainingseinheit');
+					$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>Details</td> <td></td> </tr> </thead> <tbody> <tr> <td><strong>Art: </strong></td> <td>'+returnedData.Name+'</td> </tr> <tr> <td><strong>Ort: </strong></td> <td>'+returnedData.Ort+'</td> </tr> <tr> <td><strong>Uhrzeit: </strong></td> <td>'+returnedData.Uhrzeit+'</td> </tr> <tr> <td><strong>Trainer: </strong></td> <td>'+returnedData.Trainer+'</td> </tr> <tr> <td><strong>Trainingsgruppe: </strong></td> <td>'+returnedData.Trainingsgruppe+'</td> </tr> </tbody> </table>');
+				}
+			 	//wenn es sich nicht um eine Trainingseinheit handelt, ist es ein Spiel
+				else{
+					$('#kalendermodalheader').html('Details zum '+str_prefix+'spiel');
+					$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>Details</td> <td></td> </tr> </thead> <tbody> <tr> <td><strong>Art: </strong></td> <td>'+returnedData.Status+'</td> </tr> <tr> <td><strong>Heim: </strong></td> <td>'+returnedData.Heim+'</td> </tr> <tr> <td><strong>Auswärts: </strong></td> <td>'+returnedData.Auswaerts+'</td> </tr> <tr> <td><strong>Uhrzeit: </strong></td> <td>'+returnedData.Uhrzeit+'</td> </tr> <tr> <td><strong>Ort: </strong></td> <td>'+returnedData.Ort+'</td> </tr> <tr> <td><strong>Sparte: </strong></td> <td>'+returnedData.Sparte+'</td> </tr> </tbody> </table>');
+				}
 
+				//Modal anzeigen
 			 	$('#kalenderModal').modal('toggle');
 			});
-		}
 
 }

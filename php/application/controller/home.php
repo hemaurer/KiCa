@@ -19,11 +19,20 @@ class Home extends Controller
         require 'application/views/_templates/footer.php';
     }
 
-    //Kalender Details nach dem Klick auf einen Eintrag im Home-Kalendar laden
+    //Kalender Details nach dem Klick auf einen Eintrag im Home-Kalendar laden zur Anzeige im Details Modal
     public function getKalenderDetails()
     {
-        $home_model = $this->loadModel('HomeModel');
-        $home_model->getKalenderDetails($_POST["className"], $_POST["id"]);
+
+        if($_POST["className"] == "training"){
+            $home_model = $this->loadModel('HomeModel');
+            $home_model->getKalenderDetails_training($_POST["id"]);
+        }
+        // wenn es sich nicht um eine Trainingseinheit handelt, ist es ein Spiel
+        else{
+            $home_model = $this->loadModel('HomeModel');
+            $home_model->getKalenderDetails_spiel($_POST["id"]);
+        }
+
     }//end getKalenderDetails()
 
 }

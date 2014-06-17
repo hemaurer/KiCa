@@ -14,9 +14,14 @@ class HomeModel
         }
     }
 
+//****************************************
+//*KALENDER MIT DATEN AUS DER DB BEFÜLLEN*
+//****************************************
+
     //Trainingsdaten ausgeben
     public function getTrainingseinheitenDaten()
     {
+        //Als Array festlegen
         $json = array();
 
         $sql = "SELECT CONCAT('\\n',name) AS title, zeit AS start, tr_id AS ID FROM trainingseinheit";
@@ -81,13 +86,19 @@ class HomeModel
         return json_encode($query->fetchAll());
     }//end getTurnierDaten()
 
+//***********************************
+//*DETAILS FÜR KALENDER MODALS LADEN*
+//***********************************
 
-    //Kalender Details nach dem Klick auf einen Eintrag im Home-Kalendar laden
-    public function getKalenderDetails($className, $id)
+    //Kalender Details nach dem Klick auf einen Trainings Eintrag im Home-Kalendar laden
+    public function getKalenderDetails_training($id)
     {
         $json = array();
 
-        $sql = "SELECT * FROM trainingseinheit WHERE tr_id =?";
+        $sql = "SELECT trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Uhrzeit, trainingsgruppe.name as Trainingsgruppe, CONCAT (person.name, ', ', person.v_name ) as Trainer
+                FROM trainingseinheit
+                JOIN trainingsgruppe ON trainingseinheit.tg_id = trainingsgruppe.tg_id
+                JOIN person ON trainingseinheit.trainer = person.p_id WHERE tr_id =?";
         $query = $this->db->prepare($sql);
         $query->execute(array($id));
 
@@ -96,5 +107,28 @@ class HomeModel
 
         echo $json_string;
         return $json_string;
-    }//end getKalenderDetails()
+    }//end getKalenderDetails_training()
+
+    //Kalender Details nach dem Klick auf einen Spiel Eintrag im Home-Kalendar laden
+    public function getKalenderDetails_spiel($id)
+    {
+        $json = array();
+
+        $sql = "SELECT spiel.s_id, spiel.ort as Ort, heim.name as Heim, auswaerts.name as Auswaerts, spiel.h_tore as Heimtore, spiel.a_tore as Auswaertstore, `status`.`status` as Status, spiel.zeit as Uhrzeit, turnier.name as Turnier , sparte.name AS Sparte
+                FROM spiel
+                JOIN mannschaft as heim ON spiel.heim = heim.m_id
+                JOIN mannschaft as auswaerts ON spiel.auswaerts = auswaerts.m_id
+                JOIN `status` ON spiel.stat_id =`status`.stat_id
+                JOIN turnier ON spiel.tu_id = turnier.tu_id
+                JOIN sparte ON spiel.sparte_id = sparte.sparte_id WHERE spiel.s_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($id));
+
+        $result = json_encode($query->fetchAll());
+        $json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
+        return $json_string;
+    }//end getKalenderDetails_spiel()
+
 }?>
