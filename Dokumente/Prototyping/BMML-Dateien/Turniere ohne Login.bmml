@@ -22,7 +22,7 @@
     </control>
     <control controlID="12" controlTypeID="com.balsamiq.mockups::List" x="0" y="184" w="382" h="280" measuredW="100" measuredH="300" zOrder="4" locked="false" isInGroup="-1">
       <controlProperties>
-        <text>Gruppenphase%0AA-Jugend%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20%20Bummstruppe%0A%20%0AA-Jugend%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20%20Pfeifen%0A%20%0ABummstruppe%20%20%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20A-Jugend%20%0A%20%0APfeifen%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20%20A-Jugend%0A%20%0A%20%0A1/4%20Finale%0AA-Jugend%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20Gurckentruppe%0A%20%0A%20</text>
+        <text>Gruppenphase%0AA-Jugend%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20%20FC%20Heidenheim%0A%20%0AA-Jugend%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20%20Eintracht%20Aalen%20%0A%20%0AFC%20Heidenheim%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20A-Jugend%20%0A%20%0AEintracht%20Aalen%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20%20A-Jugend%0A%20%0A%20%0A1/4%20Finale%0AA-Jugend%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20v.s%20%20%20%20%20%20%20%20%20%20Dynamo%20Kiew%0A%20%0A%20</text>
       </controlProperties>
     </control>
     <control controlID="18" controlTypeID="com.balsamiq.mockups::TextInput" x="91" y="204" w="24" h="-1" measuredW="20" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
