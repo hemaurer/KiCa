@@ -111,11 +111,11 @@ class Verwaltung extends Controller
     }
 	public function edit_mannschaft()
     {
-        if (isset($_POST["submit_edit_mannschaft"])) {
+        //if (isset($_POST["submit_edit_mannschaft"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->edit_mannschaft($_POST["m_id"], $_POST["str_name"]);
-        }
-        header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
+        //}
+        //header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
     public function delete_mannschaft()
     {

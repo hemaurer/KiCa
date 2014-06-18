@@ -314,9 +314,17 @@ class VerwaltungsModel
     }
 	public function edit_mannschaft($m_id, $str_name)
     {
+		$sql = "SELECT * FROM mannschaft WHERE m_id=?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($m_id));
+		$mannschaft = $query->fetch(PDO::FETCH_OBJ);
+		if ($str_name == null){
+			$str_name = $mannschaft->name;
+		}	
 		$sql = "UPDATE mannschaft SET name=? WHERE m_id=?";
 		$query = $this->db->prepare($sql);
 		$query->execute(array($str_name, $m_id));
+		echo true;
 	}
     public function delete_mannschaft($m_id)
     {

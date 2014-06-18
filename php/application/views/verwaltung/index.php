@@ -346,13 +346,13 @@
 									<label class="control-label col-md-4">Ligaturnier?</label>
 									<div class="col-md-1">
 										<label>
-											<input type="radio" name="int_liga" id="radiobtn2" value="1">
+											<input type="radio" name="int_liga" value="1">
 											Ja
 										</label>
 									</div>
 									<div class="col-md-2">
 										<label>
-											<input type="radio" name="int_liga" id="optionsRadios1" value="0" checked>
+											<input type="radio" name="int_liga" value="0" checked>
 											Nein
 										</label>
 									</div>
@@ -467,7 +467,7 @@
 										<td><?php if (isset($person->geb_datum)) echo $person->geb_datum; ?></td>
 										<td><?php if (isset($person->username)) echo $person->username; ?></td>
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
-										<td align="center"><a data-toggle="modal" data-target="#person_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_person/' . $person->p_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 										<!--td><a data-toggle="modal" data-target="#pModal<?php echo $person->p_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
@@ -512,7 +512,7 @@
 										<td><?php if (isset($spiel->Status)) echo $spiel->Status; ?></td>
 										<td><?php if (isset($spiel->Ort)) echo $spiel->Ort; ?></td>
 										<td><?php if (isset($spiel->Uhrzeit)){$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.Y H:i');} ?></td>
-										<td align="center"><a data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->heimname; ?> gegen <?php echo $spiel->auswaertsname;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
 										<!--td><a href="<?php echo URL . 'verwaltung/delete_spiel/' . $spiel->s_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
 										<!--td align="center"><a data-toggle="modal" data-target="#sModal<?php echo $spiel->s_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
@@ -548,7 +548,7 @@
 								<?php foreach ($mannschaften as $mannschaft) { ?>
 									<tr>
 										<td><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></td>
-										<td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 								<?php } ?>
