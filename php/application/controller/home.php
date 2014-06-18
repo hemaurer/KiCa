@@ -27,15 +27,14 @@ class Home extends Controller
         $home_model = $this->loadModel('HomeModel');
 
         $ligaDaten = $home_model->getLigaDaten($_POST["sparte_id"]);
+		$turnierDaten = $home_model->getTurnierDaten($_POST["sparte_id"]);
         $freundschaftsDaten = $home_model->getFreundschaftsDaten($_POST["sparte_id"]);
-        $turnierDaten = $home_model->getTurnierDaten($_POST["sparte_id"]);
 
-        $arr = array();
-        $arr[0] = $ligaDaten;
-        $arr[1] = $freundschaftsDaten;
-        $arr[2] = $turnierDaten;
-
-        echo json_encode($arr);
+		echo $ligaDaten;
+		echo '|';
+		echo $turnierDaten;
+		echo '|';
+      	echo $freundschaftsDaten;
 
     }
 

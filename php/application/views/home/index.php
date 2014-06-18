@@ -57,13 +57,11 @@
 				$.post("getKalenderDaten", {"sparte_id": sparte_id})
 				.done(function( data ) {
 
-				var return_array = data.split('","');
+				var return_array = data.split('|');
 
 				var ligadaten = JSON.parse(return_array[0]);
 				var turnierdaten = JSON.parse(return_array[1]);
 				var freundschaftsdaten = JSON.parse(return_array[2]);
-
-				alert (ligadaten);
 
 				$('#calendar').fullCalendar( 'removeEvents');
 				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'} );
