@@ -159,7 +159,7 @@ class Verwaltung extends Controller
     {
         if (isset($_POST["submit_add_trainingsgruppe"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->add_trainingsgruppe($_POST["str_name"]);
+            $verwaltungs_model->add_trainingsgruppe($_POST["str_name"], $_POST["arr_teilnehmer_option"]);
         }
         header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }

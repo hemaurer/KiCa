@@ -297,6 +297,25 @@
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="control-label col-md-4">Teilnehmer wählen*</label>
+									<div class="col-md-4">
+										<ul class="form-control" id="checkboxSelect">
+										<div class="checkbox">
+											<?php 
+											$i = 1;
+											foreach ($personen as $person) { ?>
+											<li>
+													<label>
+														<input type="checkbox" name="arr_teilnehmer_option[]" value="<?php if (isset($person->p_id)){echo $person->p_id; } ?>"><?php echo $person->v_name; ?> <?php echo $person->name; ?>
+													</label>
+											</li>
+											<?php 
+											$i++;} ?>
+										</div>
+										</ul>
+									</div>
+								</div>
+								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-default" type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
 									</div>

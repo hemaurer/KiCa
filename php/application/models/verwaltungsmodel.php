@@ -400,13 +400,36 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
-	public function add_trainingsgruppe($str_name)
+	public function add_trainingsgruppe($str_name, $arr_teilnehmer_option)
     {	
 		
-		
+		/*Neues Trainingsgruppe wird in tbl trainingsgruppe eingetragen*/
         $sql = "INSERT INTO trainingsgruppe (name) VALUES (:name)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name));
+		
+		/*Nur wenn eine Person (Checkbox) gewählt wurde, wird auch eine Verknüpfung erstellt.*/
+		if(isset($arr_teilnehmer_option)){
+			/*neu angelegte Trainingsgruppe-ID auslesen*/
+			$sql = "SELECT tg_id FROM trainingsgruppe WHERE name = ?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_name));
+			$trainingsgruppe = $query->fetch(PDO::FETCH_OBJ);
+			
+			/*egal wieviele Personen gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
+			if (is_array($arr_teilnehmer_option)) {
+				foreach($arr_teilnehmer_option as $option){
+							
+					/*neue Verknüpfung in tbl teilnehmer_tg anlegen*/
+					$sql = "INSERT INTO teilnehmer_tg (tg_id, p_id) VALUES (:tg_id, :p_id)";
+					$query = $this->db->prepare($sql);
+					$query->execute(array(':tg_id' => $trainingsgruppe->tg_id, ':p_id' => $option));
+				}
+			} 
+		}
+		
+		
+		
     }
 	public function edit_trainingsgruppe($tg_id, $str_name)
     {
