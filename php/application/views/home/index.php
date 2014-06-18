@@ -1,5 +1,21 @@
 <div class="container">
 
+	<!-- Dropdown zur Spartenauswahl -->
+	<ul class="nav nav-pills">
+		<li class="dropdown">
+		  <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> Sparte wählen <span class="caret"></span> </a>
+			<ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+          		<?php
+					// Sparten aus der DB laden und in der Liste anzeigen
+					// Model wird bereits in header.php angesprochen, deshalb muss nur noch ausgelesen werden
+					foreach ($spartenDaten as $sparte) { ?>
+							<li role="presentation" ><a onclick="fillSparte()" role="menuitem" tabindex="-1" href="#"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+				<?php } ?>
+	        </ul>
+		</li>
+	</ul>
+
+
 	<!-- Kalender Div - wird mit dem Kalender befüllt -->
     <div id='calendar'>
 		<!-- Script zum Generieren des Kalenders beim Laden der Seite -->
@@ -9,7 +25,8 @@
 			$(document).ready(function() {
 
 				//Fullcalendar
-				 $('#calendar').fullCalendar({
+				$('#calendar').fullCalendar( 'removeEvents');
+				$('#calendar').fullCalendar({
 
 			 		//die einzelnen Events aus der Datenbank, bzw. den Variablen dem Kalender hinzufügen
 					eventSources:[
@@ -29,9 +46,26 @@
 					    	kalenderModal(event.source.className, event.ID);
 					    }
 
-					});
+				});
 
-			 });
+			});
+
+
+			function fillSparte(){
+
+				//Ajax Request auf Home Controller getKalenderDaten()
+				//1 testweise hardgecoded - noch keine Überlegung, wie Sparte übergeben wird
+				$.post("getKalenderDaten", {"sparte_id": 1})
+				.done(function( data ) {
+				});
+
+				$('#calendar').fullCalendar( 'removeEvents');
+				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'} );
+				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $ligaDaten;?>,backgroundColor: '#3276B1', borderColor: '#3276B1', textColor:'#fff', className:'liga'} );
+				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $turnierDaten;?>,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff', className:'turnier'});
+				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $freundschaftsDaten;?>,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff', className:'freundschaft'});
+			}
+
 		</script>
 
 		<br>

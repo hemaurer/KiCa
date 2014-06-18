@@ -9,14 +9,27 @@ class Home extends Controller
     	$home_model = $this->loadModel('HomeModel');
 
         //Daten für den Home Kalender laden
+        //Die Spiele erhalten die erste Sparte als Standardwert, da dieser Standardmäßig auf der Home Seite angezeigt wird
+        //über das Dropdown Menü können die anderen Sparten an späterer Stelle geladen werden
         $trainingseinheitenDaten = $home_model->getTrainingseinheitenDaten();
-        $ligaDaten = $home_model->getLigaDaten();
-        $freundschaftsDaten = $home_model->getFreundschaftsDaten();
-    	$turnierDaten = $home_model->getTurnierDaten();
+        $ligaDaten = $home_model->getLigaDaten(3);
+        $freundschaftsDaten = $home_model->getFreundschaftsDaten(3);
+    	$turnierDaten = $home_model->getTurnierDaten(3);
 
         require 'application/views/_templates/header.php';
         require 'application/views/home/index.php';
         require 'application/views/_templates/footer.php';
+    }
+
+    //Lädt die Daten je nach ausgewählter Sparte aus der Datenbank, um sie im Kalender darzustellen
+    public function getKalenderDaten(){
+
+        $home_model = $this->loadModel('HomeModel');
+
+        $ligaDaten = $home_model->getLigaDaten($_POST["sparte_id"]);
+        $freundschaftsDaten = $home_model->getFreundschaftsDaten($_POST["sparte_id"]);
+        $turnierDaten = $home_model->getTurnierDaten($_POST["sparte_id"]);
+
     }
 
     //Kalender Details nach dem Klick auf einen Eintrag im Home-Kalendar laden zur Anzeige im Details Modal
@@ -36,4 +49,3 @@ class Home extends Controller
     }//end getKalenderDetails()
 
 }
-

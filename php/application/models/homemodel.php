@@ -37,7 +37,7 @@ class HomeModel
 
 
     //Ligaspiele ausgeben
-    public function getLigaDaten()
+    public function getLigaDaten($sparte_id)
     {
         $json = array();
 
@@ -45,16 +45,16 @@ class HomeModel
                 FROM spiel
                  JOIN mannschaft AS heim ON heim.m_id=spiel.heim
                  JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
-                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 1";
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 1 AND spiel.sparte_id =?";
         $query = $this->db->prepare($sql);
-        $query->execute();
+        $query->execute(array($sparte_id));
 
         return json_encode($query->fetchAll());
     }//end getLigaDaten()
 
 
     //Freundschaftsspiele ausgeben
-    public function getFreundschaftsDaten()
+    public function getFreundschaftsDaten($sparte_id)
     {
         $json = array();
 
@@ -62,16 +62,16 @@ class HomeModel
                 FROM spiel
                  JOIN mannschaft AS heim ON heim.m_id=spiel.heim
                  JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
-                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 7";
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND spiel.stat_id = 7 AND spiel.sparte_id =?";
         $query = $this->db->prepare($sql);
-        $query->execute();
+        $query->execute(array($sparte_id));
 
         return json_encode($query->fetchAll());
     }//end getFreundschaftsDaten()
 
 
     //Turnierspiele ausgeben
-    public function getTurnierDaten()
+    public function getTurnierDaten($sparte_id)
     {
         $json = array();
 
@@ -79,9 +79,9 @@ class HomeModel
                 FROM spiel
                  JOIN mannschaft AS heim ON heim.m_id=spiel.heim
                  JOIN mannschaft AS auswaerts ON auswaerts.m_id=spiel.auswaerts
-                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND (stat_id <> 1 AND stat_id <> 7)";
+                WHERE (spiel.heim = 1 OR spiel.auswaerts = 1) AND (stat_id <> 1 AND stat_id <> 7) AND spiel.sparte_id =?";
         $query = $this->db->prepare($sql);
-        $query->execute();
+        $query->execute(array($sparte_id));
 
         return json_encode($query->fetchAll());
     }//end getTurnierDaten()

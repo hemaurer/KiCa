@@ -187,7 +187,7 @@ function kalenderModal(className, id){
 			 	//wenn es sich nicht um eine Trainingseinheit handelt, ist es ein Spiel
 				else{
 					$('#kalendermodalheader').html('Details zum '+str_prefix+'spiel');
-					$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>Details</td> <td></td> </tr> </thead> <tbody> <tr> <td><strong>Art: </strong></td> <td>'+returnedData.Status+'</td> </tr> <tr> <td><strong>Heim: </strong></td> <td>'+returnedData.Heim+'</td> </tr> <tr> <td><strong>Auswärts: </strong></td> <td>'+returnedData.Auswaerts+'</td> </tr> <tr> <td><strong>Uhrzeit: </strong></td> <td>'+returnedData.Uhrzeit+'</td> </tr> <tr> <td><strong>Ort: </strong></td> <td>'+returnedData.Ort+'</td> </tr> <tr> <td><strong>Sparte: </strong></td> <td>'+returnedData.Sparte+'</td> </tr> </tbody> </table>');
+					$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>'+returnedData.Turnier+'</td> <td></td> <td></td> </tr> </thead> <tbody> <tr> <td>'+returnedData.Heim+'</td> <td><strong>vs.</strong></td> <td>'+returnedData.Auswaerts+'</td> </tr> <tr> <td>'+returnedData.Uhrzeit+'</td> <td></td> <td>'+returnedData.Ort+'</td> </tr> </tbody> </table>');
 				}
 
 				//Modal anzeigen

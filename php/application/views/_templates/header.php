@@ -24,6 +24,7 @@
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/fullcalendar.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/de.js"></script>
 
+
 </head>
 <body>
 <!-- header -->
