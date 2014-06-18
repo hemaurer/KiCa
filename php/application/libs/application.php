@@ -61,9 +61,10 @@ class Application
             }
         } else {
             // echo "invalid URL";// so simply show home/index
-            require './application/controller/home.php';
-            $home = new Home();
-            $home->index();
+            // require './application/controller/home.php';
+            // $home = new Home();
+            // $home->index();
+			header('location: ' . URL . 'home/');
         }
     }
 
