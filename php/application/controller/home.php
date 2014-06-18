@@ -12,9 +12,9 @@ class Home extends Controller
         //Die Spiele erhalten die erste Sparte als Standardwert, da dieser Standardmäßig auf der Home Seite angezeigt wird
         //über das Dropdown Menü können die anderen Sparten an späterer Stelle geladen werden
         $trainingseinheitenDaten = $home_model->getTrainingseinheitenDaten();
-        $ligaDaten = $home_model->getLigaDaten(3);
-        $freundschaftsDaten = $home_model->getFreundschaftsDaten(3);
-    	$turnierDaten = $home_model->getTurnierDaten(3);
+        $ligaDaten = $home_model->getLigaDaten(1);
+        $freundschaftsDaten = $home_model->getFreundschaftsDaten(1);
+    	$turnierDaten = $home_model->getTurnierDaten(1);
 
         require 'application/views/_templates/header.php';
         require 'application/views/home/index.php';
@@ -29,6 +29,13 @@ class Home extends Controller
         $ligaDaten = $home_model->getLigaDaten($_POST["sparte_id"]);
         $freundschaftsDaten = $home_model->getFreundschaftsDaten($_POST["sparte_id"]);
         $turnierDaten = $home_model->getTurnierDaten($_POST["sparte_id"]);
+
+        $arr = array();
+        $arr[0] = $ligaDaten;
+        $arr[1] = $freundschaftsDaten;
+        $arr[2] = $turnierDaten;
+
+        echo json_encode($arr);
 
     }
 

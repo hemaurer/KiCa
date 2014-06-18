@@ -9,7 +9,7 @@
 					// Sparten aus der DB laden und in der Liste anzeigen
 					// Model wird bereits in header.php angesprochen, deshalb muss nur noch ausgelesen werden
 					foreach ($spartenDaten as $sparte) { ?>
-							<li role="presentation" ><a onclick="fillSparte()" role="menuitem" tabindex="-1" href="#"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+							<li role="presentation" ><a onclick="fillSparte(<?php echo $sparte->ID;?>)" role="menuitem" tabindex="-1" href="#"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
 				<?php } ?>
 	        </ul>
 		</li>
@@ -51,20 +51,28 @@
 			});
 
 
-			function fillSparte(){
+			function fillSparte(sparte_id){
 
 				//Ajax Request auf Home Controller getKalenderDaten()
-				//1 testweise hardgecoded - noch keine Überlegung, wie Sparte übergeben wird
-				$.post("getKalenderDaten", {"sparte_id": 1})
+				$.post("getKalenderDaten", {"sparte_id": sparte_id})
 				.done(function( data ) {
-				});
+
+				var return_array = data.split('","');
+
+				var ligadaten = JSON.parse(return_array[0]);
+				var turnierdaten = JSON.parse(return_array[1]);
+				var freundschaftsdaten = JSON.parse(return_array[2]);
+
+				alert (ligadaten);
 
 				$('#calendar').fullCalendar( 'removeEvents');
 				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'} );
-				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $ligaDaten;?>,backgroundColor: '#3276B1', borderColor: '#3276B1', textColor:'#fff', className:'liga'} );
-				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $turnierDaten;?>,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff', className:'turnier'});
-				$('#calendar').fullCalendar( 'addEventSource', {events:<?php echo $freundschaftsDaten;?>,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff', className:'freundschaft'});
+				$('#calendar').fullCalendar( 'addEventSource', {events:ligadaten,backgroundColor: '#3276B1', borderColor: '#3276B1', textColor:'#fff', className:'liga'} );
+				$('#calendar').fullCalendar( 'addEventSource', {events:turnierdaten,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff', className:'turnier'});
+				$('#calendar').fullCalendar( 'addEventSource', {events:freundschaftsdaten,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff', className:'freundschaft'});
+				});
 			}
+
 
 		</script>
 
