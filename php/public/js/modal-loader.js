@@ -213,5 +213,32 @@ function kalenderModal(className, id){
 				//Modal anzeigen
 			 	$('#kalenderModal').modal('toggle');
 			});
+}
 
+//Befüllt den Kalender neu, wenn auf der Home Seite eine andere Sparte ausgewählt wird
+function fillSparte(sparte_id, sparte){
+
+	//Ajax Request auf Home Controller getKalenderDaten()
+	$.post("getKalenderDaten/", {"sparte_id": sparte_id})
+	.done(function( data ) {
+
+		//Da eine Zeichenkette zurückgegeben wird, die einzelnen Rückgaben auftrennen und in Arrays verpacken
+		var return_array = data.split('|');
+
+		var trainingseinheitenDaten = JSON.parse(return_array[0]);
+		var ligadaten = JSON.parse(return_array[1]);
+		var turnierdaten = JSON.parse(return_array[2]);
+		var freundschaftsdaten = JSON.parse(return_array[3]);
+
+		//Kalender neu befüllen mit den Rückgabewerten
+		$('#calendar').fullCalendar( 'removeEvents');
+		$('#calendar').fullCalendar( 'addEventSource', {events:trainingseinheitenDaten, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'} );
+		$('#calendar').fullCalendar( 'addEventSource', {events:ligadaten,backgroundColor: '#3276B1', borderColor: '#3276B1', textColor:'#fff', className:'liga'} );
+		$('#calendar').fullCalendar( 'addEventSource', {events:turnierdaten,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff', className:'turnier'});
+		$('#calendar').fullCalendar( 'addEventSource', {events:freundschaftsdaten,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff', className:'freundschaft'});
+
+		//Den Text des Dropdown Menüs auf die ausgewählte Sparte setzen
+		$('#spartenDropdownName').html(sparte);
+
+	});
 }

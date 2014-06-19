@@ -26,12 +26,17 @@ class Home extends Controller
 
         $home_model = $this->loadModel('HomeModel');
 
+        $trainingseinheitenDaten = $home_model->getTrainingseinheitenDaten();
         $ligaDaten = $home_model->getLigaDaten($_POST["sparte_id"]);
 		$turnierDaten = $home_model->getTurnierDaten($_POST["sparte_id"]);
         $freundschaftsDaten = $home_model->getFreundschaftsDaten($_POST["sparte_id"]);
 
-		echo $ligaDaten;
+        //Daten als Zeichenkette zurückgeben, die über "|" wieder getrennt werden kann
+        //Workaround für aufgetretene Array-Probleme
+        echo $trainingseinheitenDaten;
 		echo '|';
+        echo $ligaDaten;
+        echo '|';
 		echo $turnierDaten;
 		echo '|';
       	echo $freundschaftsDaten;
