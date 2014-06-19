@@ -30,11 +30,12 @@ class Training extends Controller
     {
         if (isset($_POST["submit_edit_trainingseinheit"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            if ($verwaltungs_model->edit_trainingseinheit($_POST["tr_id"], $_POST["str_name"], $_POST["str_ort"], $_POST["d_time"], $_POST["d_zeit"], $_POST["int_tg_id"], $_POST["int_trainer"])){
+			$verwaltungs_model->edit_trainingseinheit($_POST["tr_id"], $_POST["str_name"], $_POST["str_ort"], $_POST["d_time"], $_POST["d_date"], $_POST["str_tg_name"], $_POST["str_trainer"]);
+            // if ($verwaltungs_model->edit_trainingseinheit($_POST["tr_id"], $_POST["str_name"], $_POST["str_ort"], $_POST["d_time"], $_POST["d_date"], $_POST["str_tg_name"], $_POST["str_trainer"])){
 				header('location: ' . URL . 'termine/'); //Weiterleitung nach Ausführen der Methode
-			} else {
-				header('location: ' . URL . 'home/'); //Weiterleitung nach Ausführen der Methode
-			}
+			// }else{
+				// header('location: ' . URL . 'home/'); //Weiterleitung nach Ausführen der Methode
+			// }
         }
     }
 }
