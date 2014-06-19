@@ -279,7 +279,7 @@ class VerwaltungsModel
 				$int_liga = 0;
 			}
 			
-			$sql = "SELECT turnier.name AS value FROM turnier RIGHT JOIN turnier_sparte ON turnier_sparte.tu_id = turnier.tu_id WHERE turnier_sparte.sparte_id = ".$int_sparte_id." AND turnier.liga = ".$int_liga."";
+			$sql = "SELECT DISTINCT turnier.name AS value FROM turnier JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.tu_id = turnier.tu_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND turnier.liga = ".$int_liga." AND mannschaft_turnier_sparte.m_id = 1";
 		}
 		
 		if ($nextSelectId == "str_heim"){
