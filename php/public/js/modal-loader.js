@@ -68,7 +68,7 @@ function editSuccess(type, x_id) {
 		var int_tel_in = $('#int_tel');
 		var int_tel = int_tel_in.val();
 
-		$.post("edit_"+type+"",{"p_id":x_id, "str_nachname":str_nachname, "str_vorname":str_vorname, "d_date":d_date, "int_groesse":int_groesse, "b_betreuer":b_betreuer, "int_tel":int_tel})
+		$.post("edit_"+type+"/",{"p_id":x_id, "str_nachname":str_nachname, "str_vorname":str_vorname, "d_date":d_date, "int_groesse":int_groesse, "b_betreuer":b_betreuer, "int_tel":int_tel})
 			.done(function( data ) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Person bearbeiten erfolgreich abgeschlossen!</div>');
@@ -85,7 +85,7 @@ function editSuccess(type, x_id) {
 	}
 
 	if (type == "reset_password"){
-		$.post("reset_password",{"p_id": x_id})
+		$.post("reset_password/",{"p_id": x_id})
 		.done(function( data ) {
 			if (data == 1){
 					$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Passwort erfolgreich zurückgesetzt!</div>');
@@ -124,7 +124,7 @@ function editSuccess(type, x_id) {
 	if (type == "mannschaft"){
 		var str_name_in = $('#str_new_mannschaft');
 		var str_name = str_name_in.val();
-		$.post("edit_"+type+"",{"m_id":x_id, "str_name":str_name})
+		$.post("edit_"+type+"/",{"m_id":x_id, "str_name":str_name})
 			.done(function( data ) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Mannschaft erfolgreich bearbeitet!</div>');
@@ -147,7 +147,7 @@ function editSuccess(type, x_id) {
 		var str_name = str_name_in.val();
 		var int_liga_in = $('#int_liga');
 		var int_liga = int_liga_in.val();
-		$.post("edit_"+type+"",{"tu_id":x_id, "str_name":str_name, "int_liga":int_liga})
+		$.post("edit_"+type+"/",{"tu_id":x_id, "str_name":str_name, "int_liga":int_liga})
 			.done(function( data ) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
@@ -170,7 +170,7 @@ function editSuccess(type, x_id) {
 function successModal(type, x_id) {
 
 		//Post Request auf die PHP Funktion im Controller von Verwaltung um die Daten von DB zu löschen
-		$.post("delete_"+type+"",{"del_id": x_id})
+		$.post("delete_"+type+"/",{"del_id": x_id})
 			.done(function( data ) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Löschen erfolgreich abgeschlossen!</div>');
@@ -194,7 +194,7 @@ function kalenderModal(className, id){
 	str_prefix = className.substring(0, 1).toUpperCase() + className.substring(1);
 
 		//Ajax Request auf Home Controller getKalenderDetails()
-		$.post("getKalenderDetails", {"className": className, "id": id})
+		$.post("getKalenderDetails/", {"className": className, "id": id})
 			.done(function( data ) {
 				//Rückgabearray als JSON transformieren
 			 	var returnedData = JSON.parse(data);

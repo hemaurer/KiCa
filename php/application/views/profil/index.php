@@ -31,7 +31,7 @@
 												<div align="center">
 													<!-- Datei hochladen -->
 										            <!-- Die Encoding-Art enctyoe MUSS wie dargestellt angegeben werden -->
-													<form enctype="multipart/form-data" action="<?php echo URL; ?>profil/doChangeProfilbild" method="POST">
+													<form enctype="multipart/form-data" action="<?php echo URL; ?>profil/doChangeProfilbild/" method="POST">
 													    <!-- MAX_FILE_SIZE muss vor dem Dateiupload Input Feld stehen / Bis zu 3 MB aktuell erlaubt-->
 													    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
 													    <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->

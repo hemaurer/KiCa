@@ -87,7 +87,7 @@ function saveGroesse() {
 
 		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
 		// $.post("doChangeGroesse", {"int_groesse": groesse});
-		$.post("doChangeGroesse", {"int_groesse": groesse})
+		$.post("doChangeGroesse/", {"int_groesse": groesse})
 			 .done(function( data ) {
 			 	if (data == 1){
 			 			/*$('#successModal_head').html("Erfolgreich");
@@ -119,7 +119,7 @@ function saveTel() {
 		var tel = tel_value.val();
 
 		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
-		$.post("doChangeTel", {"str_tel": tel})
+		$.post("doChangeTel/", {"str_tel": tel})
 			 .done(function( data ) {
 			 	if (data == 1){
 			 			/*$('#successModal_head').html("Erfolgreich");
@@ -129,8 +129,7 @@ function saveTel() {
 						window.setTimeout(function(){location.reload();},2000);
 					}
 					else{
-						$('#successModal_head').html("Fehler");
-			 			$('#successModal_dialog').html("Telefonnummer konnte nicht geändert werden!");
+						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
 						window.setTimeout(function(){location.reload();},2000);
 					}
@@ -150,17 +149,17 @@ function savePassword() {
 		var pw_neu_2 = pw_value_3.val();
 
 		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
-		$.post("doChangePassword", {"str_altesPassword": pw_alt, "str_neuesPassword": pw_neu, "str_neuesPasswordWiederholt": pw_neu_2})
+		$.post("doChangePassword/", {"str_altesPassword": pw_alt, "str_neuesPassword": pw_neu, "str_neuesPasswordWiederholt": pw_neu_2})
 			 .done(function( data ) {
 			 	if (data == 1){
-			 			$('#successModal_head').html("Erfolgreich");
-			 			$('#successModal_dialog').html("Passwort erfolgreich geändert!");
+			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Passwort erfolgreich geändert!</div>');
 			 			$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
 					}
 					else{
-						$('#successModal_head').html("Fehler");
-			 			$('#successModal_dialog').html("Passwort konnte nicht geändert werden!\nBitte überprüfen Sie Ihre Eingaben.");
+						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
 					}
 				});
 

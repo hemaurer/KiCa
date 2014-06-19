@@ -53,7 +53,7 @@
 	        				$spartenDaten = $sparten_model->getSparten();
 
 						foreach ($spartenDaten as $sparte) { ?>
-								<li><a href="<?php echo URL; echo 'liga/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+								<li><a href="<?php echo URL; echo 'liga/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
 						<?php } ?>
 
 					</ul>
@@ -115,7 +115,7 @@
 							?>
 							<li class="divider"></li>
 
-								<form class="navbar-form" name="logoutform" action="<?php echo URL; ?>login/doLogout" method="get">
+								<form class="navbar-form" name="logoutform" action="<?php echo URL; ?>login/doLogout/" method="get">
 									<button class="btn btn-default" type="submit" name="submit_logout" />Logout</button>
 								</form>
 

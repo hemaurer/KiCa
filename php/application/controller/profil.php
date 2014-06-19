@@ -27,7 +27,7 @@ class Profil extends Controller
             $profil_model = $this->loadModel('ProfilModel');
             $profil_model->doChangeProfilbild($_SESSION["p_id"]);
 
-            header('location: ' . URL . 'profil/index'); //Weiterleitung nach Ausführen der Methode
+            header('location: ' . URL . 'profil/index/'); //Weiterleitung nach Ausführen der Methode
         }
     }//end doChangeProfilbild()
 
