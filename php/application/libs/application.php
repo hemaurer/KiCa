@@ -74,27 +74,33 @@ class Application
     private function splitUrl()
     {
         if (isset($_GET['url'])) {
+		$link = $_GET['url'];	//URL in Variable speichern
+		$zeichen = substr($link, -1);	//Letztes Zeichen der URL heraussuchen
+			if ($zeichen == "/"){	//Wenn das letzte Zeichen ein "/" dann soll alles normal ausgeführt werden, wenn nicht wird auf die Seite mit "/" weitergeleitet
+				// split URL
+				$url = rtrim($_GET['url'], '/');
+				$url = filter_var($url, FILTER_SANITIZE_URL);
+				$url = explode('/', $url);
 
-            // split URL
-            $url = rtrim($_GET['url'], '/');
-            $url = filter_var($url, FILTER_SANITIZE_URL);
-            $url = explode('/', $url);
+				// Put URL parts into according properties
+				// By the way, the syntax here is just a short form of if/else, called "Ternary Operators"
+				// @see http://davidwalsh.name/php-shorthand-if-else-ternary-operators
+				$this->url_controller = (isset($url[0]) ? $url[0] : null);
+				$this->url_action = (isset($url[1]) ? $url[1] : null);
+				$this->url_parameter_1 = (isset($url[2]) ? $url[2] : null);
+				$this->url_parameter_2 = (isset($url[3]) ? $url[3] : null);
+				$this->url_parameter_3 = (isset($url[4]) ? $url[4] : null);
 
-            // Put URL parts into according properties
-            // By the way, the syntax here is just a short form of if/else, called "Ternary Operators"
-            // @see http://davidwalsh.name/php-shorthand-if-else-ternary-operators
-            $this->url_controller = (isset($url[0]) ? $url[0] : null);
-            $this->url_action = (isset($url[1]) ? $url[1] : null);
-            $this->url_parameter_1 = (isset($url[2]) ? $url[2] : null);
-            $this->url_parameter_2 = (isset($url[3]) ? $url[3] : null);
-            $this->url_parameter_3 = (isset($url[4]) ? $url[4] : null);
-
-            // for debugging. uncomment this if you have problems with the URL
-            // echo 'Controller: ' . $this->url_controller . '<br />';
-            // echo 'Action: ' . $this->url_action . '<br />';
-            // echo 'Parameter 1: ' . $this->url_parameter_1 . '<br />';
-            // echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
-            // echo 'Parameter 3: ' . $this->url_parameter_3 . '<br />';
-        }
+				// for debugging. uncomment this if you have problems with the URL
+				// echo 'Controller: ' . $this->url_controller . '<br />';
+				// echo 'Action: ' . $this->url_action . '<br />';
+				// echo 'Parameter 1: ' . $this->url_parameter_1 . '<br />';
+				// echo 'Parameter 2: ' . $this->url_parameter_2 . '<br />';
+				// echo 'Parameter 3: ' . $this->url_parameter_3 . '<br />';
+			}else{
+				header('location: ' . $link . '/');
+				exit;
+			}
+		}
     }
 }
