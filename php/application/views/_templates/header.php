@@ -88,7 +88,7 @@
 							if (!isset($_SESSION['user_login_status'])){
 						?>
 
-								<form class="navbar-form" name="loginform" action="<?php echo URL; ?>login/doLogin" method="post">
+								<form class="navbar-form" name="loginform" action="<?php echo URL; ?>login/doLogin/" method="post">
 									<div class="form-group">
 									<input id="login_input_username" class="form-control" type="text" name="str_username" placeholder="Benutzername" required /><br>
 									<input id="login_input_password" class="form-control" type="password" name="str_password" autocomplete="off" placeholder="Passwort" required /><br>

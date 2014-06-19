@@ -26,7 +26,7 @@
 					</div>
 					<div id="p_add" class="panel-collapse collapse">
 						<div class="panel-body">
-							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_person" method="POST">
+							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_person/" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Vorname*</label>
 									<div class="col-md-4">
@@ -94,7 +94,7 @@
 					</div>
 					<div id="s_add" class="panel-collapse collapse">
 						<div class="panel-body">
-							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_spiel" method="POST">
+							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_spiel/" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
@@ -189,7 +189,7 @@
 					</div>
 					<div id="m_add" class="panel-collapse collapse">
 						<div class="panel-body">
-							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_mannschaft" method="POST">
+							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_mannschaft/" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Mannschaftsname*</label>
 									<div class="col-md-4">
@@ -215,7 +215,7 @@
 					</div>	
 					<div id="tr_add" class="panel-collapse collapse">
 						<div class="panel-body">
-							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingseinheit" method="POST">
+							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingseinheit/" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
 									<div class="col-md-4">
@@ -289,7 +289,7 @@
 
 					<div id="tg_add" class="panel-collapse collapse">
 						<div class="panel-body">
-							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingsgruppe" method="POST">
+							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingsgruppe/" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsgruppenname*</label>
 									<div class="col-md-4">
@@ -335,7 +335,7 @@
 
 					<div id="tu_add" class="panel-collapse collapse">
 						<div class="panel-body">
-							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_turnier" method="POST">
+							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_turnier/" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Turniername*</label>
 									<div class="col-md-4">
@@ -414,7 +414,7 @@
 
 					<div id="sparte_add" class="panel-collapse collapse">
 						<div class="panel-body">
-							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_sparte" method="POST">
+							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_sparte/" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
