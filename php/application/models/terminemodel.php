@@ -24,7 +24,7 @@ class TermineModel
                     JOIN `status` ON spiel.stat_id =`status`.stat_id
                     JOIN turnier ON spiel.tu_id = turnier.tu_id
                     JOIN sparte ON spiel.sparte_id = sparte.sparte_id
-					WHERE CONVERT(spiel.zeit,DATE)>= DATE_ADD(CURRENT_DATE(),INTERVAL -7 DAY)
+					WHERE CONVERT(spiel.zeit,DATE)>= DATE_ADD(CURRENT_DATE(),INTERVAL -7 DAY) AND (heim.m_id = 1 OR auswaerts.m_id = 1)
                 ORDER BY Uhrzeit ASC";
         $query = $this->db->prepare($sql);
         $query->execute();

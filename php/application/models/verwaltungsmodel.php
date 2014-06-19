@@ -375,20 +375,34 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer, ':tg_id' => $int_tg_id));
     }
-	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_zeit, $int_tg_id, $str_trainer)
+	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_time, $d_zeit, $str_tg, $str_trainer)
     {
 		/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
-		$sql = "Select p_id FROM person WHERE  name = ?";	
+		$sql = "Select p_id FROM person WHERE name like '?'";	
         $query = $this->db->prepare($sql);						
         $query->execute(array($str_trainer));					
 		$arr_trainer = $query->fetchAll();					
-		foreach($arr_trainer as $int_trainer){				
-			$int_trainer = $int_trainer->p_id;				
+		foreach($arr_trainer as $trainer){				
+			$int_trainer = $trainer->p_id;				
 		};
 		
-		$sql = "UPDATE trainingseinheit SET name=?, ort=?, zeit=?, trainer=?, tg_id=? WHERE tr_id=?";
+		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
+		$sql = "Select tg_id FROM trainingsgruppe WHERE name like '?'";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_tg));					
+		$arr_tg = $query->fetchAll();	
+		foreach($arr_tg as $int_tg_id){				
+			$int_trainingsgruppe = $int_tg_id->tg_id;				
+		};
+		
+		/**Zeit formatieren**/
+		$d_obj = new DateTime($d_date." ".$d_time);
+		$d_zeit = $d_obj->format('Y-m-d H:i:s');
+		
+		// Update ausführen
+		$sql = "UPDATE trainingseinheit SET name=':name', ort=':ort', zeit=':zeit', trainer=:int_trainer, tg_id=:tg_id WHERE tr_id=:tr_id";
 		$query = $this->db->prepare($sql);
-		$query->execute(array($str_name, $str_ort, $d_zeit, $int_trainer, $int_tg_id, $tr_id));
+		return $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':int_trainer' => $int_trainer, ':tg_id' => $int_tg_id, ':tr_id'=>$tr_id));
 	}
     public function delete_trainingseinheit($tr_id)
     {
