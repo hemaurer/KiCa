@@ -98,7 +98,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_sparte" id="str_sparte" size="1" onchange="selectFiller('str_sparte', 'str_status')" required>
+										<select class="form-control" name="str_sparte" id="str_sparte1" size="1" onchange="selectFiller('1', 'str_sparte1', 'str_status1')" required>
 											<option value="0" selected disabled>Sparte wählen</option>
 											<?php foreach ($sparten as $sparte) { ?>
 											<option><?php if (isset($sparte->name)) echo $sparte->name; ?></option>
@@ -109,7 +109,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Status*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_stat_name" id="str_status" size="1" onchange="selectFiller('str_status', 'str_tu_name')" disabled required>
+										<select class="form-control" name="str_stat_name" id="str_status1" size="1" onchange="selectFiller('1', 'str_status1', 'str_tu_name1')" disabled required>
 											<option value="0" selected disabled>Status wählen</option>
 											
 										</select>
@@ -118,7 +118,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Turnier*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_tu_name" id="str_tu_name" size="1" onchange="selectFiller('str_tu_name', 'str_heim')" disabled required>
+										<select class="form-control" name="str_tu_name" id="str_tu_name1" size="1" onchange="selectFiller('1', 'str_tu_name1', 'str_heim1')" disabled required>
 											<option value="0" selected disabled>Turnier wählen</option>
 										</select>
 									</div>
@@ -126,7 +126,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Heim Team*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_heim" id="str_heim" size="1" onchange="selectFiller('str_heim', 'str_auswaerts')" disabled required>
+										<select class="form-control" name="str_heim" id="str_heim1" size="1" onchange="selectFiller('1', 'str_heim1', 'str_auswaerts1')" disabled required>
 											<option value="0" selected disabled>Team wählen</option>
 											<?php foreach ($mannschaften as $mannschaft) { ?>
 											<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
@@ -137,7 +137,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Gegnerisches Team*</label>
 									<div class="col-md-4">
-										<select class="form-control" name="str_auswaerts" id="str_auswaerts" size="1" disabled required>
+										<select class="form-control" name="str_auswaerts" id="str_auswaerts1" size="1" disabled required>
 											<option value="0" selected disabled>Gegner wählen</option>
 											<?php foreach ($mannschaften as $mannschaft) { ?>
 											<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>

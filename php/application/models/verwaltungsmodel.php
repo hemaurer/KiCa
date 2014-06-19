@@ -235,11 +235,102 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute(array(':ort' => $str_ort, ':heim' => $int_heim, ':auswaerts' => $int_auswaerts, ':h_tore' => $int_h_tore, ':a_tore' => $int_a_tore, ':stat_id' => $int_stat_id, ':zeit' => $d_zeit, ':tu_id' => $int_tu_id, ':sparte_id' => $int_sparte_id));
     }
-	public function edit_spiel($s_id, $str_ort, $int_heim, $int_auswaerts, $int_h_tore, $int_a_tore, $int_stat_id, $d_zeit, $int_tu_id)
+	public function edit_spiel($s_id, $str_ort, $str_heim, $str_auswaerts, $int_h_tore, $int_a_tore, $str_stat_name, $d_date, $d_time, $str_tu_name, $str_sparte_name)
     {
-		$sql = "UPDATE spiel SET ort=?, heim=?, auswaerts=?, h_tore=?, a_tore=?, stat_id=?, zeit=?, tu_id=? WHERE s_id=?";
+		/*Vergleichsdaten des Spiels*/
+		$sql = "SELECT * FROM spiel WHERE s_id=?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($s_id));
+		$spiel = $query->fetch(PDO::FETCH_OBJ); 
+		
+		/**Wenn Ort null wird der Ort von db genommen**/
+		if ($str_ort == null){
+			$str_ort = $spiel->ort;
+		}
+		
+		/**Wenn Heim null wird der Heim von db genommen**/
+		if ($str_heim == 0){
+			$int_heim = $spiel->heim;
+		}else{
+			/*Mannschaft ID auslesen*/
+			$sql = "SELECT m_id FROM mannschaft WHERE name=?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_heim));
+			$int_heim = $query->fetch(PDO::FETCH_OBJ);
+		}
+	
+		/**Wenn Auswaerts null wird der Auswaerts von db genommen**/
+		if ($str_auswaerts == 0){
+			$int_auswaerts = $spiel->auswaerts;
+		}else{
+			/*Mannschaft ID auslesen*/
+			$sql = "SELECT m_id FROM mannschaft WHERE name=?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_auswaerts));
+			$int_auswaerts = $query->fetch(PDO::FETCH_OBJ);
+		}
+		
+		/**Tore auf null checken**/
+		if ($int_h_tore == null){
+			$int_h_tore = $spiel->h_tore;
+		}
+		if ($int_a_tore == null){
+			$int_a_tore = $spiel->a_tore;
+		}
+		/**Status checken**/
+		if ($str_stat_name == 0){
+			$int_stat_id = $spiel->stat_id;
+		}else{
+			/*Mannschaft ID auslesen*/
+			$sql = "SELECT stat_id FROM status WHERE status=?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_stat_name));
+			$int_stat_id = $query->fetch(PDO::FETCH_OBJ);
+		}
+		
+		/**Wenn Datum gleich 0 wird das Datum aus der Datenbank genommen **/
+		if ($d_date == 0){
+			$d_zeit = $spiel->zeit;
+			$d_obj = new DateTime($d_zeit);
+			$d_date = $d_obj->format('Y-m-d'); 
+		}
+		/**Wenn Zeit gleich 0 wird die Zeit aus der Datenbank genommen **/
+		if ($d_time == 0){
+			$d_zeit = $spiel->zeit;
+			$d_obj = new DateTime($d_zeit);
+			$d_time = $d_obj->format('H:i:s'); 
+		}
+		/**Zeit formatieren**/
+		$d_obj = new DateTime($d_date." ".$d_time);
+		$d_zeit = $d_obj->format('Y-m-d H:i:s');
+		
+		/**Turnier auf 0 checken**/
+		if ($str_tu_name == 0){
+			$int_tu_id = $spiel->tu_id;
+		}else{
+			/*Turnier ID auslesen*/
+			$sql = "SELECT tu_id FROM turnier WHERE name=?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_tu_name));
+			$int_tu_id = $query->fetch(PDO::FETCH_OBJ);
+		}
+		
+		/**Sparte auf 0 checken**/
+		if ($str_sparte_name == 0){
+			$int_sparte_id = $spiel->sparte_id;
+		}else{
+			/*Turnier ID auslesen*/
+			$sql = "SELECT tu_id FROM turnier WHERE name=?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_sparte_name));
+			$int_sparte_id = $query->fetch(PDO::FETCH_OBJ);
+		}
+		
+		
+		$sql = "UPDATE spiel SET ort=?, heim=?, auswaerts=?, h_tore=?, a_tore=?, stat_id=?, zeit=?, tu_id=?, sparte_id=? WHERE s_id=?";
 		$query = $this->db->prepare($sql);
-		$query->execute(array($str_ort, $int_heim, $int_auswaerts, $int_h_tore, $int_a_tore, $int_stat_id, $d_zeit, $int_tu_id, $s_id));
+		$query->execute(array($str_ort, $int_heim, $int_auswaerts, $int_h_tore, $int_a_tore, $int_stat_id, $d_zeit, $int_tu_id, $int_sparte_id, $s_id));
+		echo true;
 	}
     public function delete_spiel($s_id)
     {
@@ -248,7 +339,7 @@ class VerwaltungsModel
         $query->execute(array($s_id));
 		echo true;
     }
-	public function get_select_options($selectedOption, $nextSelectId, $str_sparteValue, $str_statusValue, $str_turnierValue, $str_heimValue, $str_auswaertsValue)
+	public function get_select_options($index, $selectedOption, $nextSelectId, $str_sparteValue, $str_statusValue, $str_turnierValue, $str_heimValue, $str_auswaertsValue)
 	{
 		/*Sparten ID herauslesen*/
 		$sql = "Select sparte_id FROM sparte WHERE  name = ?";	
@@ -267,12 +358,12 @@ class VerwaltungsModel
 			$int_tu_id = $int_tu_id->tu_id;				
 		};
 		/*Wenn die nächste Selectbox str_status ist, soll folgendes aus der db ausgelesen werden */
-		if ($nextSelectId == "str_status"){
+		if ($nextSelectId == "str_status".$index){
 			$sql = "SELECT status.status AS value FROM status";
 		}
 		
 		/*Wenn die nächste Selectbox str_tu_name ist, soll folgendes aus der db ausgelesen werden */
-		if ($nextSelectId == "str_tu_name"){
+		if ($nextSelectId == "str_tu_name".$index){
 			if ($str_statusValue == "Liga"){
 				$int_liga = 1;
 			}else{
@@ -282,10 +373,10 @@ class VerwaltungsModel
 			$sql = "SELECT DISTINCT turnier.name AS value FROM turnier JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.tu_id = turnier.tu_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND turnier.liga = ".$int_liga." AND mannschaft_turnier_sparte.m_id = 1";
 		}
 		
-		if ($nextSelectId == "str_heim"){
+		if ($nextSelectId == "str_heim".$index){
 			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id."";
 		}
-		if ($nextSelectId == "str_auswaerts"){
+		if ($nextSelectId == "str_auswaerts".$index){
 			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id." AND mannschaft.name <> '".$str_heimValue."'";
 		}
 		$query = $this->db->prepare($sql);

@@ -101,14 +101,30 @@ function editSuccess(type, x_id) {
 	}
 
 	if (type == "spiel"){
-		/*var str_name_in = $('#str_name');
-		var str_name = str_name_in.val();
-		var int_liga_in = $('#int_liga');
-		var int_liga = int_liga_in.val();
-		$.post("edit_"+type+"",{"tu_id":x_id, "str_name":str_name, "int_liga":int_liga})
+		var str_sparte_in = $('#str_sparte2');
+		var str_sparte = str_sparte_in.val();
+		var str_status_in = $('#str_status2');
+		var str_status = str_status_in.val();
+		var str_tu_name_in = $('#str_tu_name2');
+		var str_tu_name = str_tu_name_in.val();
+		var str_heim_in = $('#str_heim2');
+		var str_heim = str_heim_in.val();
+		var str_auswaerts_in = $('#str_auswaerts2');
+		var str_auswaerts = str_auswaerts_in.val();
+		var str_ort_in = $('#str_ort2');
+		var str_ort = str_ort_in.val();
+		var d_date_in = $('#d_date2');
+		var d_date = d_date_in.val();
+		var d_time_in = $('#d_time2');
+		var d_time = d_time_in.val();
+		var int_heimtor_in = $('#int_heimtor');
+		var int_heimtor = int_heimtor_in.val();
+		var int_auswaertstor_in = $('#int_auswaertstor');
+		var int_auswaertstor = int_auswaertstor_in.val();
+		$.post("edit_"+type+"/",{"s_id":x_id, "str_ort":str_ort, "str_heim":str_heim, "str_auswaerts":str_auswaerts, "int_h_tore":int_heimtor, "int_a_tore":int_auswaertstor, "str_stat_name":str_status, "d_date":d_date, "d_time":d_time, "str_tu_name":str_tu_name, "str_sparte":str_sparte})
 			.done(function( data ) {
 			 	if (data == 1){
-			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
+			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Spiel erfolgreich bearbeitet!</div>');
 						$('#successModal').modal('toggle');
 						window.setTimeout(function(){location.reload();},2000);
 					}
@@ -118,7 +134,7 @@ function editSuccess(type, x_id) {
 						window.setTimeout(function(){location.reload();},2000);
 					}
 				}
-			);*/
+			);
 
 	}
 	if (type == "mannschaft"){

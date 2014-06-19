@@ -78,11 +78,11 @@ class Verwaltung extends Controller
 	public function edit_spiel()
     {
 
-        if (isset($_POST["submit_edit_spiel"])) {
+        //if (isset($_POST["submit_edit_spiel"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->edit_spiel($_POST["s_id"], $_POST["str_ort"], $_POST["int_heim"], $_POST["int_auswaerts"], $_POST["int_h_tore"], $_POST["int_a_tore"], $_POST["int_stat_id"], $_POST["d_zeit"], $_POST["int_tu_id"]);
-        }
-        header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
+            $verwaltungs_model->edit_spiel($_POST["s_id"], $_POST["str_ort"], $_POST["str_heim"], $_POST["str_auswaerts"], $_POST["int_h_tore"], $_POST["int_a_tore"], $_POST["str_stat_name"], $_POST["d_date"], $_POST["d_time"],$_POST["str_tu_name"], $_POST["str_sparte"]);
+        // }
+        // header('location: ' . URL . 'verwaltung/index'); //Weiterleitung nach Ausführen der Methode
     }
     public function delete_spiel()
     {
@@ -90,12 +90,11 @@ class Verwaltung extends Controller
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->delete_spiel($_POST["del_id"]);
         }
-        //header('location: ' . URL . 'verwaltung/');
     }
 	public function get_select_options()
 	{
 		$verwaltungs_model = $this->loadModel('VerwaltungsModel');
-        $verwaltungs_model->get_select_options($_POST["str_selectedOption"], $_POST["nextSelectId"], $_POST["str_sparteValue"], $_POST["str_statusValue"], $_POST["str_turnierValue"], $_POST["str_heimValue"], $_POST["str_auswaertsValue"]);
+        $verwaltungs_model->get_select_options($_POST["int_index"], $_POST["str_selectedOption"], $_POST["nextSelectId"], $_POST["str_sparteValue"], $_POST["str_statusValue"], $_POST["str_turnierValue"], $_POST["str_heimValue"], $_POST["str_auswaertsValue"]);
 		//$verwaltungs_model->get_select_options($_POST["json_values"]);
 	}
 
