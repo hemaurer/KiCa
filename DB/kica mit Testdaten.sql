@@ -53,67 +53,68 @@ DROP TABLE IF EXISTS `mannschaft`;
 CREATE TABLE IF NOT EXISTS `mannschaft` (
   `m_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`m_id`)
+  PRIMARY KEY (`m_id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.mannschaft: ~55 rows (ungefähr)
 /*!40000 ALTER TABLE `mannschaft` DISABLE KEYS */;
 INSERT INTO `mannschaft` (`m_id`, `name`) VALUES
-	(1, 'Borussia Dortmund'),
-	(2, 'Bayern München'),
-	(3, 'FC Schalke 04'),
-	(4, 'Bayer 04 Leverkusen'),
-	(5, 'VfL Wolfsburg'),
-	(6, 'Bor. Mönchengladbach'),
-	(7, '1. FSV Mainz 05'),
-	(8, 'FC Augsburg'),
-	(9, '1899 Hoffenheim'),
-	(10, 'Hannover 96'),
-	(11, 'Hertha BSC'),
-	(12, 'Werder Bremen'),
-	(13, 'Eintracht Frankfurt'),
-	(14, 'SC Freiburg'),
-	(15, 'VfB Stuttgart'),
-	(16, 'Hamburger SV'),
-	(17, '1. FC Nürnberg'),
-	(18, 'Eintracht Braunschweig'),
+	(38, '1. FC Heidenheim'),
+	(22, '1. FC Kaiserslautern '),
 	(19, '1. FC Köln'),
+	(17, '1. FC Nürnberg'),
+	(55, '1. FC Saarbrücken'),
+	(27, '1. FC Union Berlin'),
+	(7, '1. FSV Mainz 05'),
+	(25, '1860 München'),
+	(9, '1899 Hoffenheim'),
+	(34, 'Arminia Bielefeld'),
+	(4, 'Bayer 04 Leverkusen'),
+	(2, 'Bayern München'),
+	(6, 'Bor. Mönchengladbach'),
+	(1, 'Borussia Dortmund'),
+	(49, 'Chemnitzer FC'),
+	(35, 'Dynamo Dresden'),
+	(18, 'Eintracht Braunschweig'),
+	(13, 'Eintracht Frankfurt'),
+	(36, 'Energie Cottbus'),
+	(32, 'Erzgebirge Aue'),
+	(8, 'FC Augsburg'),
+	(28, 'FC Ingolstadt 04'),
+	(3, 'FC Schalke 04'),
+	(26, 'FC St. Pauli'),
+	(24, 'Fortuna Düsseldorf'),
+	(31, 'FSV Frankfurt'),
+	(46, 'Hallescher FC'),
+	(16, 'Hamburger SV'),
+	(10, 'Hannover 96'),
+	(50, 'Hansa Rostock'),
+	(11, 'Hertha BSC'),
+	(51, 'Holstein Kiel'),
+	(48, 'Jahn Regensburg'),
+	(23, 'Karlsruher SC'),
+	(44, 'MSV Duisburg'),
+	(37, 'Optik Rathenow'),
+	(43, 'Preußen Münster'),
+	(39, 'RasenBallsport Leipzig'),
+	(47, 'Rot Weiß Erfurt'),
+	(14, 'SC Freiburg'),
 	(20, 'SC Paderborn 07 '),
 	(21, 'SpVgg Greuther Fürth '),
-	(22, '1. FC Kaiserslautern '),
-	(23, 'Karlsruher SC'),
-	(24, 'Fortuna Düsseldorf'),
-	(25, '1860 München'),
-	(26, 'FC St. Pauli'),
-	(27, '1. FC Union Berlin'),
-	(28, 'FC Ingolstadt 04'),
-	(29, 'VfR Aalen'),
-	(30, 'SV Sandhausen'),
-	(31, 'FSV Frankfurt'),
-	(32, 'Erzgebirge Aue'),
-	(33, 'VfL Bochum'),
-	(34, 'Arminia Bielefeld'),
-	(35, 'Dynamo Dresden'),
-	(36, 'Energie Cottbus'),
-	(37, 'Optik Rathenow'),
-	(38, '1. FC Heidenheim'),
-	(39, 'RasenBallsport Leipzig'),
-	(40, 'SV Darmstadt 98'),
-	(41, 'SV Wehen Wiesbaden'),
-	(42, 'VfL Osnabrück'),
-	(43, 'Preußen Münster'),
-	(44, 'MSV Duisburg'),
-	(45, 'Stuttgarter Kickers'),
-	(46, 'Hallescher FC'),
-	(47, 'Rot Weiß Erfurt'),
-	(48, 'Jahn Regensburg'),
-	(49, 'Chemnitzer FC'),
-	(50, 'Hansa Rostock'),
-	(51, 'Holstein Kiel'),
 	(52, 'SpVgg Unterhaching'),
+	(45, 'Stuttgarter Kickers'),
+	(40, 'SV Darmstadt 98'),
 	(53, 'SV Elversberg'),
+	(30, 'SV Sandhausen'),
+	(41, 'SV Wehen Wiesbaden'),
+	(15, 'VfB Stuttgart'),
+	(33, 'VfL Bochum'),
+	(42, 'VfL Osnabrück'),
+	(5, 'VfL Wolfsburg'),
+	(29, 'VfR Aalen'),
 	(54, 'Wacker Burghausen'),
-	(55, '1. FC Saarbrücken');
+	(12, 'Werder Bremen');
 /*!40000 ALTER TABLE `mannschaft` ENABLE KEYS */;
 
 
@@ -131,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `mannschaft_turnier_sparte` (
   CONSTRAINT `Turnier1` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.mannschaft_turnier_sparte: ~513 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.mannschaft_turnier_sparte: ~529 rows (ungefähr)
 /*!40000 ALTER TABLE `mannschaft_turnier_sparte` DISABLE KEYS */;
 INSERT INTO `mannschaft_turnier_sparte` (`m_id`, `tu_id`, `sparte_id`) VALUES
 	(1, 1, 1),
@@ -772,23 +773,24 @@ DROP TABLE IF EXISTS `status`;
 CREATE TABLE IF NOT EXISTS `status` (
   `stat_id` int(10) NOT NULL AUTO_INCREMENT,
   `status` varchar(30) NOT NULL,
-  PRIMARY KEY (`stat_id`)
+  PRIMARY KEY (`stat_id`),
+  UNIQUE KEY `status` (`status`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.status: ~11 rows (ungefähr)
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`stat_id`, `status`) VALUES
-	(1, 'Liga'),
-	(2, 'Gruppenphase'),
-	(3, 'Achtelfinale'),
-	(4, 'Viertelfinale'),
-	(5, 'Halbfinale'),
-	(6, 'Finale'),
-	(7, 'Freundschaftsspiel'),
-	(8, 'Sechzehntelfinale'),
 	(9, '1. Runde'),
 	(10, '2. Runde'),
-	(11, '3. Runde');
+	(11, '3. Runde'),
+	(3, 'Achtelfinale'),
+	(6, 'Finale'),
+	(7, 'Freundschaftsspiel'),
+	(2, 'Gruppenphase'),
+	(5, 'Halbfinale'),
+	(1, 'Liga'),
+	(8, 'Sechzehntelfinale'),
+	(4, 'Viertelfinale');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 
 
@@ -830,7 +832,7 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
 -- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~8 rows (ungefähr)
 /*!40000 ALTER TABLE `trainingseinheit` DISABLE KEYS */;
 INSERT INTO `trainingseinheit` (`tr_id`, `name`, `ort`, `zeit`, `trainer`, `tg_id`) VALUES
-	(1, 'Testspiel', 'Platz 1', '2014-05-25 18:49:49', 29, 1),
+	(1, 'Trainingsspiel', 'Heimstadion', '2014-05-25 18:49:50', 29, 1),
 	(2, 'Ausdauer', 'Wald', '2014-05-26 18:50:05', 29, 2),
 	(3, 'Ausdauer G2', 'Heimstadion', '2014-06-14 18:00:00', 29, 1),
 	(4, 'Kraft', 'Heimstadion', '2014-06-19 15:45:00', 29, 3),
@@ -846,7 +848,8 @@ DROP TABLE IF EXISTS `trainingsgruppe`;
 CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
   `tg_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`tg_id`)
+  PRIMARY KEY (`tg_id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.trainingsgruppe: ~8 rows (ungefähr)
@@ -857,9 +860,9 @@ INSERT INTO `trainingsgruppe` (`tg_id`, `name`) VALUES
 	(3, 'Gruppe C'),
 	(4, 'Gruppe D'),
 	(5, 'Gruppe E'),
-	(6, 'Torwart'),
 	(7, 'Gruppe F'),
-	(8, 'Gruppe G');
+	(8, 'Gruppe G'),
+	(6, 'Torwart');
 /*!40000 ALTER TABLE `trainingsgruppe` ENABLE KEYS */;
 
 
@@ -869,7 +872,8 @@ CREATE TABLE IF NOT EXISTS `turnier` (
   `tu_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `liga` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`tu_id`)
+  PRIMARY KEY (`tu_id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.turnier: ~13 rows (ungefähr)

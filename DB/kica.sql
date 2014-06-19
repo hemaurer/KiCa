@@ -1,4 +1,4 @@
-﻿-- --------------------------------------------------------
+-- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server Version:               5.5.28 - MySQL Community Server (GPL)
 -- Server Betriebssystem:        Win64
@@ -49,7 +49,8 @@ DROP TABLE IF EXISTS `mannschaft`;
 CREATE TABLE IF NOT EXISTS `mannschaft` (
   `m_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`m_id`)
+  PRIMARY KEY (`m_id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -138,7 +139,8 @@ DROP TABLE IF EXISTS `status`;
 CREATE TABLE IF NOT EXISTS `status` (
   `stat_id` int(10) NOT NULL AUTO_INCREMENT,
   `status` varchar(30) NOT NULL,
-  PRIMARY KEY (`stat_id`)
+  PRIMARY KEY (`stat_id`),
+  UNIQUE KEY `status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -182,7 +184,8 @@ DROP TABLE IF EXISTS `trainingsgruppe`;
 CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
   `tg_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`tg_id`)
+  PRIMARY KEY (`tg_id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -194,7 +197,8 @@ CREATE TABLE IF NOT EXISTS `turnier` (
   `tu_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `liga` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`tu_id`)
+  PRIMARY KEY (`tu_id`),
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
