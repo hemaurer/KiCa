@@ -70,6 +70,27 @@ table {
 	margin:0px;
 	height: 79px;
 }
+
+/*HOME*/
+#spartenText{
+    float: left;
+    margin-top: -10px;
+    color: #777;
+}
+
+#spartenButton{
+    float: right;
+}
+
+#calendar{
+    text-align: center;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    clear: both;
+}
+
+
 /*VERWALTUNG*/
 
 /*Tabs über dem Collapse*/
@@ -137,14 +158,6 @@ table {
 	padding: 0px 0px 0px 20px;
 	min-height: 0px;
 }
-/*HOME*/
-#calendar{
-    /*width: 70%;*/
-    text-align: center;
-    margin-right: auto;
-    margin-left: auto;
-}
-
 
 /*PROFIL*/
 

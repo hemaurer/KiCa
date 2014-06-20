@@ -1,20 +1,35 @@
-<script type="text/javascript" src="<?php echo URL; ?>public/js/modal-loader.js"></script>
+<!-- CSS  -->
+<link href="<?php echo URL; ?>public/css/fullcalendar.css" rel="stylesheet">
+
+<!-- JS -->
+<script type="text/javascript" src="<?php echo URL; ?>public/js/moment.min.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>public/js/fullcalendar.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>public/js/de.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>public/js/home.js"></script>
 
 <div class="container">
+
+	<div id="spartenText">
+		<h3>Kalender der <span class="spartenDropdownName"><?php echo $spartenDaten[0]->Sparte; ?></span></h3>
+	</div>
+
 	<!-- Dropdown zur Spartenauswahl -->
-	<ul class="nav nav-pills">
-		<li class="dropdown">
-		  <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"><span id="spartenDropdownName"> <?php echo $spartenDaten[0]->Sparte; ?> </span><span class="caret"></span> </a>
-			<ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
-          		<?php
-					// Sparten aus der DB laden und in der Liste anzeigen
-					// Model wird bereits in header.php angesprochen, deshalb muss nur noch ausgelesen werden
-					foreach ($spartenDaten as $sparte) { ?>
-							<li role="presentation" ><a onclick="fillSparte(<?php echo $sparte->ID; echo','; echo '\'';echo $sparte->Sparte; echo'\''; ?>)" role="menuitem" tabindex="-1" href="#"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
-				<?php } ?>
-	        </ul>
-		</li>
-	</ul>
+	<div id="spartenButton">
+		<div class="btn-group">
+			 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			    <span class="spartenDropdownName"> <?php echo $spartenDaten[0]->Sparte; ?> </span> <span class="caret"></span>
+	 		 </button>
+			  <!-- <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"><span id="spartenDropdownName"> <?php echo $spartenDaten[0]->Sparte; ?> </span><span class="caret"></span> </a> -->
+				 <ul class="dropdown-menu" role="menu">
+	          		<?php
+						// Sparten aus der DB laden und in der Liste anzeigen
+						// Model wird bereits in header.php angesprochen, deshalb muss nur noch ausgelesen werden
+						foreach ($spartenDaten as $sparte) { ?>
+								<li role="presentation" ><a onclick="fillSparte(<?php echo $sparte->ID; echo','; echo '\'';echo $sparte->Sparte; echo'\''; ?>)" role="menuitem" tabindex="-1" ><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+					<?php } ?>
+		        </ul>
+		</div> <!-- End class="btn-group"> -->
+	</div> <!-- End id="spartenButton" -->
 
 	<!-- Kalender Div - wird mit dem JQueryKalender befüllt -->
     <div id='calendar'>
@@ -76,4 +91,4 @@
 			</div>
 		</div>
 	</div>
-</div> <!-- End container -->
+</div> <!-- End container

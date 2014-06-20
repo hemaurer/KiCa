@@ -6,13 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- css -->
 
+    <!-- css -->
     <link href="<?php echo URL; ?>public/css/style.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/datepicker3.css" rel="stylesheet">
 	<link href="<?php echo URL; ?>public/css/bootstrap-timepicker.css" rel="stylesheet">
-	<link href="<?php echo URL; ?>public/css/fullcalendar.css" rel="stylesheet">
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo URL; ?>public/img/favicon.ico" />
 
     <!-- jQuery -->
@@ -20,9 +19,7 @@
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript" src="<?php echo URL; ?>public/js/moment.min.js"></script>
-	<script type="text/javascript" src="<?php echo URL; ?>public/js/fullcalendar.js"></script>
-	<script type="text/javascript" src="<?php echo URL; ?>public/js/de.js"></script>
+
 
 
 </head>
