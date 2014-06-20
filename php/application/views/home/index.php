@@ -57,7 +57,7 @@
 						//beim Klicken auf ein Event ein weiteres JS aufrufen, zur Anzeige des Modals mit Details
 						eventClick: function(event) {
 					    	//in modal-loader.js
-					    	kalenderModal(event.source.className, event.ID);
+					    	kalenderModal(event.source.className, event.ID, <?php echo '"'. URL . '"'; ?>, <?php if (isset($_SESSION['betreuer'])) {echo $_SESSION['betreuer']; } else{echo 0; } ?>);
 					    }
 				});//end $('#calendar').fullCalendar({
 			});//end $(document).ready(function() {
