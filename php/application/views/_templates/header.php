@@ -15,7 +15,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo URL; ?>public/img/favicon.ico" />
 
     <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-datepicker.js"></script>
