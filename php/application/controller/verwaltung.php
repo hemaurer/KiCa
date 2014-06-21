@@ -17,6 +17,7 @@ class Verwaltung extends Controller
         $trainingseinheiten = $verwaltungs_model->get_alle_trainingseinheiten();
 		$trainingsgruppen = $verwaltungs_model->get_alle_trainingsgruppen();
 		$turniere = $verwaltungs_model->get_alle_turniere();
+		$turniere_detail = $verwaltungs_model->get_alle_turniere_detail();
 		$stats = $verwaltungs_model->get_alle_stats();
 		$sparten = $verwaltungs_model->get_alle_sparten();
 

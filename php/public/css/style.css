@@ -145,6 +145,13 @@ table {
 	text-align:right;
 
 }
+.emptycell{
+	border-top: none !important;
+}
+.firstrow{
+	border-top: 2px solid #DDD !important;
+	border-collapse: seperate !important;
+}
 
 #checkboxSelect{
 	height: 81px;

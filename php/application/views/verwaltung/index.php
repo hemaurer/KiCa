@@ -657,29 +657,40 @@
 									</tr>
 								</thead>
 								<tbody>
-								<?php foreach ($turniere as $turnier) { ?>
+								<?php foreach ($turniere as $turnier) { $k=1;
+									if (($turnier->Turnier) != "Freundschaftsspiel" ){ ?>
 									<tr>
-										<td><?php if (isset($turnier->Turnier)){ 
-											/*$next[] = (next($turniere[1]));
-											if (($turnier->Turnier) == ($next[0]->Turnier)){*/
+										<td class="firstrow"><?php if (isset($turnier->Turnier)){ 
 												echo $turnier->Turnier;
-											//}
+											
 										 
 										}?></td>
-										<td><?php if (isset($turnier->Liga)){
+										<td class="firstrow"><?php if (isset($turnier->Liga)){
 											if ($turnier->Liga == 1){
 											echo "ja"; }else
 											{ echo "nein"; }}?></td>
-										<td><?php if (isset($turnier->Sparte)) echo $turnier->Sparte; ?></td>
-										<td><?php if (isset($turnier->Gewinner)) echo $turnier->Gewinner; ?></td>
-										
+										<td class="firstrow"></td>
+										<td class="firstrow"></td>
 										<!--td align="center"><a href="<?php echo URL . 'verwaltung/edit_turnier/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
-										<td align="center"><a data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td class="firstrow" align="center"><a data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td class="firstrow" align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 										<!--td><a data-toggle="modal" data-target="#tuModal<?php echo $turnier->tu_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
 										<!--<td><a href="<?php echo URL . 'verwaltung/delete_turnier/' . $turnier->tu_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td>-->
 									</tr>
-								<?php } ?>
+									<?php foreach ($turniere_detail as $turnier_detail) { 
+										if (($turnier_detail->Turnier == $turnier->Turnier) ){  ?>
+											<tr>
+												<td class="emptycell"></td>
+												<td class="emptycell"></td>
+												<td><?php if (isset($turnier_detail->Sparte)) echo $turnier_detail->Sparte; ?></td>
+												<td><?php if (isset($turnier_detail->Gewinner)) echo $turnier_detail->Gewinner; ?></td>
+												<td align="center"><a data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+											</tr>
+								<?php 	}
+										}
+									}
+								} ?>
 
 
 								</tbody>

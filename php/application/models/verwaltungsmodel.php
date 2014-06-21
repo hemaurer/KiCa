@@ -566,6 +566,14 @@ class VerwaltungsModel
 	public function get_alle_turniere()
     {
         //$sql = "SELECT * FROM turnier";
+		$sql = "SELECT turnier.tu_id AS ID, turnier.name AS Turnier, turnier.liga AS Liga FROM turnier ORDER BY Turnier";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
+	public function get_alle_turniere_detail()
+    {
+        //$sql = "SELECT * FROM turnier";
 		$sql = "SELECT turnier.tu_id AS ID, turnier.name AS Turnier, turnier.liga AS Liga, sparte.name AS Sparte, IFNULL(mannschaft.name,'noch nicht ermittelt') AS Gewinner FROM turnier_sparte JOIN turnier ON turnier.tu_id = turnier_sparte.tu_id JOIN sparte ON sparte.sparte_id = turnier_sparte.sparte_id LEFT JOIN mannschaft ON mannschaft.m_id = turnier_sparte.gewinner ORDER BY Turnier";
         $query = $this->db->prepare($sql);
         $query->execute();
