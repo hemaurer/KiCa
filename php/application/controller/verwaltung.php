@@ -194,7 +194,11 @@ class Verwaltung extends Controller
     {
         //if (isset($_POST["submit_edit_turnier"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["int_liga"]);
+			if (isset ($_POST["arr_sparte_option"])){
+            $verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["int_liga"], $_POST["arr_sparte_option"]);
+			}else{
+				$verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["int_liga"], null);
+			}
         // }
         // header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
@@ -209,6 +213,25 @@ class Verwaltung extends Controller
             $verwaltungs_model->delete_turnier($_POST["del_id"]);
         }
         //header('location: ' . URL . 'verwaltung/');
+    }
+	public function get_turnier_sparte_select()
+	{
+		//if ((isset($_POST["sparte_id"])) && (isset($_POST["tu_id"]))) {
+			$verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->get_turnier_sparte_select($_POST["tu_id"], $_POST["sparte_id"]);
+        //}
+	}
+	public function edit_turnier_sparte()
+	{
+		$verwaltungs_model = $this->loadModel('VerwaltungsModel');
+        $verwaltungs_model->edit_turnier_sparte($_POST["tu_id"], $_POST["sparte_id"], $_POST["arr_mannschaft_option"]);
+	}
+	public function delete_turnier_sparte(/*$tu_id*/)
+    {
+		if ((isset($_POST["sparte_id"])) && (isset($_POST["tu_id"]))) {
+			$verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->delete_turnier_sparte($_POST["tu_id"], $_POST["sparte_id"]);
+        }
     }
 	public function add_sparte()
     {

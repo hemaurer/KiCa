@@ -142,20 +142,74 @@
 							<label class="control-label col-md-4">Ligaturnier?</label>
 							<div class="col-md-2">
 								<label>
-									<input type="radio" name="int_liga" value="1">
+									<input type="radio" id="int_liga" name="int_liga" value="1">
 									Ja
 								</label>
 							</div>
 							<div class="col-md-2">
 								<label>
-									<input type="radio" name="int_liga" value="0" checked>
+									<input type="radio" id="int_liga" name="int_liga" value="0" checked>
 									Nein
 								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">Sparten wählen*</label>
+							<div class="col-md-6">
+								<ul class="form-control" id="checkboxSelect">
+								<div class="checkbox">
+									<?php 
+									$i = 1;
+									foreach ($sparten as $sparte) { ?>
+									<li>
+											<label>
+												<input type="checkbox" id="arr_sparte_option" name="arr_sparte_option[]" value="<?php if (isset($sparte->name)) echo $sparte->name; ?>"><?php echo $sparte->name; ?>
+											</label>
+									</li>
+									<?php 
+									$i++;} ?>
+								</div>
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer" id="turniermodalfooter">
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Turnier-Sparte-Modal -->
+	<div class="modal fade" id="turnier_sparte_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="ModalLabel"><div id="turnier_sparte_header"></div></h4>
+				</div>
+				<div class="modal-body" id="turnier_sparte_body">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-md-4">Turnierteilnehmer wählen*</label>
+							<div class="col-md-6">
+								<ul class="form-control" id="checkboxSelect">
+									<div class="checkbox" id="turnier_sparte_checkbox">
+										<?php 
+											
+											foreach ($mannschaften as $mannschaft) { ?>
+											<li>
+													<label>
+														<input type="checkbox" id="arr_mannschaft_option" name="arr_mannschaft_option[]" value="<?php if (isset($mannschaft->name)) echo $mannschaft->name; ?>"><?php echo $mannschaft->name; ?>
+													</label>
+											</li>
+											<?php 
+											$i++;} ?>
+									</div>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" id="turnier_sparte_footer">
 				</div>
 			</div>
 		</div>

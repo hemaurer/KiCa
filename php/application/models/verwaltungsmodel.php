@@ -574,11 +574,12 @@ class VerwaltungsModel
 	public function get_alle_turniere_detail()
     {
         //$sql = "SELECT * FROM turnier";
-		$sql = "SELECT turnier.tu_id AS ID, turnier.name AS Turnier, turnier.liga AS Liga, sparte.name AS Sparte, IFNULL(mannschaft.name,'noch nicht ermittelt') AS Gewinner FROM turnier_sparte JOIN turnier ON turnier.tu_id = turnier_sparte.tu_id JOIN sparte ON sparte.sparte_id = turnier_sparte.sparte_id LEFT JOIN mannschaft ON mannschaft.m_id = turnier_sparte.gewinner ORDER BY Turnier";
+		$sql = "SELECT turnier.tu_id AS ID, turnier.name AS Turnier, turnier.liga AS Liga, sparte.sparte_id, sparte.name AS Sparte, IFNULL(mannschaft.name,'noch nicht ermittelt') AS Gewinner FROM turnier_sparte JOIN turnier ON turnier.tu_id = turnier_sparte.tu_id JOIN sparte ON sparte.sparte_id = turnier_sparte.sparte_id LEFT JOIN mannschaft ON mannschaft.m_id = turnier_sparte.gewinner ORDER BY Sparte";
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
     }
+
 	public function add_turnier($str_name, $int_liga, $arr_sparte_option)
     {
 		/*Neues Turnier mit Name und Ligawert in tbl Turnier anlegen*/
@@ -611,7 +612,7 @@ class VerwaltungsModel
 			} 
 		}
     }
-	public function edit_turnier($tu_id, $str_name, $int_liga)
+	public function edit_turnier($tu_id, $str_name, $int_liga, $arr_sparte_option)
     {
 		$sql = "SELECT * FROM turnier WHERE tu_id=?";
         $query = $this->db->prepare($sql);
@@ -619,29 +620,102 @@ class VerwaltungsModel
 		$turnier = $query->fetch(PDO::FETCH_OBJ);
 		if ($str_name == null){
 			$str_name = $turnier->name;
-		}							
-		if ($int_liga == null){
-			$int_liga = $turnier->liga;
 		}
+		$sql = "UPDATE turnier SET name=?, liga=? WHERE tu_id=?";
+		$query = $this->db->prepare($sql);
+		$query->execute(array($str_name, $int_liga, $tu_id));
 		
+		$sql = "DELETE FROM turnier_sparte WHERE tu_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tu_id));
+		
+		/*Nur wenn eine Sparte (Checkbox) gewählt wurde, wird auch eine Verknüpfung erstellt.*/
+		if(isset($arr_sparte_option)){
+			/*neu angelegte Turnier-ID auslesen*/
+			$sql = "SELECT tu_id FROM turnier WHERE name = ?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_name));
+			$turnier = $query->fetch(PDO::FETCH_OBJ);
+			
+			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
+			if (is_array($arr_sparte_option)) {
+				foreach($arr_sparte_option as $option){
+					/*Sparten ID auslesen*/
+					$sql = "SELECT sparte_id FROM sparte WHERE name = ?";
+					$query = $this->db->prepare($sql);
+					$query->execute(array($option));
+					$sparte = $query->fetch(PDO::FETCH_OBJ);
+			
+					/*neue Verknüpfung in tbl turnier_sparte ohne gewinner anlegen*/
+					$sql = "INSERT INTO turnier_sparte (tu_id, sparte_id) VALUES (:tu_id, :sparte_id)";
+					$query = $this->db->prepare($sql);
+					$query->execute(array(':tu_id' => $turnier->tu_id, ':sparte_id' => $sparte->sparte_id));
+				}
+			} 
+		}
 		// /*Backup*/
 		// $sql = "UPDATE turnier SET name=?, gewinner=? WHERE tu_id=?";
 		// $query = $this->db->prepare($sql);
 		// $query->execute(array($str_name, $int_gewinner, $tu_id));
 		
-		$sql = "UPDATE turnier SET name=?, liga=? WHERE tu_id=?";
-		$query = $this->db->prepare($sql);
-		$query->execute(array($str_name, $int_liga, $tu_id));
+		
 		echo true;
 	}
     public function delete_turnier($tu_id)
     {
+	    $sql = "DELETE FROM turnier_sparte WHERE tu_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tu_id));
+		$sql = "DELETE FROM mannschaft_turnier_sparte WHERE tu_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tu_id));
         $sql = "DELETE FROM turnier WHERE tu_id =?";
         $query = $this->db->prepare($sql);
         $query->execute(array($tu_id));
 		echo true;
     }
-
+	public function get_turnier_sparte_select($tu_id, $sparte_id){
+		$sql = "SELECT mannschaft.name AS value FROM mannschaft";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+        $result = json_encode($query->fetchAll());
+        return $result;
+	}
+	public function edit_turnier_sparte($tu_id, $sparte_id, $arr_mannschaft_option )
+	{
+		$sql = "DELETE FROM mannschaft_turnier_sparte WHERE tu_id =? AND sparte_id=?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tu_id, $sparte_id));
+		
+		if(isset($arr_mannschaft_option)){			
+			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
+			if (is_array($arr_mannschaft_option)) {
+				foreach($arr_mannschaft_option as $option){
+					/*Sparten ID auslesen*/
+					$sql = "SELECT m_id FROM mannschaft WHERE name = ?";
+					$query = $this->db->prepare($sql);
+					$query->execute(array($option));
+					$mannschaft = $query->fetch(PDO::FETCH_OBJ);
+			
+					/*neue Verknüpfung in tbl turnier_sparte ohne gewinner anlegen*/
+					$sql = "INSERT INTO mannschaft_turnier_sparte (m_id, tu_id, sparte_id) VALUES (:m_id, :tu_id, :sparte_id)";
+					$query = $this->db->prepare($sql);
+					$query->execute(array(':m_id' => $mannschaft->m_id ,':tu_id' => $tu_id, ':sparte_id' => $sparte_id));
+				}
+			} 
+		}
+		echo true;
+	}
+	public function delete_turnier_sparte($tu_id, $sparte_id)
+    {		
+	    $sql = "DELETE FROM turnier_sparte WHERE tu_id =? AND sparte_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tu_id, $sparte_id));
+		$sql = "DELETE FROM mannschaft_turnier_sparte WHERE tu_id =? AND sparte_id=?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tu_id, $sparte_id));
+		echo true;
+    }
 /***Status***/
 	public function get_alle_stats()
     {

@@ -1,6 +1,3 @@
-
-
-
 function toggleModal(modal_id, type, x_id, x_name){
 	if (modal_id == 1){ //ID für Add
 
@@ -32,20 +29,75 @@ function toggleModal(modal_id, type, x_id, x_name){
 			$('#turniermodalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="editSuccess(\''+type+'\',\''+x_id+'\')">Speichern</a>');
 		}
 	}else if (modal_id == 3){ //ID für Löschen
-		$('#modalheader').html("Löschen bestätigen");
-		$('#modalbody').html('Wollen Sie '+x_name+' wirklich löschen?');
-		$('#modalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="successModal(\''+type+'\',\''+x_id+'\')">Löschen</a>');
+		
+		if (type == 'turnier'){
+			$('#modalheader').html("Löschen bestätigen");
+			$('#modalbody').html('Wollen Sie '+x_name+' wirklich löschen? Achtung: Alle verknüpften Sparten und Mannschaften werden ebenfalls gelöscht!');
+			$('#modalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="successModal(\''+type+'\',\''+x_id+'\')">Löschen</a>');
+		}else{
+			$('#modalheader').html("Löschen bestätigen");
+			$('#modalbody').html('Wollen Sie '+x_name+' wirklich löschen?');
+			$('#modalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="successModal(\''+type+'\',\''+x_id+'\')">Löschen</a>');
+		}
 	}
 
+}
+function toggleModalS(modal_id, type, x_id, y_id, x_name){
+	if (modal_id == 2){ //ID für Bearbeiten
+		if (type == 'turnier_sparte'){
+			$('#turnier_sparte_header').html(x_name+"bearbeiten");
+			$('#turnier_sparte_footer').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="editModalS(\''+type+'\',\''+x_id+'\',\''+y_id+'\')">Speichern</a>');
+		}
+	}else if (modal_id == 3){ //ID für Löschen
+		$('#modalheader').html("Löschen bestätigen");
+		$('#modalbody').html('Wollen Sie "'+x_name+'" löschen?');
+		$('#modalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="deleteModalS(\''+type+'\',\''+x_id+'\',\''+y_id+'\')">Löschen</a>');
+	}
+}
+function editModalS(type, x_id, y_id){
+		
+		var arr_mannschaft_option = new Array();
+		$("input:checkbox[id=arr_mannschaft_option]:checked").each(function() {
+			arr_mannschaft_option.push($(this).val());
+		});
+		$.post("edit_"+type+"/",{"tu_id":x_id, "sparte_id":y_id, "arr_mannschaft_option":arr_mannschaft_option})
+			.done(function( data ) {
+			 	if (data == 1){
+			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
+					}
+					else{
+						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
+					}
+				}
+			);
+
+
+}
+function deleteModalS(type, x_id, y_id) {
+
+		//Post Request auf die PHP Funktion im Controller von Verwaltung um die Daten von DB zu löschen
+		$.post("delete_"+type+"/",{"tu_id": x_id, "sparte_id":y_id})
+			.done(function( data ) {
+			 	if (data == 1){
+			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Löschen erfolgreich abgeschlossen!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
+					}
+					else{
+						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
+					}
+				});
 }
 function passwordModal(type, x_id, x_name) {
 		$('#modalheader').html("Passwort zurücksetzen bestätigen");
 		$('#modalbody').html('Wollen Sie das Passwort von "'+x_name+'" wirklich zurücksetzen?');
 		$('#modalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="editSuccess(\''+type+'\',\''+x_id+'\')">Passwort zurücksetzen</a>');
-
-
-
-
 }
 //Über den Button "Ändern" des Modals der Größe, um den neuen Wert in die DB schreiben
 function editSuccess(type, x_id) {
@@ -161,9 +213,15 @@ function editSuccess(type, x_id) {
 	if (type == "turnier"){
 		var str_name_in = $('#str_name');
 		var str_name = str_name_in.val();
-		var int_liga_in = $('#int_liga');
-		var int_liga = int_liga_in.val();
-		$.post("edit_"+type+"/",{"tu_id":x_id, "str_name":str_name, "int_liga":int_liga})
+		// var int_liga_in = $('#int_liga');
+		// var int_liga = int_liga_in.val();
+		
+		var int_liga = $('input[id=int_liga]:checked').val();
+		var arr_sparte_option = new Array();
+		$("input:checkbox[id=arr_sparte_option]:checked").each(function() {
+			arr_sparte_option.push($(this).val());
+		});
+		$.post("edit_"+type+"/",{"tu_id":x_id, "str_name":str_name, "int_liga":int_liga, "arr_sparte_option":arr_sparte_option})
 			.done(function( data ) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
