@@ -23,11 +23,12 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
   `p_id` int(10) NOT NULL,
   PRIMARY KEY (`tr_id`,`p_id`),
   KEY `Abwesende` (`p_id`),
-  CONSTRAINT `Abwesende` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`),
-  CONSTRAINT `Trainingseinheit` FOREIGN KEY (`tr_id`) REFERENCES `trainingseinheit` (`tr_id`)
+  CONSTRAINT `Abwesende` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Trainingseinheit` FOREIGN KEY (`tr_id`) REFERENCES `trainingseinheit` (`tr_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~0 rows (ungefähr)
+DELETE FROM `abwesenheit`;
 /*!40000 ALTER TABLE `abwesenheit` DISABLE KEYS */;
 /*!40000 ALTER TABLE `abwesenheit` ENABLE KEYS */;
 
@@ -39,12 +40,15 @@ CREATE TABLE IF NOT EXISTS `aufstellung` (
   `p_id` int(10) NOT NULL,
   PRIMARY KEY (`s_id`,`p_id`),
   KEY `Spieler` (`p_id`),
-  CONSTRAINT `Spiel` FOREIGN KEY (`s_id`) REFERENCES `spiel` (`s_id`),
-  CONSTRAINT `Spieler` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`)
+  CONSTRAINT `Spiel` FOREIGN KEY (`s_id`) REFERENCES `spiel` (`s_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Spieler` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.aufstellung: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.aufstellung: ~1 rows (ungefähr)
+DELETE FROM `aufstellung`;
 /*!40000 ALTER TABLE `aufstellung` DISABLE KEYS */;
+INSERT INTO `aufstellung` (`s_id`, `p_id`) VALUES
+	(1, 20);
 /*!40000 ALTER TABLE `aufstellung` ENABLE KEYS */;
 
 
@@ -58,6 +62,7 @@ CREATE TABLE IF NOT EXISTS `mannschaft` (
 ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.mannschaft: ~55 rows (ungefähr)
+DELETE FROM `mannschaft`;
 /*!40000 ALTER TABLE `mannschaft` DISABLE KEYS */;
 INSERT INTO `mannschaft` (`m_id`, `name`) VALUES
 	(38, '1. FC Heidenheim'),
@@ -132,7 +137,8 @@ CREATE TABLE IF NOT EXISTS `mannschaft_turnier_sparte` (
   CONSTRAINT `Turnier1` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.mannschaft_turnier_sparte: ~529 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.mannschaft_turnier_sparte: ~513 rows (ungefähr)
+DELETE FROM `mannschaft_turnier_sparte`;
 /*!40000 ALTER TABLE `mannschaft_turnier_sparte` DISABLE KEYS */;
 INSERT INTO `mannschaft_turnier_sparte` (`m_id`, `tu_id`, `sparte_id`) VALUES
 	(1, 1, 1),
@@ -669,6 +675,7 @@ CREATE TABLE IF NOT EXISTS `person` (
 ) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.person: ~30 rows (ungefähr)
+DELETE FROM `person`;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
 INSERT INTO `person` (`p_id`, `name`, `v_name`, `geb_datum`, `groesse`, `bild`, `betreuer`, `tel`, `username`, `password`) VALUES
 	(1, 'Weidenfeller', 'Roman', '1999-05-11', 188, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Roman.Weidenfeller', '098f6bcd4621d373cade4e832627b4f6'),
@@ -714,6 +721,7 @@ CREATE TABLE IF NOT EXISTS `sparte` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.sparte: ~7 rows (ungefähr)
+DELETE FROM `sparte`;
 /*!40000 ALTER TABLE `sparte` DISABLE KEYS */;
 INSERT INTO `sparte` (`sparte_id`, `name`) VALUES
 	(1, 'A-Jugend'),
@@ -753,6 +761,7 @@ CREATE TABLE IF NOT EXISTS `spiel` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.spiel: ~10 rows (ungefähr)
+DELETE FROM `spiel`;
 /*!40000 ALTER TABLE `spiel` DISABLE KEYS */;
 INSERT INTO `spiel` (`s_id`, `ort`, `heim`, `auswaerts`, `h_tore`, `a_tore`, `stat_id`, `zeit`, `tu_id`, `sparte_id`) VALUES
 	(1, 'Berliner Olympiastadion', 1, 2, NULL, NULL, 6, '2014-05-17 20:00:00', 2, 1),
@@ -778,6 +787,7 @@ CREATE TABLE IF NOT EXISTS `status` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.status: ~11 rows (ungefähr)
+DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`stat_id`, `status`) VALUES
 	(9, '1. Runde'),
@@ -801,11 +811,12 @@ CREATE TABLE IF NOT EXISTS `teilnehmer_tg` (
   `p_id` int(10) NOT NULL,
   PRIMARY KEY (`tg_id`,`p_id`),
   KEY `Teilnehmer` (`p_id`),
-  CONSTRAINT `Teilnehmer` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`),
-  CONSTRAINT `Trainigsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`)
+  CONSTRAINT `Teilnehmer` FOREIGN KEY (`p_id`) REFERENCES `person` (`p_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Trainigsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.teilnehmer_tg: ~2 rows (ungefähr)
+DELETE FROM `teilnehmer_tg`;
 /*!40000 ALTER TABLE `teilnehmer_tg` DISABLE KEYS */;
 INSERT INTO `teilnehmer_tg` (`tg_id`, `p_id`) VALUES
 	(1, 19),
@@ -825,11 +836,12 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   PRIMARY KEY (`tr_id`),
   KEY `Trainingsgruppe` (`tg_id`),
   KEY `Trainer` (`trainer`),
-  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`),
-  CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`)
+  CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~8 rows (ungefähr)
+DELETE FROM `trainingseinheit`;
 /*!40000 ALTER TABLE `trainingseinheit` DISABLE KEYS */;
 INSERT INTO `trainingseinheit` (`tr_id`, `name`, `ort`, `zeit`, `trainer`, `tg_id`) VALUES
 	(1, 'Trainingsspiel', 'Heimstadion', '2014-05-25 18:49:50', 29, 1),
@@ -853,6 +865,7 @@ CREATE TABLE IF NOT EXISTS `trainingsgruppe` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.trainingsgruppe: ~8 rows (ungefähr)
+DELETE FROM `trainingsgruppe`;
 /*!40000 ALTER TABLE `trainingsgruppe` DISABLE KEYS */;
 INSERT INTO `trainingsgruppe` (`tg_id`, `name`) VALUES
 	(1, 'Gruppe A'),
@@ -877,6 +890,7 @@ CREATE TABLE IF NOT EXISTS `turnier` (
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.turnier: ~13 rows (ungefähr)
+DELETE FROM `turnier`;
 /*!40000 ALTER TABLE `turnier` DISABLE KEYS */;
 INSERT INTO `turnier` (`tu_id`, `name`, `liga`) VALUES
 	(1, 'Bundesliga 2014/15', 1),
@@ -910,6 +924,7 @@ CREATE TABLE IF NOT EXISTS `turnier_sparte` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.turnier_sparte: ~15 rows (ungefähr)
+DELETE FROM `turnier_sparte`;
 /*!40000 ALTER TABLE `turnier_sparte` DISABLE KEYS */;
 INSERT INTO `turnier_sparte` (`tu_id`, `sparte_id`, `gewinner`) VALUES
 	(1, 2, NULL),
