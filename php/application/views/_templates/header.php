@@ -55,7 +55,18 @@
 
 					</ul>
 				</li>
-				<li><a href="<?php echo URL; ?>turniere/">Turniere</a></li>
+				<li class="dropdown"><a href="<?php echo URL; ?>turniere/" class="dropdown-toggle" data-toggle="dropdown">Turniere</a>
+					<ul class="dropdown-menu">
+
+						<?php
+							// Sparten aus der DB laden und in der Liste anzeigen
+	        				$spartenDaten = $sparten_model->getSparten();
+
+						foreach ($spartenDaten as $sparte) { ?>
+								<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+						<?php } ?>
+					</ul>
+				</li>
 
 				<!-- Login mit Submenü, die die Forms beinhalten -->
 				<!-- Hier wird vom Server anhand von Sessionvariablen über PHP entschieden, wie die Navigation aufgebaut ist -->

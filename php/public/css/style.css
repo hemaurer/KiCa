@@ -76,6 +76,7 @@ table {
     float: left;
     margin-top: -10px;
     color: #777;
+    margin-bottom: 5px;
 }
 
 #spartenButton{
@@ -84,7 +85,6 @@ table {
 
 #calendar{
     text-align: center;
-    margin-top: 50px;
     margin-right: auto;
     margin-left: auto;
     clear: both;

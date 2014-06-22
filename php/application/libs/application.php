@@ -7,6 +7,8 @@ class Application
 
     //Variable um die Unterseite zu definieren (z.B. im Header)
     public static $subpage = "Home";
+    //Variable um den ersten Parameter der URL zu identifizieren - genutzt in Liga
+    public static $parm_1 = "";
 
     /** @var null The method (of the above controller), often also named "action" */
     private $url_action = null;
@@ -34,6 +36,7 @@ class Application
 
             // Variable aus der gesplitteten URL generieren, die im Header verwendet werden kann
             self::$subpage = $this->url_controller;
+            self::$parm_1 = $this->url_parameter_1;
 
             // if so, then load this file and create this controller
             // example: if controller would be "car", then this line would translate into: $this->car = new car();
