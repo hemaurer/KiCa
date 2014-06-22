@@ -28,4 +28,14 @@ class SpartenModel
 
     } //end getSparten()
 
+    public function getTurniere()
+    {
+        $sql = "SELECT turnier.tu_id AS ID, turnier.name As Turnier From turnier ORDER BY turnier.name";
+        $query = $this->db->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll();
+
+    } //end getTurniere()
+
 }?>

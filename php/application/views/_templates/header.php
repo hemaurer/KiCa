@@ -55,7 +55,35 @@
 
 					</ul>
 				</li>
-				<li><a href="<?php echo URL; ?>turniere/">Turniere</a></li>
+				<li class="dropdown"><a href="<?php echo URL; ?>turniere/" class="dropdown-toggle" data-toggle="dropdown">Turniere</a>
+					<ul class="dropdown-menu">
+
+						<?php
+							// Turniere aus der DB laden und in der Liste anzeigen
+							// Freundschaftsspiel wird ganz unten angezeigt
+	        				$turniere = $sparten_model->getTurniere();
+
+								foreach ($turniere as $turnier) {
+									if ($turnier->Turnier <> "Freundschaftsspiel"){
+									?>
+										<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($turnier->ID)) echo $turnier->ID; ?>/"><?php if (isset($turnier->Turnier)) echo $turnier->Turnier; ?></a></li>
+						<?php 		}
+								}
+								foreach ($turniere as $turnier) {
+									if(isset($turnier->Turnier)){
+										if ($turnier->Turnier == "Freundschaftsspiel"){ ?>
+											<li class="divider"></li>
+											<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($turnier->ID)) echo $turnier->ID; ?>/"><?php if (isset($turnier->Turnier)) echo $turnier->Turnier; ?></a></li>
+						<?php 			}
+									}
+								}
+
+
+
+						?>
+
+					</ul>
+				</li>
 
 				<!-- Login mit Submenü, die die Forms beinhalten -->
 				<!-- Hier wird vom Server anhand von Sessionvariablen über PHP entschieden, wie die Navigation aufgebaut ist -->

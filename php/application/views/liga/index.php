@@ -1,8 +1,10 @@
 <div class="container">
 	<!-- Beinhaltet alle Daten zu eintragen -->
 
+	<div id="spartenText">
+		<h3>Spiele der <?php echo $spartenDaten[(Application::$parm_1 - 1)]->Sparte; ?></h3>
+	</div>
 
-	<h3>Spiele</h3>
 			<table class="table">
 				<thead style="background-color: #ddd; font-weight: bold;">
 					<tr>
