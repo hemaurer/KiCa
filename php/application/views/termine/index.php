@@ -8,7 +8,15 @@
 					<tr>
 					<?php $date = new DateTime($termin->Uhrzeit); // Datumsformatierer vorbereiten ?>
 						<?php if (isset($termin->Heim))  {
-									if (isset($termin->Sparte)) echo "<td width='10px'>".$termin->Sparte."</td>";
+									if (isset($termin->Sparte)) {
+										echo "<td width='10px'>";
+										if (isset($_SESSION['user_login_status'])){
+											echo "<a href='".URL."spiel/index/".$termin->s_id."/'>".$termin->Sparte."</a>";
+										} else {
+										echo $termin->Sparte;
+										}
+										echo "</td>";
+									}
 									if (isset($termin->Heim)) echo "<td width='30px'>".$termin->Heim."</td>";
 									if (isset($termin->Heimtore)) echo "<td width='10px'>".$termin->Heimtore."</td><td width='5'>:</td>";
 									if (isset($termin->Auswaertstore)) echo "<td width='10'>".$termin->Auswaertstore."</td>";
