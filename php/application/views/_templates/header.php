@@ -49,6 +49,14 @@
 							$sparten_model = $this->loadModel('SpartenModel');
 	        				$spartenDaten = $sparten_model->getSparten();
 
+	        				$turniere = $sparten_model->getTurniere(1);
+
+	        				foreach ($turniere as $turnier) {
+	        					if($turnier->Turnier == "Freundschaftsspiel"){
+	        						$id_freundschaftsspiel = $turnier->ID;
+	        					}
+							}
+
 						foreach ($spartenDaten as $sparte) { ?>
 								<li><a href="<?php echo URL; echo 'liga/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
 						<?php } ?>
@@ -60,7 +68,7 @@
 
 						<?php
 						foreach ($spartenDaten as $sparte) { ?>
-								<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>/1/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+								<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($sparte->ID)) echo $sparte->ID; echo '/'; echo $id_freundschaftsspiel; ?>/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
 						<?php } ?>
 
 					</ul>
