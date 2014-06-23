@@ -34,14 +34,14 @@
 								foreach ($turniere as $turnier) {
 									if ($turnier->Turnier <> "Freundschaftsspiel"){
 									?>
-										<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($turnier->ID)) echo $turnier->ID; ?>/"><?php if (isset($turnier->Turnier)) echo $turnier->Turnier; ?></a></li>
+										<li><a href="<?php echo URL; echo 'turniere/index/'; echo $sparte_id; echo '/'; if (isset($turnier->ID)){ echo $turnier->ID;} ?>/"><?php if (isset($turnier->Turnier)) echo $turnier->Turnier; ?></a></li>
 						<?php 		}
 								}
 								foreach ($turniere as $turnier) {
 									if(isset($turnier->Turnier)){
 										if ($turnier->Turnier == "Freundschaftsspiel"){ ?>
 											<li class="divider"></li>
-											<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($turnier->ID)) echo $turnier->ID; ?>/"><?php if (isset($turnier->Turnier)) echo $turnier->Turnier; ?></a></li>
+											<li><a href="<?php echo URL; echo 'turniere/index/'; echo $sparte_id; echo '/'; if (isset($turnier->ID)){ echo $turnier->ID;} ?>/"><?php if (isset($turnier->Turnier)) echo $turnier->Turnier; ?></a></li>
 						<?php 			}
 									}
 								}

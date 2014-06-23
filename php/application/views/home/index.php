@@ -25,7 +25,7 @@
 						// Sparten aus der DB laden und in der Liste anzeigen
 						// Model wird bereits in header.php angesprochen, deshalb muss nur noch ausgelesen werden
 						foreach ($spartenDaten as $sparte) { ?>
-								<li role="presentation" ><a onclick="fillSparte(<?php echo $sparte->ID; echo','; echo '\'';echo $sparte->Sparte; echo'\''; ?>)" role="menuitem" tabindex="-1" ><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+								<li role="presentation" ><a href="#" onclick="fillSparte(<?php echo $sparte->ID; echo','; echo '\'';echo $sparte->Sparte; echo'\''; ?>)" role="menuitem" tabindex="-1" ><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
 					<?php } ?>
 		        </ul>
 		</div> <!-- End class="btn-group"> -->

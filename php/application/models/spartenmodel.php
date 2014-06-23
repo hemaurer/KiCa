@@ -35,7 +35,7 @@ class SpartenModel
     //genutzt in Turniere
     public function getTurniere($sparte_id)
     {
-        $sql = "SELECT turnier.name AS Turnier
+        $sql = "SELECT turnier.name AS Turnier, turnier.tu_id AS ID
                 FROM turnier
                 JOIN turnier_sparte ON turnier_sparte.tu_id = turnier.tu_id
                 WHERE turnier.liga = 0 AND turnier_sparte.sparte_id = ?";

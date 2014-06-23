@@ -15,12 +15,12 @@ class TurniereModel
     }
 
 
-    public function get_turniertabelle($s_id)
+    public function get_turniertabelle($s_id, $tu_id)
     {
 
         $sql = "SELECT * FROM turnier";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':s_id' => $s_id));
+        $query->execute(array($s_id, $tu_id));
 
         // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
         // libs/controller.php! If you prefer to get an associative array as the result, then do

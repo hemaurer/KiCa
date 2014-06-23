@@ -60,7 +60,7 @@
 
 						<?php
 						foreach ($spartenDaten as $sparte) { ?>
-								<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+								<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>/1/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
 						<?php } ?>
 
 					</ul>
