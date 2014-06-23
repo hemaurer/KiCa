@@ -19,7 +19,8 @@ function toggleModal(modal_id, type, x_id, x_name){
 			$('#modalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="editSuccess(\''+type+'\',\''+x_id+'\')">Speichern</a>');
 		}
 		if (type == 'trainingseinheit'){
-
+			$('#trainingseinheitheader').html("Trainingseinheit bearbeiten");
+			$('#trainingseinheitfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="editSuccess(\''+type+'\',\''+x_id+'\')">Speichern</a>');
 		}
 		if (type == 'traininggruppe'){
 
@@ -209,7 +210,35 @@ function editSuccess(type, x_id) {
 	}
 
 
+	if (type == "trainingseinheit"){
+		var str_name_in = $('#edit_trainingseinheit_str_name');
+		var str_name = str_name_in.val();
+		var str_ort_in = $('#edit_trainingseinheit_str_ort');
+		var str_ort = str_ort_in.val();
+		var str_trainer_in = $('#edit_trainingseinheit_str_trainer');
+		var str_trainer = str_trainer_in.val();
+		var str_tg_name_in = $('#edit_trainingseinheit_str_tg_name');
+		var str_tg_name = str_tg_name_in.val();
+		var d_date_in = $('#edit_trainingseinheit_d_date');
+		var d_date = d_date_in.val();
+		var d_time_in = $('#edit_trainingseinheit_timepicker');
+		var d_time = d_time_in.val();
+		$.post("edit_"+type+"/",{"tr_id":x_id, "str_name":str_name, "str_ort":str_ort, "d_date":d_date, "d_time":d_time, "str_tg_name":str_tg_name, "str_trainer":str_trainer})
+			.done(function( data ) {
+			 	if (data == 1){
+			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Trainingseinheit erfolgreich bearbeitet!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
+					}
+					else{
+						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
+					}
+				}
+			);
 
+	}
 	if (type == "turnier"){
 		var str_name_in = $('#str_name');
 		var str_name = str_name_in.val();

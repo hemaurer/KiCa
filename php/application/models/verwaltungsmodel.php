@@ -468,26 +468,58 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer, ':tg_id' => $int_tg_id));
     }
-	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_time, $d_date, $str_tg, $str_trainer)
+	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_date, $d_time, $str_tg, $str_trainer)
     {
-		/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
-		$sql = "Select p_id FROM person WHERE name=?";	
-        $query = $this->db->prepare($sql);						
-        $query->execute(array($str_trainer));					
-		$arr_trainer = $query->fetchAll();					
-		foreach($arr_trainer as $trainer){				
-			$int_trainer = $trainer->p_id;				
-		};
-		
-		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
-		$sql = "Select tg_id FROM trainingsgruppe WHERE name=?";	
-        $query = $this->db->prepare($sql);						
-        $query->execute(array($str_tg));					
-		$arr_tg = $query->fetchAll();	
-		foreach($arr_tg as $int_tg_id){				
-			 $int_tg_id = $int_tg_id->tg_id;				
-		 };
-			
+		/**Vergleichsdaten**/
+		$sql = "SELECT * FROM trainingseinheit WHERE tr_id=?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tr_id));
+		$trainingseinheit = $query->fetch(PDO::FETCH_OBJ);
+		if ($str_name == null){
+			$str_name = $trainingseinheit->name;
+		}	
+		if ($str_ort == null){
+			$str_ort = $trainingseinheit->ort;
+		}
+		if ($str_ort == null){
+			$str_ort = $trainingseinheit->ort;
+		}		
+		if ($str_trainer == null){
+			$int_trainer = $trainingseinheit->trainer;
+		}else{
+			/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
+			$sql = "Select p_id FROM person WHERE name=?";	
+			$query = $this->db->prepare($sql);						
+			$query->execute(array($str_trainer));					
+			$arr_trainer = $query->fetchAll();					
+			foreach($arr_trainer as $trainer){				
+				$int_trainer = $trainer->p_id;				
+			};
+		}
+		if ($str_tg == null){
+			$int_tg_id = $trainingseinheit->tg_id;
+		}else{
+			/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
+			$sql = "Select tg_id FROM trainingsgruppe WHERE name=?";	
+			$query = $this->db->prepare($sql);						
+			$query->execute(array($str_tg));					
+			$arr_tg = $query->fetchAll();	
+			foreach($arr_tg as $int_tg_id){				
+				 $int_tg_id = $int_tg_id->tg_id;				
+			};
+		}		
+		/**Wenn Datum gleich 0 wird das Datum aus der Datenbank genommen **/
+		if ($d_date == null){
+			$d_zeit = $trainingseinheit->zeit;
+			$d_obj = new DateTime($d_zeit);
+			$d_date = $d_obj->format('Y-m-d'); 
+		}
+		/**Wenn Zeit gleich 0 wird die Zeit aus der Datenbank genommen **/
+		if ($d_time == null){
+			$d_zeit = $trainingseinheit->zeit;
+			$d_obj = new DateTime($d_zeit);
+			$d_time = $d_obj->format('H:i:s'); 
+		}
 		/**Zeit formatieren**/
 		$d_obj = new DateTime($d_date." ".$d_time);
 		$d_zeit = $d_obj->format('Y-m-d H:i:s');
@@ -547,11 +579,33 @@ class VerwaltungsModel
 		
 		
     }
-	public function edit_trainingsgruppe($tg_id, $str_name)
+	public function edit_trainingsgruppe($tg_id, $str_name, $arr_teilnehmer_option)
     {
-		$sql = "UPDATE trainingsgruppe SET name=? WHERE tg_id=?";
-		$query = $this->db->prepare($sql);
-		$query->execute(array($str_name, $tg_id));
+		if ($str_name != null){
+			$sql = "UPDATE trainingsgruppe SET name=? WHERE tg_id=?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_name, $tg_id));
+		}
+		
+		
+		$sql = "DELETE FROM teilnehmer_tg WHERE tg_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tg_id));
+		
+		/*Nur wenn eine Person (Checkbox) gewählt wurde, wird auch eine Verknüpfung erstellt.*/
+		if(isset($arr_teilnehmer_option)){
+			
+			/*egal wieviele Personen gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
+			if (is_array($arr_teilnehmer_option)) {
+				foreach($arr_teilnehmer_option as $option){
+							
+					/*neue Verknüpfung in tbl teilnehmer_tg anlegen*/
+					$sql = "INSERT INTO teilnehmer_tg (tg_id, p_id) VALUES (:tg_id, :p_id)";
+					$query = $this->db->prepare($sql);
+					$query->execute(array(':tg_id' => $tg_id, ':p_id' => $option));
+				}
+			} 
+		}
 	}
     public function delete_trainingsgruppe($tg_id)
     {
@@ -674,7 +728,9 @@ class VerwaltungsModel
         $query->execute(array($tu_id));
 		echo true;
     }
-	public function get_turnier_sparte_select($tu_id, $sparte_id){
+/***Turnier_Sparte***/
+	public function get_turnier_sparte_select($tu_id, $sparte_id)
+	{
 		$sql = "SELECT mannschaft.name AS value FROM mannschaft";
 		$query = $this->db->prepare($sql);
 		$query->execute();

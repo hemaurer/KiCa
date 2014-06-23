@@ -448,11 +448,8 @@
 										<td><?php if (isset($person->v_name)) echo $person->v_name; ?></td>
 										<td><?php if (isset($person->geb_datum)) echo $person->geb_datum; ?></td>
 										<td><?php if (isset($person->username)) echo $person->username; ?></td>
-										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<!--td><a href="<?php echo URL . 'verwaltung/delete_person/' . $person->p_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
-										<!--td><a data-toggle="modal" data-target="#pModal<?php echo $person->p_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>
@@ -494,11 +491,8 @@
 										<td><?php if (isset($spiel->Status)) echo $spiel->Status; ?></td>
 										<td><?php if (isset($spiel->Ort)) echo $spiel->Ort; ?></td>
 										<td><?php if (isset($spiel->Uhrzeit)){$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.Y H:i');} ?></td>
-										<td align="center"><a data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<!--td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td-->
-										<!--td><a href="<?php echo URL . 'verwaltung/delete_spiel/' . $spiel->s_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
-										<!--td align="center"><a data-toggle="modal" data-target="#sModal<?php echo $spiel->s_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td-->
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>
@@ -530,8 +524,8 @@
 								<?php foreach ($mannschaften as $mannschaft) { ?>
 									<tr>
 										<td><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></td>
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 								<?php } ?>
 								</tbody>
@@ -570,10 +564,8 @@
 										<td><?php if (isset($trainingseinheit->Uhrzeit)){$date = new DateTime($trainingseinheit->Uhrzeit); echo $date->format('d.m.Y H:i');} ?></td>
 										<td><?php if (isset($trainingseinheit->Trainingsgruppe)) echo $trainingseinheit->Trainingsgruppe; ?></td>
 										<td><?php if (isset($trainingseinheit->Trainer)) echo $trainingseinheit->Trainer; ?></td>
-										<td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
-
-										<!--td><a href="<?php echo URL . 'verwaltung/delete_trainingseinheit/' . $trainingseinheit->tr_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
+										<td align="center"><a href="#" data-toggle="modal" data-target="#trainingseinheit_Modal" onclick="toggleModal('2','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->Name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->Name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>
@@ -604,10 +596,9 @@
 								<tbody>
 								<?php foreach ($trainingsgruppen as $trainingsgruppe) { ?>
 									<tr>
-										<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td><td align="center"><a href="<?php echo URL . 'verwaltung/' ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
-										<!--td align="center"><a data-toggle="modal" data-target="#tgModal<?php echo $trainingsgruppe->tg_id; ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
-										<!--td><a href="<?php echo URL . 'verwaltung/delete_trainingsgruppe/' . $trainingsgruppe->tg_id; ?>"><span><i class="glyphicon glyphicon-remove"></i></span></a></td-->
+										<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td>
+										<td align="center"><a ><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>

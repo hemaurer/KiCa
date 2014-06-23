@@ -138,11 +138,8 @@ class Verwaltung extends Controller
     }
 	public function edit_trainingseinheit()
     {
-        if (isset($_POST["submit_edit_trainingseinheit"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->edit_trainingseinheit($_POST["tr_id"], $_POST["str_name"], $_POST["str_ort"], $_POST["d_zeit"], $_POST["int_tg_id"], $_POST["int_trainer"]);
-        }
-        header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
+            $verwaltungs_model->edit_trainingseinheit($_POST["tr_id"], $_POST["str_name"], $_POST["str_ort"], $_POST["d_date"], $_POST["d_time"], $_POST["str_tg_name"], $_POST["str_trainer"]);
     }
     public function delete_trainingseinheit()
     {
@@ -165,11 +162,8 @@ class Verwaltung extends Controller
     }
 	public function edit_trainingsgruppe()
     {
-        if (isset($_POST["submit_edit_trainingsgruppe"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->edit_trainingsgruppe($_POST["tg_id"], $_POST["str_name"]);
-        }
-        header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
+            $verwaltungs_model->edit_trainingsgruppe($_POST["tg_id"], $_POST["str_name"], $_POST["arr_teilnehmer_option"]);
     }
     public function delete_trainingsgruppe()
     {

@@ -154,7 +154,8 @@ table {
 }
 
 #checkboxSelect{
-	height: 81px;
+	/*height: 81px;*/
+	height: 100px;
 	overflow: auto;
 	/*border: 1px solid #e5e5e5;*/
 	list-style-type: none;
