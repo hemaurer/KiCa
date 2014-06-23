@@ -13,6 +13,12 @@ function kalenderModal(className, id, URL, isBetreuer){
 				//Rückgabearray als JSON transformieren
 			 	var returnedData = JSON.parse(data);
 
+			 	//Prüfen, ob das Spiel in der Vergangenheit liegt, um Tore anzuzeigen
+			 	var Tore = "vs.";
+			 	if (returnedData.Heimtore != null){
+			 		Tore = "" + returnedData.Heimtore + " : " + returnedData.Auswaertstore;
+			 	}
+
 			 	//Zeit formatieren
 			 	var t = returnedData.Uhrzeit.split(/[- :]/);
 			 	returnedData.Uhrzeit = "" + t[2] + "." + t[1] + "." + t[0] + " - " + t[3] + ":" + t[4] + " Uhr";
@@ -20,9 +26,9 @@ function kalenderModal(className, id, URL, isBetreuer){
 			 	//Modal zur Anzeige der Details mit den Werten aus dem Post Request befüllen
 				if (className == "training"){
 					if(isBetreuer == 1){
-						$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>Details</td> <td><a href="'+URL+'training/index/'+id+'/"><span class="glyphicon glyphicon-pencil"></span></a></td> </tr> </thead> <tbody> <tr> <td><strong>Art: </strong></td> <td>'+returnedData.Name+'</td> </tr> <tr> <td><strong>Ort: </strong></td> <td>'+returnedData.Ort+'</td> </tr> <tr> <td><strong>Uhrzeit: </strong></td> <td>'+returnedData.Uhrzeit+'</td> </tr> <tr> <td><strong>Trainer: </strong></td> <td>'+returnedData.Trainer+'</td> </tr> <tr> <td><strong>Trainingsgruppe: </strong></td> <td>'+returnedData.Trainingsgruppe+'</td> </tr> </tbody> </table>');
+						$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>'+returnedData.Name+'</td> <td><a href="'+URL+'training/index/'+id+'/"><span class="glyphicon glyphicon-pencil"></span></a></td> </tr> </thead> <tbody><tr> <td><strong>Ort: </strong></td> <td>'+returnedData.Ort+'</td> </tr> <tr> <td><strong>Uhrzeit: </strong></td> <td>'+returnedData.Uhrzeit+'</td> </tr> <tr> <td><strong>Trainer: </strong></td> <td>'+returnedData.Trainer+'</td> </tr> <tr> <td><strong>Trainingsgruppe: </strong></td> <td>'+returnedData.Trainingsgruppe+'</td> </tr> </tbody> </table>');
 					}else{
-						$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>Details</td> <td></td> </tr> </thead> <tbody> <tr> <td><strong>Art: </strong></td> <td>'+returnedData.Name+'</td> </tr> <tr> <td><strong>Ort: </strong></td> <td>'+returnedData.Ort+'</td> </tr> <tr> <td><strong>Uhrzeit: </strong></td> <td>'+returnedData.Uhrzeit+'</td> </tr> <tr> <td><strong>Trainer: </strong></td> <td>'+returnedData.Trainer+'</td> </tr> <tr> <td><strong>Trainingsgruppe: </strong></td> <td>'+returnedData.Trainingsgruppe+'</td> </tr> </tbody> </table>');
+						$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>'+returnedData.Name+'</td> <td></td> </tr> </thead> <tbody> <tr> <td><strong>Ort: </strong></td> <td>'+returnedData.Ort+'</td> </tr> <tr> <td><strong>Uhrzeit: </strong></td> <td>'+returnedData.Uhrzeit+'</td> </tr> <tr> <td><strong>Trainer: </strong></td> <td>'+returnedData.Trainer+'</td> </tr> <tr> <td><strong>Trainingsgruppe: </strong></td> <td>'+returnedData.Trainingsgruppe+'</td> </tr> </tbody> </table>');
 					}
 						$('#kalendermodalheader').html('Details zur Trainingseinheit');
 				}
@@ -31,7 +37,7 @@ function kalenderModal(className, id, URL, isBetreuer){
 					if(isBetreuer == 1){
 						$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>'+returnedData.Turnier+'</td> <td></td> <td><a href="'+URL+'spiel/index/'+id+'/"><span class="glyphicon glyphicon-pencil"></span></a></td> </tr> </thead> <tbody> <tr> <td>'+returnedData.Heim+'</td> <td><strong>vs.</strong></td> <td>'+returnedData.Auswaerts+'</td> </tr> <tr> <td>'+returnedData.Uhrzeit+'</td> <td></td> <td>'+returnedData.Ort+'</td> </tr> </tbody> </table>');
 					}else{
-						$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>'+returnedData.Turnier+'</td> <td></td> <td></td> </tr> </thead> <tbody> <tr> <td>'+returnedData.Heim+'</td> <td><strong>vs.</strong></td> <td>'+returnedData.Auswaerts+'</td> </tr> <tr> <td>'+returnedData.Uhrzeit+'</td> <td></td> <td>'+returnedData.Ort+'</td> </tr> </tbody> </table>');
+						$('#kalendermodalbody').html('<table class="table"> <thead style="background-color: #ddd; font-weight: bold;"> <tr> <td>'+returnedData.Turnier+'</td> <td></td> <td></td> </tr> </thead> <tbody> <tr> <td>'+returnedData.Heim+'</td> <td><strong>'+Tore+'</strong></td> <td>'+returnedData.Auswaerts+'</td> </tr> <tr> <td>'+returnedData.Uhrzeit+'</td> <td></td> <td>'+returnedData.Ort+'</td> </tr> </tbody> </table>');
 					}
 						$('#kalendermodalheader').html('Details zum '+str_prefix+'spiel');
 				}

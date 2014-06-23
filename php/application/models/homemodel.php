@@ -102,7 +102,9 @@ class HomeModel
         $query = $this->db->prepare($sql);
         $query->execute(array($id));
 
+        //Ergebnis als JSON formatieren
         $result = json_encode($query->fetchAll());
+        //Das erste und letzte Zeichen des Strings entfernen, dass es interpretiert werden kann
         $json_string = substr($result, 1 , (strlen($result)-2));
 
         echo $json_string;
@@ -124,7 +126,9 @@ class HomeModel
         $query = $this->db->prepare($sql);
         $query->execute(array($id));
 
+        //Ergebnis als JSON formatieren
         $result = json_encode($query->fetchAll());
+        //Das erste und letzte Zeichen des Strings entfernen, dass es interpretiert werden kann
         $json_string = substr($result, 1 , (strlen($result)-2));
 
         echo $json_string;
