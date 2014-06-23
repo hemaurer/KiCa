@@ -41,7 +41,7 @@
 			<ul class="nav navbar-nav">
 
 				<li><a href="<?php echo URL; ?>termine/">Termine</a></li>
-				<li class="dropdown"><a href="<?php echo URL; ?>ligatabelle/" class="dropdown-toggle" data-toggle="dropdown">Ligatabelle</a>
+				<li class="dropdown"><a href="<?php echo URL; ?>liga/" class="dropdown-toggle" data-toggle="dropdown">Ligatabelle</a>
 					<ul class="dropdown-menu">
 
 						<?php
@@ -59,28 +59,9 @@
 					<ul class="dropdown-menu">
 
 						<?php
-							// Turniere aus der DB laden und in der Liste anzeigen
-							// Freundschaftsspiel wird ganz unten angezeigt
-	        				$turniere = $sparten_model->getTurniere();
-
-								foreach ($turniere as $turnier) {
-									if ($turnier->Turnier <> "Freundschaftsspiel"){
-									?>
-										<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($turnier->ID)) echo $turnier->ID; ?>/"><?php if (isset($turnier->Turnier)) echo $turnier->Turnier; ?></a></li>
-						<?php 		}
-								}
-								foreach ($turniere as $turnier) {
-									if(isset($turnier->Turnier)){
-										if ($turnier->Turnier == "Freundschaftsspiel"){ ?>
-											<li class="divider"></li>
-											<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($turnier->ID)) echo $turnier->ID; ?>/"><?php if (isset($turnier->Turnier)) echo $turnier->Turnier; ?></a></li>
-						<?php 			}
-									}
-								}
-
-
-
-						?>
+						foreach ($spartenDaten as $sparte) { ?>
+								<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
+						<?php } ?>
 
 					</ul>
 				</li>

@@ -3,7 +3,7 @@
 
 
 	<div id="spartenText">
-		<h3>Spiele der <?php echo $spartenDaten[(Application::$parm_1 - 1)]->Sparte; ?></h3>
+		<h3>Tabelle der <?php echo $spartenDaten[(Application::$parm_1 - 1)]->Sparte; ?></h3>
 	</div>
 
 

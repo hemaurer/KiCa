@@ -14,6 +14,8 @@ class SpartenModel
     }
 
 
+    //Liest die Sparten aus der DB aus
+    //genutzt z.B. in der Navigation und Home
 	public function getSparten()
 	{
         $sql = "SELECT sparte.sparte_id AS ID, sparte.name As Sparte From sparte";
@@ -28,14 +30,21 @@ class SpartenModel
 
     } //end getSparten()
 
-    public function getTurniere()
+
+    //Liest die zugehörigen Turniere zu der ausgewählten Sparte aus der DB
+    //genutzt in Turniere
+    public function getTurniere($sparte_id)
     {
-        $sql = "SELECT turnier.tu_id AS ID, turnier.name As Turnier From turnier ORDER BY turnier.name";
+        $sql = "SELECT turnier.name AS Turnier
+                FROM turnier
+                JOIN turnier_sparte ON turnier_sparte.tu_id = turnier.tu_id
+                WHERE turnier.liga = 0 AND turnier_sparte.sparte_id = ?";
         $query = $this->db->prepare($sql);
-        $query->execute();
+        $query->execute(array($sparte_id));
 
         return $query->fetchAll();
 
     } //end getTurniere()
+
 
 }?>
