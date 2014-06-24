@@ -4,7 +4,7 @@
 
 
 	<div id="spartenText">
-		<h3> 
+		<h3>
 			<?php
 				//Das ausgewählte Turnier anzeigen
 				foreach ($spartenDaten as $sparte) {
@@ -28,7 +28,16 @@
 	<div id="spartenButton">
 		<div class="btn-group">
 			 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-				<span class="spartenDropdownName"> Freundschaftsspiel </span> <span class="caret"></span>
+				<span class="spartenDropdownName">
+					 <?php
+				    	//Text im Dropdown Button nach dem ausgewählten Turnier benennen
+						foreach ($turniere as $turnier) {
+							if($turnier->ID == Application::$parm_2){
+								echo $turnier->Turnier;
+							}
+						}
+					?>
+				</span> <span class="caret"></span>
 			 </button>
 			  <!-- <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"><span id="spartenDropdownName"> <?php echo $spartenDaten[0]->Sparte; ?> </span><span class="caret"></span> </a> -->
 				 <ul class="dropdown-menu" role="menu">
@@ -71,21 +80,21 @@
 		</div> <!-- End class="btn-group"> -->
 	</div> <!-- End id="spartenButton" -->
 	<br /><br /><br />
-	
+
 	<div id=spieluebersicht>
-	<?php 
+	<?php
 		if (count($turnierspiele) > 0){
 			$str_status = $turnierspiele[0]->Status;
 			echo "<h3>".$str_status."</h3><table class='table'><tr>";
-			
-			foreach ($turnierspiele as $spiel){ 
+
+			foreach ($turnierspiele as $spiel){
 				if (strcmp($str_status,$spiel->Status) !== 0){
 					$str_status = $spiel->Status;
 					echo "</table><h3>".$str_status."</h3><table class='table'><tr>";
 				}
 				if (isset($spiel->Heim)) echo "<td>".$spiel->Heim."</td>";
 				if (isset($spiel->Heimtore)) {echo "<td width='100px'>".$spiel->Heimtore."</td><td width='5'> : </td>";} else { echo "<td> vs </td>";};
-				
+
 				if (isset($spiel->Auswaertstore)) echo "<td width='100'>".$spiel->Auswaertstore."</td>";
 				if (isset($spiel->Auswaerts)) echo "<td width='300'>".$spiel->Auswaerts."</td>";
 			?>
