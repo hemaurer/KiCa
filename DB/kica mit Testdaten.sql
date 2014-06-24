@@ -678,36 +678,36 @@ CREATE TABLE IF NOT EXISTS `person` (
 DELETE FROM `person`;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
 INSERT INTO `person` (`p_id`, `name`, `v_name`, `geb_datum`, `groesse`, `bild`, `betreuer`, `tel`, `username`, `password`) VALUES
-	(1, 'Weidenfeller', 'Roman', '1999-05-11', 188, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Roman.Weidenfeller', '098f6bcd4621d373cade4e832627b4f6'),
-	(2, 'Langerak', 'Mitchell', '1999-05-11', 193, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mitchell.Langerak', '098f6bcd4621d373cade4e832627b4f6'),
-	(3, 'Alomerovic', 'Zlatan', '1999-05-11', 187, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Zlatan.Alomerovic', '098f6bcd4621d373cade4e832627b4f6'),
-	(4, 'Friedrich', 'Manuel', '1999-05-11', 189, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Manuel.Friedrich', '098f6bcd4621d373cade4e832627b4f6'),
-	(5, 'Subotic', 'Neven', '1999-05-11', 192, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Neven.Subotic', '098f6bcd4621d373cade4e832627b4f6'),
-	(6, 'Hummels', 'Mats', '1999-05-11', 192, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mats.Hummels', '098f6bcd4621d373cade4e832627b4f6'),
-	(7, 'Sarr', 'Marian', '1999-05-11', 187, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marian.Sarr', '098f6bcd4621d373cade4e832627b4f6'),
-	(8, 'Papastathopoulos', 'Sokratis', '1999-05-11', 185, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sokratis', '098f6bcd4621d373cade4e832627b4f6'),
-	(9, 'Schmelzer', 'Marcel', '1999-05-11', 181, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marcel.Schmelzer', '098f6bcd4621d373cade4e832627b4f6'),
-	(10, 'Bandowski', 'Jannik', '1999-05-11', 190, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jannik.Bandowski', '098f6bcd4621d373cade4e832627b4f6'),
-	(11, 'Durm', 'Erik', '1999-05-11', 183, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Erik.Durm', '098f6bcd4621d373cade4e832627b4f6'),
-	(12, 'Piszczek', 'Lukasz', '1999-05-11', 184, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Lukasz.Piszczek', '098f6bcd4621d373cade4e832627b4f6'),
-	(13, 'Kehl', 'Sebastian', '1999-05-11', 188, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sebastian.Kehl', '098f6bcd4621d373cade4e832627b4f6'),
-	(14, 'Bender', 'Sven', '1999-05-11', 186, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sven.Bender', '098f6bcd4621d373cade4e832627b4f6'),
-	(15, 'Kirch', 'Oliver', '1999-05-11', 182, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Oliver.Kirch', '098f6bcd4621d373cade4e832627b4f6'),
-	(16, 'Gündogan', 'Ilkay', '1999-05-11', 179, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Ilkay.Gündogan', '098f6bcd4621d373cade4e832627b4f6'),
-	(17, 'Jojic', 'Milos', '1999-05-11', 177, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Milos.Jojic', '098f6bcd4621d373cade4e832627b4f6'),
-	(18, 'Sahin', 'Nuri', '1999-05-11', 180, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Nuri.Sahin', '098f6bcd4621d373cade4e832627b4f6'),
-	(19, 'Amini', 'Mustafa', '1999-05-11', 175, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mustafa.Amini', '098f6bcd4621d373cade4e832627b4f6'),
-	(20, 'Mkhitaryan', 'Henrikh', '1999-05-11', 178, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Henrikh.Mkhitaryan', '098f6bcd4621d373cade4e832627b4f6'),
-	(21, 'Reus', 'Marco', '1999-05-11', 182, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marco.Reus', '098f6bcd4621d373cade4e832627b4f6'),
-	(22, 'Großkreutz', 'Kevin', '1999-05-11', 186, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Kevin.Großkreutz', '098f6bcd4621d373cade4e832627b4f6'),
-	(23, 'Hofmann', 'Jonas', '1999-05-11', 176, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jonas.Hofmann', '098f6bcd4621d373cade4e832627b4f6'),
-	(24, 'Blaszczykowski', 'Jakub', '1999-05-11', 176, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jakub.Blaszczykowski', '098f6bcd4621d373cade4e832627b4f6'),
-	(25, 'Aubameyang', 'Pierre-Emerick', '1999-05-11', 185, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Pierre-Emerick.Aubameyang', '098f6bcd4621d373cade4e832627b4f6'),
-	(26, 'Lewandowski', 'Robert', '1999-05-11', 185, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Robert.Lewandowski', '098f6bcd4621d373cade4e832627b4f6'),
-	(27, 'Schieber', 'Julian', '1999-05-11', 186, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Julian.Schieber', '098f6bcd4621d373cade4e832627b4f6'),
-	(28, 'Ducksch', 'Marvin', '1999-05-11', 188, '../public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marvin.Ducksch', '098f6bcd4621d373cade4e832627b4f6'),
-	(29, 'Klopp', 'Jürgen', '1967-06-16', 193, '../public/img/profilbilder/_noimage.jpg', 1, NULL, 'Jürgen.Klopp', '098f6bcd4621d373cade4e832627b4f6'),
-	(30, 'admin', 'admin', '1967-06-16', 193, '../public/img/profilbilder/_noimage.jpg', 1, '', 'admin', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC');
+	(1, 'Weidenfeller', 'Roman', '1999-05-11', 188, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Roman.Weidenfeller', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(2, 'Langerak', 'Mitchell', '1999-05-11', 193, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mitchell.Langerak', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(3, 'Alomerovic', 'Zlatan', '1999-05-11', 187, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Zlatan.Alomerovic', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(4, 'Friedrich', 'Manuel', '1999-05-11', 189, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Manuel.Friedrich', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(5, 'Subotic', 'Neven', '1999-05-11', 192, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Neven.Subotic', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(6, 'Hummels', 'Mats', '1999-05-11', 192, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mats.Hummels', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(7, 'Sarr', 'Marian', '1999-05-11', 187, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marian.Sarr', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(8, 'Papastathopoulos', 'Sokratis', '1999-05-11', 185, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sokratis', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(9, 'Schmelzer', 'Marcel', '1999-05-11', 181, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marcel.Schmelzer', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(10, 'Bandowski', 'Jannik', '1999-05-11', 190, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jannik.Bandowski', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(11, 'Durm', 'Erik', '1999-05-11', 183, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Erik.Durm', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(12, 'Piszczek', 'Lukasz', '1999-05-11', 184, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Lukasz.Piszczek', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(13, 'Kehl', 'Sebastian', '1999-05-11', 188, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sebastian.Kehl', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(14, 'Bender', 'Sven', '1999-05-11', 186, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Sven.Bender', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(15, 'Kirch', 'Oliver', '1999-05-11', 182, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Oliver.Kirch', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(16, 'Gündogan', 'Ilkay', '1999-05-11', 179, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Ilkay.Gündogan', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(17, 'Jojic', 'Milos', '1999-05-11', 177, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Milos.Jojic', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(18, 'Sahin', 'Nuri', '1999-05-11', 180, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Nuri.Sahin', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(19, 'Amini', 'Mustafa', '1999-05-11', 175, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Mustafa.Amini', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(20, 'Mkhitaryan', 'Henrikh', '1999-05-11', 178, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Henrikh.Mkhitaryan', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(21, 'Reus', 'Marco', '1999-05-11', 182, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marco.Reus', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(22, 'Großkreutz', 'Kevin', '1999-05-11', 186, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Kevin.Großkreutz', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(23, 'Hofmann', 'Jonas', '1999-05-11', 176, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jonas.Hofmann', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(24, 'Blaszczykowski', 'Jakub', '1999-05-11', 176, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Jakub.Blaszczykowski', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(25, 'Aubameyang', 'Pierre-Emerick', '1999-05-11', 185, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Pierre-Emerick.Aubameyang', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(26, 'Lewandowski', 'Robert', '1999-05-11', 185, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Robert.Lewandowski', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(27, 'Schieber', 'Julian', '1999-05-11', 186, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Julian.Schieber', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(28, 'Ducksch', 'Marvin', '1999-05-11', 188, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marvin.Ducksch', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(29, 'Klopp', 'Jürgen', '1967-06-16', 193, 'public/img/profilbilder/_noimage.jpg', 1, NULL, 'Jürgen.Klopp', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(30, 'admin', 'admin', '1967-06-16', 193, 'public/img/profilbilder/_noimage.jpg', 1, '', 'admin', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 
@@ -836,8 +836,8 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   PRIMARY KEY (`tr_id`),
   KEY `Trainingsgruppe` (`tg_id`),
   KEY `Trainer` (`trainer`),
-  CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`)
+  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`),
+  CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~8 rows (ungefähr)
