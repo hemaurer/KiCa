@@ -19,6 +19,11 @@ function kalenderModal(className, id, URL, isBetreuer){
 			 		Tore = "" + returnedData.Heimtore + " : " + returnedData.Auswaertstore;
 			 	}
 
+			 	//bei Turnierspielen den Status (z.B. Achtelfinale) zur Anzeige hinzufügen
+			 	if(returnedData.Status != "Freundschaftsspiel" && returnedData.Status != "Liga"){
+			 		returnedData.Turnier = returnedData.Turnier + " - " + returnedData.Status;
+			 	}
+
 			 	//Zeit formatieren
 			 	var t = returnedData.Uhrzeit.split(/[- :]/);
 			 	returnedData.Uhrzeit = "" + t[2] + "." + t[1] + "." + t[0] + " - " + t[3] + ":" + t[4] + " Uhr";
