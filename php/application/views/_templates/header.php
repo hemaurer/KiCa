@@ -49,11 +49,11 @@
 							$sparten_model = $this->loadModel('SpartenModel');
 	        				$spartenDaten = $sparten_model->getSparten();
 
-	        				$turniere = $sparten_model->getTurniere(1);
+	        				$nav_turniere = $sparten_model->getTurniere(1);
 
-	        				foreach ($turniere as $turnier) {
-	        					if($turnier->Turnier == "Freundschaftsspiel"){
-	        						$id_freundschaftsspiel = $turnier->ID;
+	        				foreach ($nav_turniere as $nav_turnier) {
+	        					if($nav_turnier->Turnier == "Freundschaftsspiel"){
+	        						$id_freundschaftsspiel = $nav_turnier->ID;
 	        					}
 							}
 
