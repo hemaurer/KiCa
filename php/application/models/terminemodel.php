@@ -36,7 +36,7 @@ class TermineModel
     public function get_alle_trainingseinheiten()
     {
 		// Suche alle Trainings, beginnend vor einer Woche 
-         $sql = "SELECT trainingseinheit.tr_id, trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Uhrzeit, trainingsgruppe.name as trainingsgruppe, CONCAT (person.name, ', ', person.v_name ) as Trainer
+         $sql = "SELECT trainingseinheit.tr_id, trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Uhrzeit, trainingsgruppe.name as Trainingsgruppe, CONCAT (person.name, ', ', person.v_name ) as Trainer
                 FROM trainingseinheit
                 JOIN trainingsgruppe ON trainingseinheit.tg_id = trainingsgruppe.tg_id
                 JOIN person ON trainingseinheit.trainer = person.p_id

@@ -166,7 +166,23 @@ table {
 	padding: 0px 0px 0px 20px;
 	min-height: 0px;
 }
-
+/*Termin*/
+.termin{
+	text-align:left;
+	width: 70%;
+	vertical-align: middle !important;
+}
+.termin h4{
+	display: inline;
+	padding: 0px 10px;
+}
+.termin h5{
+	display: inline;
+	padding: 0px 10px;
+}
+.termin-details{
+	
+}
 /*PROFIL*/
 
 .profilContent{
