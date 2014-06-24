@@ -11,7 +11,16 @@ class Home extends Controller
         //Daten für den Home Kalender laden
         //Die Spiele erhalten die erste Sparte als Standardwert, da dieser Standardmäßig auf der Home Seite angezeigt wird
         //über das Dropdown Menü können die anderen Sparten an späterer Stelle geladen werden
-        $trainingseinheitenDaten = $home_model->getTrainingseinheitenDaten();
+
+        //Ist ein User eingeloggt, werden nur die eigenen Trainings gezeigt, sonst alle Trainings
+        @session_start();
+        if (isset($_SESSION['user_login_status'])){
+            $trainingseinheitenDaten = $home_model->getEigeneTrainingseinheiten($_SESSION['p_id']);
+        }
+        else{
+            $trainingseinheitenDaten = $home_model->getAlleTrainingseinheiten();
+        }
+
         $ligaDaten = $home_model->getLigaDaten(1);
         $freundschaftsDaten = $home_model->getFreundschaftsDaten(1);
     	$turnierDaten = $home_model->getTurnierDaten(1);
@@ -26,7 +35,15 @@ class Home extends Controller
 
         $home_model = $this->loadModel('HomeModel');
 
-        $trainingseinheitenDaten = $home_model->getTrainingseinheitenDaten();
+        //Ist ein User eingeloggt, werden nur die eigenen Trainings gezeigt, sonst alle Trainings
+        @session_start();
+        if (isset($_SESSION['user_login_status']) && $_POST["eigeneTrainings"] == "alle"){
+            $trainingseinheitenDaten = $home_model->getEigeneTrainingseinheiten($_SESSION["p_id"]);
+        }
+        else{
+            $trainingseinheitenDaten = $home_model->getAlleTrainingseinheiten();
+        }
+
         $ligaDaten = $home_model->getLigaDaten($_POST["sparte_id"]);
 		$turnierDaten = $home_model->getTurnierDaten($_POST["sparte_id"]);
         $freundschaftsDaten = $home_model->getFreundschaftsDaten($_POST["sparte_id"]);

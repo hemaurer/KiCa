@@ -18,8 +18,30 @@ class HomeModel
 //*KALENDER MIT DATEN AUS DER DB BEFÜLLEN*
 //****************************************
 
-    //Trainingsdaten ausgeben
-    public function getTrainingseinheitenDaten()
+    //Eigene Trainingsdaten ausgeben, in deren Gruppe sich der User befindet
+    public function getEigeneTrainingseinheiten($p_id)
+    {
+        //Als Array festlegen
+        $json = array();
+
+        $sql = "SELECT CONCAT('\\n',trainingseinheit.name) AS title, trainingseinheit.zeit AS start, trainingseinheit.tr_id AS ID
+                FROM trainingseinheit
+                JOIN teilnehmer_tg ON teilnehmer_tg.tg_id = trainingseinheit.tg_id
+                JOIN person ON teilnehmer_tg.p_id = person.p_id
+                WHERE person.p_id = ?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($p_id));
+
+        // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
+        // libs/controller.php! If you prefer to get an associative array as the result, then do
+        // $query->fetchAll(PDO::FETCH_ASSOC); or change libs/controller.php's PDO options to
+        // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
+        return json_encode($query->fetchAll());
+    }//end getEigeneTrainingseinheiten()
+
+
+    //Alle Trainingsdaten ausgeben
+    public function getAlleTrainingseinheiten()
     {
         //Als Array festlegen
         $json = array();
@@ -28,12 +50,8 @@ class HomeModel
         $query = $this->db->prepare($sql);
         $query->execute();
 
-        // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
-        // libs/controller.php! If you prefer to get an associative array as the result, then do
-        // $query->fetchAll(PDO::FETCH_ASSOC); or change libs/controller.php's PDO options to
-        // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return json_encode($query->fetchAll());
-    }//end getTrainingseinheitenDaten()
+    }//end getAlleTrainingseinheiten()
 
 
     //Ligaspiele ausgeben

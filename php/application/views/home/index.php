@@ -9,17 +9,16 @@
 
 <div class="container">
 
-	<div id="spartenText">
-		<h3>Kalender der <span class="spartenDropdownName"><?php echo $spartenDaten[0]->Sparte; ?></span></h3>
+	<div id="spartenText" value="test">
+		<h3>Kalender der <?php echo $spartenDaten[0]->Sparte; ?></h3>
 	</div>
 
 	<!-- Dropdown zur Spartenauswahl -->
 	<div id="spartenButton">
 		<div class="btn-group">
 			 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			    <span class="spartenDropdownName"> <?php echo $spartenDaten[0]->Sparte; ?> </span> <span class="caret"></span>
+			    <span class="spartenDropdownName" value=""> <?php echo $spartenDaten[0]->Sparte; ?> </span> <span class="caret"></span>
 	 		 </button>
-			  <!-- <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"><span id="spartenDropdownName"> <?php echo $spartenDaten[0]->Sparte; ?> </span><span class="caret"></span> </a> -->
 				 <ul class="dropdown-menu" role="menu">
 	          		<?php
 						// Sparten aus der DB laden und in der Liste anzeigen
@@ -29,7 +28,21 @@
 					<?php } ?>
 		        </ul>
 		</div> <!-- End class="btn-group"> -->
+
+		<?php
+			//Button anzeigen, wenn ein User eingeloggt ist
+			//zur Wechseln der Anzeige von allen Trainingseinheiten und den eigenen Trainings
+			if (isset($_SESSION['user_login_status'])){
+		?>
+			<div class="btn-group">
+			  <button id="btn_alleTrainings" type="button" class="btn btn-default" value="alle" onclick="changeAnzeigeTrainingseinheiten()">alle Trainingseinheiten anzeigen</button>
+			</div>
+		<?php
+			}
+		?>
 	</div> <!-- End id="spartenButton" -->
+
+
 
 	<!-- Kalender Div - wird mit dem JQueryKalender befüllt -->
     <div id='calendar'>
@@ -38,6 +51,9 @@
 		<script type="text/javascript">
 			//beim Laden der Seite den Fullcalender laden
 			$(document).ready(function() {
+
+				//Muss injiziert werden, dass die PHP Variable ohne JS Injizierung nicht ausgelesen werden kann
+				$('.spartenDropdownName').val("<?php echo $spartenDaten[0]->ID; ?>");
 
 				//Fullcalendar
 				$('#calendar').fullCalendar({
@@ -56,7 +72,7 @@
 
 						//beim Klicken auf ein Event ein weiteres JS aufrufen, zur Anzeige des Modals mit Details
 						eventClick: function(event) {
-					    	//in modal-loader.js
+					    	//home.js
 					    	kalenderModal(event.source.className, event.ID, <?php echo '"'. URL . '"'; ?>, <?php if (isset($_SESSION['betreuer'])) {echo $_SESSION['betreuer']; } else{echo 0; } ?>);
 					    }
 				});//end $('#calendar').fullCalendar({

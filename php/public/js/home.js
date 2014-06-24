@@ -55,8 +55,13 @@ function kalenderModal(className, id, URL, isBetreuer){
 //Befüllt den Kalender neu, wenn auf der Home Seite eine andere Sparte ausgewählt wird
 function fillSparte(sparte_id, sparte){
 
+	//value vom Button wird über den Ajax Request mit fillSparte() an den Controller übergeben
+	//hierdurch wird festgestellt, ob alle Trainings oder nur die eigenen geladen werden sollen,
+	//je nachdem, was gerade ausgewählt ist
+	var eigeneTrainings = $('#btn_alleTrainings').val();
+
 	//Ajax Request auf Home Controller getKalenderDaten()
-	$.post("getKalenderDaten/", {"sparte_id": sparte_id})
+	$.post("getKalenderDaten/", {"sparte_id": sparte_id, "eigeneTrainings": eigeneTrainings})
 	.done(function( data ) {
 
 		//Da eine Zeichenkette zurückgegeben wird, die einzelnen Rückgaben auftrennen und in Arrays verpacken
@@ -76,6 +81,31 @@ function fillSparte(sparte_id, sparte){
 
 		//Den Text des Dropdown Menüs auf die ausgewählte Sparte setzen
 		$('.spartenDropdownName').html(sparte);
+		$('.spartenDropdownName').val(sparte_id);
 
 	});
+}
+
+//Wechselt zwischen eigenen Trainings und allen Trainings, wenn der Benutzer eingeloggt ist
+function changeAnzeigeTrainingseinheiten(){
+
+	//den Text des Buttons ändern, sobald auf ihn geklickt wird
+	//value vom Button wird über den Ajax Request mit fillSparte() an den Controller übergeben
+	//hierdurch wird festgestellt, ob alle Trainings oder nur die eigenen geladen werden sollen
+	if ($('#btn_alleTrainings').val() == "alle"){
+		$('#btn_alleTrainings').html("nur eigene Trainingseinheiten anzeigen");
+		$('#btn_alleTrainings').val("eigene");
+	}
+	else{
+		$('#btn_alleTrainings').html("alle Trainingseinheiten anzeigen");
+		$('#btn_alleTrainings').val("alle");
+	}
+
+	//um die Trainings neu zu laden wird fillSparte() aufgerufen
+	//dies benötigt 2 Parameter, die zuvor ausgelesen werden müssen
+	var sparte_id = $('.spartenDropdownName').val();
+	var sparte = $('.spartenDropdownName').html();
+
+	fillSparte(sparte_id, sparte);
+
 }
