@@ -50,10 +50,13 @@ class SpielModel
         $query->execute();
 		
 		// Neue Aufstellung speichern
-		foreach ($arr_aufgestellteSpieler as $i_spieler){
-			$sql = "INSERT INTO aufstellung values (".$id.", ".$i_spieler.")";
-			$query = $this->db->prepare($sql);
-			$query->execute();
-		}
+		$sql = "INSERT INTO aufstellung (s_id, p_id) values (".$id.", ".$arr_aufgestellteSpieler[0].")";
+		if (count($arr_aufgestellteSpieler) > 1 ) {
+			for ($i = 1; $i < count($arr_aufgestellteSpieler); $i++){
+				$sql = $sql.", (".$id.", ".$arr_aufgestellteSpieler[$i].")";
+			}
+		}			
+		$query = $this->db->prepare($sql);
+		$query->execute();
 	}
 }?>
