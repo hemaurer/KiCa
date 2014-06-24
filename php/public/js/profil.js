@@ -14,6 +14,19 @@ function toggleModal(){
 }
 
 
+//Über den Button Bild zurücksetzen des Modals bei Bild ändern
+//um das Profilbild auf das Standardbild zurückzusetzen
+function resetProfilbild() {
+
+		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
+		$.post("doChangeProfilbild/", {"resetProfilbild": "1"})
+			 .done(function( data ) {
+						$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Bild erfolgreich zurückgesetzt!</div>');
+						$('#successModal').modal('toggle');
+						window.setTimeout(function(){location.reload();},2000);
+				});
+}
+
 //prüft, ob im Modal der Passwortänderung etwas als altes Passwort eingegeben wurde
 function checkPassword_alt(){
 	var altesPasswort = document.form1.str_altesPassword.value;
@@ -93,7 +106,7 @@ function saveGroesse() {
 			 			/*$('#successModal_head').html("Erfolgreich");
 			 			$('#successModal_body').html("Größe erfolgreich geändert!");
 			 			$('#successModal').modal('toggle');*/
-						
+
 						$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Größe erfolgreich geändert!</div>');
 						$('#successModal').modal('toggle');
 						window.setTimeout(function(){location.reload();},2000);
@@ -102,7 +115,7 @@ function saveGroesse() {
 						/*$('#successModal_head').html("Fehler");
 			 			$('#successModal_body').html("Größe konnte nicht geändert werden!");
 						$('#successModal').modal('toggle');*/
-						
+
 						$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
 						$('#successModal').modal('toggle');
 						window.setTimeout(function(){location.reload();},2000);

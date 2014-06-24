@@ -14,28 +14,43 @@ class ProfilModel
     }
 
 
-    public function doChangeProfilbild($p_id)
+    public function doChangeProfilbild($p_id, $resetProfilbild)
     {
+        //$resetProfilbild entscheidet, ob das Profilbild geändert oder zurückgesetzt werden soll
+        //handelt es sich um eine Änderung:
+        if ($resetProfilbild == 0){
+            //Dateiendung für die Umbennenung herausfiltern
+            $filename = basename($_FILES['userfile']['name']);
+            $filenameext = pathinfo($filename, PATHINFO_EXTENSION);
 
-        //Dateiendung für die Umbennenung herausfiltern
-        $filename = basename($_FILES['userfile']['name']);
-        $filenameext = pathinfo($filename, PATHINFO_EXTENSION);
+            //Verzeichnis zur Ablage des hochgeladenen Bildes setzen
+            $uploaddir = 'public/img/profilbilder/';
+            //Namen des Bildes definieren
+            $uploadfile = "./" .$uploaddir . $p_id . "_profilbild." . $filenameext;
+            $str_bild = $uploaddir . $p_id . "_profilbild." . $filenameext;
 
-        //Verzeichnis zur Ablage des hochgeladenen Bildes setzen
-        $uploaddir = 'public/img/profilbilder/';
-        //Namen des Bildes definieren
-        $uploadfile = "./" .$uploaddir . $p_id . "_profilbild." . $filenameext;
-        $str_bild = $uploaddir . $p_id . "_profilbild." . $filenameext;
-
-        //Bild hochladen
-        if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-            //bereits vorhandes Bild löschen
-            if ($_SESSION['bild'] != "../public/img/profilbilder/_noimage.jpg"){
-                unlink(substr($_SESSION['bild'],3));
+            //Bild hochladen
+            if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+                //bereits vorhandes Bild löschen
+                if ($_SESSION['bild'] != "public/img/profilbilder/_noimage.jpg"){
+                    unlink(substr($_SESSION['bild'],3));
+                }
+                // echo "Datei ist valide und wurde erfolgreich hochgeladen.\n";
+            } else {
+                // echo "Datei konnte nicht hochgeladen werden.\n";
             }
-            // echo "Datei ist valide und wurde erfolgreich hochgeladen.\n";
-        } else {
-            // echo "Datei konnte nicht hochgeladen werden.\n";
+        }
+        // handelt es sich um das Zurücksetzen ($resetProfilbild == 1):
+        else{
+
+            //Bild zurücksetzen auf den Standard
+            $str_bild = "public/img/profilbilder/_noimage.jpg";
+
+            //altes Bild löschen
+            if ($_SESSION['bild'] != "public/img/profilbilder/_noimage.jpg"){
+                    unlink($_SESSION['bild']);
+                }
+
         }
 
         //Den Pfad zum hochgeladenen Bild in der DB der Person eintragen, dass es angezeigt wird
@@ -50,6 +65,7 @@ class ProfilModel
             // echo '<pre>';
             // print_r($_FILES);
             // print "</pre>";
+
     }//end doChangeProfilbild()
 
 

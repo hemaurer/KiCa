@@ -16,7 +16,7 @@
 				</div>
 
 				<div align="center">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bildModal">Profilbild hochladen</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bildModal">Profilbild ändern</button>
 				</div>
 
 								<!-- sModal -->
@@ -24,7 +24,7 @@
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h4 class="modal-title" id="pModalLabel">Profilbild hochladen</h4>
+												<h4 class="modal-title" id="pModalLabel">Profilbild ändern</h4>
 											</div>
 											<div class="modal-body">
 
@@ -34,13 +34,18 @@
 													<form enctype="multipart/form-data" action="<?php echo URL; ?>profil/doChangeProfilbild/" method="POST">
 													    <!-- MAX_FILE_SIZE muss vor dem Dateiupload Input Feld stehen / Bis zu 3 MB aktuell erlaubt-->
 													    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+													    <input type="hidden" name="resetProfilbild" value="0"/>
 													    <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
 													    <input name="userfile" type="file"  class="btn btn-default" required/></p>
-													    <input type="submit" name="submit_change_profilbild" value="Hochladen" class="btn btn-default"/>
+													    <input type="submit" name="submit_change_profilbild" value="Hochladen" class="btn btn-primary"/>
 													</form>
 												</div>
 
 											</div>
+											<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal" >Abbrechen</button>
+													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="resetProfilbild()">Profilbild zurücksetzen</button>
+												</div>
 										</div>
 									</div>
 								</div>

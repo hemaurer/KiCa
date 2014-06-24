@@ -22,13 +22,11 @@ class Profil extends Controller
 
     public function doChangeProfilbild()
     {
-        if (isset($_POST["submit_change_profilbild"])) {
             @session_start();
             $profil_model = $this->loadModel('ProfilModel');
-            $profil_model->doChangeProfilbild($_SESSION["p_id"]);
+            $profil_model->doChangeProfilbild($_SESSION["p_id"], $_POST["resetProfilbild"]);
 
-            header('location: ' . URL . 'profil/index/'); //Weiterleitung nach Ausführen der Methode
-        }
+            header('location: ' . URL . 'profil/'); //Weiterleitung nach Ausführen der Methode
     }//end doChangeProfilbild()
 
     public function doChangeGroesse()
