@@ -139,7 +139,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Ligaturnier?</label>
+							<label class="control-label col-md-4">Liga?</label>
 							<div class="col-md-2">
 								<label>
 									<input type="radio" id="int_liga" name="int_liga" value="1">
@@ -189,7 +189,7 @@
 				<div class="modal-body" id="turnier_sparte_body">
 					<div class="form-horizontal">
 						<div class="form-group">
-							<label class="control-label col-md-4">Turnierteilnehmer wählen*</label>
+							<label class="control-label col-md-4">Turnierteilnehmer wählen</label>
 							<div class="col-md-6">
 								<ul class="form-control" id="checkboxSelect">
 									<div class="checkbox" id="turnier_sparte_checkbox">
@@ -207,6 +207,19 @@
 								</ul>
 							</div>
 						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-md-4">Gewinner</label>
+							<div class="col-md-6">
+								<select class="form-control" name="str_gewinner" id="str_gewinner" size="1" >
+									<option value="0" selected disabled>Team wählen</option>
+									<?php foreach ($mannschaften as $mannschaft) { ?>
+									<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
+									<?php } ?>
+								</select>
+							</div>
+						</div>
+						
 					</div>
 				</div>
 				<div class="modal-footer" id="turnier_sparte_footer">
@@ -215,12 +228,7 @@
 		</div>
 	</div>
 	
-	
-	
-	
-	
-	
-	
+	<!-- Trainingseinheit-Modal -->
 							
 	<div class="modal fade" id="trainingseinheit_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">

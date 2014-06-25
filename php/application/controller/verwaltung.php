@@ -218,7 +218,7 @@ class Verwaltung extends Controller
 	public function edit_turnier_sparte()
 	{
 		$verwaltungs_model = $this->loadModel('VerwaltungsModel');
-        $verwaltungs_model->edit_turnier_sparte($_POST["tu_id"], $_POST["sparte_id"], $_POST["arr_mannschaft_option"]);
+        $verwaltungs_model->edit_turnier_sparte($_POST["tu_id"], $_POST["sparte_id"], $_POST["arr_mannschaft_option"], $_POST["str_gewinner"]);
 	}
 	public function delete_turnier_sparte(/*$tu_id*/)
     {

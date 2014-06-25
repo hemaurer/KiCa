@@ -742,12 +742,22 @@ class VerwaltungsModel
         $result = json_encode($query->fetchAll());
         return $result;
 	}
-	public function edit_turnier_sparte($tu_id, $sparte_id, $arr_mannschaft_option )
+	public function edit_turnier_sparte($tu_id, $sparte_id, $arr_mannschaft_option, $str_gewinner)
 	{
 		$sql = "DELETE FROM mannschaft_turnier_sparte WHERE tu_id =? AND sparte_id=?";
         $query = $this->db->prepare($sql);
         $query->execute(array($tu_id, $sparte_id));
-		
+		/*Wenn Gewinner gesetzt wurde, dann wird dieser in die Tabelle eingetragen*/
+		if(isset($str_gewinner)){
+			$sql = "SELECT m_id FROM mannschaft WHERE name = ?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($str_gewinner));
+			$int_gewinner = $query->fetch(PDO::FETCH_OBJ);
+			
+			$sql = "UPDATE turnier_sparte SET gewinner=? WHERE tu_id=? AND sparte_id=?";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($int_gewinner->m_id, $tu_id, $sparte_id));
+		}
 		if(isset($arr_mannschaft_option)){			
 			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
 			if (is_array($arr_mannschaft_option)) {

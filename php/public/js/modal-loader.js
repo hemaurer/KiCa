@@ -265,7 +265,12 @@ function successModalS(modal_id, type, x_id, y_id) {
 		$("input:checkbox[id=arr_mannschaft_option]:checked").each(function() {
 			arr_mannschaft_option.push($(this).val());
 		});
-		$.post("edit_"+type+"/",{"tu_id":x_id, "sparte_id":y_id, "arr_mannschaft_option":arr_mannschaft_option})
+		if (arr_mannschaft_option.length == 0){
+			arr_mannschaft_option = null;
+		};
+		var str_gewinner_in = $('#str_gewinner');
+			var str_gewinner = str_gewinner_in.val();
+		$.post("edit_"+type+"/",{"tu_id":x_id, "sparte_id":y_id, "arr_mannschaft_option":arr_mannschaft_option, "str_gewinner":str_gewinner})
 			.done(function( data ) {
 			 	if (data == 1){
 			 			$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
