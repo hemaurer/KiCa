@@ -657,7 +657,12 @@ class VerwaltungsModel
 					$query = $this->db->prepare($sql);
 					$query->execute(array($option));
 					$sparte = $query->fetch(PDO::FETCH_OBJ);
-			
+					
+					/*neue Verknüpfung in tbl mannschaft_turnier_sparte mit der eigenen Mannschaft*/
+					$sql = "INSERT INTO mannschaft_turnier_sparte (m_id, tu_id, sparte_id) VALUES (:m_id, :tu_id, :sparte_id)";
+					$query = $this->db->prepare($sql);
+					$query->execute(array('m_id' => '1', ':tu_id' => $turnier->tu_id, ':sparte_id' => $sparte->sparte_id));
+					
 					/*neue Verknüpfung in tbl turnier_sparte ohne gewinner anlegen*/
 					$sql = "INSERT INTO turnier_sparte (tu_id, sparte_id) VALUES (:tu_id, :sparte_id)";
 					$query = $this->db->prepare($sql);
