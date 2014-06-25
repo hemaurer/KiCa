@@ -27,8 +27,9 @@ function toggleModal(modal_id, type, x_id, x_name){
 			$('#trainingseinheitheader').html("Trainingseinheit bearbeiten");
 			$('#trainingseinheitfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="successModal(\''+modal_id+'\',\''+type+'\',\''+x_id+'\')">Speichern</a>');
 		}
-		if (type == 'traininggruppe'){
-
+		if (type == 'trainingsgruppe'){
+			$('#trainingsgruppemodalheader').html("Trainingsgruppe bearbeiten");
+			$('#trainingsgruppemodalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button> <a type="submit" class="btn btn-primary" data-dismiss="modal" onclick="successModal(\''+modal_id+'\',\''+type+'\',\''+x_id+'\')">Speichern</a>');
 		}
 		if (type == 'turnier'){
 			$('#turniermodalheader').html("Turnier bearbeiten");
@@ -194,6 +195,33 @@ function successModal(modal_id, type, x_id) {
 					}
 				);
 		}
+		if (type == "trainingsgruppe"){
+			
+			var str_name_in = $('#str_name_edit_trainingsgruppe');
+			var str_name = str_name_in.val();
+			var arr_teilnehmer_option = new Array();
+			$("input:checkbox[id=arr_teilnehmer_option]:checked").each(function() {
+				arr_teilnehmer_option.push($(this).val());
+			});
+			if (arr_teilnehmer_option.length == 0){
+				arr_teilnehmer_option = null;
+			};
+			$.post("edit_"+type+"/",{"tg_id":x_id, "str_name":str_name, "arr_teilnehmer_option":arr_teilnehmer_option})
+				.done(function( data ) {
+					if (data == 1){
+							$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Turnier erfolgreich bearbeitet!</div>');
+							$('#successModal').modal('toggle');
+							window.setTimeout(function(){location.reload();},2000);
+						}
+						else{
+							$('#successModal_dialog').html('<div class="alert alert-danger"><strong>Fehler!</strong> Es ist ein Fehler aufgetreten!</div>');
+							$('#successModal').modal('toggle');
+							window.setTimeout(function(){location.reload();},2000);
+						}
+					}
+				);
+		}
+		
 		if (type == "turnier"){
 			var str_name_in = $('#str_name');
 			var str_name = str_name_in.val();
@@ -205,6 +233,9 @@ function successModal(modal_id, type, x_id) {
 			$("input:checkbox[id=arr_sparte_option]:checked").each(function() {
 				arr_sparte_option.push($(this).val());
 			});
+			if (arr_sparte_option.length == 0){
+				arr_sparte_option = null;
+			};
 			$.post("edit_"+type+"/",{"tu_id":x_id, "str_name":str_name, "int_liga":int_liga, "arr_sparte_option":arr_sparte_option})
 				.done(function( data ) {
 					if (data == 1){
@@ -241,7 +272,7 @@ function successModal(modal_id, type, x_id) {
 
 
 //**************************************************
-// Die folgenden drei functions entsprechen den ersten zwei mit der Ausnahme, dass eine weitere ID mitgegeben
+// Die folgenden zwei functions entsprechen den ersten zwei mit der Ausnahme, dass eine weitere ID mitgegeben
 // werden kann.
 function toggleModalS(modal_id, type, x_id, y_id, x_name){
 	if (modal_id == 2){ //ID für Bearbeiten

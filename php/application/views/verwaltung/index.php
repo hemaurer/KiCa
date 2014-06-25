@@ -302,7 +302,7 @@
 										<ul class="form-control" id="checkboxSelect">
 										<div class="checkbox">
 											<?php 
-											$i = 1;
+											
 											foreach ($personen as $person) { ?>
 											<li>
 													<label>
@@ -310,7 +310,7 @@
 													</label>
 											</li>
 											<?php 
-											$i++;} ?>
+											} ?>
 										</div>
 										</ul>
 									</div>
@@ -597,7 +597,7 @@
 								<?php foreach ($trainingsgruppen as $trainingsgruppe) { ?>
 									<tr>
 										<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td>
-										<td align="center"><a ><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a href="#" data-toggle="modal" data-target="#trainingsgruppe_Modal" onclick="toggleModal('2','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 

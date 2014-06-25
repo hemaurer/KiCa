@@ -158,16 +158,15 @@
 							<div class="col-md-6">
 								<ul class="form-control" id="checkboxSelect">
 								<div class="checkbox">
-									<?php 
-									$i = 1;
+									<?php
 									foreach ($sparten as $sparte) { ?>
 									<li>
 											<label>
 												<input type="checkbox" id="arr_sparte_option" name="arr_sparte_option[]" value="<?php if (isset($sparte->name)) echo $sparte->name; ?>"><?php echo $sparte->name; ?>
 											</label>
 									</li>
-									<?php 
-									$i++;} ?>
+									<?php
+									} ?>
 								</div>
 								</ul>
 							</div>
@@ -228,8 +227,7 @@
 		</div>
 	</div>
 	
-	<!-- Trainingseinheit-Modal -->
-							
+	<!-- Trainingseinheit-Modal -->			
 	<div class="modal fade" id="trainingseinheit_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -294,6 +292,49 @@
 							</div>
 				</div>
 				<div class="modal-footer" id="trainingseinheitfooter">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<!-- Trainingsgruppe-Modal -->
+	<div class="modal fade" id="trainingsgruppe_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="ModalLabel"><div id="trainingsgruppemodalheader"></div></h4>
+				</div>
+				<div class="modal-body" id="modalbody">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-md-4">Trainingsgruppe</label>
+							<div class="col-md-6">
+								<input class="form-control" type="text" id="str_name_edit_trainingsgruppe" value="" placeholder="Trainingsgruppe" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-4">Sparten wählen</label>
+							<div class="col-md-6">
+								<ul class="form-control" id="checkboxSelect">
+								<div class="checkbox">
+									<?php	
+									foreach ($personen as $person) { ?>
+									<li>
+											<label>
+												<input type="checkbox" name="arr_teilnehmer_option[]" id="arr_teilnehmer_option" value="<?php if (isset($person->p_id)){echo $person->p_id; } ?>"><?php echo $person->v_name; ?> <?php echo $person->name; ?>
+											</label>
+									</li>
+									<?php 
+									} ?>
+								</div>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" id="trainingsgruppemodalfooter">
 				</div>
 			</div>
 		</div>

@@ -606,6 +606,7 @@ class VerwaltungsModel
 				}
 			} 
 		}
+		echo true;
 	}
     public function delete_trainingsgruppe($tg_id)
     {
