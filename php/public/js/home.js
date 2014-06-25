@@ -58,7 +58,7 @@ function fillSparte(sparte_id, sparte){
 	//value vom Button wird über den Ajax Request mit fillSparte() an den Controller übergeben
 	//hierdurch wird festgestellt, ob alle Trainings oder nur die eigenen geladen werden sollen,
 	//je nachdem, was gerade ausgewählt ist
-	var eigeneTrainings = $('#btn_alleTrainings').val();
+	var eigeneTrainings = $('#chkbox_eigeneTrainings').val();
 
 	//Ajax Request auf Home Controller getKalenderDaten()
 	$.post("getKalenderDaten/", {"sparte_id": sparte_id, "eigeneTrainings": eigeneTrainings})
@@ -92,13 +92,11 @@ function changeAnzeigeTrainingseinheiten(){
 	//den Text des Buttons ändern, sobald auf ihn geklickt wird
 	//value vom Button wird über den Ajax Request mit fillSparte() an den Controller übergeben
 	//hierdurch wird festgestellt, ob alle Trainings oder nur die eigenen geladen werden sollen
-	if ($('#btn_alleTrainings').val() == "alle"){
-		$('#btn_alleTrainings').html("nur eigene Trainingseinheiten anzeigen");
-		$('#btn_alleTrainings').val("eigene");
+	if ($('#chkbox_eigeneTrainings').val() == "ja"){
+		$('#chkbox_eigeneTrainings').val("nein");
 	}
 	else{
-		$('#btn_alleTrainings').html("alle Trainingseinheiten anzeigen");
-		$('#btn_alleTrainings').val("alle");
+		$('#chkbox_eigeneTrainings').val("ja");
 	}
 
 	//um die Trainings neu zu laden wird fillSparte() aufgerufen

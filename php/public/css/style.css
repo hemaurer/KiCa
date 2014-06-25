@@ -76,11 +76,16 @@ table {
     float: left;
     margin-top: -20px;
     color: #777;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+#lbl_chkbox_eigeneTrainings{
+    font-weight: 300;
 }
 
 #spartenButton{
     float: right;
+    margin-top: 30px;
 }
 
 #calendar{
@@ -181,7 +186,7 @@ table {
 	padding: 0px 10px;
 }
 .termin-details{
-	
+
 }
 /*PROFIL*/
 

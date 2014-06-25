@@ -11,10 +11,34 @@
 
 	<div id="spartenText" value="test">
 		<h3>Kalender der <?php echo $spartenDaten[0]->Sparte; ?></h3>
+		<?php
+			//Button anzeigen, wenn ein User eingeloggt ist
+			//zur Wechseln der Anzeige von allen Trainingseinheiten und den eigenen Trainings
+			if (isset($_SESSION['user_login_status'])){
+		?>
+				<label id="lbl_chkbox_eigeneTrainings">
+				    <input type="checkbox" id="chkbox_eigeneTrainings" value="ja" onclick="changeAnzeigeTrainingseinheiten()" checked></input>
+				    nur eigene Trainingseinheiten anzeigen
+				</label>
+		<?php
+			}
+		?>
 	</div>
 
 	<!-- Dropdown zur Spartenauswahl -->
-	<div id="spartenButton">
+	<?php
+	//Der Dropdown Button zur Spartenauswahl wird je nach Zustand, ob ein User eingeloggt ist anders dargestellt
+	//aus diesem Grund wird über PHP das CSS margin-top Element überschrieben - da CSS keine Variablen unterstützt
+	if (isset($_SESSION['user_login_status'])){
+	?>
+		<div id="spartenButton">
+	<?php
+	}else{
+	?>
+		<div id="spartenButton" style="margin-top:0px !important;">
+	<?php
+	}
+	?>
 		<div class="btn-group">
 			 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 			    <span class="spartenDropdownName" value=""> <?php echo $spartenDaten[0]->Sparte; ?> </span> <span class="caret"></span>
@@ -28,18 +52,6 @@
 					<?php } ?>
 		        </ul>
 		</div> <!-- End class="btn-group"> -->
-
-		<?php
-			//Button anzeigen, wenn ein User eingeloggt ist
-			//zur Wechseln der Anzeige von allen Trainingseinheiten und den eigenen Trainings
-			if (isset($_SESSION['user_login_status'])){
-		?>
-			<div class="btn-group">
-			  <button id="btn_alleTrainings" type="button" class="btn btn-default" value="alle" onclick="changeAnzeigeTrainingseinheiten()">alle Trainingseinheiten anzeigen</button>
-			</div>
-		<?php
-			}
-		?>
 	</div> <!-- End id="spartenButton" -->
 
 

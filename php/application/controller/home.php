@@ -37,7 +37,7 @@ class Home extends Controller
 
         //Ist ein User eingeloggt, werden nur die eigenen Trainings gezeigt, sonst alle Trainings
         @session_start();
-        if (isset($_SESSION['user_login_status']) && $_POST["eigeneTrainings"] == "alle"){
+        if (isset($_SESSION['user_login_status']) && $_POST["eigeneTrainings"] == "ja"){
             $trainingseinheitenDaten = $home_model->getEigeneTrainingseinheiten($_SESSION["p_id"]);
         }
         else{
