@@ -21,7 +21,7 @@ class Home extends Controller
         }
         else{
             $trainingseinheitenDaten = $home_model->getAlleTrainingseinheiten();
-            $trainerDaten = "";
+            $trainerDaten = "{}";
         }
 
         $ligaDaten = $home_model->getLigaDaten(1);
@@ -53,7 +53,7 @@ class Home extends Controller
             $trainerDaten = $home_model->getTrainerDaten($_SESSION['p_id']);
         }
         else{
-            $trainerDaten = "";
+            $trainerDaten = "{}";
         }
 
         $ligaDaten = $home_model->getLigaDaten($_POST["sparte_id"]);
