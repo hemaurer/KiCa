@@ -54,6 +54,22 @@ class HomeModel
     }//end getAlleTrainingseinheiten()
 
 
+    //Alle Trainingsdaten ausgeben, in denen ein User Trainer ist
+    public function getTrainerDaten($p_id)
+    {
+        //Als Array festlegen
+        $json = array();
+
+        $sql = "SELECT CONCAT('\\n',trainingseinheit.name) AS title, trainingseinheit.zeit AS start, trainingseinheit.tr_id AS ID
+                FROM trainingseinheit
+                WHERE trainingseinheit.trainer = ?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($p_id));
+
+        return json_encode($query->fetchAll());
+    }//end getTrainerDaten()
+
+
     //Ligaspiele ausgeben
     public function getLigaDaten($sparte_id)
     {

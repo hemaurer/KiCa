@@ -68,13 +68,15 @@ function fillSparte(sparte_id, sparte){
 		var return_array = data.split('|');
 
 		var trainingseinheitenDaten = JSON.parse(return_array[0]);
-		var ligadaten = JSON.parse(return_array[1]);
-		var turnierdaten = JSON.parse(return_array[2]);
-		var freundschaftsdaten = JSON.parse(return_array[3]);
+		var trainerDaten = JSON.parse(return_array[1]);
+		var ligadaten = JSON.parse(return_array[2]);
+		var turnierdaten = JSON.parse(return_array[3]);
+		var freundschaftsdaten = JSON.parse(return_array[4]);
 
 		//Kalender neu befüllen mit den Rückgabewerten
 		$('#calendar').fullCalendar( 'removeEvents');
 		$('#calendar').fullCalendar( 'addEventSource', {events:trainingseinheitenDaten, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'} );
+		$('#calendar').fullCalendar( 'addEventSource', {events:trainerDaten, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'} );
 		$('#calendar').fullCalendar( 'addEventSource', {events:ligadaten,backgroundColor: '#3276B1', borderColor: '#3276B1', textColor:'#fff', className:'liga'} );
 		$('#calendar').fullCalendar( 'addEventSource', {events:turnierdaten,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff', className:'turnier'});
 		$('#calendar').fullCalendar( 'addEventSource', {events:freundschaftsdaten,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff', className:'freundschaft'});

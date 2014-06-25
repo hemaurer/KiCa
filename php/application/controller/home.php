@@ -16,9 +16,12 @@ class Home extends Controller
         @session_start();
         if (isset($_SESSION['user_login_status'])){
             $trainingseinheitenDaten = $home_model->getEigeneTrainingseinheiten($_SESSION['p_id']);
+            //Trainings anzeigen, in denen ein User Trainer ist
+            $trainerDaten = $home_model->getTrainerDaten($_SESSION['p_id']);
         }
         else{
             $trainingseinheitenDaten = $home_model->getAlleTrainingseinheiten();
+            $trainerDaten = "";
         }
 
         $ligaDaten = $home_model->getLigaDaten(1);
@@ -42,6 +45,15 @@ class Home extends Controller
         }
         else{
             $trainingseinheitenDaten = $home_model->getAlleTrainingseinheiten();
+
+        }
+
+        //Trainings anzeigen, in denen ein User Trainer ist
+        if (isset($_SESSION['user_login_status'])){
+            $trainerDaten = $home_model->getTrainerDaten($_SESSION['p_id']);
+        }
+        else{
+            $trainerDaten = "";
         }
 
         $ligaDaten = $home_model->getLigaDaten($_POST["sparte_id"]);
@@ -52,6 +64,8 @@ class Home extends Controller
         //Workaround für aufgetretene Array-Probleme
         echo $trainingseinheitenDaten;
 		echo '|';
+        echo $trainerDaten;
+        echo '|';
         echo $ligaDaten;
         echo '|';
 		echo $turnierDaten;
