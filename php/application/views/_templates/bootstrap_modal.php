@@ -315,19 +315,20 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Sparten wählen</label>
+							<label class="control-label col-md-4">Teilnehmer wählen</label>
 							<div class="col-md-6">
 								<ul class="form-control" id="checkboxSelect">
 								<div class="checkbox">
 									<?php	
-									foreach ($personen as $person) { ?>
+									foreach ($personen as $person) { 
+									if ($person->betreuer != 1){ ?>
 									<li>
 											<label>
 												<input type="checkbox" name="arr_teilnehmer_option[]" id="arr_teilnehmer_option" value="<?php if (isset($person->p_id)){echo $person->p_id; } ?>"><?php echo $person->v_name; ?> <?php echo $person->name; ?>
 											</label>
 									</li>
 									<?php 
-									} ?>
+									}} ?>
 								</div>
 								</ul>
 							</div>

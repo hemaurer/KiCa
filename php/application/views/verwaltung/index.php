@@ -1,8 +1,8 @@
 <?php
 	if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 ?>
-<script src="<?php echo URL; ?>public/js/modal-loader.js"> </script>
 <script src="<?php echo URL; ?>public/js/verwaltung.js"> </script>
+<script src="<?php echo URL; ?>public/js/format.js"> </script>
 
 <div class="container">
 	<ul class="nav nav-tabs">
@@ -30,13 +30,13 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Vorname*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_vorname" value="" placeholder="Vorname" required />
+										<input class="form-control" type="text" name="str_vorname" id="str_vorname_add_person" onkeyup="inputChecker('str', 'str_vorname_add_person')" value="" placeholder="Vorname" required />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Nachname*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_nachname" value="" placeholder="Nachname" required/>
+										<input class="form-control" type="text" name="str_nachname" id="str_nachname_add_person" onkeyup="inputChecker('str', 'str_nachname_add_person')" value="" placeholder="Nachname" required/>
 									</div>
 								</div>
 								<div class="form-group">
