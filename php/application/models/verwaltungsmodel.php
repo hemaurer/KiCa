@@ -22,6 +22,17 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
+	public function get_person($p_id)
+    {
+		$sql = "SELECT name AS Name, v_name AS Vorname, geb_datum AS Geburtstag, groesse AS Groesse, betreuer AS Betreuer, tel AS Telefon FROM person WHERE p_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($p_id));
+        $result = json_encode($query->fetchAll());
+        $json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
+        return $result;
+    }
     public function add_person($str_nachname, $str_vorname, $d_date, $int_groesse, $b_betreuer, $int_tel)
     {
 		$str_bild = "public/img/profilbilder/_noimage.jpg";

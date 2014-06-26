@@ -28,7 +28,11 @@ class Verwaltung extends Controller
     }
 
 /***Person***/
-
+	public function get_person()
+    {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->get_person($_POST["p_id"]);
+    }
     public function add_person()
     {
         if (isset($_POST["submit_add_person"])) {
