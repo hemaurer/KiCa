@@ -104,7 +104,11 @@ class Verwaltung extends Controller
 	}
 
 /***Mannschaften***/
-
+	public function get_mannschaft()
+    {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->get_mannschaft($_POST["m_id"]);
+    }
     public function add_mannschaft()
     {
         if (isset($_POST["submit_add_mannschaft"])) {
@@ -131,7 +135,11 @@ class Verwaltung extends Controller
     }
 
 /***Trainingseinheiten***/
-
+	public function get_trainingseinheit()
+    {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->get_trainingseinheit($_POST["tr_id"]);
+    }
     public function add_trainingseinheit()
     {
         if (isset($_POST["submit_add_trainingseinheit"])) {

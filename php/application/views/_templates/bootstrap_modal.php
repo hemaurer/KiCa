@@ -239,19 +239,19 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
 									<div class="col-md-6">
-										<input class="form-control" type="text" name="str_name" id="edit_trainingseinheit_str_name" value="" placeholder="Training" />
+										<input class="form-control" type="text" name="str_name" id="str_name_edit_trainingseinheit" value="" placeholder="Training" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsort*</label>
 									<div class="col-md-6">
-										<input class="form-control" type="text" name="str_ort" id="edit_trainingseinheit_str_ort" value="" placeholder="Trainingsort" />
+										<input class="form-control" type="text" name="str_ort" id="str_ort_edit_trainingseinheit" value="" placeholder="Trainingsort" />
 									</div>
 								</div>							
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainer*</label>
 									<div class="col-md-6">
-										<select class="form-control" name="str_trainer" id="edit_trainingseinheit_str_trainer" size="1">
+										<select class="form-control" name="str_trainer" id="str_trainer_edit_trainingseinheit" size="1">
 											<option value="0" selected disabled>Wählen...</option>
 											<?php foreach ($personen as $person) { ?>
 											<?php if ((isset($person->name))&&($person->betreuer == 1)){?><option><?php echo $person->name; ?></option><?php } ?>
@@ -262,7 +262,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsgruppe*</label>
 									<div class="col-md-6">
-										<select class="form-control" name="str_tg_name" id="edit_trainingseinheit_str_tg_name" size="1">
+										<select class="form-control" name="str_tg_name" id="str_tg_name_edit_trainingseinheit" size="1">
 											<option value="0" selected disabled>Wählen...</option>
 											<?php foreach ($trainingsgruppen as $trainingsgruppe) { ?>
 											<option><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></option>
@@ -274,7 +274,7 @@
 									<label class="control-label col-md-4">Datum*</label>
 									<div class="col-md-6">
 										<div data-provide="datepicker" class="input-group date">
-											<input class="form-control" name="d_date" id="edit_trainingseinheit_d_date" type="text" placeholder="Beispiel 01.01.2011">
+											<input class="form-control" name="d_date" id="d_date_edit_trainingseinheit" type="text" placeholder="Beispiel 01.01.2011">
 											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 										</div>
 									</div>
@@ -283,11 +283,11 @@
 									<label class="control-label col-md-4">Zeit*</label>
 									<div class="col-md-6">
 										<div class="input-group">
-											<input class="form-control" id="edit_trainingseinheit_timepicker" name="d_time" type="text" placeholder="Beispiel 12:00" required>
+											<input class="form-control" id="d_time_edit_trainingseinheit" name="d_time" type="text" placeholder="Beispiel 12:00" required>
 											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 										</div>
 									</div>
-									<script> $('#edit_trainingseinheit_timepicker').timepicker({showMeridian: false, defaultTime: false});</script>
+									<script> $('#d_time_edit_trainingseinheit').timepicker({showMeridian: false, defaultTime: false});</script>
 								</div>	
 							</div>
 				</div>

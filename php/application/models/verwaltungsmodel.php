@@ -408,6 +408,17 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
+	public function get_mannschaft($m_id)
+    {
+		$sql = "SELECT name AS Name FROM mannschaft WHERE m_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($m_id));
+        $result = json_encode($query->fetchAll());
+        $json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
+        return $result;
+    }
 	public function add_mannschaft($str_name)
     {
         $sql = "INSERT INTO mannschaft (name) VALUES (:name)";
@@ -448,6 +459,20 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
+    }
+	public function get_trainingseinheit($tr_id)
+    {
+		$sql = "SELECT trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Zeit, trainingsgruppe.name as Trainingsgruppe, person.name as Trainer 
+				FROM trainingseinheit
+				JOIN trainingsgruppe ON trainingseinheit.tg_id = trainingsgruppe.tg_id
+				JOIN person ON trainingseinheit.trainer = person.p_id WHERE trainingseinheit.tr_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($tr_id));
+        $result = json_encode($query->fetchAll());
+        $json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
+        return $result;
     }
 	public function add_trainingseinheit($str_name, $str_ort, $d_date, $d_time, $str_tg_name, $str_trainer)
     {
