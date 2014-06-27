@@ -124,10 +124,10 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   KEY `Status` (`stat_id`),
   KEY `Turnier` (`tu_id`),
   KEY `Sparte1` (`sparte_id`),
+  CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Auswaertsmannschaft` FOREIGN KEY (`auswaerts`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Heimmannschaft` FOREIGN KEY (`heim`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Sparte1` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
-  CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Turnier` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -172,8 +172,8 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   PRIMARY KEY (`tr_id`),
   KEY `Trainingsgruppe` (`tg_id`),
   KEY `Trainer` (`trainer`),
-  CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`)
+  CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`),
+  CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -219,6 +219,35 @@ CREATE TABLE IF NOT EXISTS `turnier_sparte` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
+
+
+-- Exportiere Struktur von Trigger kica.AutoDeleteAbwesenheit
+DROP TRIGGER IF EXISTS `AutoDeleteAbwesenheit`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `AutoDeleteAbwesenheit` AFTER DELETE ON `teilnehmer_tg` FOR EACH ROW BEGIN
+DELETE FROM abwesenheit
+WHERE abwesenheit.p_id = OLD.p_id AND
+		abwesenheit.tr_id IN (	SELECT trainingseinheit.tr_id
+										FROM trainingseinheit
+										WHERE trainingseinheit.tg_id = OLD.tg_id);						
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica.AutoInsertAbwesenheit
+DROP TRIGGER IF EXISTS `AutoInsertAbwesenheit`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `AutoInsertAbwesenheit` AFTER INSERT ON `teilnehmer_tg` FOR EACH ROW BEGIN
+INSERT INTO abwesenheit
+	SELECT trainingseinheit.tr_id, NEW.p_id
+   FROM trainingseinheit
+   WHERE trainingseinheit.tg_id = NEW.tg_id AND trainingseinheit.zeit > NOW();
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

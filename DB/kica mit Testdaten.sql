@@ -27,9 +27,20 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
   CONSTRAINT `Trainingseinheit` FOREIGN KEY (`tr_id`) REFERENCES `trainingseinheit` (`tr_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~0 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~10 rows (ungefähr)
 DELETE FROM `abwesenheit`;
 /*!40000 ALTER TABLE `abwesenheit` DISABLE KEYS */;
+INSERT INTO `abwesenheit` (`tr_id`, `p_id`) VALUES
+	(6, 3),
+	(8, 3),
+	(8, 10),
+	(8, 14),
+	(8, 19),
+	(8, 24),
+	(7, 25),
+	(8, 25),
+	(7, 28),
+	(8, 28);
 /*!40000 ALTER TABLE `abwesenheit` ENABLE KEYS */;
 
 
@@ -753,10 +764,10 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   KEY `Status` (`stat_id`),
   KEY `Turnier` (`tu_id`),
   KEY `Sparte1` (`sparte_id`),
+  CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Auswaertsmannschaft` FOREIGN KEY (`auswaerts`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Heimmannschaft` FOREIGN KEY (`heim`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Sparte1` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
-  CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Turnier` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
@@ -784,9 +795,9 @@ CREATE TABLE IF NOT EXISTS `status` (
   `status` varchar(30) NOT NULL,
   PRIMARY KEY (`stat_id`),
   UNIQUE KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.status: ~11 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.status: ~12 rows (ungefähr)
 DELETE FROM `status`;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
 INSERT INTO `status` (`stat_id`, `status`) VALUES
@@ -799,6 +810,7 @@ INSERT INTO `status` (`stat_id`, `status`) VALUES
 	(2, 'Gruppenphase'),
 	(5, 'Halbfinale'),
 	(1, 'Liga'),
+	(12, 'Qualifikation'),
 	(8, 'Sechzehntelfinale'),
 	(4, 'Viertelfinale');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
@@ -815,12 +827,23 @@ CREATE TABLE IF NOT EXISTS `teilnehmer_tg` (
   CONSTRAINT `Trainigsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.teilnehmer_tg: ~2 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.teilnehmer_tg: ~13 rows (ungefähr)
 DELETE FROM `teilnehmer_tg`;
 /*!40000 ALTER TABLE `teilnehmer_tg` DISABLE KEYS */;
 INSERT INTO `teilnehmer_tg` (`tg_id`, `p_id`) VALUES
+	(1, 3),
+	(2, 3),
+	(3, 3),
+	(1, 10),
+	(3, 10),
+	(1, 14),
+	(3, 14),
 	(1, 19),
-	(2, 19);
+	(1, 24),
+	(3, 24),
+	(1, 25),
+	(3, 25),
+	(1, 28);
 /*!40000 ALTER TABLE `teilnehmer_tg` ENABLE KEYS */;
 
 
@@ -943,6 +966,35 @@ INSERT INTO `turnier_sparte` (`tu_id`, `sparte_id`, `gewinner`) VALUES
 	(7, 5, NULL),
 	(1, 1, 1);
 /*!40000 ALTER TABLE `turnier_sparte` ENABLE KEYS */;
+
+
+-- Exportiere Struktur von Trigger kica_test.AutoDeleteAbwesenheit
+DROP TRIGGER IF EXISTS `AutoDeleteAbwesenheit`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `AutoDeleteAbwesenheit` AFTER DELETE ON `teilnehmer_tg` FOR EACH ROW BEGIN
+DELETE FROM abwesenheit
+WHERE abwesenheit.p_id = OLD.p_id AND
+		abwesenheit.tr_id IN (	SELECT trainingseinheit.tr_id
+										FROM trainingseinheit
+										WHERE trainingseinheit.tg_id = OLD.tg_id);						
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.AutoInsertAbwesenheit
+DROP TRIGGER IF EXISTS `AutoInsertAbwesenheit`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `AutoInsertAbwesenheit` AFTER INSERT ON `teilnehmer_tg` FOR EACH ROW BEGIN
+INSERT INTO abwesenheit
+	SELECT trainingseinheit.tr_id, NEW.p_id
+   FROM trainingseinheit
+   WHERE trainingseinheit.tg_id = NEW.tg_id AND trainingseinheit.zeit > NOW();
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
