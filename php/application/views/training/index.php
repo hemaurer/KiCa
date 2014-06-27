@@ -67,6 +67,49 @@
 				</div>
 			</div>
 		</form>
+		<br />
+		<br />
+		<h2>Anwesenheitsliste</h2>
+		<br />
+		<div class="form-group">
+			<form action="<?php echo URL; ?>training/edit_anwesenheitsliste/" method="POST">
+				<input type="hidden" name="tr_id" value="<?php echo $tr_id ?>">
+				<div class="col-md-6">
+				<?php
+					foreach ($anwesenheitsliste as $person){ 
+				?>
+					<?php 
+						$b_anwesend = true;?>
+						<ul class="form-control" id="checkboxSelect">
+							<div class="checkbox">
+								<li>
+									<label>
+										<input type="checkbox" id="p_ids[]" name="p_ids[]" value="<?php echo $person->p_id ?>"
+																	<?php
+																		foreach ($abwesenheitsliste as $abwesend){
+																			if (stripos($abwesend->Teilnehmer, $person->Teilnehmer) !== false){
+																				$b_anwesend = false;
+																				break;
+																			}
+																		}
+																		if ($b_anwesend) {
+																			echo "checked";
+																		}
+																	?>>
+									</label>
+								</li>
+								<label class="control-label col-md-3"><?php echo $person->Teilnehmer ?></label>
+							<br />
+							</div>
+						</ul>
+				<?php	
+					}
+				?>
+				
+					<input class="btn btn-default" type="submit" name="submit_edit_anwesenheitsliste" value="Speichern" />
+				</div>
+			</form>
+		</div>
 </div>
 
  <?php }

@@ -45,6 +45,21 @@ class SpartenModel
         return $query->fetchAll();
 
     } //end getTurniere()
+	
+	public function get_Sieger($tu_id, $sparte_id){
+	
+		$sql = "SELECT turnier.name AS Turnier, sparte.name AS Sparte, IFNULL(mannschaft.name,'noch nicht ermittelt') AS Gewinner
+			FROM turnier_sparte
+			JOIN turnier ON turnier.tu_id = turnier_sparte.tu_id
+			JOIN sparte ON sparte.sparte_id = turnier_sparte.sparte_id
+			LEFT JOIN mannschaft ON mannschaft.m_id = turnier_sparte.gewinner
+			WHERE turnier_sparte.sparte_id = ? AND turnier_sparte.tu_id = ?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($sparte_id, $tu_id));
+
+        return $query->fetchAll();
+	
+	}
 
 
 }?>

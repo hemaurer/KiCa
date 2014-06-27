@@ -93,10 +93,10 @@
 					echo "</table><h3>".$str_status."</h3><table class='table'><tr>";
 				}
 				if (isset($spiel->Heim)) echo "<td>".$spiel->Heim."</td>";
-				if (isset($spiel->Heimtore)) {echo "<td width='100px'>".$spiel->Heimtore."</td><td width='5'> : </td>";} else { echo "<td> vs </td>";};
+				if (isset($spiel->Heimtore)) {echo "<td>".$spiel->Heimtore."</td><td width='5'> : </td>";} else { echo "<td> vs </td>";};
 
-				if (isset($spiel->Auswaertstore)) echo "<td width='100'>".$spiel->Auswaertstore."</td>";
-				if (isset($spiel->Auswaerts)) echo "<td width='300'>".$spiel->Auswaerts."</td>";
+				if (isset($spiel->Auswaertstore)) echo "<td>".$spiel->Auswaertstore."</td>";
+				if (isset($spiel->Auswaerts)) echo "<td>".$spiel->Auswaerts."</td>";
 			?>
 			</tr>
 			<?php
