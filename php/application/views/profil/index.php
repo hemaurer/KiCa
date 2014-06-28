@@ -36,15 +36,15 @@
 													    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
 													    <input type="hidden" name="resetProfilbild" value="0"/>
 													    <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
-													    <input name="userfile" type="file"  class="btn btn-default" required/></p>
+													    <input name="userfile" type="file" id="profilFileDialog" class="btn btn-default" required/>
 													    <input type="submit" name="submit_change_profilbild" value="Hochladen" class="btn btn-primary"/>
 													</form>
 												</div>
 
 											</div>
 											<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal" >Abbrechen</button>
 													<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="resetProfilbild()">Profilbild zurücksetzen</button>
+													<button type="button" class="btn btn-default" data-dismiss="modal" >Abbrechen</button>
 												</div>
 										</div>
 									</div>
@@ -107,7 +107,7 @@
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismissTel()">Abbrechen</button>
-													<button type="button" id="submit_saveTel" class="btn btn-primary" data-dismiss="modal" onclick="saveTel()">Ändern</button>
+													<button type="button" id="submit_saveTel" class="btn btn-primary" data-dismiss="modal" onclick="saveTel()">Speichern</button>
 												</div>
 											</div>
 										</div>
@@ -144,7 +144,7 @@
 												</div>
 												<div class="modal-footer">
 													<button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismissPW()">Abbrechen</button>
-													<button type="button" class="btn btn-primary" id="submit_change_password" data-dismiss="modal" onclick="savePassword()">Ändern</button>
+													<button type="button" class="btn btn-primary" id="submit_change_password" data-dismiss="modal" onclick="savePassword()">Speichern</button>
 												</div>
 											</div>
 										</div>

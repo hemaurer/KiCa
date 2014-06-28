@@ -49,7 +49,7 @@
 					<div class="col-md-6">
 						<ul class="form-control" id="checkboxSelect">
 							<div class="checkbox">
-							<?php 
+							<?php
 								// Liste alle Personen auf
 								foreach ($personen as $spieler){
 									$b_aufgestellt = false;
@@ -62,7 +62,7 @@
 												if (strstr($aufgestellterSpieler->Spieler, $spieler->name) !== false){
 													$b_aufgestellt = true;
 													break;
-												} 
+												}
 											}
 											// Checkbox darstellen, checked oder nicht
 											if ($b_aufgestellt){
@@ -70,10 +70,10 @@
 											} else {
 												echo "<li><label><input type='checkbox' name='arr_aufstellung[]' value='".$spieler->p_id."' /> </label></li>";
 											}
-											
+
 										} else {
 											echo "<li><label><input type='checkbox' name='arr_aufstellung[]' value='".$spieler->p_id."' />";
-											
+
 										}
 										echo $spieler->v_name." ".$spieler->name."</label></li>";
 									}
@@ -86,7 +86,7 @@
 				<br />
 				<div class="form-group">
 					<div class="col-md-offset-3 col-md-6">
-						<input class="btn btn-default" type="submit" name="submit_edit_aufstellung" value="Speichern" />
+						<input class="btn btn-primary" type="submit" name="submit_edit_aufstellung" value="Speichern" />
 					</div>
 				</div>
 			</form>
@@ -95,14 +95,14 @@
 </div>
 
  <?php
-	} else { 
+	} else {
 		// Eingeloggter User, aber kein Betreuer, daher nur Ansichtsseite
-		if (isset($_SESSION['user_login_status'])){		
+		if (isset($_SESSION['user_login_status'])){
 	?>
 			<div class="container">
 				<h4>Aufstellung</h4>
 				<table>
-				<?php 
+				<?php
 					// Wenn Aufstellung vorhanden ist, stelle die aufgestellten Spieler dar
 					if (count($aufstellung) > 0){
 						foreach ($personen as $spieler){
@@ -111,7 +111,7 @@
 								if (strstr($aufgestellterSpieler->Spieler, $spieler->name) !== false){
 									$b_aufgestellt = true;
 									break;
-								} 
+								}
 							}
 							if ($b_aufgestellt){
 								echo "<tr><td>".$spieler->v_name." ".$spieler->name."</td></tr>";
@@ -120,15 +120,15 @@
 					} else {
 							echo "<h5>Keine Aufstellung vorhanden</h5>";
 					}
-					
+
 				?>
 				</table>
 			</div>
 	<?php
-		} else {	?>	
+		} else {	?>
 		<div class="container"> <?php
 			echo "Diese Seite ist für Sie gesperrt"; ?>
 		</div>
-	<?php } 
+	<?php }
 	}?>
 

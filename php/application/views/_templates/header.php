@@ -130,7 +130,7 @@
 							<li class="divider"></li>
 
 								<form class="navbar-form" name="logoutform" action="<?php echo URL; ?>login/doLogout/" method="get">
-									<button class="btn btn-default" type="submit" name="submit_logout" />Logout</button>
+									<button class="btn btn-danger" type="submit" name="submit_logout" />Logout</button>
 								</form>
 
 						<?php }

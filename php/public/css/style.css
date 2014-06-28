@@ -209,6 +209,10 @@ table {
     margin-left: auto;
 }
 
+#profilFileDialog{
+    display: inline-block;
+}
+
 #bild img{
     display: inline-block;
     width: 250px;

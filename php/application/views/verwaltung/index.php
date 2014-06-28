@@ -77,7 +77,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
-										<input type="submit" class="btn btn-default" name="submit_add_person" value="Speichern" />
+										<input type="submit" class="btn btn-primary" name="submit_add_person" value="Speichern" />
 									</div>
 								</div>
 							</form>
@@ -111,7 +111,7 @@
 									<div class="col-md-4">
 										<select class="form-control" name="str_stat_name" id="str_status1" size="1" onchange="selectFiller('1', 'str_status1', 'str_tu_name1')" disabled required>
 											<option value="0" selected disabled>Status wählen</option>
-											
+
 										</select>
 									</div>
 								</div>
@@ -172,7 +172,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
-										<input type="submit" class="btn btn-default" name="submit_add_spiel" value="Speichern"/>
+										<input type="submit" class="btn btn-primary" name="submit_add_spiel" value="Speichern"/>
 									</div>
 								</div>
 							</form>
@@ -198,7 +198,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
-										<input class="btn btn-default" type="submit" name="submit_add_mannschaft" value="Speichern" />
+										<input class="btn btn-primary" type="submit" name="submit_add_mannschaft" value="Speichern" />
 									</div>
 								</div>
 							</form>
@@ -212,7 +212,7 @@
 						<h4 class="panel-title">
 							<a class="collapse_title" >Neue Trainingseinheit hinzufügen</a><div id="tr_add_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
-					</div>	
+					</div>
 					<div id="tr_add" class="panel-collapse collapse">
 						<div class="panel-body">
 							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_trainingseinheit/" method="POST">
@@ -227,7 +227,7 @@
 									<div class="col-md-4">
 										<input class="form-control" type="text" name="str_ort" value="" placeholder="Trainingsort" required />
 									</div>
-								</div>							
+								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainer*</label>
 									<div class="col-md-4">
@@ -268,10 +268,10 @@
 										</div>
 									</div>
 									<script> $('#timepicker2').timepicker({showMeridian: false, defaultTime: false});</script>
-								</div>	
+								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
-										<input class="btn btn-default" type="submit" name="submit_add_trainingseinheit" value="Speichern" />
+										<input class="btn btn-primary" type="submit" name="submit_add_trainingseinheit" value="Speichern" />
 									</div>
 								</div>
 							</form>
@@ -301,15 +301,15 @@
 									<div class="col-md-4">
 										<ul class="form-control" id="checkboxSelect">
 										<div class="checkbox">
-											<?php 
-											
+											<?php
+
 											foreach ($personen as $person) { ?>
 											<li>
 													<label>
 														<input type="checkbox" name="arr_teilnehmer_option[]" value="<?php if (isset($person->p_id)){echo $person->p_id; } ?>"><?php echo $person->v_name; ?> <?php echo $person->name; ?>
 													</label>
 											</li>
-											<?php 
+											<?php
 											} ?>
 										</div>
 										</ul>
@@ -317,7 +317,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
-										<input class="btn btn-default" type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
+										<input class="btn btn-primary" type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
 									</div>
 								</div>
 							</form>
@@ -362,7 +362,7 @@
 									<div class="col-md-4">
 										<ul class="form-control" id="checkboxSelect">
 										<div class="checkbox">
-											<?php 
+											<?php
 											$i = 1;
 											foreach ($sparten as $sparte) { ?>
 											<li>
@@ -370,7 +370,7 @@
 														<input type="checkbox" name="arr_sparte_option[]" value="<?php if (isset($sparte->name)) echo $sparte->name; ?>"><?php echo $sparte->name; ?>
 													</label>
 											</li>
-											<?php 
+											<?php
 											$i++;} ?>
 										</div>
 										</ul>
@@ -378,7 +378,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
-										<input class="btn btn-default" type="submit" name="submit_add_turnier" value="Speichern" />
+										<input class="btn btn-primary" type="submit" name="submit_add_turnier" value="Speichern" />
 									</div>
 								</div>
 							</form>
@@ -405,7 +405,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
-										<input class="btn btn-default" type="submit" name="submit_add_sparte" value="Speichern" />
+										<input class="btn btn-primary" type="submit" name="submit_add_sparte" value="Speichern" />
 									</div>
 								</div>
 							</form>
@@ -413,9 +413,9 @@
 					</div>
 				</div>
 			</div>
-		</div>	
-	
-		
+		</div>
+
+
 	<?php /***Edit-Tab***/?>
 		<div id="edit" class="tab-pane fade">
 			<div class="panel-group" id="edit-accordion">
@@ -540,7 +540,7 @@
 						<h4 class="panel-title">
 							<a class="collapse_title" >Trainingseinheiten bearbeiten</a><div id="tr_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
 						</h4>
-					</div>	
+					</div>
 					<div id="tr_edit" class="panel-collapse collapse">
 						<div class="panel-body">
 							<h3>Liste aller Trainingseinheiten</h3>
@@ -630,11 +630,11 @@
 									</tr>
 								</thead>
 								<tbody>
-								<?php foreach ($turniere as $turnier) { 
+								<?php foreach ($turniere as $turnier) {
 									if (($turnier->Turnier) != "Freundschaftsspiel" ){ ?>
 									<tr>
-										<td class="firstrow"><?php if (isset($turnier->Turnier)){ 
-												echo $turnier->Turnier;										 
+										<td class="firstrow"><?php if (isset($turnier->Turnier)){
+												echo $turnier->Turnier;
 										}?></td>
 										<td class="firstrow"><?php if (isset($turnier->Liga)){
 											if ($turnier->Liga == 1){
@@ -645,7 +645,7 @@
 										<td class="firstrow" align="center"><a href="#" data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td class="firstrow" align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
-									<?php foreach ($turniere_detail as $turnier_detail) { 
+									<?php foreach ($turniere_detail as $turnier_detail) {
 										if (($turnier_detail->Turnier == $turnier->Turnier) ){  ?>
 											<tr>
 												<td class="emptycell"></td>

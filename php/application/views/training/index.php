@@ -18,7 +18,7 @@
 				<div class="col-md-4">
 					<input class="form-control" type="text" name="str_ort" value="<?php echo $training->Ort ?>" required />
 				</div>
-			</div>							
+			</div>
 			<div class="form-group">
 				<label class="control-label col-md-4">Trainer*</label>
 				<div class="col-md-4">
@@ -60,10 +60,10 @@
 					</div>
 				</div>
 				<script> $('#timepicker2').timepicker({showMeridian: false, defaultTime: false});</script>
-			</div>	
+			</div>
 			<div class="form-group">
 				<div class="col-md-offset-4 col-md-4">
-					<input class="btn btn-default" type="submit" name="submit_edit_trainingseinheit" value="Speichern" />
+					<input class="btn btn-primary" type="submit" name="submit_edit_trainingseinheit" value="Speichern" />
 				</div>
 			</div>
 		</form>
@@ -76,9 +76,9 @@
 				<input type="hidden" name="tr_id" value="<?php echo $tr_id ?>">
 				<div class="col-md-6">
 				<?php
-					foreach ($anwesenheitsliste as $person){ 
+					foreach ($anwesenheitsliste as $person){
 				?>
-					<?php 
+					<?php
 						$b_anwesend = true;?>
 						<ul class="form-control" id="checkboxSelect">
 							<div class="checkbox">
@@ -102,11 +102,11 @@
 							<br />
 							</div>
 						</ul>
-				<?php	
+				<?php
 					}
 				?>
-				
-					<input class="btn btn-default" type="submit" name="submit_edit_anwesenheitsliste" value="Speichern" />
+
+					<input class="btn btn-primary" type="submit" name="submit_edit_anwesenheitsliste" value="Speichern" />
 				</div>
 			</form>
 		</div>

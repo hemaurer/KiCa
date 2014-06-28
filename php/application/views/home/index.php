@@ -75,11 +75,11 @@
 
 					 	// Kalender mit Events (bzw. Daten) füllen - ausgelesen über controller bzw. model
 					 	// className wird zur Unterscheidung von Trainingseinheit / Spiel genutzt
-					 	{events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'},
-					 	{events:<?php echo $trainerDaten;?>, backgroundColor: '#47A447', borderColor : '#47A447', textColor:'#fff', className:'training'},
-					 	{events:<?php echo $ligaDaten;?>,backgroundColor: '#3276B1', borderColor: '#3276B1', textColor:'#fff', className:'liga'},
-					 	{events:<?php echo $turnierDaten;?>,backgroundColor: '#D2322D', borderColor:'#D2322D', textColor:'#fff', className:'turnier'},
-					 	{events:<?php echo $freundschaftsDaten;?>,backgroundColor: '#ED9C28', borderColor:'#ED9C28', textColor:'#fff', className:'freundschaft'},
+					 	{events:<?php echo $trainingseinheitenDaten;?>, backgroundColor: '#5cb85c', borderColor : '#5cb85c', textColor:'#fff', className:'training'},
+					 	{events:<?php echo $trainerDaten;?>, backgroundColor: '#5cb85c', borderColor : '#5cb85c', textColor:'#fff', className:'training'},
+					 	{events:<?php echo $ligaDaten;?>,backgroundColor: '#428bca', borderColor: '#428bca', textColor:'#fff', className:'liga'},
+					 	{events:<?php echo $turnierDaten;?>,backgroundColor: '#d9534f', borderColor:'#d9534f', textColor:'#fff', className:'turnier'},
+					 	{events:<?php echo $freundschaftsDaten;?>,backgroundColor: '#f0ad4e', borderColor:'#f0ad4e', textColor:'#fff', className:'freundschaft'},
 
 						],
 
@@ -120,4 +120,4 @@
 			</div>
 		</div>
 	</div>
-</div> <!-- End container
+</div> <!-- End container -->
