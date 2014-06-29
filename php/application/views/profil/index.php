@@ -57,26 +57,21 @@
 					<table class="table">
 						<thead style="background-color: #ddd; font-weight: bold;">
 						<tr>
-							<td>Meine Daten</td>
-							<td></td>
-							<td></td>
+							<td colspan="3">Meine Daten</td>
 						</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td><strong>Name: </strong></td>
-								<td><?php echo $_SESSION['v_name']; echo" "; echo $_SESSION['name']; ?></td>
-								<td></td>
+								<td colspan="2"><?php echo $_SESSION['v_name']; echo" "; echo $_SESSION['name']; ?></td>
 							</tr>
 							<tr>
 								<td><strong>Benutzername: </strong></td>
-								<td><?php echo $_SESSION['username']; ?></td>
-								<td></td>
+								<td colspan="2"><?php echo $_SESSION['username']; ?></td>
 							</tr>
 							<tr>
 								<td><strong>Geburtsdatum: </strong></td>
-								<td><?php echo $_SESSION['geb_datum']; ?></td>
-								<td></td>
+								<td colspan="2"><?php if (isset($_SESSION['geb_datum'])){$date = new DateTime($_SESSION['geb_datum']); echo $date->format('d.m.Y');} ?></td>
 							</tr>
 							<tr>
 								<td><strong>Größe: </strong></td>

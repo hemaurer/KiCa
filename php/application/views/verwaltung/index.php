@@ -446,7 +446,7 @@
 									<tr>
 										<td><?php if (isset($person->name)) echo $person->name; ?></td>
 										<td><?php if (isset($person->v_name)) echo $person->v_name; ?></td>
-										<td><?php if (isset($person->geb_datum)) echo $person->geb_datum; ?></td>
+										<td><?php if (isset($person->geb_datum)){$date = new DateTime($person->geb_datum); echo $date->format('d.m.Y');} ?></td>
 										<td><?php if (isset($person->username)) echo $person->username; ?></td>
 										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>

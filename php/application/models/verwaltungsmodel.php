@@ -502,7 +502,7 @@ class VerwaltungsModel
 		
         $sql = "INSERT INTO trainingseinheit (name, ort, zeit, trainer, tg_id) VALUES (:name, :ort, :zeit, :trainer, :tg_id)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer, ':tg_id' => $int_tg_id));
+        $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer->p_id, ':tg_id' => $int_tg_id->tg_id));
     }
 	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_date, $d_time, $str_tg, $str_trainer)
     {
@@ -694,7 +694,24 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
+	public function get_turnier($tu_id)
+    {
+		$sql = "SELECT turnier.name AS Name, turnier.liga AS Liga FROM turnier WHERE turnier.tu_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($tu_id));
+		$turnier_result = $query->fetchAll();
+		
+		$sql = "SELECT turnier_sparte.sparte_id AS Sparte FROM turnier_sparte WHERE turnier_sparte.tu_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($tu_id));
+		$turnier_sparte_result = $query->fetchAll();
+		
+		$result = json_encode(array_merge($turnier_result,$turnier_sparte_result));
+		$json_string = substr($result, 1 , (strlen($result)-2));
 
+        echo $json_string;
+        return $result;
+    }
 	public function add_turnier($str_name, $int_liga, $arr_sparte_option)
     {
 		/*Neues Turnier mit Name und Ligawert in tbl Turnier anlegen*/
@@ -760,24 +777,14 @@ class VerwaltungsModel
 			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
 			if (is_array($arr_sparte_option)) {
 				foreach($arr_sparte_option as $option){
-					/*Sparten ID auslesen*/
-					$sql = "SELECT sparte_id FROM sparte WHERE name = ?";
-					$query = $this->db->prepare($sql);
-					$query->execute(array($option));
-					$sparte = $query->fetch(PDO::FETCH_OBJ);
 			
 					/*neue Verknüpfung in tbl turnier_sparte ohne gewinner anlegen*/
 					$sql = "INSERT INTO turnier_sparte (tu_id, sparte_id) VALUES (:tu_id, :sparte_id)";
 					$query = $this->db->prepare($sql);
-					$query->execute(array(':tu_id' => $turnier->tu_id, ':sparte_id' => $sparte->sparte_id));
+					$query->execute(array(':tu_id' => $turnier->tu_id, ':sparte_id' => $option));
 				}
 			} 
 		}
-		// /*Backup*/
-		// $sql = "UPDATE turnier SET name=?, gewinner=? WHERE tu_id=?";
-		// $query = $this->db->prepare($sql);
-		// $query->execute(array($str_name, $int_gewinner, $tu_id));
-		
 		
 		echo true;
 	}
@@ -795,13 +802,31 @@ class VerwaltungsModel
 		echo true;
     }
 /***Turnier_Sparte***/
-	public function get_turnier_sparte_select($tu_id, $sparte_id)
+	public function get_turnier_sparte($tu_id, $sparte_id)
 	{
-		$sql = "SELECT mannschaft.name AS value FROM mannschaft";
+		$sql = "SELECT mannschaft_turnier_sparte.m_id AS Mannschaft FROM mannschaft_turnier_sparte WHERE tu_id=? AND sparte_id=?";
 		$query = $this->db->prepare($sql);
-		$query->execute();
-        $result = json_encode($query->fetchAll());
+		$query->execute(array($tu_id, $sparte_id));
+        $mannschaft_sparte_result = $query->fetchAll();
+		
+		$sql = "SELECT turnier_sparte.gewinner AS Gewinner_Id FROM turnier_sparte WHERE turnier_sparte.tu_id=? AND turnier_sparte.sparte_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($tu_id, $sparte_id));
+		$gewinner_id_result = $query->fetch(PDO::FETCH_OBJ);
+		// $gewinner_id_result = $query->fetchAll();
+		
+		$sql = "SELECT mannschaft.name AS Gewinner FROM mannschaft WHERE mannschaft.m_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($gewinner_id_result->Gewinner_Id));
+		$gewinner_result = $query->fetchAll();
+		
+		$result = json_encode(array_merge($gewinner_result,$mannschaft_sparte_result));
+		$json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
         return $result;
+		
+		
 	}
 	public function edit_turnier_sparte($tu_id, $sparte_id, $arr_mannschaft_option, $str_gewinner)
 	{
@@ -857,7 +882,7 @@ class VerwaltungsModel
         return $query->fetchAll();
     }
 	
-	/***Sparte***/
+/***Sparte***/
 	public function get_alle_sparten()
     {
         $sql = "SELECT * FROM sparte";

@@ -146,7 +146,7 @@ class Verwaltung extends Controller
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->add_trainingseinheit($_POST["str_name"], $_POST["str_ort"], $_POST["d_date"], $_POST["d_time"], $_POST["str_tg_name"], $_POST["str_trainer"]);
         }
-        header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
+        // header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
 	public function edit_trainingseinheit()
     {
@@ -191,7 +191,11 @@ class Verwaltung extends Controller
     }
 
 /***Turnier***/
-
+	public function get_turnier()
+    {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->get_turnier($_POST["tu_id"]);
+    }
     public function add_turnier()
     {
         if (isset($_POST["submit_add_turnier"])) {
@@ -224,12 +228,10 @@ class Verwaltung extends Controller
         }
         //header('location: ' . URL . 'verwaltung/');
     }
-	public function get_turnier_sparte_select()
+	public function get_turnier_sparte()
 	{
-		//if ((isset($_POST["sparte_id"])) && (isset($_POST["tu_id"]))) {
 			$verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->get_turnier_sparte_select($_POST["tu_id"], $_POST["sparte_id"]);
-        //}
+            $verwaltungs_model->get_turnier_sparte($_POST["tu_id"], $_POST["sparte_id"]);
 	}
 	public function edit_turnier_sparte()
 	{

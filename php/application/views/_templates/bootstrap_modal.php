@@ -133,28 +133,28 @@
 				<div class="modal-body" id="modalbody">
 					<div class="form-horizontal">
 						<div class="form-group">
-							<label class="control-label col-md-4">Turniername</label>
+							<label class="control-label col-md-4">Turniername*</label>
 							<div class="col-md-6">
-								<input class="form-control" type="text" id="str_name" value="" placeholder="Turniername" />
+								<input class="form-control" type="text" name="str_name" id="str_name_edit_turnier" value="" placeholder="Turniername" required />
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Liga?</label>
+							<label class="control-label col-md-4">Liga?*</label>
 							<div class="col-md-2">
 								<label>
-									<input type="radio" id="int_liga" name="int_liga" value="1">
+									<input type="radio" id="int_liga" name="int_liga_ja" value="1">
 									Ja
 								</label>
 							</div>
 							<div class="col-md-2">
 								<label>
-									<input type="radio" id="int_liga" name="int_liga" value="0" checked>
+									<input type="radio" id="int_liga" name="int_liga_nein" value="0">
 									Nein
 								</label>
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-md-4">Sparten wählen*</label>
+							<label class="control-label col-md-4">Sparten wählen</label>
 							<div class="col-md-6">
 								<ul class="form-control" id="checkboxSelect">
 								<div class="checkbox">
@@ -162,7 +162,7 @@
 									foreach ($sparten as $sparte) { ?>
 									<li>
 											<label>
-												<input type="checkbox" id="arr_sparte_option" name="arr_sparte_option[]" value="<?php if (isset($sparte->name)) echo $sparte->name; ?>"><?php echo $sparte->name; ?>
+												<input type="checkbox" id="arr_sparte_option" name="arr_sparte_option[]" value="<?php if (isset($sparte->sparte_id)){ echo $sparte->sparte_id; ?>"><?php echo $sparte->name; }?>
 											</label>
 									</li>
 									<?php
@@ -197,7 +197,7 @@
 											foreach ($mannschaften as $mannschaft) { ?>
 											<li>
 													<label>
-														<input type="checkbox" id="arr_mannschaft_option" name="arr_mannschaft_option[]" value="<?php if (isset($mannschaft->name)) echo $mannschaft->name; ?>"><?php echo $mannschaft->name; ?>
+														<input type="checkbox" id="arr_mannschaft_option" name="arr_mannschaft_option[]" value="<?php if (isset($mannschaft->m_id)){ echo $mannschaft->m_id; ?>"><?php echo $mannschaft->name;} ?>
 													</label>
 											</li>
 											<?php 
@@ -210,8 +210,8 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">Gewinner</label>
 							<div class="col-md-6">
-								<select class="form-control" name="str_gewinner" id="str_gewinner" size="1" >
-									<option value="0" selected disabled>Team wählen</option>
+								<select class="form-control" name="str_gewinner" id="str_gewinner_edit_turnier_sparte" size="1" >
+									<option value="0" selected disabled>Gewinner wählen</option>
 									<?php foreach ($mannschaften as $mannschaft) { ?>
 									<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
 									<?php } ?>
