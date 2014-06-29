@@ -385,10 +385,10 @@ class VerwaltungsModel
 		}
 		
 		if ($nextSelectId == "str_heim".$index){
-			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id."";
+			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id." ORDER BY mannschaft.name ASC";
 		}
 		if ($nextSelectId == "str_auswaerts".$index){
-			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id." AND mannschaft.name <> '".$str_heimValue."'";
+			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id." AND mannschaft.name <> '".$str_heimValue."' ORDER BY mannschaft.name ASC";
 		}
 		$query = $this->db->prepare($sql);
 		$query->execute();
@@ -583,6 +583,30 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute();
         return $query->fetchAll();
+    }
+	public function get_trainingsgruppe($tg_id)
+    {
+		$sql = "SELECT trainingsgruppe.name AS Name FROM trainingsgruppe WHERE trainingsgruppe.tg_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($tg_id));
+        // $trainingsgruppe_result = json_encode($query->fetchAll());
+		$trainingsgruppe_result = $query->fetchAll();
+		
+		$sql = "SELECT teilnehmer_tg.p_id AS Person FROM teilnehmer_tg WHERE teilnehmer_tg.tg_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($tg_id));
+        // $tg_teilnehemer_result = json_encode($query->fetchAll());
+		$tg_teilnehemer_result = $query->fetchAll();
+		
+		//$result = "{ data : [".$trainingsgruppe_result."][".$tg_teilnehemer_result."]}";
+        // $result = $trainingsgruppe_result.",".;
+		// $result = "[".(json_encode($trainingsgruppe_result)).(json_encode($tg_teilnehemer_result))."]";
+		$result = json_encode(array_merge($trainingsgruppe_result,$tg_teilnehemer_result));
+		
+		$json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
+        return $result;
     }
 	public function add_trainingsgruppe($str_name, $arr_teilnehmer_option)
     {	

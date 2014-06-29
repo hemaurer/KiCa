@@ -163,7 +163,11 @@ class Verwaltung extends Controller
     }
 
 /***Trainingsgruppe***/
-
+	public function get_trainingsgruppe()
+    {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->get_trainingsgruppe($_POST["tg_id"]);
+    }
     public function add_trainingsgruppe()
     {
         if (isset($_POST["submit_add_trainingsgruppe"])) {

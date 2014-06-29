@@ -309,7 +309,7 @@
 				<div class="modal-body" id="modalbody">
 					<div class="form-horizontal">
 						<div class="form-group">
-							<label class="control-label col-md-4">Trainingsgruppe</label>
+							<label class="control-label col-md-4">Trainingsgruppe*</label>
 							<div class="col-md-6">
 								<input class="form-control" type="text" id="str_name_edit_trainingsgruppe" value="" placeholder="Trainingsgruppe" />
 							</div>
