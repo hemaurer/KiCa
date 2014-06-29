@@ -239,13 +239,13 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
 									<div class="col-md-6">
-										<input class="form-control" type="text" name="str_name" id="str_name_edit_trainingseinheit" value="" placeholder="Training" />
+										<input class="form-control" type="text" name="str_name" id="str_name_edit_trainingseinheit" value="" placeholder="Training" required/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsort*</label>
 									<div class="col-md-6">
-										<input class="form-control" type="text" name="str_ort" id="str_ort_edit_trainingseinheit" value="" placeholder="Trainingsort" />
+										<input class="form-control" type="text" name="str_ort" id="str_ort_edit_trainingseinheit" value="" placeholder="Trainingsort" required/>
 									</div>
 								</div>							
 								<div class="form-group">
@@ -274,7 +274,7 @@
 									<label class="control-label col-md-4">Datum*</label>
 									<div class="col-md-6">
 										<div data-provide="datepicker" class="input-group date">
-											<input class="form-control" name="d_date" id="d_date_edit_trainingseinheit" type="text" placeholder="Beispiel 01.01.2011">
+											<input class="form-control" name="d_date" id="d_date_edit_trainingseinheit" type="text" placeholder="Beispiel 01.01.2011" required>
 											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 										</div>
 									</div>

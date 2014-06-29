@@ -479,11 +479,7 @@ class VerwaltungsModel
 		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
 		$sql = "Select tg_id FROM trainingsgruppe WHERE  name = ?";	
         $query = $this->db->prepare($sql);						
-        $query->execute(array($str_tg_name));					
-		// $arr_tg_id = $query->fetchAll();					
-		// foreach($arr_tg_id as $int_tg_id){				
-			// $int_tg_id = $int_tg_id->tg_id;				
-		// };
+        $query->execute(array($str_tg_name));
 		$int_tg_id = $query->fetch(PDO::FETCH_OBJ);
 		
 		/**Zeit formatieren**/
@@ -493,16 +489,30 @@ class VerwaltungsModel
 		/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
 		$sql = "Select p_id FROM person WHERE  name = ?";	
         $query = $this->db->prepare($sql);						
-        $query->execute(array($str_trainer));					
-		// $arr_trainer = $query->fetchAll();					
-		// foreach($arr_trainer as $int_trainer){				
-			// $int_trainer = $int_trainer->p_id;				
-		// };
+        $query->execute(array($str_trainer));
 		$int_trainer = $query->fetch(PDO::FETCH_OBJ);
 		
         $sql = "INSERT INTO trainingseinheit (name, ort, zeit, trainer, tg_id) VALUES (:name, :ort, :zeit, :trainer, :tg_id)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer->p_id, ':tg_id' => $int_tg_id->tg_id));
+		
+		/*ID der angelegten Trainingseinheit heraussuchen*/
+		$sql = "Select tr_id FROM trainingseinheit WHERE name=?";	
+		$query = $this->db->prepare($sql);						
+		$query->execute(array($str_name));					
+		$int_tr_id = $query->fetch(PDO::FETCH_OBJ);
+		
+		/*Teilnehmer der Trainingsgruppe auslesen und in abwesenheitsliste speichern*/
+		$sql = "Select p_id FROM teilnehmer_tg WHERE tg_id=?";	
+		$query = $this->db->prepare($sql);						
+		$query->execute(array($int_tg_id->tg_id));					
+		$arr_teilnehmer = $query->fetchAll();					
+		foreach($arr_teilnehmer as $teilnehmer){				
+			$sql = "INSERT INTO abwesenheit (tr_id, p_id) VALUES (:tr_id, :p_id)";
+			$query = $this->db->prepare($sql);
+			$query->execute(array(':tr_id' => $int_tr_id->tr_id, ':p_id' => $teilnehmer->p_id));
+		
+		};
     }
 	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_date, $d_time, $str_tg, $str_trainer)
     {
@@ -511,51 +521,19 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute(array($tr_id));
 		$trainingseinheit = $query->fetch(PDO::FETCH_OBJ);
-		if ($str_name == null){
-			$str_name = $trainingseinheit->name;
-		}	
-		if ($str_ort == null){
-			$str_ort = $trainingseinheit->ort;
-		}
-		if ($str_ort == null){
-			$str_ort = $trainingseinheit->ort;
-		}		
-		if ($str_trainer == null){
-			$int_trainer = $trainingseinheit->trainer;
-		}else{
-			/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
-			$sql = "Select p_id FROM person WHERE name=?";	
-			$query = $this->db->prepare($sql);						
-			$query->execute(array($str_trainer));					
-			$arr_trainer = $query->fetchAll();					
-			foreach($arr_trainer as $trainer){				
-				$int_trainer = $trainer->p_id;				
-			};
-		}
-		if ($str_tg == null){
-			$int_tg_id = $trainingseinheit->tg_id;
-		}else{
-			/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
-			$sql = "Select tg_id FROM trainingsgruppe WHERE name=?";	
-			$query = $this->db->prepare($sql);						
-			$query->execute(array($str_tg));					
-			$arr_tg = $query->fetchAll();	
-			foreach($arr_tg as $int_tg_id){				
-				 $int_tg_id = $int_tg_id->tg_id;				
-			};
-		}		
-		/**Wenn Datum gleich 0 wird das Datum aus der Datenbank genommen **/
-		if ($d_date == null){
-			$d_zeit = $trainingseinheit->zeit;
-			$d_obj = new DateTime($d_zeit);
-			$d_date = $d_obj->format('Y-m-d'); 
-		}
-		/**Wenn Zeit gleich 0 wird die Zeit aus der Datenbank genommen **/
-		if ($d_time == null){
-			$d_zeit = $trainingseinheit->zeit;
-			$d_obj = new DateTime($d_zeit);
-			$d_time = $d_obj->format('H:i:s'); 
-		}
+		
+		/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
+		$sql = "Select p_id FROM person WHERE name=?";	
+		$query = $this->db->prepare($sql);						
+		$query->execute(array($str_trainer));					
+		$int_trainer = $query->fetch(PDO::FETCH_OBJ);
+		
+		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
+		$sql = "Select tg_id FROM trainingsgruppe WHERE name=?";	
+		$query = $this->db->prepare($sql);						
+		$query->execute(array($str_tg));					
+		$int_tg_id = $query->fetch(PDO::FETCH_OBJ);
+			
 		/**Zeit formatieren**/
 		$d_obj = new DateTime($d_date." ".$d_time);
 		$d_zeit = $d_obj->format('Y-m-d H:i:s');
@@ -563,7 +541,26 @@ class VerwaltungsModel
 		// Update ausführen
 		$sql = "UPDATE trainingseinheit SET name=?, ort=?, zeit=?, trainer=?, tg_id=? WHERE tr_id=?";
 		$query = $this->db->prepare($sql);
-		$query->execute(array($str_name, $str_ort, $d_zeit, $int_trainer, $int_tg_id, $tr_id));
+		$query->execute(array($str_name, $str_ort, $d_zeit, $int_trainer->p_id, $int_tg_id->tg_id, $tr_id));
+		
+		$sql = "DELETE FROM abwesenheit WHERE tr_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($tr_id));
+		
+		/*Teilnehmer der Trainingsgruppe auslesen und in abwesenheitsliste speichern*/
+		$sql = "Select p_id FROM teilnehmer_tg WHERE tg_id=?";	
+		$query = $this->db->prepare($sql);						
+		$query->execute(array($int_tg_id->tg_id));					
+		$arr_teilnehmer = $query->fetchAll();					
+		foreach($arr_teilnehmer as $teilnehmer){				
+			$sql = "INSERT INTO abwesenheit (tr_id, p_id) VALUES (:tr_id, :p_id)";
+			$query = $this->db->prepare($sql);
+			$query->execute(array(':tr_id' => $tr_id, ':p_id' => $teilnehmer->p_id));
+		
+		};
+		
+		
+		
 		echo true;
 	}
     public function delete_trainingseinheit($tr_id)
