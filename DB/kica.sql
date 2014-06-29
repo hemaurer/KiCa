@@ -124,10 +124,10 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   KEY `Status` (`stat_id`),
   KEY `Turnier` (`tu_id`),
   KEY `Sparte1` (`sparte_id`),
-  CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Auswaertsmannschaft` FOREIGN KEY (`auswaerts`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Heimmannschaft` FOREIGN KEY (`heim`) REFERENCES `mannschaft` (`m_id`),
   CONSTRAINT `Sparte1` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
+  CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Turnier` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -245,6 +245,21 @@ INSERT INTO abwesenheit
 	SELECT trainingseinheit.tr_id, NEW.p_id
    FROM trainingseinheit
    WHERE trainingseinheit.tg_id = NEW.tg_id AND trainingseinheit.zeit > NOW();
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica.UpdateTraining
+DROP TRIGGER IF EXISTS `UpdateTraining`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `UpdateTraining` AFTER UPDATE ON `trainingseinheit` FOR EACH ROW BEGIN
+DELETE FROM abwesenheit WHERE abwesenheit.tr_id = NEW.tr_id;
+INSERT INTO abwesenheit
+	SELECT NEW.tr_id, teilnehmer_tg.p_id
+	FROM teilnehmer_tg
+	WHERE teilnehmer_tg.tg_id = NEW.tg_id;
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
