@@ -1,9 +1,11 @@
 <?php
 	if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 ?>
+
 <script src="<?php echo URL; ?>public/js/modal-loader.js"> </script>
 
 <div class="container">
+
 	<?php /***Trainingseinheiten-Edit***/?>
 		<form class="form-horizontal" action="<?php echo URL; ?>training/edit_trainingseinheit/" method="POST">
 			<input type="hidden" name="tr_id" value="<?php echo $training->tr_id ?>">
@@ -111,12 +113,13 @@
 				</div>
 			</form>
 		</div>
-</div>
-
  <?php }
     else{ ?>
 		<div class="container"> <?php
-			echo "Diese Seite ist für Sie gesperrt"; ?>
+			echo "Diese Seite ist für Sie gesperrt."; ?>
 		</div>
 	<?php } ?>
+
+</div>
+
 

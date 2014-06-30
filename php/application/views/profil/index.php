@@ -189,8 +189,10 @@
 	</div>
 </div>
 
+ <?php }
+    else{ ?>
+		<div class="container"> <?php
+			echo "Bitte melden Sie sich zuerst an."; ?>
+		</div>
+	<?php } ?>
 </div><!-- End Container  -->
-<?php }
-    else{
-	echo "Bitte melden Sie sich zu erst an.";}
-	?>

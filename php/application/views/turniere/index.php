@@ -1,7 +1,8 @@
+<?php
+if(isset(Application::$parm_1) && isset(Application::$parm_2)){
+	?>
 <div class="container">
 	<!-- Beinhaltet alle Daten zu eintragen -->
-
-
 
 	<div id="spartenText">
 		<h3>
@@ -80,7 +81,7 @@
 		</div> <!-- End class="btn-group"> -->
 	</div> <!-- End id="spartenButton" -->
 	<br /><br /><br />
-	
+
 	<div id=spieluebersicht>
 	<?php
 		if (isset($str_winner)){
@@ -111,4 +112,13 @@
 	?>
 
 	</div> <!-- End id="spieluebersicht" -->
+
+
+
+ <?php }
+    else{ ?>
+		<div class="container"> <?php
+			echo "Bitte über die Navigation ein Turnier wählen."; ?>
+		</div>
+	<?php } ?>
 </div><!-- End Container  -->

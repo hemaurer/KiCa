@@ -675,7 +675,7 @@
  <?php }
     else{ ?>
 		<div class="container"> <?php
-			echo "Diese Seite ist für Sie gesperrt"; ?>
+			echo "Diese Seite ist für Sie gesperrt."; ?>
 		</div>
 	<?php } ?>
 

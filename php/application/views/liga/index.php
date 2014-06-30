@@ -1,6 +1,9 @@
+<?php
+if(isset(Application::$parm_1)){
+	?>
+
 <div class="container">
 	<!-- Beinhaltet alle Daten zu eintragen -->
-
 
 	<div id="spartenText">
 		<h3>Tabelle der <?php echo $spartenDaten[(Application::$parm_1 - 1)]->Sparte; ?></h3>
@@ -36,5 +39,10 @@
 				</tbody>
 			</table>
 
-
+ <?php }
+    else{ ?>
+		<div class="container"> <?php
+			echo "Bitte über die Navigation eine Liga wählen."; ?>
+		</div>
+	<?php } ?>
 </div><!-- End Container  -->

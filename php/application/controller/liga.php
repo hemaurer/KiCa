@@ -3,11 +3,13 @@
 class Liga extends Controller
 {
 
-    public function index($s_id)
+    public function index()
     {
         // load a model, perform an action, pass the returned data to a variable
         $liga_model = $this->loadModel('LigaModel');
 
+        //Den ersten Parameter aus der URL auslesen und zur Anzeige der Liga Tabelle weitergeben
+        $s_id = Application::$parm_1;
         $ligatabelle = $liga_model->get_ligatabelle($s_id);
 
         require 'application/views/_templates/header.php';
