@@ -52,5 +52,11 @@ class Training extends Controller
 		if (isset($_POST["submit_abort"])) {
 			header('location: ' . URL . 'termine/');
 		}
+		
+		if (isset($_POST["submit_create_PDF"])) {
+			$training_model = $this->loadModel('TrainingModel');
+			$training_model->create_PDF($_POST["tr_id"]);
+			//header('location: ' . URL . 'termine/');
+		}
 	}
 }

@@ -109,6 +109,7 @@
 					}
 				?>
 					<input class="btn btn-warning" type="submit" name="submit_abort" value="Abbrechen" />
+					<input class="btn btn-primary" type="submit" name="submit_create_PDF" value="Drucken" />
 					<input class="btn btn-primary" type="submit" name="submit_edit_anwesenheitsliste" value="Speichern" />
 				</div>
 			</form>
