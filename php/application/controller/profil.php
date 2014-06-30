@@ -4,24 +4,22 @@ class Profil extends Controller
 {
     public function index()
     {
-        // load a model, perform an action, pass the returned data to a variable
-        // NOTE: please write the name of the model "LikeThis"
 
         $profil_model = $this->loadModel('ProfilModel');
 
         //Session Variable wird gesetzt
         @session_start();
-
         if (isset($_SESSION['user_login_status'])){
            $trainingsDaten = $profil_model->getTrainingsdaten($_SESSION["p_id"]);
         }
 
-        // load views. within the views we can echo out $songs and $amount_of_songs easily
+        // Views laden
         require 'application/views/_templates/header.php';
         require 'application/views/profil/index.php';
         require 'application/views/_templates/footer.php';
     }
 
+    // Profilbild ändern / zurücksetzen
     public function doChangeProfilbild()
     {
             @session_start();
@@ -31,6 +29,7 @@ class Profil extends Controller
             header('location: ' . URL . 'profil/'); //Weiterleitung nach Ausführen der Methode
     }//end doChangeProfilbild()
 
+    // Größe ändern
     public function doChangeGroesse()
     {
         if (isset($_POST["int_groesse"])) {
@@ -41,6 +40,7 @@ class Profil extends Controller
         }
     }//end doChangeGroesse()
 
+    // Telefonnummer ändern
     public function doChangeTel()
     {
         if (isset($_POST["str_tel"])) {
@@ -51,6 +51,7 @@ class Profil extends Controller
         }
     }//end doChangeTel()
 
+    // Passwort ändern
     public function doChangePassword()
     {
         if (isset($_POST["str_altesPassword"])) {
