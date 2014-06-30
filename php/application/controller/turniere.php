@@ -9,6 +9,7 @@ class Turniere extends Controller
         $turniere_model = $this->loadModel('TurniereModel');
 
         $turnierspiele = $turniere_model->get_turnierSpiele($sparte_id, $tu_id);
+		$str_winner = $turniere_model->get_winner($sparte_id, $tu_id);
 
         require 'application/views/_templates/header.php';
         require 'application/views/turniere/index.php';

@@ -1,4 +1,4 @@
-/* Demo CSS */
+/*Allgemein*/
 
 html, body {
     margin: 0;
@@ -10,10 +10,32 @@ body {
     font-size: 15px;
 }
 
-
 table {
     font-size: 13px;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+.btn-left{
+    float: left;
+}
+
+.btn-right{
+    float: right;
+}
+/*Bootstrap Overwrite*/
+
+.glyphicon{
+    cursor: pointer !important;
+}
+
+.modal-footer{
+    text-align: inherit !important;
+}
+
+/*Header*/
 
 #header{
     background: none;
@@ -49,10 +71,6 @@ table {
     display: inline-block;
 }
 
-.bold {
-    font-weight: bold;
-}
-
 #headline{
     border-radius: 5px 5px 0px 0px;
     background: #F8F8F8;
@@ -81,6 +99,7 @@ table {
 
 #lbl_chkbox_eigeneTrainings{
     font-weight: 300;
+    cursor: pointer !important;
 }
 
 #spartenButton{
@@ -95,6 +114,10 @@ table {
     clear: both;
 }
 
+/*Fullcalender Overwrite*/
+.fc-event{
+    cursor: pointer !important;
+}
 
 /*VERWALTUNG*/
 
@@ -266,4 +289,18 @@ table {
     display: inline-block;
     margin-right: 10px;
     color: #777;
+}
+
+/*IMPRESSUM*/
+
+#impressum{
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#table_impressum{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }

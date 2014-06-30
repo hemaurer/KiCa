@@ -27,48 +27,75 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
   CONSTRAINT `Trainingseinheit` FOREIGN KEY (`tr_id`) REFERENCES `trainingseinheit` (`tr_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~9 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~41 rows (ungefähr)
 DELETE FROM `abwesenheit`;
 /*!40000 ALTER TABLE `abwesenheit` DISABLE KEYS */;
 INSERT INTO `abwesenheit` (`tr_id`, `p_id`) VALUES
+	(1, 1),
 	(6, 1),
 	(7, 1),
 	(9, 1),
+	(1, 2),
 	(6, 2),
 	(7, 2),
 	(9, 2),
+	(5, 3),
 	(8, 3),
+	(12, 3),
+	(1, 4),
 	(6, 4),
 	(7, 4),
 	(9, 4),
+	(1, 5),
 	(6, 5),
 	(7, 5),
 	(9, 5),
+	(1, 6),
 	(6, 6),
 	(7, 6),
 	(9, 6),
+	(1, 7),
 	(6, 7),
 	(7, 7),
 	(9, 7),
+	(5, 10),
 	(8, 10),
+	(12, 10),
+	(5, 11),
 	(8, 11),
+	(12, 11),
+	(1, 12),
 	(6, 12),
 	(7, 12),
 	(9, 12),
+	(1, 13),
 	(6, 13),
 	(7, 13),
 	(9, 13),
+	(5, 14),
 	(8, 14),
+	(12, 14),
+	(1, 15),
 	(6, 15),
 	(7, 15),
 	(9, 15),
+	(5, 19),
 	(8, 19),
+	(12, 19),
+	(5, 24),
 	(8, 24),
+	(12, 24),
+	(5, 25),
 	(8, 25),
+	(12, 25),
+	(1, 27),
 	(6, 27),
 	(7, 27),
 	(9, 27),
+	(5, 28),
 	(8, 28),
+	(12, 28),
+	(1, 31),
 	(6, 31),
 	(7, 31),
 	(9, 31);
@@ -748,8 +775,8 @@ INSERT INTO `person` (`p_id`, `name`, `v_name`, `geb_datum`, `groesse`, `bild`, 
 	(28, 'Ducksch', 'Marvin', '1999-05-11', 188, 'public/img/profilbilder/_noimage.jpg', 0, NULL, 'Marvin.Ducksch', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
 	(29, 'Klopp', 'Jürgen', '1967-06-16', 193, 'public/img/profilbilder/_noimage.jpg', 1, NULL, 'Jürgen.Klopp', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
 	(30, 'admin', 'admin', '1967-06-16', 193, 'public/img/profilbilder/_noimage.jpg', 1, '', 'admin', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
-	(31, 'Klopp', 'Lars', '2014-06-27', NULL, NULL, 0, NULL, '123', 'test'),
-	(34, 'Klopp', 'Lars', '2014-06-27', NULL, NULL, 1, NULL, '12346', 'test');
+	(31, 'Klopp', 'Lars', '2014-06-27', NULL, 'public/img/profilbilder/_noimage.jpg', 0, NULL, '123', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC'),
+	(34, 'Klopp', 'Lars', '2014-06-27', NULL, NULL, 1, NULL, '12346', '$2y$10$3cgV5/WquGld6m7xMjIQ6.aMUmUJhUpODTK0dy4qcOS03yQkNUujC');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 
@@ -800,9 +827,9 @@ CREATE TABLE IF NOT EXISTS `spiel` (
   CONSTRAINT `Sparte1` FOREIGN KEY (`sparte_id`) REFERENCES `sparte` (`sparte_id`),
   CONSTRAINT `Status` FOREIGN KEY (`stat_id`) REFERENCES `status` (`stat_id`),
   CONSTRAINT `Turnier` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=322 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.spiel: ~60 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.spiel: ~253 rows (ungefähr)
 DELETE FROM `spiel`;
 /*!40000 ALTER TABLE `spiel` DISABLE KEYS */;
 INSERT INTO `spiel` (`s_id`, `ort`, `heim`, `auswaerts`, `h_tore`, `a_tore`, `stat_id`, `zeit`, `tu_id`, `sparte_id`) VALUES
@@ -1119,10 +1146,11 @@ INSERT INTO `spiel` (`s_id`, `ort`, `heim`, `auswaerts`, `h_tore`, `a_tore`, `st
 	(314, 'Testort', 8, 13, NULL, NULL, 1, '2015-02-06 15:30:00', 1, 1),
 	(315, 'Testort', 11, 1, NULL, NULL, 1, '2015-02-06 15:30:00', 1, 1),
 	(316, 'Berliner Olympiastadion', 1, 2, 4, 1, 6, '2014-06-17 19:30:00', 14, 1),
-	(317, 'Veltins-Arena', 3, 1, 5, 2, 3, '2014-05-07 20:00:00', 2, 1),
+	(317, 'Veltins-Arena', 3, 1, 2, 5, 3, '2014-05-07 20:00:00', 2, 1),
 	(318, 'Ostseestadion', 50, 1, 2, 3, 4, '2014-05-22 18:45:00', 2, 1),
 	(319, 'Commerzbank-Arena	', 13, 1, 2, 2, 7, '2014-05-02 19:00:00', 5, 1),
-	(320, 'Mercedes-Benz Arena', 15, 1, 0, 4, 7, '2014-04-25 17:30:00', 5, 1);
+	(320, 'Mercedes-Benz Arena', 15, 1, 0, 4, 7, '2014-04-25 17:30:00', 5, 1),
+	(321, 'Signal Iduna Park', 1, 9, NULL, NULL, 7, '2025-04-30 00:00:00', 5, 1);
 /*!40000 ALTER TABLE `spiel` ENABLE KEYS */;
 
 
@@ -1165,7 +1193,7 @@ CREATE TABLE IF NOT EXISTS `teilnehmer_tg` (
   CONSTRAINT `Trainigsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.teilnehmer_tg: ~13 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.teilnehmer_tg: ~24 rows (ungefähr)
 DELETE FROM `teilnehmer_tg`;
 /*!40000 ALTER TABLE `teilnehmer_tg` DISABLE KEYS */;
 INSERT INTO `teilnehmer_tg` (`tg_id`, `p_id`) VALUES
@@ -1210,21 +1238,22 @@ CREATE TABLE IF NOT EXISTS `trainingseinheit` (
   KEY `Trainer` (`trainer`),
   CONSTRAINT `Trainer` FOREIGN KEY (`trainer`) REFERENCES `person` (`p_id`),
   CONSTRAINT `Trainingsgruppe` FOREIGN KEY (`tg_id`) REFERENCES `trainingsgruppe` (`tg_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~11 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.trainingseinheit: ~10 rows (ungefähr)
 DELETE FROM `trainingseinheit`;
 /*!40000 ALTER TABLE `trainingseinheit` DISABLE KEYS */;
 INSERT INTO `trainingseinheit` (`tr_id`, `name`, `ort`, `zeit`, `trainer`, `tg_id`) VALUES
-	(1, 'Trainingsspiel', 'Heimstadion', '2014-05-25 18:49:50', 29, 1),
+	(1, 'Trainingsspiel', 'Heimstadion', '2014-05-25 18:49:00', 34, 2),
 	(2, 'Ausdauer', 'Wald', '2014-05-26 18:50:05', 29, 2),
 	(3, 'Ausdauer G2', 'Heimstadion', '2014-06-14 18:00:00', 29, 1),
 	(4, 'Kraft', 'Heimstadion', '2014-06-19 15:45:00', 29, 3),
-	(5, 'Ausdauer ', 'Heimstadion', '2014-06-26 12:45:00', 29, 1),
+	(5, 'Ausdauer ', 'Heimstadion', '2014-06-26 12:45:00', 34, 1),
 	(6, 'Torwarttraining', 'Stadtwald', '2014-06-29 12:45:00', 29, 2),
 	(7, 'Spielzüge', 'Heimstadion', '2014-06-30 18:45:00', 29, 2),
 	(8, 'Vorbereitungstraining', 'Signal Iduna Park', '2014-07-03 17:45:00', 29, 1),
-	(9, 'Ausdauer', 'Wald', '2014-07-04 18:00:00', 29, 2);
+	(9, 'Ausdauer', 'Wald', '2014-07-04 18:00:00', 29, 2),
+	(12, 'Ausdauer', 'Wald', '2014-06-29 02:47:07', 34, 1);
 /*!40000 ALTER TABLE `trainingseinheit` ENABLE KEYS */;
 
 
@@ -1262,7 +1291,7 @@ CREATE TABLE IF NOT EXISTS `turnier` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.turnier: ~13 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.turnier: ~14 rows (ungefähr)
 DELETE FROM `turnier`;
 /*!40000 ALTER TABLE `turnier` DISABLE KEYS */;
 INSERT INTO `turnier` (`tu_id`, `name`, `liga`) VALUES
@@ -1297,7 +1326,7 @@ CREATE TABLE IF NOT EXISTS `turnier_sparte` (
   CONSTRAINT `Turnier2` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.turnier_sparte: ~15 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.turnier_sparte: ~16 rows (ungefähr)
 DELETE FROM `turnier_sparte`;
 /*!40000 ALTER TABLE `turnier_sparte` DISABLE KEYS */;
 INSERT INTO `turnier_sparte` (`tu_id`, `sparte_id`, `gewinner`) VALUES
@@ -1344,6 +1373,20 @@ INSERT INTO abwesenheit
 	SELECT trainingseinheit.tr_id, NEW.p_id
    FROM trainingseinheit
    WHERE trainingseinheit.tg_id = NEW.tg_id AND trainingseinheit.zeit > NOW();
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.BefuellenAbwesenheit
+DROP TRIGGER IF EXISTS `BefuellenAbwesenheit`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `BefuellenAbwesenheit` AFTER INSERT ON `trainingseinheit` FOR EACH ROW BEGIN
+INSERT INTO abwesenheit
+	SELECT NEW.tr_id, teilnehmer_tg.p_id
+	FROM teilnehmer_tg
+	WHERE teilnehmer_tg.tg_id = NEW.tg_id;
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;

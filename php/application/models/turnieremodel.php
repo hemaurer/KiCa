@@ -26,5 +26,21 @@ class TurniereModel
         $query->execute(array($tu_id, $sparte_id));
 		return $query->fetchAll();
 	}
+	
+	public function get_winner($sparte_id, $tu_id){
+		$sql = "SELECT mannschaft.name
+			FROM mannschaft
+			JOIN turnier_sparte ON turnier_sparte.gewinner = mannschaft.m_id
+			WHERE turnier_sparte.tu_id =? and turnier_sparte.sparte_id= ?";
+		$query = $this->db->prepare($sql);
+        $query->execute(array($tu_id, $sparte_id));
+		$result = $query->fetchAll();
+		if (count($result) > 0){ 
+			$str_winner = $result[0]->name;
+		} else {
+			$str_winner = null;
+		}
+		return $str_winner;
+	}
 
 }?>

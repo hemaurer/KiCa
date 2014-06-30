@@ -10,7 +10,7 @@
 <div class="container">
 
 	<div id="spartenText" value="test">
-		<h3>Kalender der <?php echo $spartenDaten[0]->Sparte; ?></h3>
+		<h3>Kalender der <span id="home_kalenderSparte"><?php echo $spartenDaten[0]->Sparte; ?></span></h3>
 		<?php
 			//Button anzeigen, wenn ein User eingeloggt ist
 			//zur Wechseln der Anzeige von allen Trainingseinheiten und den eigenen Trainings

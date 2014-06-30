@@ -38,22 +38,23 @@ class Home extends Controller
 
         $home_model = $this->loadModel('HomeModel');
 
+        //Nicht eingeloggt: Trainer Daten ausblenden und alle Trainings anzeigen
+        if (!isset($_SESSION['user_login_status'])){
+            $trainerDaten = "{}";
+            $trainingseinheitenDaten = $home_model->getAlleTrainingseinheiten();
+        }
+
         //Ist ein User eingeloggt, werden nur die eigenen Trainings gezeigt, sonst alle Trainings
         @session_start();
         if (isset($_SESSION['user_login_status']) && $_POST["eigeneTrainings"] == "ja"){
             $trainingseinheitenDaten = $home_model->getEigeneTrainingseinheiten($_SESSION["p_id"]);
-        }
-        else{
-            $trainingseinheitenDaten = $home_model->getAlleTrainingseinheiten();
-
-        }
-
-        //Trainings anzeigen, in denen ein User Trainer ist
-        if (isset($_SESSION['user_login_status'])){
             $trainerDaten = $home_model->getTrainerDaten($_SESSION['p_id']);
         }
-        else{
+
+        //Eingeloggt und alle Trainings anzeigen ausgewählt
+        if (isset($_SESSION['user_login_status']) && $_POST["eigeneTrainings"] == "nein"){
             $trainerDaten = "{}";
+            $trainingseinheitenDaten = $home_model->getAlleTrainingseinheiten();
         }
 
         $ligaDaten = $home_model->getLigaDaten($_POST["sparte_id"]);

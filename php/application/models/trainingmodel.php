@@ -48,6 +48,13 @@ class TrainingModel
 	}
 	
 	function set_Abwesenheitsliste($tr_id, $arr_p_ids){
+		$anwesenheitsliste = $this->get_Anwesenheitsliste($tr_id);
+		for ($i = 0; $i < count($anwesenheitsliste); $i++){
+			$sql = "INSERT IGNORE INTO abwesenheit
+			VALUES (?, ?)";
+			$query = $this->db->prepare($sql);
+			$query->execute(array($tr_id, $anwesenheitsliste[$i]->p_id));
+		}
 		
 		for ($i = 0; $i < count($arr_p_ids); $i++){
 			$sql = "DELETE FROM abwesenheit

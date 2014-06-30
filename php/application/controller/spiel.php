@@ -25,5 +25,9 @@ class Spiel extends Controller
              //Weiterleitung nach Ausführen der Methode
 			header('location: ' . URL . 'termine/');
         }
+		
+		if (isset($_POST["submit_abort"])) {
+			header('location: ' . URL . 'termine/');
+		}
     }
 }
