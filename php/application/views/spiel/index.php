@@ -86,6 +86,7 @@
 				<br />
 				<div class="form-group">
 					<div class="col-md-offset-3 col-md-6">
+						<input class="btn btn-warning" type="submit" name="submit_abort" value="Abbrechen" />
 						<input class="btn btn-primary" type="submit" name="submit_edit_aufstellung" value="Speichern" />
 					</div>
 				</div>
@@ -120,9 +121,15 @@
 					} else {
 							echo "<h5>Keine Aufstellung vorhanden</h5>";
 					}
-
 				?>
 				</table>
+				<div class="form-group">
+					<form action="<?php echo URL; ?>spiel/edit_aufstellung/" method="POST">
+						<div class="col-md-offset-3 col-md-6">
+							<input class="btn btn-primary" type="submit" name="submit_abort" value="Speichern" />
+						</div>
+					</form>
+				</div>
 			</div>
 	<?php
 		} else {	?>

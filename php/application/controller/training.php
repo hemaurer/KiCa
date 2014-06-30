@@ -28,6 +28,10 @@ class Training extends Controller
              //Weiterleitung nach Ausführen der Methode
 			header('location: ' . URL . 'termine/');
         }
+		
+		if (isset($_POST["submit_abort"])) {
+			header('location: ' . URL . 'termine/');
+		}
     }
 	
 	public function edit_anwesenheitsliste(){
@@ -35,7 +39,10 @@ class Training extends Controller
 			$training_model = $this->loadModel('TrainingModel');
 			$training_model->set_Abwesenheitsliste($_POST["tr_id"], $_POST["p_ids"]);
 			header('location: ' . URL . 'termine/');
-
+		}
+		
+		if (isset($_POST["submit_abort"])) {
+			header('location: ' . URL . 'termine/');
 		}
 	}
 }
