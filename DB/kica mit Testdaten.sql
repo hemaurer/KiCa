@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `abwesenheit` (
   CONSTRAINT `Trainingseinheit` FOREIGN KEY (`tr_id`) REFERENCES `trainingseinheit` (`tr_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~41 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.abwesenheit: ~68 rows (ungefähr)
 DELETE FROM `abwesenheit`;
 /*!40000 ALTER TABLE `abwesenheit` DISABLE KEYS */;
 INSERT INTO `abwesenheit` (`tr_id`, `p_id`) VALUES
@@ -128,14 +128,14 @@ CREATE TABLE IF NOT EXISTS `mannschaft` (
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`m_id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle kica_test.mannschaft: ~55 rows (ungefähr)
 DELETE FROM `mannschaft`;
 /*!40000 ALTER TABLE `mannschaft` DISABLE KEYS */;
 INSERT INTO `mannschaft` (`m_id`, `name`) VALUES
 	(38, '1. FC Heidenheim'),
-	(22, '1. FC Kaiserslautern '),
+	(22, '1. FC Kaiserslautern'),
 	(19, '1. FC Köln'),
 	(17, '1. FC Nürnberg'),
 	(55, '1. FC Saarbrücken'),
@@ -174,8 +174,8 @@ INSERT INTO `mannschaft` (`m_id`, `name`) VALUES
 	(39, 'RasenBallsport Leipzig'),
 	(47, 'Rot Weiß Erfurt'),
 	(14, 'SC Freiburg'),
-	(20, 'SC Paderborn 07 '),
-	(21, 'SpVgg Greuther Fürth '),
+	(20, 'SC Paderborn 07'),
+	(21, 'SpVgg Greuther Fürth'),
 	(52, 'SpVgg Unterhaching'),
 	(45, 'Stuttgarter Kickers'),
 	(40, 'SV Darmstadt 98'),
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `mannschaft_turnier_sparte` (
   CONSTRAINT `Turnier1` FOREIGN KEY (`tu_id`) REFERENCES `turnier` (`tu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.mannschaft_turnier_sparte: ~511 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.mannschaft_turnier_sparte: ~519 rows (ungefähr)
 DELETE FROM `mannschaft_turnier_sparte`;
 /*!40000 ALTER TABLE `mannschaft_turnier_sparte` DISABLE KEYS */;
 INSERT INTO `mannschaft_turnier_sparte` (`m_id`, `tu_id`, `sparte_id`) VALUES
@@ -246,6 +246,7 @@ INSERT INTO `mannschaft_turnier_sparte` (`m_id`, `tu_id`, `sparte_id`) VALUES
 	(34, 1, 2),
 	(35, 1, 2),
 	(50, 1, 2),
+	(1, 2, 1),
 	(1, 3, 3),
 	(1, 3, 7),
 	(4, 3, 7),
@@ -720,7 +721,11 @@ INSERT INTO `mannschaft_turnier_sparte` (`m_id`, `tu_id`, `sparte_id`) VALUES
 	(42, 7, 5),
 	(44, 7, 5),
 	(45, 7, 5),
-	(48, 7, 5);
+	(48, 7, 5),
+	(1, 15, 1),
+	(1, 15, 2),
+	(1, 15, 3),
+	(1, 15, 4);
 /*!40000 ALTER TABLE `mannschaft_turnier_sparte` ENABLE KEYS */;
 
 
@@ -1289,9 +1294,9 @@ CREATE TABLE IF NOT EXISTS `turnier` (
   `liga` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`tu_id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle kica_test.turnier: ~14 rows (ungefähr)
+-- Exportiere Daten aus Tabelle kica_test.turnier: ~15 rows (ungefähr)
 DELETE FROM `turnier`;
 /*!40000 ALTER TABLE `turnier` DISABLE KEYS */;
 INSERT INTO `turnier` (`tu_id`, `name`, `liga`) VALUES
@@ -1387,6 +1392,166 @@ INSERT INTO abwesenheit
 	SELECT NEW.tr_id, teilnehmer_tg.p_id
 	FROM teilnehmer_tg
 	WHERE teilnehmer_tg.tg_id = NEW.tg_id;
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimMannschaftInsert
+DROP TRIGGER IF EXISTS `TrimMannschaftInsert`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimMannschaftInsert` BEFORE INSERT ON `mannschaft` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimMannschaftUpdate
+DROP TRIGGER IF EXISTS `TrimMannschaftUpdate`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimMannschaftUpdate` BEFORE UPDATE ON `mannschaft` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimPersonInsert
+DROP TRIGGER IF EXISTS `TrimPersonInsert`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimPersonInsert` BEFORE INSERT ON `person` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+SET NEW.v_name = TRIM(NEW.v_name);
+SET NEW.tel = TRIM(NEW.tel);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimPersonUpdate
+DROP TRIGGER IF EXISTS `TrimPersonUpdate`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimPersonUpdate` BEFORE UPDATE ON `person` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+SET NEW.v_name = TRIM(NEW.v_name);
+SET NEW.tel = TRIM(NEW.tel);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimSparteInsert
+DROP TRIGGER IF EXISTS `TrimSparteInsert`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimSparteInsert` BEFORE INSERT ON `sparte` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimSparteUpdate
+DROP TRIGGER IF EXISTS `TrimSparteUpdate`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimSparteUpdate` BEFORE UPDATE ON `sparte` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimSpielInsert
+DROP TRIGGER IF EXISTS `TrimSpielInsert`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimSpielInsert` BEFORE INSERT ON `spiel` FOR EACH ROW BEGIN
+SET NEW.ort = TRIM(NEW.ort);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimSpielUpdate
+DROP TRIGGER IF EXISTS `TrimSpielUpdate`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimSpielUpdate` BEFORE UPDATE ON `spiel` FOR EACH ROW BEGIN
+SET NEW.ort = TRIM(NEW.ort);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimTrainingseinheitInsert
+DROP TRIGGER IF EXISTS `TrimTrainingseinheitInsert`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimTrainingseinheitInsert` BEFORE INSERT ON `trainingseinheit` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+SET NEW.ort = TRIM(NEW.ort);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimTrainingseinheitUpdate
+DROP TRIGGER IF EXISTS `TrimTrainingseinheitUpdate`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimTrainingseinheitUpdate` BEFORE UPDATE ON `trainingseinheit` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+SET NEW.ort = TRIM(NEW.ort);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimTrainingsgruppeInsert
+DROP TRIGGER IF EXISTS `TrimTrainingsgruppeInsert`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimTrainingsgruppeInsert` BEFORE INSERT ON `trainingsgruppe` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimTrainingsgruppeUpdate
+DROP TRIGGER IF EXISTS `TrimTrainingsgruppeUpdate`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimTrainingsgruppeUpdate` BEFORE UPDATE ON `trainingsgruppe` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimTurnierInsert
+DROP TRIGGER IF EXISTS `TrimTurnierInsert`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimTurnierInsert` BEFORE INSERT ON `turnier` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica_test.TrimTurnierUpdate
+DROP TRIGGER IF EXISTS `TrimTurnierUpdate`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `TrimTurnierUpdate` BEFORE UPDATE ON `turnier` FOR EACH ROW BEGIN
+SET NEW.name = TRIM(NEW.name);
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
