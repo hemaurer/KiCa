@@ -80,9 +80,12 @@
 		</div> <!-- End class="btn-group"> -->
 	</div> <!-- End id="spartenButton" -->
 	<br /><br /><br />
-
+	
 	<div id=spieluebersicht>
 	<?php
+		if (isset($str_winner)){
+			echo "<h3>SIEGER: ".$str_winner."</h3>";
+		}
 		if (count($turnierspiele) > 0){
 			$str_status = $turnierspiele[0]->Status;
 			echo "<h3>".$str_status."</h3><table class='table'><tr>";
@@ -93,7 +96,7 @@
 					echo "</table><h3>".$str_status."</h3><table class='table'><tr>";
 				}
 				if (isset($spiel->Heim)) echo "<td>".$spiel->Heim."</td>";
-				if (isset($spiel->Heimtore)) {echo "<td>".$spiel->Heimtore."</td><td width='5'> : </td>";} else { echo "<td> vs </td>";};
+				if (isset($spiel->Heimtore)) {echo "<td>".$spiel->Heimtore."</td><td width='5'> : </td>";} else { echo "<td> gegen </td>";};
 
 				if (isset($spiel->Auswaertstore)) echo "<td>".$spiel->Auswaertstore."</td>";
 				if (isset($spiel->Auswaerts)) echo "<td>".$spiel->Auswaerts."</td>";
