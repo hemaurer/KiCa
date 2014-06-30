@@ -30,13 +30,13 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Vorname*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_vorname" id="str_vorname_add_person" onkeyup="inputChecker('str', 'str_vorname_add_person')" value="" placeholder="Vorname" required />
+										<input class="form-control" type="text" name="str_vorname" id="str_vorname_add_person" onkeyup="inputChecker('str', 'str_vorname_add_person', 'submit_add_person')" value="" placeholder="Vorname" required />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Nachname*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_nachname" id="str_nachname_add_person" onkeyup="inputChecker('str', 'str_nachname_add_person')" value="" placeholder="Nachname" required/>
+										<input class="form-control" type="text" name="str_nachname" id="str_nachname_add_person" onkeyup="inputChecker('str', 'str_nachname_add_person', 'submit_add_person')" value="" placeholder="Nachname" required/>
 									</div>
 								</div>
 								<div class="form-group">
@@ -51,7 +51,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Groesse</label>
 									<div class="col-md-4">
-										<input class="form-control" type="number" name="int_groesse" value="" placeholder="Beispiel 158cm" />
+										<input class="form-control" type="number" name="int_groesse" id="int_groesse_add_person" value="" onkeyup="inputChecker('groesse', 'int_groesse_add_person', 'submit_add_person')" placeholder="Beispiel 158cm" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -77,7 +77,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4">
-										<input type="submit" class="btn btn-primary" name="submit_add_person" value="Speichern" />
+										<input type="submit" class="btn btn-primary" name="submit_add_person" id="submit_add_person" value="Speichern" />
 									</div>
 								</div>
 							</form>
@@ -148,7 +148,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Spielort*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_ort" value="" placeholder="Spielort" required />
+										<input class="form-control" type="text" name="str_ort" id="str_ort_add_spiel" value="" placeholder="Spielort" required />
 									</div>
 								</div>
 								<div class="form-group">
@@ -448,8 +448,8 @@
 										<td><?php if (isset($person->v_name)) echo $person->v_name; ?></td>
 										<td><?php if (isset($person->geb_datum)){$date = new DateTime($person->geb_datum); echo $date->format('d.m.Y');} ?></td>
 										<td><?php if (isset($person->username)) echo $person->username; ?></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','person','<?php echo $person->p_id; ?>','<?php echo $person->v_name; ?> <?php echo $person->name;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>
@@ -491,8 +491,8 @@
 										<td><?php if (isset($spiel->Status)) echo $spiel->Status; ?></td>
 										<td><?php if (isset($spiel->Ort)) echo $spiel->Ort; ?></td>
 										<td><?php if (isset($spiel->Uhrzeit)){$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.Y H:i');} ?></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>
@@ -524,8 +524,8 @@
 								<?php foreach ($mannschaften as $mannschaft) { ?>
 									<tr>
 										<td><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','mannschaft','<?php echo $mannschaft->m_id; ?>','<?php echo $mannschaft->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 								<?php } ?>
 								</tbody>
@@ -564,8 +564,8 @@
 										<td><?php if (isset($trainingseinheit->Uhrzeit)){$date = new DateTime($trainingseinheit->Uhrzeit); echo $date->format('d.m.Y H:i');} ?></td>
 										<td><?php if (isset($trainingseinheit->Trainingsgruppe)) echo $trainingseinheit->Trainingsgruppe; ?></td>
 										<td><?php if (isset($trainingseinheit->Trainer)) echo $trainingseinheit->Trainer; ?></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#trainingseinheit_Modal" onclick="toggleModal('2','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->Name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->Name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#trainingseinheit_Modal" onclick="toggleModal('2','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->Name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingseinheit','<?php echo $trainingseinheit->tr_id; ?>','<?php echo $trainingseinheit->Name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>
@@ -597,8 +597,8 @@
 								<?php foreach ($trainingsgruppen as $trainingsgruppe) { ?>
 									<tr>
 										<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#trainingsgruppe_Modal" onclick="toggleModal('2','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#trainingsgruppe_Modal" onclick="toggleModal('2','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','trainingsgruppe','<?php echo $trainingsgruppe->tg_id; ?>','<?php echo $trainingsgruppe->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 
 								<?php } ?>
@@ -642,8 +642,8 @@
 											{ echo "nein"; }}?></td>
 										<td class="firstrow"></td>
 										<td class="firstrow"></td>
-										<td class="firstrow" align="center"><a href="#" data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-										<td class="firstrow" align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+										<td class="firstrow" align="center"><a  data-toggle="modal" data-target="#turnier_Modal" onclick="toggleModal('2','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td class="firstrow" align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','turnier','<?php echo $turnier->ID; ?>','<?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
 									<?php foreach ($turniere_detail as $turnier_detail) {
 										if (($turnier_detail->Turnier == $turnier->Turnier) ){  ?>
@@ -652,8 +652,8 @@
 												<td class="emptycell"></td>
 												<td><?php if (isset($turnier_detail->Sparte)) echo $turnier_detail->Sparte; ?></td>
 												<td><?php if (isset($turnier_detail->Gewinner)) echo $turnier_detail->Gewinner; ?></td>
-												<td align="center"><a href="#" data-toggle="modal" data-target="#turnier_sparte_Modal" onclick="toggleModalS('2','turnier_sparte','<?php echo $turnier->ID; ?>' ,'<?php echo $turnier_detail->sparte_id; ?>','<?php echo $turnier->Turnier; ?> Sparte: <?php echo $turnier_detail->Sparte;?> ')"><span class="glyphicon glyphicon-pencil"></span></a></td>
-												<td align="center"><a href="#" data-toggle="modal" data-target="#bs_Modal" onclick="toggleModalS('3','turnier_sparte','<?php echo $turnier->ID; ?>' ,'<?php echo $turnier_detail->sparte_id; ?>','<?php echo $turnier_detail->Sparte;?> aus <?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+												<td align="center"><a  data-toggle="modal" data-target="#turnier_sparte_Modal" onclick="toggleModalS('2','turnier_sparte','<?php echo $turnier->ID; ?>' ,'<?php echo $turnier_detail->sparte_id; ?>','<?php echo $turnier->Turnier; ?> Sparte: <?php echo $turnier_detail->Sparte;?> ')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+												<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModalS('3','turnier_sparte','<?php echo $turnier->ID; ?>' ,'<?php echo $turnier_detail->sparte_id; ?>','<?php echo $turnier_detail->Sparte;?> aus <?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 											</tr>
 								<?php 	}
 										}

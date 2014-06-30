@@ -192,6 +192,23 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
+	public function get_spiel($s_id)
+    {
+		$sql = "SELECT spiel.ort as Ort, heim.name as Heim, auswaerts.name as Auswaerts, spiel.h_tore as Heimtore, spiel.a_tore as Auswaertstore, `status`.`status` as Status, spiel.zeit as Zeit, turnier.name as Turnier , sparte.name AS Sparte
+	FROM spiel 
+		JOIN mannschaft as heim ON spiel.heim = heim.m_id
+		JOIN mannschaft as auswaerts ON spiel.auswaerts = auswaerts.m_id
+		JOIN `status` ON spiel.stat_id =`status`.stat_id
+		JOIN turnier ON spiel.tu_id = turnier.tu_id
+		JOIN sparte ON spiel.sparte_id = sparte.sparte_id WHERE spiel.s_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($s_id));
+        $result = json_encode($query->fetchAll());
+        $json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
+        return $result;
+    }
 	public function add_spiel($str_ort, $str_heim, $str_auswaerts, $int_h_tore, $int_a_tore, $str_stat_name, $d_date, $d_time, $str_tu_name, $str_sparte_name)
     {
 		/**Heimmannschaft auslesen und ID aus Datenbank heraussuchen und Array splitten**/
@@ -352,6 +369,7 @@ class VerwaltungsModel
     }
 	public function get_select_options($index, $selectedOption, $nextSelectId, $str_sparteValue, $str_statusValue, $str_turnierValue, $str_heimValue, $str_auswaertsValue)
 	{
+		
 		/*Sparten ID herauslesen*/
 		$sql = "Select sparte_id FROM sparte WHERE  name = ?";	
 		$query = $this->db->prepare($sql);						
@@ -388,17 +406,93 @@ class VerwaltungsModel
 			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id." ORDER BY mannschaft.name ASC";
 		}
 		if ($nextSelectId == "str_auswaerts".$index){
+			/*letzten Spielort auslesen*/
+			if ($index == 1){
+				$sql = "Select spiel.ort AS Ort FROM spiel JOIN mannschaft as heim ON spiel.heim = heim.m_id WHERE  heim.name = '".$str_heimValue."' ORDER BY zeit DESC LIMIT 1";	
+				$query = $this->db->prepare($sql);						
+				$query->execute();					
+				$arr_letzter_spielort = $query->fetchAll();
+			}
 			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id." AND mannschaft.name <> '".$str_heimValue."' ORDER BY mannschaft.name ASC";
+			$query = $this->db->prepare($sql);
+			$query->execute();
+			$arr_select = $query->fetchAll();
+			$result = json_encode(array_merge($arr_select, $arr_letzter_spielort));
+			$json_string = substr($result, 1 , (strlen($result)-2));
+
+			echo $json_string;
+			return $result;
+		}else{
+			$query = $this->db->prepare($sql);
+			$query->execute();
+			$arr_select = $query->fetchAll();
+			$result = json_encode($arr_select);
+			$json_string = substr($result, 1 , (strlen($result)-2));
+
+			echo $json_string;
+			return $result;
 		}
+	}
+
+	
+	public function get_select_prefill($str_sparteValue, $str_statusValue, $str_turnierValue, $str_heimValue, $str_auswaertsValue)
+	{
+		/*Sparten ID herauslesen*/
+		$sql = "Select sparte_id FROM sparte WHERE  name = ?";	
+		$query = $this->db->prepare($sql);						
+		$query->execute(array($str_sparteValue));					
+		$int_sparte_id = $query->fetch(PDO::FETCH_OBJ);
+
+		/**Turnier auslesen und ID aus Datenbank heraussuchen und Array splitten**/
+		$sql = "Select tu_id FROM turnier WHERE  name = ?";	
+        $query = $this->db->prepare($sql);						
+        $query->execute(array($str_turnierValue));					
+		$int_tu_id = $query->fetch(PDO::FETCH_OBJ);
+		
+		/*Alle Status auslesen */
+		$sql = "SELECT status.status AS Status FROM status";
 		$query = $this->db->prepare($sql);
 		$query->execute();
-        $result = json_encode($query->fetchAll());
-        $json_string = substr($result, 1 , (strlen($result)-2));
+		$arr_status_result = $query->fetchAll();
+		
+		
+		
+		/*Liga als int definieren*/
+		if ($str_statusValue == "Liga"){
+			$int_liga = 1;
+		}else{
+			$int_liga = 0;
+		}
+		/*Alle Turniere entsprechend auslesen*/
+		$sql = "SELECT DISTINCT turnier.name AS Turnier FROM turnier JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.tu_id = turnier.tu_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id->sparte_id." AND turnier.liga = ".$int_liga." AND mannschaft_turnier_sparte.m_id = 1";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+		$arr_turnier_result = $query->fetchAll();
+		
+		
+		/*Alle Heimmanschaften entsprechend auslesen*/
+		$sql = "SELECT mannschaft.name AS Heim FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id->sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id->tu_id." ORDER BY mannschaft.name ASC";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+		$arr_heim_result = $query->fetchAll();
+		
+		/*Alle Auswaertsmannschaften entsprechend auslesen*/
+		$sql = "SELECT mannschaft.name AS Auswaerts FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id->sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id->tu_id." AND mannschaft.name <> '".$str_heimValue."' ORDER BY mannschaft.name ASC";
+		$query = $this->db->prepare($sql);
+		$query->execute();
+		$arr_auswaerts_result = $query->fetchAll();
+
+		
+		$result = json_encode(array_merge($arr_status_result,$arr_turnier_result,$arr_heim_result,$arr_auswaerts_result));
+		
+		$json_string = substr($result, 1 , (strlen($result)-2));
 
         echo $json_string;
         return $result;
+		
 	}
 
+	
 /***Mannschaften***/
 
 	public function get_alle_mannschaften()
@@ -542,24 +636,6 @@ class VerwaltungsModel
 		$sql = "UPDATE trainingseinheit SET name=?, ort=?, zeit=?, trainer=?, tg_id=? WHERE tr_id=?";
 		$query = $this->db->prepare($sql);
 		$query->execute(array($str_name, $str_ort, $d_zeit, $int_trainer->p_id, $int_tg_id->tg_id, $tr_id));
-		
-		$sql = "DELETE FROM abwesenheit WHERE tr_id =?";
-        $query = $this->db->prepare($sql);
-        $query->execute(array($tr_id));
-		
-		/*Teilnehmer der Trainingsgruppe auslesen und in abwesenheitsliste speichern*/
-		$sql = "Select p_id FROM teilnehmer_tg WHERE tg_id=?";	
-		$query = $this->db->prepare($sql);						
-		$query->execute(array($int_tg_id->tg_id));					
-		$arr_teilnehmer = $query->fetchAll();					
-		foreach($arr_teilnehmer as $teilnehmer){				
-			$sql = "INSERT INTO abwesenheit (tr_id, p_id) VALUES (:tr_id, :p_id)";
-			$query = $this->db->prepare($sql);
-			$query->execute(array(':tr_id' => $tr_id, ':p_id' => $teilnehmer->p_id));
-		
-		};
-		
-		
 		
 		echo true;
 	}
@@ -845,16 +921,21 @@ class VerwaltungsModel
 			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
 			if (is_array($arr_mannschaft_option)) {
 				foreach($arr_mannschaft_option as $option){
-					/*Sparten ID auslesen*/
-					$sql = "SELECT m_id FROM mannschaft WHERE name = ?";
+					// /*Sparten ID auslesen*/
+					// $sql = "SELECT m_id FROM mannschaft WHERE name = ?";
+					// $query = $this->db->prepare($sql);
+					// $query->execute(array($option));
+					// $mannschaft = $query->fetch(PDO::FETCH_OBJ);
+					
+					/*neue Verknüpfung in tbl mannschaft_turnier_sparte mit der eigenen Mannschaft*/
+					$sql = "INSERT INTO mannschaft_turnier_sparte (m_id, tu_id, sparte_id) VALUES (:m_id, :tu_id, :sparte_id)";
 					$query = $this->db->prepare($sql);
-					$query->execute(array($option));
-					$mannschaft = $query->fetch(PDO::FETCH_OBJ);
-			
+					$query->execute(array('m_id' => '1', ':tu_id' => $tu_id, ':sparte_id' => $sparte_id));
+					
 					/*neue Verknüpfung in tbl turnier_sparte ohne gewinner anlegen*/
 					$sql = "INSERT INTO mannschaft_turnier_sparte (m_id, tu_id, sparte_id) VALUES (:m_id, :tu_id, :sparte_id)";
 					$query = $this->db->prepare($sql);
-					$query->execute(array(':m_id' => $mannschaft->m_id ,':tu_id' => $tu_id, ':sparte_id' => $sparte_id));
+					$query->execute(array(':m_id' => $option ,':tu_id' => $tu_id, ':sparte_id' => $sparte_id));
 				}
 			} 
 		}
