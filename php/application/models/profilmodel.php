@@ -2,6 +2,7 @@
 
 class ProfilModel
 {
+    // Datenbankverbindung aufbauen
     function __construct($db) {
         try
 		{
@@ -13,7 +14,7 @@ class ProfilModel
         }
     }
 
-
+    // Profilbild ändern oder zurücksetzen
     public function doChangeProfilbild($p_id, $resetProfilbild)
     {
         //$resetProfilbild entscheidet, ob das Profilbild geändert oder zurückgesetzt werden soll
@@ -50,7 +51,6 @@ class ProfilModel
             if ($_SESSION['bild'] != "public/img/profilbilder/_noimage.jpg"){
                     unlink($_SESSION['bild']);
                 }
-
         }
 
         //Den Pfad zum hochgeladenen Bild in der DB der Person eintragen, dass es angezeigt wird
@@ -59,6 +59,7 @@ class ProfilModel
         $query->execute(array($str_bild,$p_id));
 
         //Session Variable neu setzen, dass das neue Bild auf der Profilseite angezeigt wird
+        //ohne, dass der Benutzer sich neu anmelden muss
         $_SESSION['bild'] = $str_bild;
 
         //Zusätzliche Infos fürs Debugging:
@@ -68,33 +69,31 @@ class ProfilModel
 
     }//end doChangeProfilbild()
 
-
+    // Größe ändern
     public function doChangeGroesse($p_id, $int_groesse)
     {
+        $sql = "UPDATE person SET groesse=? WHERE p_id=?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($int_groesse,$p_id));
 
-            $sql = "UPDATE person SET groesse=? WHERE p_id=?";
-            $query = $this->db->prepare($sql);
-            $query->execute(array($int_groesse,$p_id));
+        $_SESSION['groesse'] = $int_groesse;
 
-            $_SESSION['groesse'] = $int_groesse;
-
-            echo true;
-
+        echo true;
     }//end doChangeGroesse()
 
-
-    public function doChangeTel($p_id, $str_tel)
+    // Telefonnummer ändern
+    public function doChangeTel($p_id, $int_tel)
     {
         $sql = "UPDATE person SET tel=? WHERE p_id=?";
         $query = $this->db->prepare($sql);
-        $query->execute(array($str_tel,$p_id));
+        $query->execute(array($int_tel,$p_id));
 
-        $_SESSION['tel'] = $str_tel;
+        $_SESSION['tel'] = $int_tel;
 
         echo true;
     }//end doChangeTel()
 
-
+    // Passwort ändern
     public function doChangePassword($p_id, $str_altesPassword, $str_neuesPassword, $str_neuesPasswordWiederholt)
     {
         //erneute Serverseitige Überprüfung, falls Clientprüfung umgangen wurde
@@ -132,17 +131,13 @@ class ProfilModel
         }
     }//end doChangeTel()
 
-
+    // Die Trainingsgruppen des angemeldeten Benutzers laden, die im Profil angezeigt werden
     public function getTrainingsdaten($p_id)
     {
         $sql = "SELECT trainingsgruppe.name FROM trainingsgruppe RIGHT JOIN teilnehmer_tg ON trainingsgruppe.tg_id = teilnehmer_tg.tg_id WHERE teilnehmer_tg.p_id =?";
         $query = $this->db->prepare($sql);
         $query->execute(array($p_id));
 
-        // fetchAll() is the PDO method that gets all result rows, here in object-style because we defined this in
-        // libs/controller.php! If you prefer to get an associative array as the result, then do
-        // $query->fetchAll(PDO::FETCH_ASSOC); or change libs/controller.php's PDO options to
-        // $options = array(PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC ...
         return $query->fetchAll();
     }//end getTrainingsdaten()
 }?>

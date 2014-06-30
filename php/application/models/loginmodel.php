@@ -51,7 +51,7 @@ class LoginModel
             $_SESSION['v_name'] = $result_set->v_name;
             $_SESSION['geb_datum'] = $result_set->geb_datum;
             $_SESSION['groesse'] = $result_set->groesse;
-            $_SESSION['bild'] = $result_set->bild;
+            $_SESSION['str_bild'] = $result_set->bild;
             $_SESSION['tel'] = $result_set->tel;
             $_SESSION['user_login_status'] = 1;
 

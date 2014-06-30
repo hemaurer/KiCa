@@ -1,5 +1,5 @@
 <?php
-
+require('application/libs/pdf.php');
 class TrainingModel
 {
 
@@ -68,5 +68,23 @@ class TrainingModel
 			$query = $this->db->prepare($sql);
 			$query->execute();
 		} */
+	}
+	
+	function create_PDF($tr_id){
+		
+		$pdf = new PDF();
+		// Column headings
+		$str_header = 'Name';
+		// Data loading
+		$arr_anwesend = $this->get_Anwesenheitsliste($tr_id);
+		$arr_data = array();
+		foreach ($arr_anwesend as $item){
+			array_push($arr_data, $item->Teilnehmer);
+		}
+		$pdf->SetFont('Arial','',14);
+		$pdf->AddPage();
+		$pdf->createHeader("Anwesenheitsliste");
+		$pdf->ShowList($str_header,$arr_data);
+		$pdf->Output();
 	}
 }?>

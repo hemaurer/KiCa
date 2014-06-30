@@ -12,12 +12,13 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- success-Modal -->
 	<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" id="successModal_dialog">
 		</div>
 	</div>
+
 	<!-- Spiel-Modal -->
 	<div class="modal fade" id="spiel_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -46,7 +47,7 @@
 							<div class="col-md-6">
 								<select class="form-control" name="str_stat_name" id="str_status2" size="1" onchange="selectFiller('2','str_status2', 'str_tu_name2')" disabled required>
 									<option value="0" selected disabled>Status wählen</option>
-									
+
 								</select>
 							</div>
 						</div>
@@ -122,7 +123,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Turnier-Modal -->
 	<div class="modal fade" id="turnier_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -192,21 +193,21 @@
 							<div class="col-md-6">
 								<ul class="form-control" id="checkboxSelect">
 									<div class="checkbox" id="turnier_sparte_checkbox">
-										<?php 
-											
+										<?php
+
 											foreach ($mannschaften as $mannschaft) { ?>
 											<li>
 													<label>
 														<input type="checkbox" id="arr_mannschaft_option" name="arr_mannschaft_option[]" value="<?php if (isset($mannschaft->m_id)){ echo $mannschaft->m_id; ?>"><?php echo $mannschaft->name;} ?>
 													</label>
 											</li>
-											<?php 
+											<?php
 											$i++;} ?>
 									</div>
 								</ul>
 							</div>
 						</div>
-						
+
 						<div class="form-group">
 							<label class="control-label col-md-4">Gewinner</label>
 							<div class="col-md-6">
@@ -218,7 +219,7 @@
 								</select>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 				<div class="modal-footer" id="turnier_sparte_footer">
@@ -226,8 +227,8 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- Trainingseinheit-Modal -->			
+
+	<!-- Trainingseinheit-Modal -->
 	<div class="modal fade" id="trainingseinheit_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -247,7 +248,7 @@
 									<div class="col-md-6">
 										<input class="form-control" type="text" name="str_ort" id="str_ort_edit_trainingseinheit" value="" placeholder="Trainingsort" required/>
 									</div>
-								</div>							
+								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainer*</label>
 									<div class="col-md-6">
@@ -288,7 +289,7 @@
 										</div>
 									</div>
 									<script> $('#d_time_edit_trainingseinheit').timepicker({showMeridian: false, defaultTime: false});</script>
-								</div>	
+								</div>
 							</div>
 				</div>
 				<div class="modal-footer" id="trainingseinheitfooter">
@@ -296,9 +297,9 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<!-- Trainingsgruppe-Modal -->
 	<div class="modal fade" id="trainingsgruppe_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -319,15 +320,15 @@
 							<div class="col-md-6">
 								<ul class="form-control" id="checkboxSelect">
 								<div class="checkbox">
-									<?php	
-									foreach ($personen as $person) { 
+									<?php
+									foreach ($personen as $person) {
 									if ($person->betreuer != 1){ ?>
 									<li>
 											<label>
 												<input type="checkbox" name="arr_teilnehmer_option[]" id="arr_teilnehmer_option" value="<?php if (isset($person->p_id)){echo $person->p_id; } ?>"><?php echo $person->v_name; ?> <?php echo $person->name; ?>
 											</label>
 									</li>
-									<?php 
+									<?php
 									}} ?>
 								</div>
 								</ul>
