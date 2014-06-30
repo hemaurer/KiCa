@@ -81,6 +81,7 @@ table {
 
 #lbl_chkbox_eigeneTrainings{
     font-weight: 300;
+    cursor: pointer !important;
 }
 
 #spartenButton{
@@ -95,6 +96,9 @@ table {
     clear: both;
 }
 
+.fc-event{
+    cursor: pointer !important;
+}
 
 /*VERWALTUNG*/
 

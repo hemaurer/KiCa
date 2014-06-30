@@ -85,6 +85,9 @@ function fillSparte(sparte_id, sparte){
 		$('.spartenDropdownName').html(sparte);
 		$('.spartenDropdownName').val(sparte_id);
 
+		//Text der Überschrift auf die Sparte anpassen ("Kalender der ...")
+		$('#home_kalenderSparte').html(sparte);
+
 	});
 }
 
