@@ -1,41 +1,37 @@
 $(function(){
 
-    //Buttons ausschalten (beim Laden der Seite)
+    //Buttons disablen (beim Laden der Seite)
+    //werden durch Funktionen auf Inhalt geprüft und danach wieder enabled
     document.getElementById('submit_change_password').disabled = true;
     document.getElementById('submit_saveTel').disabled = true;
+    document.getElementById('submit_saveGroesse').disabled = true;
 });
-
-function toggleModal(){
-	$('#modalhead').html("Größe ändern");
-	$('#modalbody').html('Bitte tragen Sie die neue Größe in cm ein: </p> <input class="form-control" type="text" id="neueGroesse" name="str_neueGroesse" onkeyup="checkGroesse()" value="" />');
-	$('#modalfooter').html('<button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismissGroesse()">Abbrechen</button> <button type="button" id="submit_saveGroesse" class="btn btn-primary" data-dismiss="modal" onclick="saveGroesse()">Speichern</button>');
-
-	document.getElementById('submit_saveGroesse').disabled = true;
-}
 
 
 //Über den Button Bild zurücksetzen des Modals bei Bild ändern
 //um das Profilbild auf das Standardbild zurückzusetzen
 function resetProfilbild() {
 
-		//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
-		$.post("doChangeProfilbild/", {"resetProfilbild": "1"})
-			 .done(function( data ) {
-						$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Bild erfolgreich zurückgesetzt!</div>');
-						$('#successModal').modal('toggle');
-						window.setTimeout(function(){location.reload();},2000);
-				});
+	//Post Request auf die PHP Funktion im Controller von Profil um die Daten in die DB zu schreiben
+	$.post("doChangeProfilbild/", {"resetProfilbild": "1"})
+		 .done(function( data ) {
+					$('#successModal_dialog').html('<div class="alert alert-success"><strong>Erfolgreich!</strong> Bild erfolgreich zurückgesetzt!</div>');
+					$('#successModal').modal('toggle');
+					window.setTimeout(function(){location.reload();},2000);
+			});
 }
 
 //prüft, ob im Modal der Passwortänderung etwas als altes Passwort eingegeben wurde
 function checkPassword_alt(){
-	var altesPasswort = document.form1.str_altesPassword.value;
+	var str_altesPasswort = document.form1.str_altesPassword.value;
 
-	if (altesPasswort != ""){
+	if (str_altesPasswort != ""){
+		inputColoration("reset", "altesPW");
 		//die restlichen Felder des neuen Passworts prüfen
 		checkPassword_neu();
 	}
 	else{
+		inputColoration("error", "altesPW");
 		document.getElementById('submit_change_password').disabled = true;
 
 	}
@@ -43,17 +39,17 @@ function checkPassword_alt(){
 
 //prüft, ob das eingegebene Passwort bei einer Passwortänderung korrekt wiederholt wurde
 function checkPassword_neu() {
-	var neuesPassword = document.form1.str_neuesPassword.value;
-	var neuesPasswordWiederholt = document.form1.str_neuesPasswordWiederholt.value;
+	var str_neuesPasswort = document.form1.str_neuesPassword.value;
+	var str_neuesPasswortWiederholt = document.form1.str_neuesPasswordWiederholt.value;
 
-	if(neuesPasswordWiederholt != "" && neuesPassword != ""){
-		if(neuesPassword != neuesPasswordWiederholt){
-			document.form1.str_neuesPassword.style.backgroundColor = "#E98383";
-			document.form1.str_neuesPasswordWiederholt.style.backgroundColor = "#E98383";
+	if(str_neuesPasswortWiederholt != "" && str_neuesPasswort != ""){
+		if(str_neuesPasswort != str_neuesPasswortWiederholt){
+			inputColoration("error", "neuesPW");
+			inputColoration("error", "neuesPW_2");
 			document.getElementById('submit_change_password').disabled = true;
 		}else{
-			document.form1.str_neuesPassword.style.backgroundColor = '#83E983';
-			document.form1.str_neuesPasswordWiederholt.style.backgroundColor = '#83E983';
+			inputColoration("reset", "neuesPW");
+			inputColoration("reset", "neuesPW_2");
 			document.getElementById('submit_change_password').disabled = false;
 		}
 	}
@@ -69,9 +65,11 @@ function checkGroesse(){
 
 	 if (!isNaN(groesse) && groesse > 0 && groesse < 251 && groesse != ""){
 	 	 document.getElementById('submit_saveGroesse').disabled = false;
+	 	 inputColoration("reset", "neueGroesse");
 	 }
 	 else{
 	 	 document.getElementById('submit_saveGroesse').disabled = true;
+	 	 inputColoration("error", "neueGroesse");
 	 }
 
 }
@@ -83,9 +81,11 @@ function checkTel(){
 
 	 if (!isNaN(tel) && tel > 0 && tel < 999999999999999 && tel != ""){
 	 	 document.getElementById('submit_saveTel').disabled = false;
+	 	 inputColoration("reset", "neueTel");
 	 }
 	 else{
 	 	 document.getElementById('submit_saveTel').disabled = true;
+	 	 inputColoration("error", "neueTel");
 	 }
 
 }
@@ -181,12 +181,14 @@ function savePassword() {
 
 //Wenn auf Abbrechen gedrückt wird im Modal, das Größe Ändern Modal zurücksetzen
 function dismissGroesse() {
+	inputColoration("reset", "neueGroesse");
 	document.getElementById('neueGroesse').value = "";
     document.getElementById('submit_saveGroesse').disabled = true;
 }
 
 //Wenn auf Abbrechen gedrückt wird im Modal, das Telefon Ändern Modal zurücksetzen
 function dismissTel() {
+	inputColoration("reset", "neueTel");
 	document.getElementById('neueTel').value = "";
     document.getElementById('submit_saveTel').disabled = true;
 }
@@ -196,7 +198,8 @@ function dismissPW() {
 	document.getElementById('altesPW').value = "";
 	document.getElementById('neuesPW').value = "";
 	document.getElementById('neuesPW_2').value = "";
-	document.form1.str_neuesPassword.style.backgroundColor = "#fff";
-	document.form1.str_neuesPasswordWiederholt.style.backgroundColor = "#fff";
+	inputColoration("reset", "altesPW");
+	inputColoration("reset", "neuesPW");
+	inputColoration("reset", "neuesPW_2");
 	document.getElementById('submit_change_password').disabled = true;
 }

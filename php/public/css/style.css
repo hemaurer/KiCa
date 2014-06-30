@@ -31,10 +31,6 @@ table {
     cursor: pointer !important;
 }
 
-.modal-footer{
-    text-align: inherit !important;
-}
-
 /*Header*/
 
 #header{
@@ -232,15 +228,15 @@ table {
     margin-left: auto;
 }
 
-#profilFileDialog{
-    display: inline-block;
-}
-
-#bild img{
+#profilBild img{
     display: inline-block;
     width: 250px;
     height: auto;
     max-height: 400px;
+}
+
+#profilFileDialog{
+    display: inline-block;
 }
 
 #profilDaten{

@@ -2,56 +2,28 @@
 	if (isset($_SESSION['user_login_status'])){
 ?>
 
-<!-- Das Javascript um Felder der Personendaten editierbar zu machen -->
+<!-- profil.js enthält alle Funktionen, die auf der Profil Seite benötigt werden, z.B. Ändern von Größe -->
 <script src="<?php echo URL; ?>public/js/profil.js"> </script>
+<script src="<?php echo URL; ?>public/js/format.js"> </script>
 
 <div class="container">
+
 	<!-- Beinhaltet alle Daten zur Person des Profils -->
 	<div id="personenDaten">
 
 			<?php //Standardpfad Profilbilder: /public/img/profilbilder/_noimage.jpg ?>
+			<!-- Das angezeigte Profilbild des Benutzers -->
 			<div id="profilBild">
-				<div id="bild">
-					<p><img src="<?php echo URL . $_SESSION['bild']; ?>" ></p>
-				</div>
-
+					<p><img src="<?php echo URL . $_SESSION['str_bild']; ?>" ></p>
+				<!-- Button zum Ändern des Profilbilds -->
 				<div align="center">
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#bildModal">Profilbild ändern</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#profIlbildModal">Profilbild ändern</button>
 				</div>
-
-								<!-- sModal -->
-								<div class="modal fade" id="bildModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title" id="pModalLabel">Profilbild ändern</h4>
-											</div>
-											<div class="modal-body">
-
-												<div align="center">
-													<!-- Datei hochladen -->
-										            <!-- Die Encoding-Art enctyoe MUSS wie dargestellt angegeben werden -->
-													<form enctype="multipart/form-data" action="<?php echo URL; ?>profil/doChangeProfilbild/" method="POST">
-													    <!-- MAX_FILE_SIZE muss vor dem Dateiupload Input Feld stehen / Bis zu 3 MB aktuell erlaubt-->
-													    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-													    <input type="hidden" name="resetProfilbild" value="0"/>
-													    <!-- Der Name des Input Felds bestimmt den Namen im $_FILES Array -->
-													    <input name="userfile" type="file" id="profilFileDialog" class="btn btn-default" required/>
-													    <input type="submit" name="submit_change_profilbild" value="Hochladen" class="btn btn-primary"/>
-													</form>
-												</div>
-
-											</div>
-											<div class="modal-footer">
-													<button type="button" class="btn btn-danger btn-left" data-dismiss="modal" onclick="resetProfilbild()">Profilbild zurücksetzen</button>
-													<button type="button" class="btn btn-default btn-right" data-dismiss="modal" >Abbrechen</button>
-												</div>
-										</div>
-									</div>
-								</div>
-
 			</div><!-- End profilBild -->
+
 			<br>
+
+			<!-- Der Wrapper umschließt die Profildaten und die Daten zu den Trainingseinheiten -->
 			<div id="profilDatenWrapper">
 				<div id="profilDaten" class="profilContent">
 					<table class="table">
@@ -76,123 +48,54 @@
 							<tr>
 								<td><strong>Größe: </strong></td>
 								<td><span id="groesse_value"><?php echo $_SESSION['groesse']; ?></span> cm</td>
-								<td> <a data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal()"><span class="glyphicon glyphicon-pencil"></span></a> </td>
+								<td> <a data-toggle="modal" data-target="#groesseModal"><span class="glyphicon glyphicon-pencil"></span></a> </td>
 							</tr>
-
-								<?php require 'application/views/_templates/bootstrap_modal.php'; ?>
-
 							<tr>
 								<td><strong>Telefon: </strong></td>
 								<td><span id="tel_value"><?php echo $_SESSION['tel']; ?></span></td>
 								<td> <a data-toggle="modal" data-target="#telModal"><span class="glyphicon glyphicon-pencil"></span></a> </td>
 							</tr>
-									<!-- sModal -->
-									<div class="modal fade" id="telModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h4 class="modal-title" id="pModalLabel">Telefon ändern</h4>
-												</div>
-												<div class="modal-body">
-
-													Bitte tragen Sie die neue Telefonnummer ein (als eine Zahl):
-													</p>
-													<input class="form-control" type="text" id="neueTel" name="str_neueTel" onkeyup="checkTel()" value="" />
-
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismissTel()">Abbrechen</button>
-													<button type="button" id="submit_saveTel" class="btn btn-primary" data-dismiss="modal" onclick="saveTel()">Speichern</button>
-												</div>
-											</div>
-										</div>
-									</div>
 							<tr>
 								<td><strong>Passwort: </strong></td>
 								<td>********</td>
 								<td> <a data-toggle="modal" data-target="#passwordModal"><span class="glyphicon glyphicon-pencil"></span></a> </td>
 							</tr>
-									<!-- sModal -->
-									<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h4 class="modal-title" id="pModalLabel">Passwort ändern</h4>
-												</div>
-												<div class="modal-body">
-
-													<form name="form1" role="form">
-														<div class="form-group">
-															<label for="altesPW">Altes Passwort</label>
-																<input type="password" class="form-control" id="altesPW" name="str_altesPassword" onkeyup="checkPassword_alt()" value="" required/></p>
-														</div>
-														<div class="form-group">
-															<label for="neuesPW">Neues Passwort</label>
-																<input type="password" class="form-control" id="neuesPW" name="str_neuesPassword" onkeyup="checkPassword_neu()" value="" required /></p>
-														</div>
-														<div class="form-group">
-															<label for="neuesPW_2">Neues Passwort wiederholen</label>
-																<input type="password" class="form-control" id="neuesPW_2" name="str_neuesPasswordWiederholt" onkeyup="checkPassword_neu()" value="" required /></p>
-														</div>
-													</form>
-
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-default" data-dismiss="modal" onclick="dismissPW()">Abbrechen</button>
-													<button type="button" class="btn btn-primary" id="submit_change_password" data-dismiss="modal" onclick="savePassword()">Speichern</button>
-												</div>
-											</div>
-										</div>
-									</div>
 						</tbody>
 					</table>
-			</div><!-- End profilDaten -->
+				</div><!-- End profilDaten -->
 
-			<!-- Beinhaltet Daten zu Trainingsgruppen etc. -->
-			<div id="trainingsDaten" class="profilContent">
-				<table class="table">
-					<thead style="background-color: #ddd; font-weight: bold;">
-						<tr>
-							<td>Meine Trainingsgruppen</td>
-						</tr>
-					</thead>
-					<tbody>
-					<?php foreach ($trainingsDaten as $trainingsgruppe) { ?>
-						<tr>
-							<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td>
-						</tr>
-					<?php } ?>
-					</tbody>
-				</table>
-			</div> <!-- End trainingsDaten -->
-		</div>
+				<!-- Beinhaltet Daten zu Trainingsgruppen etc. -->
+				<div id="trainingsDaten" class="profilContent">
+					<table class="table">
+						<thead style="background-color: #ddd; font-weight: bold;">
+							<tr>
+								<td>Meine Trainingsgruppen</td>
+							</tr>
+						</thead>
+						<tbody>
+						<?php foreach ($trainingsDaten as $trainingsgruppe) { ?>
+							<tr>
+								<td><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></td>
+							</tr>
+						<?php } ?>
+						</tbody>
+					</table>
+				</div> <!-- End trainingsDaten -->
+
+		</div><!-- End profilDatenWrapper -->
 
 </div><!-- End personenDaten -->
 
-<!-- Modals für die Änderungsdialoge, die über Erfolg oder Misserfolg informieren -->
-<div>
-	<!-- sModal -->
-	<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="pModalLabel"><span id="successModal_head"></span></h4>
-				</div>
-				<div class="modal-body">
-					<span id="successModal_body"><span>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.reload()">Schliessen</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<?php
+	// Die verwendeten, ausgelagerten Modale zur Seite hinzuladen
+	require 'application/views/_templates/profil_modal.php';
+?>
 
- <?php }
+</div><!-- End Container  -->
+
+<?php }
     else{ ?>
 		<div class="container"> <?php
 			echo "Bitte melden Sie sich zuerst an."; ?>
 		</div>
-	<?php } ?>
-</div><!-- End Container  -->
+<?php } ?>
