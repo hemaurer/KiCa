@@ -1,4 +1,4 @@
-/* Demo CSS */
+/*Allgemein*/
 
 html, body {
     margin: 0;
@@ -10,14 +10,32 @@ body {
     font-size: 15px;
 }
 
-
 table {
     font-size: 13px;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.btn-left{
+    float: left;
+}
+
+.btn-right{
+    float: right;
+}
+/*Bootstrap Overwrite*/
+
 .glyphicon{
     cursor: pointer !important;
 }
+
+.modal-footer{
+    text-align: inherit !important;
+}
+
+/*Header*/
 
 #header{
     background: none;
@@ -51,10 +69,6 @@ table {
     background-color: #bbb;
     padding: 10px 15px;
     display: inline-block;
-}
-
-.bold {
-    font-weight: bold;
 }
 
 #headline{
@@ -100,6 +114,7 @@ table {
     clear: both;
 }
 
+/*Fullcalender Overwrite*/
 .fc-event{
     cursor: pointer !important;
 }
@@ -275,6 +290,8 @@ table {
     margin-right: 10px;
     color: #777;
 }
+
+/*IMPRESSUM*/
 
 #impressum{
     width: 75%;
