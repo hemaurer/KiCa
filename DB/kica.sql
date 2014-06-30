@@ -250,6 +250,20 @@ DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 
+-- Exportiere Struktur von Trigger kica.BefuellenAbwesenheit
+DROP TRIGGER IF EXISTS `BefuellenAbwesenheit`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `BefuellenAbwesenheit` AFTER INSERT ON `trainingseinheit` FOR EACH ROW BEGIN
+INSERT INTO abwesenheit
+	SELECT NEW.tr_id, teilnehmer_tg.p_id
+	FROM teilnehmer_tg
+	WHERE teilnehmer_tg.tg_id = NEW.tg_id;
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
 -- Exportiere Struktur von Trigger kica.UpdateTraining
 DROP TRIGGER IF EXISTS `UpdateTraining`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
