@@ -87,38 +87,38 @@ if(isset(Application::$parm_1) && isset(Application::$parm_2)){
 	<div id="spieluebersicht">
 	<?php
 		if (isset($str_winner)){
-			echo "<h3>SIEGER: ".$str_winner."</h3>";
+			echo "<h4>SIEGER: ".$str_winner."</h4></br>";
 		}
 		if (count($turnierspiele) > 0){
-			$str_status = $turnierspiele[0]->Status;
-			echo "<h3>".$str_status."</h3><table class='table'><tr>";
-
-			foreach ($turnierspiele as $spiel){
-				if (strcmp($str_status,$spiel->Status) !== 0){
-					$str_status = $spiel->Status;
-					echo "</table><h3>".$str_status."</h3><table class='table'><tr>";
-				}
-				if (isset($spiel->Heim)) echo "<td>".$spiel->Heim."</td>";
-				if (isset($spiel->Heimtore)) {echo "<td>".$spiel->Heimtore."</td><td width='5'> : </td>";} else { echo "<td> gegen </td>";};
-
-				if (isset($spiel->Auswaertstore)) echo "<td>".$spiel->Auswaertstore."</td>";
-				if (isset($spiel->Auswaerts)) echo "<td>".$spiel->Auswaerts."</td>";
-			?>
-			</tr>
-			<?php
+			if ($turnierspiele[0]->Status == "Freundschaftsspiel"){
+				$str_status = $turnierspiele[0]->Status;
+				echo "<h4>".$str_status."</h4>";
 			}
-			echo "</table>";
+			foreach ($turnierspiele as $spiel){
+				if ($spiel->Status != "Freundschaftsspiel"){
+					$str_status = $spiel->Status;
+					echo "<h4>".$str_status."</h4>";
+				}
+				echo "<table class='table'><tr>";
+				echo '<td class="termin-details" colspan="2">';								
+					if (isset($spiel->Uhrzeit)) {$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.Y - H:i')." Uhr";};
+					if (isset($spiel->Ort)) echo "</br>".$spiel->Ort;
+				echo "</td>";
+				?>
+				<td class="termin"><h4><?php if (isset($spiel->Heim)) echo $spiel->Heim; ?></h4>
+				<?php if ((isset($spiel->Heimtore)) && (isset($spiel->Auswaertstore))){ echo "<h4>".$spiel->Heimtore." : ".$spiel->Auswaertstore."</h4>";}else{ echo "<h5>gegen</h5>";} ?>
+				<h4><?php if (isset($spiel->Auswaerts)) echo $spiel->Auswaerts; ?></h4></td>
+			</tr></table>
+			<?php
+			} //echo "</table>";
 		} else {
 			echo "<h4>Keine Spiele vorhanden</h4>";
-		}
-	?>
-
+		}?>
 	</div> <!-- End id="spieluebersicht" -->
-
- <?php }
-    else{ ?>
+</div><!-- End Container  -->
+<?php }else{ ?>
 		<div class="container"> <?php
 			echo "Bitte über die Navigation ein Turnier wählen."; ?>
 		</div>
-	<?php } ?>
-</div><!-- End Container  -->
+<?php } ?>
+

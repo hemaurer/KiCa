@@ -150,7 +150,7 @@ class Verwaltung extends Controller
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->add_trainingseinheit($_POST["str_name"], $_POST["str_ort"], $_POST["d_date"], $_POST["d_time"], $_POST["str_tg_name"], $_POST["str_trainer"]);
         }
-        header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
+        //header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
 	public function edit_trainingseinheit()
     {

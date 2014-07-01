@@ -83,7 +83,6 @@
 						</ul>
 					</div>
 				</div>
-				<br />
 				<div class="form-group">
 					<div class="col-md-offset-3 col-md-6">
 						<input class="btn btn-default" type="submit" name="submit_abort" value="Abbrechen" />

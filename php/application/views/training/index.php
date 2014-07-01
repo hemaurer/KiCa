@@ -38,53 +38,58 @@
 				</table>
 			</div>
 		</div>
-		<br />
-		<br />
+		
+		
 		<div class="form-group">
-			<h2>Anwesenheitsliste</h2>
-			<br />
-			<div class="form-group">
-				<form action="<?php echo URL; ?>training/edit_anwesenheitsliste/" method="POST">
-					<input type="hidden" name="tr_id" value="<?php echo $tr_id ?>">
+			<form action="<?php echo URL; ?>training/edit_anwesenheitsliste/" method="POST">
+				<input type="hidden" name="tr_id" value="<?php echo $tr_id ?>">
+				<div class="form-group">
+					<label class="control-label col-md-3">Anwesenheitsliste</label>
 					<div class="col-md-6">
-					<?php
-						foreach ($anwesenheitsliste as $person){
-					?>
-						<?php
-							$b_anwesend = true;?>
-							<ul class="form-control" id="checkboxSelect">
-								<div class="checkbox">
+						<ul class="form-control" id="checkboxSelect">
+							<div class="checkbox">
+							<?php
+								// Liste alle Personen auf
+								foreach ($anwesenheitsliste as $person){
+									$b_anwesend = true;?>
+							
 									<li>
 										<label>
 											<input type="checkbox" id="p_ids[]" name="p_ids[]" value="<?php echo $person->p_id ?>"
-																		<?php
-																			foreach ($abwesenheitsliste as $abwesend){
-																				if (stripos($abwesend->Teilnehmer, $person->Teilnehmer) !== false){
-																					$b_anwesend = false;
-																					break;
-																				}
-																			}
-																			if ($b_anwesend) {
-																				echo "checked";
-																			}
-																		?>>
+											<?php
+												foreach ($abwesenheitsliste as $abwesend){
+													if (stripos($abwesend->Teilnehmer, $person->Teilnehmer) !== false){
+														$b_anwesend = false;
+														break;
+													}
+												}
+												if ($b_anwesend) {
+													echo "checked";
+												}
+											?>><?php echo $person->Teilnehmer ?>
 										</label>
 									</li>
-									<label class="control-label col-md-3"><?php echo $person->Teilnehmer ?></label>
-								<br />
-								</div>
-							</ul>
-					<?php
-						}
-					?>
+						<?php 	} ?>
+							</div>
+						</ul>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-offset-1 col-md-2">
+						<button type="submit" class="btn btn-info" name="submit_create_PDF">
+							<span class="glyphicon glyphicon-print"></span> Drucken
+						</button>
+					</div>
+					<div class="col-md-6">
 						<input class="btn btn-default" type="submit" name="submit_abort" value="Abbrechen" />
-						<input class="btn btn-info" type="submit" name="submit_create_PDF" value="Drucken" />
 						<input class="btn btn-primary" type="submit" name="submit_edit_anwesenheitsliste" value="Speichern" />
 					</div>
-				</form>
-			</div>
+				</div>
+			</form>
+			
 		</div>
 	</div>
+</div>
  <?php }
     else{ ?>
 		<div class="container"> <?php
@@ -92,6 +97,6 @@
 		</div>
 	<?php } ?>
 
-</div>
+
 
 

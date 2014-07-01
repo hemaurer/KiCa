@@ -306,15 +306,15 @@ class VerwaltungsModel
 			$int_a_tore = $spiel->a_tore;
 		}
 		/**Status checken**/
-		if ($str_stat_name == 0){
-			$int_stat_id = $spiel->stat_id;
-		}else{
+		// if ($str_stat_name == 0){
+			// $int_stat_id = $spiel->stat_id;
+		// }else{
 			/*Mannschaft ID auslesen*/
 			$sql = "SELECT stat_id FROM status WHERE status=?";
 			$query = $this->db->prepare($sql);
 			$query->execute(array($str_stat_name));
 			$int_stat_id = $query->fetch(PDO::FETCH_OBJ);
-		}
+		// }
 		
 		/**Wenn Datum gleich 0 wird das Datum aus der Datenbank genommen **/
 		if ($d_date == 0){
@@ -357,7 +357,7 @@ class VerwaltungsModel
 		
 		$sql = "UPDATE spiel SET ort=?, heim=?, auswaerts=?, h_tore=?, a_tore=?, stat_id=?, zeit=?, tu_id=?, sparte_id=? WHERE s_id=?";
 		$query = $this->db->prepare($sql);
-		$query->execute(array($str_ort, $int_heim, $int_auswaerts, $int_h_tore, $int_a_tore, $int_stat_id, $d_zeit, $int_tu_id, $int_sparte_id, $s_id));
+		$query->execute(array($str_ort, $int_heim, $int_auswaerts, $int_h_tore, $int_a_tore, $int_stat_id->stat_id, $d_zeit, $int_tu_id, $int_sparte_id, $s_id));
 		echo true;
 	}
     public function delete_spiel($s_id)
@@ -393,13 +393,22 @@ class VerwaltungsModel
 		
 		/*Wenn die nächste Selectbox str_tu_name ist, soll folgendes aus der db ausgelesen werden */
 		if ($nextSelectId == "str_tu_name".$index){
-			if ($str_statusValue == "Liga"){
-				$int_liga = 1;
+			if ($str_statusValue != "Freundschaftsspiel"){
+				if ($str_statusValue == "Liga"){
+					$int_liga = 1;
+				}else{
+					$int_liga = 0;
+				}
+				$sql = "SELECT DISTINCT turnier.name AS value FROM turnier JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.tu_id = turnier.tu_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND turnier.liga = ".$int_liga." AND mannschaft_turnier_sparte.m_id = 1 AND turnier.name <> 'Freundschaftsspiel'";
+				
 			}else{
-				$int_liga = 0;
+				if ($str_statusValue == "Liga"){
+					$int_liga = 1;
+				}else{
+					$int_liga = 0;
+				}
+				$sql = "SELECT DISTINCT turnier.name AS value FROM turnier JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.tu_id = turnier.tu_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND turnier.liga = ".$int_liga." AND mannschaft_turnier_sparte.m_id = 1 AND turnier.name = 'Freundschaftsspiel'";
 			}
-			
-			$sql = "SELECT DISTINCT turnier.name AS value FROM turnier JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.tu_id = turnier.tu_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND turnier.liga = ".$int_liga." AND mannschaft_turnier_sparte.m_id = 1";
 		}
 		
 		if ($nextSelectId == "str_heim".$index){
@@ -423,12 +432,13 @@ class VerwaltungsModel
 			echo $json_string;
 			return $result;
 		}else{
-			$query = $this->db->prepare($sql);
-			$query->execute();
-			$arr_select = $query->fetchAll();
-			$result = json_encode($arr_select);
-			$json_string = substr($result, 1 , (strlen($result)-2));
-
+			
+				$query = $this->db->prepare($sql);
+				$query->execute();
+				$arr_select = $query->fetchAll();
+				$result = json_encode($arr_select);
+				$json_string = substr($result, 1 , (strlen($result)-2));
+			
 			echo $json_string;
 			return $result;
 		}
@@ -556,11 +566,16 @@ class VerwaltungsModel
     }
 	public function get_trainingseinheit($tr_id)
     {
-		$sql = "SELECT trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Zeit, trainingsgruppe.name as Trainingsgruppe, person.name as Trainer 
+		// $sql = "SELECT trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Zeit, trainingsgruppe.name as Trainingsgruppe, person.name as Trainer 
+				// FROM trainingseinheit
+				// JOIN trainingsgruppe ON trainingseinheit.tg_id = trainingsgruppe.tg_id
+				// JOIN person ON trainingseinheit.trainer = person.p_id WHERE trainingseinheit.tr_id=?";
+        $sql = "SELECT trainingseinheit.name as Name, trainingseinheit.ort as Ort, trainingseinheit.zeit as Zeit, trainingsgruppe.name as Trainingsgruppe, trainingseinheit.trainer as Trainer 
 				FROM trainingseinheit
 				JOIN trainingsgruppe ON trainingseinheit.tg_id = trainingsgruppe.tg_id
-				JOIN person ON trainingseinheit.trainer = person.p_id WHERE trainingseinheit.tr_id=?";
-        $query = $this->db->prepare($sql);
+				WHERE trainingseinheit.tr_id=?";
+        
+		$query = $this->db->prepare($sql);
 		$query->execute(array($tr_id));
         $result = json_encode($query->fetchAll());
         $json_string = substr($result, 1 , (strlen($result)-2));
@@ -568,7 +583,7 @@ class VerwaltungsModel
         echo $json_string;
         return $result;
     }
-	public function add_trainingseinheit($str_name, $str_ort, $d_date, $d_time, $str_tg_name, $str_trainer)
+	public function add_trainingseinheit($str_name, $str_ort, $d_date, $d_time, $str_tg_name, /*$str_trainer*/ $int_trainer)
     {
 		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
 		$sql = "Select tg_id FROM trainingsgruppe WHERE  name = ?";	
@@ -581,14 +596,14 @@ class VerwaltungsModel
 		$d_zeit = $d_obj->format('Y-m-d H:i:s');
 		
 		/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
-		$sql = "Select p_id FROM person WHERE  name = ?";	
-        $query = $this->db->prepare($sql);						
-        $query->execute(array($str_trainer));
-		$int_trainer = $query->fetch(PDO::FETCH_OBJ);
+		// $sql = "Select p_id FROM person WHERE  name = ?";	
+        // $query = $this->db->prepare($sql);						
+        // $query->execute(array($str_trainer));
+		// $int_trainer = $query->fetch(PDO::FETCH_OBJ);
 		
         $sql = "INSERT INTO trainingseinheit (name, ort, zeit, trainer, tg_id) VALUES (:name, :ort, :zeit, :trainer, :tg_id)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer->p_id, ':tg_id' => $int_tg_id->tg_id));
+        $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer, ':tg_id' => $int_tg_id->tg_id));
 		
 		/*ID der angelegten Trainingseinheit heraussuchen*/
 		$sql = "Select tr_id FROM trainingseinheit WHERE name=?";	
@@ -608,7 +623,7 @@ class VerwaltungsModel
 		
 		};
     }
-	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_date, $d_time, $str_tg, $str_trainer)
+	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_date, $d_time, $str_tg, $int_trainer)
     {
 		/**Vergleichsdaten**/
 		$sql = "SELECT * FROM trainingseinheit WHERE tr_id=?";
@@ -617,10 +632,10 @@ class VerwaltungsModel
 		$trainingseinheit = $query->fetch(PDO::FETCH_OBJ);
 		
 		/**Trainer auslesen und ID aus Datenbank auslesen und Array splitten**/
-		$sql = "Select p_id FROM person WHERE name=?";	
-		$query = $this->db->prepare($sql);						
-		$query->execute(array($str_trainer));					
-		$int_trainer = $query->fetch(PDO::FETCH_OBJ);
+		// $sql = "Select p_id FROM person WHERE name=?";	
+		// $query = $this->db->prepare($sql);						
+		// $query->execute(array($str_trainer));					
+		// $int_trainer = $query->fetch(PDO::FETCH_OBJ);
 		
 		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
 		$sql = "Select tg_id FROM trainingsgruppe WHERE name=?";	
@@ -635,7 +650,7 @@ class VerwaltungsModel
 		// Update ausführen
 		$sql = "UPDATE trainingseinheit SET name=?, ort=?, zeit=?, trainer=?, tg_id=? WHERE tr_id=?";
 		$query = $this->db->prepare($sql);
-		$query->execute(array($str_name, $str_ort, $d_zeit, $int_trainer->p_id, $int_tg_id->tg_id, $tr_id));
+		$query->execute(array($str_name, $str_ort, $d_zeit, $int_trainer, $int_tg_id->tg_id, $tr_id));
 		
 		echo true;
 	}
@@ -824,13 +839,13 @@ class VerwaltungsModel
     }
 	public function edit_turnier($tu_id, $str_name, $int_liga, $arr_sparte_option)
     {
-		$sql = "SELECT * FROM turnier WHERE tu_id=?";
-        $query = $this->db->prepare($sql);
-        $query->execute(array($tu_id));
-		$turnier = $query->fetch(PDO::FETCH_OBJ);
-		if ($str_name == null){
-			$str_name = $turnier->name;
-		}
+		// $sql = "SELECT * FROM turnier WHERE tu_id=?";
+        // $query = $this->db->prepare($sql);
+        // $query->execute(array($tu_id));
+		// $turnier = $query->fetch(PDO::FETCH_OBJ);
+		// if ($str_name == null){
+			// $str_name = $turnier->name;
+		// }
 		$sql = "UPDATE turnier SET name=?, liga=? WHERE tu_id=?";
 		$query = $this->db->prepare($sql);
 		$query->execute(array($str_name, $int_liga, $tu_id));
@@ -842,10 +857,10 @@ class VerwaltungsModel
 		/*Nur wenn eine Sparte (Checkbox) gewählt wurde, wird auch eine Verknüpfung erstellt.*/
 		if(isset($arr_sparte_option)){
 			/*neu angelegte Turnier-ID auslesen*/
-			$sql = "SELECT tu_id FROM turnier WHERE name = ?";
-			$query = $this->db->prepare($sql);
-			$query->execute(array($str_name));
-			$turnier = $query->fetch(PDO::FETCH_OBJ);
+			// $sql = "SELECT tu_id FROM turnier WHERE name = ?";
+			// $query = $this->db->prepare($sql);
+			// $query->execute(array($str_name));
+			// $turnier = $query->fetch(PDO::FETCH_OBJ);
 			
 			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
 			if (is_array($arr_sparte_option)) {
@@ -854,7 +869,7 @@ class VerwaltungsModel
 					/*neue Verknüpfung in tbl turnier_sparte ohne gewinner anlegen*/
 					$sql = "INSERT INTO turnier_sparte (tu_id, sparte_id) VALUES (:tu_id, :sparte_id)";
 					$query = $this->db->prepare($sql);
-					$query->execute(array(':tu_id' => $turnier->tu_id, ':sparte_id' => $option));
+					$query->execute(array(':tu_id' => $tu_id, ':sparte_id' => $option));
 				}
 			} 
 		}
@@ -932,7 +947,7 @@ class VerwaltungsModel
 					$query = $this->db->prepare($sql);
 					$query->execute(array('m_id' => '1', ':tu_id' => $tu_id, ':sparte_id' => $sparte_id));
 					
-					/*neue Verknüpfung in tbl turnier_sparte ohne gewinner anlegen*/
+					/*neue Verknüpfung in tbl mannschaft_turnier_sparte*/
 					$sql = "INSERT INTO mannschaft_turnier_sparte (m_id, tu_id, sparte_id) VALUES (:m_id, :tu_id, :sparte_id)";
 					$query = $this->db->prepare($sql);
 					$query->execute(array(':m_id' => $option ,':tu_id' => $tu_id, ':sparte_id' => $sparte_id));

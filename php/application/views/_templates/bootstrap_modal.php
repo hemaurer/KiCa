@@ -35,7 +35,7 @@
 							<label class="control-label col-md-4">Sparte</label>
 							<div class="col-md-6">
 								<select class="form-control" name="str_sparte" id="str_sparte2" size="1" onchange="selectFiller('2', 'str_sparte2', 'str_status2')" required>
-									<option value="0" selected disabled>Sparte wählen</option>
+									<option value="0" selected disabled>Bitte wählen</option>
 									<?php foreach ($sparten as $sparte) { ?>
 									<option><?php if (isset($sparte->name)) echo $sparte->name; ?></option>
 									<?php } ?>
@@ -46,7 +46,7 @@
 							<label class="control-label col-md-4">Status</label>
 							<div class="col-md-6">
 								<select class="form-control" name="str_stat_name" id="str_status2" size="1" onchange="selectFiller('2','str_status2', 'str_tu_name2')" required>
-									<option value="0" selected disabled>Status wählen</option>
+									<option value="0" selected disabled>Bitte wählen</option>
 
 								</select>
 							</div>
@@ -55,7 +55,7 @@
 							<label class="control-label col-md-4">Turnier</label>
 							<div class="col-md-6">
 								<select class="form-control" name="str_tu_name" id="str_tu_name2" size="1" onchange="selectFiller('2','str_tu_name2', 'str_heim2')" required>
-									<option value="0" selected disabled>Turnier wählen</option>
+									<option value="0" selected disabled>Bitte wählen</option>
 									
 								</select>
 							</div>
@@ -64,7 +64,7 @@
 							<label class="control-label col-md-4">Heim Team</label>
 							<div class="col-md-6">
 								<select class="form-control" name="str_heim" id="str_heim2" size="1" onchange="selectFiller('2', 'str_heim2', 'str_auswaerts2')" required>
-									<option value="0" selected disabled>Team wählen</option>
+									<option value="0" selected disabled>Bitte wählen</option>
 									
 								</select>
 							</div>
@@ -73,7 +73,7 @@
 							<label class="control-label col-md-4">Gegnerisches Team</label>
 							<div class="col-md-6">
 								<select class="form-control" name="str_auswaerts" id="str_auswaerts2" size="1" required>
-									<option value="0" selected disabled>Gegner wählen</option>
+									<option value="0" selected disabled>Bitte wählen</option>
 									
 								</select>
 							</div>
@@ -209,7 +209,7 @@
 							<label class="control-label col-md-4">Gewinner</label>
 							<div class="col-md-6">
 								<select class="form-control" name="str_gewinner" id="str_gewinner_edit_turnier_sparte" size="1" >
-									<option value="0" selected disabled>Gewinner wählen</option>
+									<option value="0" selected disabled>Bitte wählen</option>
 									<?php foreach ($mannschaften as $mannschaft) { ?>
 									<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
 									<?php } ?>
@@ -250,9 +250,9 @@
 									<label class="control-label col-md-4">Trainer*</label>
 									<div class="col-md-6">
 										<select class="form-control" name="str_trainer" id="str_trainer_edit_trainingseinheit" size="1">
-											<option value="0" selected disabled>Wählen...</option>
+											<option value="0" selected disabled>Bitte wählen</option>
 											<?php foreach ($personen as $person) { ?>
-											<?php if ((isset($person->name))&&($person->betreuer == 1)){?><option><?php echo $person->name; ?></option><?php } ?>
+											<?php if ((isset($person->name))&&($person->betreuer == 1)){?><option value="<?php echo $person->p_id; ?>"><?php echo $person->name.", ".$person->v_name; ?></option><?php } ?>
 											<?php } ?>
 										</select>
 									</div>
@@ -261,7 +261,7 @@
 									<label class="control-label col-md-4">Trainingsgruppe*</label>
 									<div class="col-md-6">
 										<select class="form-control" name="str_tg_name" id="str_tg_name_edit_trainingseinheit" size="1">
-											<option value="0" selected disabled>Wählen...</option>
+											<option value="0" selected disabled>Bitte wählen</option>
 											<?php foreach ($trainingsgruppen as $trainingsgruppe) { ?>
 											<option><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></option>
 											<?php } ?>

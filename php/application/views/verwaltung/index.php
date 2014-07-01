@@ -99,7 +99,7 @@
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_sparte" id="str_sparte1" size="1" onchange="selectFiller('1', 'str_sparte1', 'str_status1')" required>
-											<option value="0" selected disabled>Sparte wählen</option>
+											<option value="0" selected disabled>Bitte wählen</option>
 											<?php foreach ($sparten as $sparte) { ?>
 											<option><?php if (isset($sparte->name)) echo $sparte->name; ?></option>
 											<?php } ?>
@@ -110,7 +110,7 @@
 									<label class="control-label col-md-4">Status*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_stat_name" id="str_status1" size="1" onchange="selectFiller('1', 'str_status1', 'str_tu_name1')" disabled required>
-											<option value="0" selected disabled>Status wählen</option>
+											<option value="0" selected disabled>Bitte wählen</option>
 
 										</select>
 									</div>
@@ -119,7 +119,7 @@
 									<label class="control-label col-md-4">Turnier*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_tu_name" id="str_tu_name1" size="1" onchange="selectFiller('1', 'str_tu_name1', 'str_heim1')" disabled required>
-											<option value="0" selected disabled>Turnier wählen</option>
+											<option value="0" selected disabled>Bitte wählen</option>
 										</select>
 									</div>
 								</div>
@@ -127,7 +127,7 @@
 									<label class="control-label col-md-4">Heim Team*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_heim" id="str_heim1" size="1" onchange="selectFiller('1', 'str_heim1', 'str_auswaerts1')" disabled required>
-											<option value="0" selected disabled>Team wählen</option>
+											<option value="0" selected disabled>Bitte wählen</option>
 											<?php foreach ($mannschaften as $mannschaft) { ?>
 											<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
 											<?php } ?>
@@ -138,7 +138,7 @@
 									<label class="control-label col-md-4">Gegnerisches Team*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_auswaerts" id="str_auswaerts1" size="1" disabled required>
-											<option value="0" selected disabled>Gegner wählen</option>
+											<option value="0" selected disabled>Bitte wählen</option>
 											<?php foreach ($mannschaften as $mannschaft) { ?>
 											<option><?php if (isset($mannschaft->name)) echo $mannschaft->name; ?></option>
 											<?php } ?>
@@ -206,7 +206,7 @@
 					</div>
 				</div>
 
-				<?php /***Trainingseinheiten-Add***/?>
+				<?php /***Trainingseinheit-Add***/?>
 				<div class="panel panel-default">
 					<div id="tr_add_glyph" onclick="change_chevron('#tr_add_glyph','#tr_add_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#accordion"href="#tr_add">
 						<h4 class="panel-title">
@@ -232,9 +232,9 @@
 									<label class="control-label col-md-4">Trainer*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_trainer" size="1" required>
-											<option></option>
+											<option selected disabled>Bitte wählen</option>
 											<?php foreach ($personen as $person) { ?>
-											<?php if ((isset($person->name))&&($person->betreuer == 1)){?><option><?php echo $person->name; ?></option><?php } ?>
+											<?php if ((isset($person->name))&&($person->betreuer == 1)){?><option value="<?php echo $person->p_id; ?>"><?php echo $person->name.", ".$person->v_name; ?></option><?php } ?>
 											<?php } ?>
 										</select>
 									</div>
@@ -243,7 +243,7 @@
 									<label class="control-label col-md-4">Trainingsgruppe*</label>
 									<div class="col-md-4">
 										<select class="form-control" name="str_tg_name" size="1" required>
-											<option></option>
+											<option selected disabled>Bitte wählen</option>
 											<?php foreach ($trainingsgruppen as $trainingsgruppe) { ?>
 											<option><?php if (isset($trainingsgruppe->name)) echo $trainingsgruppe->name; ?></option>
 											<?php } ?>
@@ -475,6 +475,8 @@
 									<td>Heim Team</td>
 									<td>Gegnerisches Team</td>
 									<td>Ergebnis</td>
+									<td>Sparte</td>
+									<td>Turnier</td>
 									<td>Spielart</td>
 									<td>Ort</td>
 									<td>Zeit</td>
@@ -488,9 +490,11 @@
 										<td><?php if (isset($spiel->Heim)) echo $spiel->Heim; ?></td>
 										<td><?php if (isset($spiel->Auswaerts)) echo $spiel->Auswaerts; ?></td>
 										<td><?php if ((isset($spiel->Heimtore)) && (isset($spiel->Auswaertstore))) echo $spiel->Heimtore." : ".$spiel->Auswaertstore; ?></td>
-										<td><?php if (isset($spiel->Status)) echo $spiel->Status; ?></td>
+										<td><?php if (isset($spiel->Sparte)) echo $spiel->Sparte; ?></td>
+										<td><?php if (isset($spiel->Turnier)){ if ($spiel->Turnier == "Freundschaftsspiel") { echo "Fr.spiel";}else{ echo $spiel->Turnier; } }?></td>
+										<td><?php if (isset($spiel->Status)){ if ($spiel->Status == "Freundschaftsspiel") { echo "Fr.spiel";}else{ echo $spiel->Status; } }?></td>
 										<td><?php if (isset($spiel->Ort)) echo $spiel->Ort; ?></td>
-										<td><?php if (isset($spiel->Uhrzeit)){$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.Y H:i');} ?></td>
+										<td><?php if (isset($spiel->Uhrzeit)){$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.y H:i');} ?></td>
 										<td align="center"><a  data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
 										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 									</tr>
