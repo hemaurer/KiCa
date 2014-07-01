@@ -88,7 +88,7 @@
 					@session_start();
 					if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
 				?>
-						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['v_name']; echo " "; echo $_SESSION['name']; ?><img id="profilbild_header" src="<?php echo URL . $_SESSION['str_bild']; ?>" ></a>
+						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['v_name']; echo " "; echo $_SESSION['name']; ?><img id="profilbild_header" src="<?php echo URL . $_SESSION['bild']; ?>" ></a>
 				<?php
 					}
 					else{

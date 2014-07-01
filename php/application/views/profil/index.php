@@ -14,7 +14,7 @@
 			<?php //Standardpfad Profilbilder: /public/img/profilbilder/_noimage.jpg ?>
 			<!-- Das angezeigte Profilbild des Benutzers -->
 			<div id="profilBild">
-					<p><img src="<?php echo URL . $_SESSION['str_bild']; ?>" ></p>
+					<p><img src="<?php echo URL . $_SESSION['bild']; ?>" ></p>
 				<!-- Button zum Ändern des Profilbilds -->
 				<div align="center">
 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#profIlbildModal">Profilbild ändern</button>
