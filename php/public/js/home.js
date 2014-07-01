@@ -9,7 +9,7 @@ function kalenderModal(str_className, id, URL, b_isBetreuer){
 	str_prefix = str_className.substring(0, 1).toUpperCase() + str_className.substring(1);
 
 		//Ajax Request auf Home Controller getKalenderDetails()
-		$.post("getKalenderDetails/", {"str_className": str_className, "id": id})
+		$.post("getKalenderDetails/", {"className": str_className, "id": id})
 			.done(function( data ) {
 				//Rückgabearray als JSON transformieren
 			 	var returnedData = JSON.parse(data);
