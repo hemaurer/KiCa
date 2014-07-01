@@ -5,7 +5,6 @@ class Turniere extends Controller
 
     public function index()
     {
-        // load a model, perform an action, pass the returned data to a variable
         $turniere_model = $this->loadModel('TurniereModel');
 
         //Parameter aus der URL auslesen und zur Anzeige der Liga Tabelle weitergeben

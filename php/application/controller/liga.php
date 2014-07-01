@@ -5,7 +5,6 @@ class Liga extends Controller
 
     public function index()
     {
-        // load a model, perform an action, pass the returned data to a variable
         $liga_model = $this->loadModel('LigaModel');
 
         //Den ersten Parameter aus der URL auslesen und zur Anzeige der Liga Tabelle weitergeben

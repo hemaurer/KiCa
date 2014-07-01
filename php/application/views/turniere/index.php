@@ -1,9 +1,12 @@
 <?php
+// Prüfen, ob ein Parameter mitgegeben wurde
+// dadurch wird abgefangen, dass die Seite ohne Parameter aufgerufen wird und Fehler erzeugt
 if(isset(Application::$parm_1) && isset(Application::$parm_2)){
 	?>
 <div class="container">
 	<!-- Beinhaltet alle Daten zu eintragen -->
 
+	<!-- Die Überschrift des Inhalts mit der Sparte -->
 	<div id="spartenText">
 		<h3>
 			<?php
@@ -40,11 +43,10 @@ if(isset(Application::$parm_1) && isset(Application::$parm_2)){
 					?>
 				</span> <span class="caret"></span>
 			 </button>
-			  <!-- <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"><span id="spartenDropdownName"> <?php echo $spartenDaten[0]->Sparte; ?> </span><span class="caret"></span> </a> -->
 				 <ul class="dropdown-menu" role="menu">
 					<?php
-						// Turniere aus der DB laden und in der Liste anzeigen
-						// Freundschaftsspiel wird ganz oben angezeigt
+							// Turniere aus der DB laden und in der Liste anzeigen
+							// Freundschaftsspiel wird ganz oben angezeigt
 							foreach ($turniere as $turnier) {
 								if(isset($turnier->Turnier)){
 									if ($turnier->Turnier == "Freundschaftsspiel"){ ?>
@@ -82,7 +84,7 @@ if(isset(Application::$parm_1) && isset(Application::$parm_2)){
 	</div> <!-- End id="spartenButton" -->
 	<br /><br /><br />
 
-	<div id=spieluebersicht>
+	<div id="spieluebersicht">
 	<?php
 		if (isset($str_winner)){
 			echo "<h3>SIEGER: ".$str_winner."</h3>";
@@ -112,8 +114,6 @@ if(isset(Application::$parm_1) && isset(Application::$parm_2)){
 	?>
 
 	</div> <!-- End id="spieluebersicht" -->
-
-
 
  <?php }
     else{ ?>

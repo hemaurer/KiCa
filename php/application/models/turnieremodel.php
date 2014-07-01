@@ -26,7 +26,8 @@ class TurniereModel
         $query->execute(array($tu_id, $sparte_id));
 		return $query->fetchAll();
 	}
-	
+
+	// Den Gewinner auslesen
 	public function get_winner($sparte_id, $tu_id){
 		$sql = "SELECT mannschaft.name
 			FROM mannschaft
@@ -35,7 +36,7 @@ class TurniereModel
 		$query = $this->db->prepare($sql);
         $query->execute(array($tu_id, $sparte_id));
 		$result = $query->fetchAll();
-		if (count($result) > 0){ 
+		if (count($result) > 0){
 			$str_winner = $result[0]->name;
 		} else {
 			$str_winner = null;

@@ -14,14 +14,11 @@
 	<link href="<?php echo URL; ?>public/css/bootstrap-timepicker.css" rel="stylesheet">
 	<link rel="shortcut icon" type="image/x-icon" href="<?php echo URL; ?>public/img/favicon.ico" />
 
-    <!-- jQuery -->
+    <!-- JavaScript / jQuery -->
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-datepicker.js"></script>
-
-
-
 </head>
 <body>
 <!-- header -->
@@ -46,17 +43,23 @@
 
 						<?php
 							// Sparten aus der DB laden und in der Liste anzeigen
+							// Bildet das Dropdown Menü für die Liga Navigation
 							$sparten_model = $this->loadModel('SpartenModel');
 	        				$spartenDaten = $sparten_model->getSparten();
 
+	        				// Turniere laden - wird für die Turnier Navigation benötigt (bzw. nur die ID des Freundschaftspiels)
 	        				$nav_turniere = $sparten_model->getTurniere(1);
 
+	        				// Es wird nur geprüft, welche ID das Freundschaftsspiel hat
+	        				// Dies wird in den Links über die Dropdown Navigation von Turniere als Parameter mitgegeben
+	        				// So wird standardmäßig immer ein Freundschaftsspiel als erstes angezeigt, da dies überall besteht
 	        				foreach ($nav_turniere as $nav_turnier) {
 	        					if($nav_turnier->Turnier == "Freundschaftsspiel"){
 	        						$id_freundschaftsspiel = $nav_turnier->ID;
 	        					}
 							}
 
+						// Dropdown Menü aufbauen
 						foreach ($spartenDaten as $sparte) { ?>
 								<li><a href="<?php echo URL; echo 'liga/index/'; if (isset($sparte->ID)) echo $sparte->ID; ?>/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
 						<?php } ?>
@@ -67,6 +70,7 @@
 					<ul class="dropdown-menu">
 
 						<?php
+						// Dropdown Menü aufbauen
 						foreach ($spartenDaten as $sparte) { ?>
 								<li><a href="<?php echo URL; echo 'turniere/index/'; if (isset($sparte->ID)) echo $sparte->ID; echo '/'; echo $id_freundschaftsspiel; ?>/"><?php if (isset($sparte->Sparte)) echo $sparte->Sparte; ?></a></li>
 						<?php } ?>
@@ -75,14 +79,13 @@
 				</li>
 
 				<!-- Login mit Submenü, die die Forms beinhalten -->
-				<!-- Hier wird vom Server anhand von Sessionvariablen über PHP entschieden, wie die Navigation aufgebaut ist -->
-				<!-- 3 Varianten: ausgeloggt, eingeloggt, eingeloggt mit Adminrechten -->
-
-				<!-- Session starten, dass die Session Variablen zum Login-Status ausgelesen werden können -->
-				<!-- "Login" in der Navigation umbennen in den eingeloggten User -->
 				<?php
-					@session_start();
+				// Hier wird vom Server anhand von Sessionvariablen über PHP entschieden, wie die Navigation aufgebaut ist
+				// 3 Varianten: ausgeloggt, eingeloggt, eingeloggt mit Adminrechten
 
+				// Session starten, dass die Session Variablen zum Login-Status ausgelesen werden können
+				// "Login" in der Navigation umbennen in den eingeloggten User
+					@session_start();
 					if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
 				?>
 						<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['v_name']; echo " "; echo $_SESSION['name']; ?><img id="profilbild_header" src="<?php echo URL . $_SESSION['str_bild']; ?>" ></a>
@@ -154,5 +157,4 @@
 			?>
 		</h1>
 	</div>
-
 </div>

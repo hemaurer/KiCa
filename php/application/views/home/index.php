@@ -54,8 +54,6 @@
 		</div> <!-- End class="btn-group"> -->
 	</div> <!-- End id="spartenButton" -->
 
-
-
 	<!-- Kalender Div - wird mit dem JQueryKalender befüllt -->
     <div id='calendar'>
 
@@ -103,7 +101,7 @@
 			<span class="label label-default">(H): Heimspiel</span>
 			<span class="label label-default">(A): Auswärtsspiel</span>
 	</div> <!-- End calender -->
-	<!-- sModal -->
+	<!-- kalenderModal -->
 	<div class="modal fade" id="kalenderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -112,11 +110,7 @@
 					<h4 class="modal-title" id="pModalLabel"><div id="kalendermodalheader"></div></h4>
 				</div>
 				<div class="modal-body" id="kalendermodalbody">
-
 				</div>
-				<!--div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-				</div-->
 			</div>
 		</div>
 	</div>
