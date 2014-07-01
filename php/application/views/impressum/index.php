@@ -17,18 +17,18 @@
 				<tbody>
 					<tr>
 						<td><strong>Kickers Calendar</strong></td>
-						<td><span class="glyphicon glyphicon-earphone"></span> 0650 8625646</td>
+						<td><span class="glyphicon glyphicon-earphone"></span> 0650 13371234</td>
 					</tr>
 					<tr>
 						<td><strong>KiCa-Team</strong></td>
-						<td><span class="glyphicon glyphicon-phone"></span> 0170 8565546</td>
+						<td><span class="glyphicon glyphicon-phone"></span> 0170 98761337</td>
 					</tr>
 					<tr>
 						<td>Standardstraße 27</td>
 						<td><span class="glyphicon glyphicon-bookmark"></span><a href="#"> www.KiCa.tld</a></td>
 					</tr>
 					<tr>
-						<td>046877 Leipzig</td>
+						<td>04103 Leipzig</td>
 						<td><span class="glyphicon glyphicon-envelope"></span><a href="#"> info@KiCa.tld</a></td>
 					</tr>
 					<tr>
@@ -62,14 +62,14 @@
 				<thead style="background-color: #ddd; font-weight: bold;">
 					<tr>
 						<td colspan="3">
-							<span class="glyphicon glyphicon-user"></span> Technische Angaben
+							<span class="glyphicon glyphicon-hdd"></span> Technische Angaben
 						</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td><strong>Technisch Verantwortlicher:</strong></td>
-						<td><a href="#">smoothtown.de GbR Leipzig</a></td>
+						<td><a href="#">1337-Design GbR Leipzig</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -79,7 +79,7 @@
 				<thead style="background-color: #ddd; font-weight: bold;">
 					<tr>
 						<td colspan="3">
-							<span class="glyphicon glyphicon-user"></span> Bildquellen und -rechte
+							<span class="glyphicon glyphicon-camera"></span> Bildquellen und -rechte
 						</td>
 					</tr>
 				</thead>
@@ -96,7 +96,7 @@
 				<thead style="background-color: #ddd; font-weight: bold;">
 					<tr>
 						<td colspan="3">
-							<span class="glyphicon glyphicon-user"></span> Weitere Informationen
+							<span class="glyphicon glyphicon-plus"></span> Weitere Informationen
 						</td>
 					</tr>
 				</thead>

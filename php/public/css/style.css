@@ -31,6 +31,14 @@ table {
     cursor: pointer !important;
 }
 
+#table_impressum .glyphicon{
+    cursor: default !important;
+}
+
+.panel-heading{
+    cursor: pointer !important;
+}
+
 /*Header*/
 
 #header{
