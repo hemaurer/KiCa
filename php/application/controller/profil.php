@@ -32,17 +32,20 @@ class Profil extends Controller
     // Größe ändern
     public function doChangeGroesse()
     {
-        if (isset($_POST["int_groesse"])) {
-            @session_start();
-            $profil_model = $this->loadModel('ProfilModel');
-            $profil_model->doChangeGroesse($_SESSION["p_id"], $_POST["int_groesse"]);
-
+        // Auf Zahl prüfen
+        if (isset($_POST["int_groesse"])){
+            if (is_numeric($_POST["int_groesse"]) && $_POST["int_groesse"] < 250){
+                @session_start();
+                $profil_model = $this->loadModel('ProfilModel');
+                $profil_model->doChangeGroesse($_SESSION["p_id"], $_POST["int_groesse"]);
+            }
         }
     }//end doChangeGroesse()
 
     // Telefonnummer ändern
     public function doChangeTel()
     {
+        // Muss nicht auf Zahl geprüft werden - ist in der DB als varchar definiert
         if (isset($_POST["str_tel"])) {
             @session_start();
             $profil_model = $this->loadModel('ProfilModel');
