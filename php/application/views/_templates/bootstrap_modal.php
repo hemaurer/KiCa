@@ -88,8 +88,8 @@
 							<label class="control-label col-md-4">Datum</label>
 							<div class="col-md-6">
 								<div data-provide="datepicker" class="input-group date">
-									<input class="form-control" name="d_date" id="d_date_edit_spiel" type="text" placeholder="Beispiel 01.01.2011" required>
-									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+									<input class="form-control" name="d_date" id="d_date_edit_spiel" type="text" onkeyup="inputChecker('date', 'd_date_edit_spiel', 'submit_edit_spiel')" placeholder="Beispiel 01.01.2011" required>
+									<span class="input-group-addon glyphicon glyphicon-calendar"></span>
 								</div>
 							</div>
 						</div>
@@ -97,8 +97,8 @@
 							<label class="control-label col-md-4">Zeit</label>
 							<div align="right" class="col-md-6">
 								<div class="input-group">
-									<input class="form-control" id="d_time_edit_spiel" name="d_time" type="text" placeholder="Beispiel 12:00" required>
-									<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+									<input class="form-control" id="d_time_edit_spiel" name="d_time" type="text" onkeyup="inputChecker('time', 'd_time_edit_spiel', 'submit_edit_spiel')" placeholder="Beispiel 12:00" required>
+									<span class="input-group-addon glyphicon glyphicon-time"></span>
 								</div>
 							</div>
 							<script> $('#d_time_edit_spiel').timepicker({showMeridian: false});</script>
@@ -106,11 +106,11 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">Tore</label>
 							<div class="col-md-2">
-								<input class="form-control" type="text" name="int_heimtor" id="int_heimtor"/>
+								<input class="form-control" type="text" name="int_heimtor" id="int_heimtor" onkeyup="inputChecker('tor', 'int_heimtor', 'submit_edit_spiel')"/>
 							</div>
-							<label class="control-label col-md-1">:</label>
+							<label class="control-label col-md-2" style="text-align:center">:</label>
 							<div class="col-md-2">
-								<input class="form-control" type="text" name="int_auswaertstor" id="int_auswaertstor" />
+								<input class="form-control" type="text" name="int_auswaertstor" id="int_auswaertstor" onkeyup="inputChecker('tor', 'int_auswaertstor', 'submit_edit_spiel')"/>
 							</div>
 						</div>
 					</div>
@@ -216,7 +216,6 @@
 								</select>
 							</div>
 						</div>
-
 					</div>
 				</div>
 				<div class="modal-footer" id="turnier_sparte_footer">
@@ -272,8 +271,8 @@
 									<label class="control-label col-md-4">Datum*</label>
 									<div class="col-md-6">
 										<div data-provide="datepicker" class="input-group date">
-											<input class="form-control" name="d_date" id="d_date_edit_trainingseinheit" type="text" placeholder="Beispiel 01.01.2011" required>
-											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+											<input class="form-control" name="d_date" id="d_date_edit_trainingseinheit" type="text" onkeyup="inputChecker('date', 'd_date_edit_trainingseinheit', 'submit_edit_trainingseinheit')" placeholder="Beispiel 01.01.2011" required>
+											<span class="input-group-addon glyphicon glyphicon-calendar"></span>
 										</div>
 									</div>
 								</div>
@@ -281,8 +280,8 @@
 									<label class="control-label col-md-4">Zeit*</label>
 									<div class="col-md-6">
 										<div class="input-group">
-											<input class="form-control" id="d_time_edit_trainingseinheit" name="d_time" type="text" placeholder="Beispiel 12:00" required>
-											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+											<input class="form-control" id="d_time_edit_trainingseinheit" name="d_time" type="text" onkeyup="inputChecker('time', 'd_time_edit_trainingseinheit', 'submit_edit_trainingseinheit')" placeholder="Beispiel 12:00" required>
+											<span class="input-group-addon glyphicon glyphicon-time"></span>
 										</div>
 									</div>
 									<script> $('#d_time_edit_trainingseinheit').timepicker({showMeridian: false});</script>

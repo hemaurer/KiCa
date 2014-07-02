@@ -43,8 +43,8 @@
 									<label class="control-label col-md-4">Geburtsdatum*</label>
 									<div class="col-md-4">
 										<div data-provide="datepicker" class="input-group date">
-											<input class="form-control" name="d_date" type="text" placeholder="Beispiel 01.01.2011" required>
-											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+											<input class="form-control" name="d_date" type="text" id="d_date_add_person" onkeyup="inputChecker('date', 'd_date_add_person', 'submit_add_person')" placeholder="Beispiel 01.01.2011" required>
+											<span class="input-group-addon glyphicon glyphicon-calendar"></span>
 										</div>
 									</div>
 								</div>
@@ -156,8 +156,8 @@
 									<label class="control-label col-md-4">Datum*</label>
 									<div class="col-md-4">
 										<div data-provide="datepicker" class="input-group date">
-											<input class="form-control" name="d_date" type="text" placeholder="Beispiel 01.01.2011" required>
-											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+											<input class="form-control" name="d_date" id="d_date_add_spiel" type="text" onkeyup="inputChecker('date', 'd_date_add_spiel', 'submit_add_spiel')" placeholder="Beispiel 01.01.2011" required>
+											<span class="input-group-addon glyphicon glyphicon-calendar"></span>
 										</div>
 									</div>
 								</div>
@@ -165,11 +165,11 @@
 									<label class="control-label col-md-4">Zeit*</label>
 									<div align="right" class="col-md-4">
 										<div class="input-group">
-											<input class="form-control" id="timepicker1" name="d_time" type="text" placeholder="Beispiel 12:00" required>
-											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+											<input class="form-control" id="d_time_add_spiel" name="d_time" type="text" onkeyup="inputChecker('time', 'd_time_add_spiel', 'submit_add_spiel')" placeholder="Beispiel 12:00" required>
+											<span class="input-group-addon glyphicon glyphicon-time"></span>
 										</div>
 									</div>
-									<script> $('#timepicker1').timepicker({showMeridian: false});</script>
+									<script> $('#d_time_add_spiel').timepicker({showMeridian: false});</script>
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4 formular-button">
@@ -191,7 +191,7 @@
 					</div>
 					<div id="m_add" class="panel-collapse collapse">
 						<div class="panel-body">
-							<form class="form-horizontal" action="<?php echo URL; ?>verwaltung/add_mannschaft/" method="POST">
+							<form class="form-horizontal" id="add_mannschaft" action="<?php echo URL; ?>verwaltung/add_mannschaft/" method="POST">
 								<div class="form-group">
 									<label class="control-label col-md-4">Mannschaftsname*</label>
 									<div class="col-md-4">
@@ -257,8 +257,8 @@
 									<label class="control-label col-md-4">Datum*</label>
 									<div class="col-md-4">
 										<div data-provide="datepicker" class="input-group date">
-											<input class="form-control" name="d_date" type="text" placeholder="Beispiel 01.01.2011" required>
-											<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+											<input class="form-control" name="d_date" type="text" id="d_date_add_trainingseinheit" onkeyup="inputChecker('date', 'd_date_add_trainingseinheit', 'submit_add_trainingseinheit')" placeholder="Beispiel 01.01.2011" required>
+											<span class="input-group-addon glyphicon glyphicon-calendar"></span>
 										</div>
 									</div>
 								</div>
@@ -266,11 +266,11 @@
 									<label class="control-label col-md-4">Zeit*</label>
 									<div class="col-md-4">
 										<div class="input-group">
-											<input class="form-control" id="timepicker2" name="d_time" type="text" placeholder="Beispiel 12:00" required>
-											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+											<input class="form-control" id="d_time_add_trainingseinheit" name="d_time" type="text" onkeyup="inputChecker('time', 'd_time_add_trainingseinheit', 'submit_add_trainingseinheit')" placeholder="Beispiel 12:00" required>
+											<span class="input-group-addon glyphicon glyphicon-time"></span>
 										</div>
 									</div>
-									<script> $('#timepicker2').timepicker({showMeridian: false});</script>
+									<script> $('#d_time_add_trainingseinheit').timepicker({showMeridian: false});</script>
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4 formular-button">
