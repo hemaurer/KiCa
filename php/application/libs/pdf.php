@@ -38,45 +38,53 @@ class PDF extends FPDF {
 	
 	function ShowList($header, $data){
 		// Größte Zelle ermitteln
-		$w = strlen($header);
+		$w = strlen($header[0]);
 		foreach ($data as $item) {
 			if ($w < strlen($item)) {
 				$w = strlen($item);
 			}
 		}
-		$w = $w * 3;
+		$w = $w * 3 + 5;
 		// Colors, line width and bold font
-		$this->SetFillColor(255,0,0);
+		$this->SetFillColor(181,181,181);
 		$this->SetTextColor(255);
 		$this->SetDrawColor(128,0,0);
 		$this->SetLineWidth(.3);
 		$this->SetFont('','B');
 		// Header
-		$this->Cell($w,7,$header,1,0,'C',true);
+		foreach($header as $item){			
+			$this->Cell($w,7,$item,0,0,'C',true);
+		}
 		$this->Ln();
 		// Color and font restoration
-		$this->SetFillColor(224,235,255);
 		$this->SetTextColor(0);
 		$this->SetFont('');
 		// Data
-		$fill = false;
 		foreach($data as $row)
 		{
-			$this->Cell($w,6,$row,'LR',0,'L',$fill);
+			$this->Cell($w,6,$row,0,0,'L');
+			$this->Cell($w/2-3);
+			$this->Cell($w,6,$this->Image("public/img/square.png"), 0, 0 ,'R');
 			$this->Ln();
-			$fill = !$fill;
 		}
-		// Closing line
-		$this->Cell($w,0,'','T');
 	}
 	
 	function createHeader($str_header){
+		// Add Logo
+		$this->Image("public/img/football-icon.png", 10, 6, 30);
+		 // Arial bold 25
+		$this->SetFont('Arial','B',25);
+		// Move to the right
+		$this->Cell(35);
+		$this->Write(25,"KiCa");
+		$this->Ln(20);
+	
 		 // Arial bold 15
 		$this->SetFont('Arial','B',15);
 		// Move to the right
 		$this->Cell(80);
 		// Title
-		$this->Cell(strlen($str_header)*4,10, $str_header,1,0,'C');
+		$this->Write(10, $str_header);
 		// Line break
 		$this->Ln(20);
 	}

@@ -84,7 +84,8 @@ class TrainingModel
 		$pdf->SetFont('Arial','',14);
 		$pdf->AddPage();
 		$pdf->createHeader("Anwesenheitsliste");
-		$pdf->ShowList($str_header,$arr_data);
+		$arr_header = array (0 => "Name", 1 => "anwesend?");
+		$pdf->ShowList($arr_header,$arr_data);
 		$pdf->Output();
 	}
 }?>
