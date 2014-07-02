@@ -51,7 +51,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Groesse</label>
 									<div class="col-md-4">
-										<input class="form-control" type="number" name="int_groesse" id="int_groesse_add_person" value="" onkeyup="inputChecker('groesse', 'int_groesse_add_person', 'submit_add_person')" placeholder="Beispiel 158cm" />
+										<input class="form-control" type="number" name="int_groesse" id="int_groesse_add_person" value="" onkeyup="inputChecker('groesse', 'int_groesse_add_person', 'submit_add_person')" placeholder="Beispiel in cm: 158" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -169,7 +169,7 @@
 											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 										</div>
 									</div>
-									<script> $('#timepicker1').timepicker({showMeridian: false, defaultTime: false});</script>
+									<script> $('#timepicker1').timepicker({showMeridian: false});</script>
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4 formular-button">
@@ -270,7 +270,7 @@
 											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 										</div>
 									</div>
-									<script> $('#timepicker2').timepicker({showMeridian: false, defaultTime: false});</script>
+									<script> $('#timepicker2').timepicker({showMeridian: false});</script>
 								</div>
 								<div class="form-group">
 									<div class="col-md-offset-4 col-md-4 formular-button">

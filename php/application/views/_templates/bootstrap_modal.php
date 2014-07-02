@@ -101,7 +101,7 @@
 									<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 								</div>
 							</div>
-							<script> $('#d_time_edit_spiel').timepicker({showMeridian: false, defaultTime: false});</script>
+							<script> $('#d_time_edit_spiel').timepicker({showMeridian: false});</script>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-md-4">Tore</label>
@@ -285,7 +285,7 @@
 											<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
 										</div>
 									</div>
-									<script> $('#d_time_edit_trainingseinheit').timepicker({showMeridian: false, defaultTime: false});</script>
+									<script> $('#d_time_edit_trainingseinheit').timepicker({showMeridian: false});</script>
 								</div>
 							</div>
 				</div>
