@@ -79,11 +79,11 @@ function fillSparte(sparte_id, str_sparte){
 
 		//Kalender neu befüllen mit den Rückgabewerten
 		$('#calendar').fullCalendar( 'removeEvents');
-		$('#calendar').fullCalendar( 'addEventSource', {events:trainingseinheitenDaten, backgroundColor: '#5cb85c', borderColor : '#5cb85c', textColor:'#fff', str_className:'training'} );
-		$('#calendar').fullCalendar( 'addEventSource', {events:trainerDaten, backgroundColor: '#5cb85c', borderColor : '#5cb85c', textColor:'#fff', str_className:'training'} );
-		$('#calendar').fullCalendar( 'addEventSource', {events:ligaDaten,backgroundColor: '#428bca', borderColor: '#428bca', textColor:'#fff', str_className:'liga'} );
-		$('#calendar').fullCalendar( 'addEventSource', {events:turnierDaten,backgroundColor: '#d9534f', borderColor:'#d9534f', textColor:'#fff', str_className:'turnier'});
-		$('#calendar').fullCalendar( 'addEventSource', {events:freundschaftsDaten,backgroundColor: '#f0ad4e', borderColor:'#f0ad4e', textColor:'#fff', str_className:'freundschaft'});
+		$('#calendar').fullCalendar( 'addEventSource', {events:trainingseinheitenDaten, backgroundColor: '#5cb85c', borderColor : '#5cb85c', textColor:'#fff', className:'training'} );
+		$('#calendar').fullCalendar( 'addEventSource', {events:trainerDaten, backgroundColor: '#5cb85c', borderColor : '#5cb85c', textColor:'#fff', className:'training'} );
+		$('#calendar').fullCalendar( 'addEventSource', {events:ligaDaten,backgroundColor: '#428bca', borderColor: '#428bca', textColor:'#fff', className:'liga'} );
+		$('#calendar').fullCalendar( 'addEventSource', {events:turnierDaten,backgroundColor: '#d9534f', borderColor:'#d9534f', textColor:'#fff', className:'turnier'});
+		$('#calendar').fullCalendar( 'addEventSource', {events:freundschaftsDaten,backgroundColor: '#f0ad4e', borderColor:'#f0ad4e', textColor:'#fff', className:'freundschaft'});
 
 		//Den Text des Dropdown Menüs auf die ausgewählte str_sparte setzen
 		$('.spartenDropdownName').html(str_sparte);
