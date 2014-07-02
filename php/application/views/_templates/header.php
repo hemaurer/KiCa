@@ -19,8 +19,27 @@
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-timepicker.js"></script>
 	<script type="text/javascript" src="<?php echo URL; ?>public/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="<?php echo URL; ?>public/js/header.js"></script>
 </head>
 <body>
+
+<?php
+	// Ist ein Login nicht erfolgreich wird eine Fehlermeldung über den Eingabefelder des Logins angezeigt
+	// Mit folgender JS Funktion wird beim Laden der Seite das Dropdown ausgeklappt
+	if (isset($_SESSION['loginSuccess'])){
+		if($_SESSION['loginSuccess'] == 0){
+?>
+		<script type="text/javascript">
+			//Page Onload
+			$(document).ready(function () {
+				$("#nav_login").click();
+			});
+		</script>
+<?php
+	}
+	}
+?>
+
 <!-- header -->
 <div class="container" id="header">
     <!-- navigation -->
@@ -93,7 +112,7 @@
 					}
 					else{
 				 ?>
-				<li class="dropdown"><a href="" class="dropdown-toggle" data-toggle="dropdown">Login</a>
+				<li class="dropdown"><a href="" id="nav_login" class="dropdown-toggle" data-toggle="dropdown">Login</a>
 				<?php  }
 				?>
 
@@ -107,6 +126,20 @@
 
 								<form class="navbar-form" name="loginform" action="<?php echo URL; ?>login/doLogin/" method="post">
 									<div class="form-group">
+
+									<?php
+									// Bei fehlerhaftem Login einen Text über den Eingabefeldern anzeigen
+									if (isset($_SESSION['loginSuccess'])){
+												if($_SESSION['loginSuccess'] == 0){
+													// delete the session of the user
+											        $_SESSION = array();
+											        session_destroy();
+							       	?>
+							       			<label id="lbl_loginFehler">Ihr Benutzername und Passwort stimmen nicht überein.</label>
+					       			<?php
+								       		}
+								       	}
+					      		 	?>
 									<input id="login_input_username" class="form-control" type="text" name="str_username" placeholder="Benutzername" required /><br>
 									<input id="login_input_password" class="form-control" type="password" name="str_password" autocomplete="off" placeholder="Passwort" required /><br>
 									</div>
@@ -156,5 +189,11 @@
 				echo "<small> - ".ucfirst(Application::$subpage)."</small>";
 			?>
 		</h1>
+	</div>
+</div>
+
+<!-- Login-Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" id="loginModal_dialog">
 	</div>
 </div>

@@ -10,9 +10,11 @@ class Login extends Controller
 	{
 		if (isset($_POST["submit_login"])) {
 			$login_model = $this->loadModel('LoginModel');
-            $login_model->doLogin($_POST["str_username"], $_POST["str_password"]);
+            $result = $login_model->doLogin($_POST["str_username"], $_POST["str_password"]);
+
+            header('location: ' . URL . 'home/');
 		}
-		header('location: ' . URL . 'home/');
+
 	}//end doLogin()
 
 

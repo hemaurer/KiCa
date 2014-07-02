@@ -97,6 +97,10 @@ table {
 	height: 79px;
 }
 
+#lbl_loginFehler{
+    color: red !important;
+}
+
 /*HOME*/
 #spartenText{
     float: left;
