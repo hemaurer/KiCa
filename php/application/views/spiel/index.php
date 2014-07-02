@@ -70,7 +70,6 @@
 											} else {
 												echo "<li><label><input type='checkbox' name='arr_aufstellung[]' value='".$spieler->p_id."' /> </label></li>";
 											}
-
 										} else {
 											echo "<li><label><input type='checkbox' name='arr_aufstellung[]' value='".$spieler->p_id."' />";
 
@@ -83,8 +82,14 @@
 						</ul>
 					</div>
 				</div>
+				
 				<div class="form-group">
-					<div class="col-md-offset-3 col-md-6 formular-button">
+					<div class="col-md-offset-3 col-md-2">
+						<button type="submit" class="btn btn-info" name="submit_create_PDF">
+							<span class="glyphicon glyphicon-print"></span> Drucken
+						</button>
+					</div>
+					<div class="col-md-offset-1 col-md-3 formular-button" >
 						<input class="btn btn-default" type="submit" name="submit_abort" value="Abbrechen" />
 						<input class="btn btn-primary" type="submit" name="submit_edit_aufstellung" value="Speichern" />
 					</div>
@@ -126,7 +131,6 @@
 					<form action="<?php echo URL; ?>spiel/edit_aufstellung/" method="POST">
 						<div class="col-md-offset-3 col-md-6">
 							<input class="btn btn-default" type="submit" name="submit_abort" value="Abbrechen" />
-							<input class="btn btn-primary" type="submit" name="submit_abort" value="Speichern" />
 						</div>
 					</form>
 				</div>

@@ -1,41 +1,9 @@
 <?php
 require('application/libs/fpdf/fpdf.php');
-// Beispiel von http://www.fpdf.org/en/tutorial/tuto5.htm
+// Beispiel abgewandelt von http://www.fpdf.org/en/tutorial/tuto5.htm
 class PDF extends FPDF {
 
-	// Colored table
-	function FancyTable($header, $data)
-	{
-		// Colors, line width and bold font
-		$this->SetFillColor(255,0,0);
-		$this->SetTextColor(255);
-		$this->SetDrawColor(128,0,0);
-		$this->SetLineWidth(.3);
-		$this->SetFont('','B');
-		// Header
-		$w = array(40, 35, 40, 45);
-		for($i=0;$i<count($header);$i++)
-			$this->Cell($w[$i],7,$header[$i],1,0,'C',true);
-		$this->Ln();
-		// Color and font restoration
-		$this->SetFillColor(224,235,255);
-		$this->SetTextColor(0);
-		$this->SetFont('');
-		// Data
-		$fill = false;
-		foreach($data as $row)
-		{
-			$this->Cell($w[0],6,$row[0],'LR',0,'L',$fill);
-			$this->Cell($w[1],6,$row[1],'LR',0,'L',$fill);
-			$this->Cell($w[2],6,number_format($row[2]),'LR',0,'R',$fill);
-			$this->Cell($w[3],6,number_format($row[3]),'LR',0,'R',$fill);
-			$this->Ln();
-			$fill = !$fill;
-		}
-		// Closing line
-		$this->Cell(array_sum($w),0,'','T');
-	}
-	
+	// Erstelle eine Liste mitsamt grauer Kopfzeile
 	function ShowList($header, $data){
 		// Größte Zelle ermitteln
 		$w = strlen($header[0]);
@@ -46,7 +14,7 @@ class PDF extends FPDF {
 		}
 		$w = $w * 3 + 5;
 		// Colors, line width and bold font
-		$this->SetFillColor(181,181,181);
+		$this->SetFillColor(191,191,191);
 		$this->SetTextColor(255);
 		$this->SetDrawColor(128,0,0);
 		$this->SetLineWidth(.3);
@@ -68,7 +36,7 @@ class PDF extends FPDF {
 			$this->Ln();
 		}
 	}
-	
+	// Erstelle den Header mit Logo und  einem Titel
 	function createHeader($str_header){
 		// Add Logo
 		$this->Image("public/img/football-icon.png", 10, 6, 30);
@@ -88,8 +56,70 @@ class PDF extends FPDF {
 		// Line break
 		$this->Ln(20);
 	}
-	
-	function createDetails($arr_details){
-		
+	// Erstelle Tabelle ohne Ränder mit den Details eines Trainings
+	function createTrainingDetails($arr_details){
+		$date = new DateTime($arr_details->Uhrzeit); // Datumsformatierer vorbereiten
+		$this->SetFont('Arial','',12);
+		$this->Cell(35,5,"Details",0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Name",0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Name),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Ort",0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Ort),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Zeit",0,0,'L');
+		$this->Cell(50,6,utf8_decode($date->format('H:i'))." Uhr",0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Datum",0,0,'L');
+		$this->Cell(50,6,utf8_decode($date->format('d.m.Y')),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Trainingsgruppe",0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Trainingsgruppe),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Trainer",0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Trainer),0,0,'L');
+		$this->Ln(15);
+	}
+	// Erstelle Tabelle ohne Ränder mit den Details eines Spiels
+	function createSpielDetails($arr_details){
+		$date = new DateTime($arr_details->Uhrzeit); // Datumsformatierer vorbereiten
+		$this->SetFont('Arial','',12);
+		$this->Cell(35,5,"Details",0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Heimteam",0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Heim),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,utf8_decode("Auswärtsteam"),0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Auswaerts),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Ergebnis",0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Heimtore.":".$arr_details->Auswaertstore),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Spielart",0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Turnier),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Ort",0,0,'L');
+		$this->Cell(50,6,utf8_decode($arr_details->Ort),0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Zeit",0,0,'L');
+		$this->Cell(50,6,utf8_decode($date->format('H:i'))." Uhr",0,0,'L');
+		$this->Ln(5);
+		$this->Cell(35);
+		$this->Cell(35,6,"Datum",0,0,'L');
+		$this->Cell(50,6,utf8_decode($date->format('d.m.Y')),0,0,'L');
+		$this->Ln(15);
 	}
 }

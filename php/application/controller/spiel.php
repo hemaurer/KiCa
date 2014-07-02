@@ -23,18 +23,26 @@ class Spiel extends Controller
         require 'application/views/spiel/index.php';
         require 'application/views/_templates/footer.php';
     }
-
+	// Ein Button wurde geklickt
 	public function edit_aufstellung()
     {
+		// Aufstellung soll verändert werden
         if (isset($_POST["submit_edit_aufstellung"])) {
 			$spiel_model= $this->loadModel('SpielModel');
 			$spiel_model->set_aufstellung($_POST['s_id'], $_POST['arr_aufstellung']);
              //Weiterleitung nach Ausführen der Methode
 			header('location: ' . URL . 'termine/');
         }
-
+		// Abbrechen, zurück zur Terminübersicht
 		if (isset($_POST["submit_abort"])) {
 			header('location: ' . URL . 'termine/');
+		}
+		// Aufstellung speichern und PDF erstellen
+		if (isset($_POST["submit_create_PDF"])) {
+			$spiel_model = $this->loadModel('SpielModel');
+			$spiel_model->set_aufstellung($_POST['s_id'], $_POST['arr_aufstellung']);
+			$spiel_model->create_PDF($_POST["s_id"]);
+			//header('location: ' . URL . 'termine/');
 		}
     }
 }

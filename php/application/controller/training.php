@@ -27,8 +27,8 @@ class Training extends Controller
         require 'application/views/training/index.php';
         require 'application/views/_templates/footer.php';
     }
-
-	public function edit_trainingseinheit()
+	// Ein Button wurde geklickt
+	/* public function edit_trainingseinheit() 
     {
         if (isset($_POST["submit_edit_trainingseinheit"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
@@ -36,25 +36,27 @@ class Training extends Controller
              //Weiterleitung nach Ausführen der Methode
 			header('location: ' . URL . 'termine/');
         }
-
+		// Abbrechen, also zurück zur Terminübersicht
 		if (isset($_POST["submit_abort"])) {
 			header('location: ' . URL . 'termine/');
 		}
-    }
-
+    }*/
+	// Ein Button wurde geklickt
 	public function edit_anwesenheitsliste(){
+		// Die Anwesenheit soll erneuer werden
 		if (isset($_POST["submit_edit_anwesenheitsliste"])) {
 			$training_model = $this->loadModel('TrainingModel');
 			$training_model->set_Abwesenheitsliste($_POST["tr_id"], $_POST["p_ids"]);
 			header('location: ' . URL . 'termine/');
 		}
-
+		// Abbrechen, also zurück zur Terminübersicht
 		if (isset($_POST["submit_abort"])) {
 			header('location: ' . URL . 'termine/');
 		}
-		
+		// Anwesenheit speichern und eine PDF erzeugen
 		if (isset($_POST["submit_create_PDF"])) {
 			$training_model = $this->loadModel('TrainingModel');
+			$training_model->set_Abwesenheitsliste($_POST["tr_id"], $_POST["p_ids"]);
 			$training_model->create_PDF($_POST["tr_id"]);
 			//header('location: ' . URL . 'termine/');
 		}
