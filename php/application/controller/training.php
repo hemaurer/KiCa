@@ -56,7 +56,9 @@ class Training extends Controller
 		// Anwesenheit speichern und eine PDF erzeugen
 		if (isset($_POST["submit_create_PDF"])) {
 			$training_model = $this->loadModel('TrainingModel');
-			$training_model->set_Abwesenheitsliste($_POST["tr_id"], $_POST["p_ids"]);
+			if (isset($_POST["p_ids"])){
+				$training_model->set_Abwesenheitsliste($_POST["tr_id"], $_POST["p_ids"]);
+			}
 			$training_model->create_PDF($_POST["tr_id"]);
 			//header('location: ' . URL . 'termine/');
 		}

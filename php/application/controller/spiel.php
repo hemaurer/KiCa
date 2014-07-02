@@ -40,7 +40,9 @@ class Spiel extends Controller
 		// Aufstellung speichern und PDF erstellen
 		if (isset($_POST["submit_create_PDF"])) {
 			$spiel_model = $this->loadModel('SpielModel');
-			$spiel_model->set_aufstellung($_POST['s_id'], $_POST['arr_aufstellung']);
+			if (isset($_POST['arr_aufstellung'])){
+				$spiel_model->set_aufstellung($_POST['s_id'], $_POST['arr_aufstellung']);
+			}
 			$spiel_model->create_PDF($_POST["s_id"]);
 			//header('location: ' . URL . 'termine/');
 		}
