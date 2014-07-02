@@ -30,13 +30,13 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Vorname*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_vorname" id="str_vorname_add_person" onkeyup="inputChecker('str_30', 'str_vorname_add_person', 'submit_add_person')" value="" placeholder="Vorname" required />
+										<input class="form-control" type="text" name="str_vorname" id="str_vorname_add_person" onkeyup="inputChecker('str_50', 'str_vorname_add_person', 'submit_add_person')" value="" placeholder="Vorname" required />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Nachname*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_nachname" id="str_nachname_add_person" onkeyup="inputChecker('str_30', 'str_nachname_add_person', 'submit_add_person')" value="" placeholder="Nachname" required/>
+										<input class="form-control" type="text" name="str_nachname" id="str_nachname_add_person" onkeyup="inputChecker('str_50', 'str_nachname_add_person', 'submit_add_person')" value="" placeholder="Nachname" required/>
 									</div>
 								</div>
 								<div class="form-group">
@@ -149,7 +149,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Spielort*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_ort" id="str_ort_add_spiel" value="" placeholder="Spielort" onkeyup="inputChecker('str_255', 'str_ort_add_spiel', 'submit_add_spiel')" required />
+										<input class="form-control" type="text" name="str_ort" id="str_ort_add_spiel" value="" placeholder="Spielort" onkeyup="inputChecker('str_200', 'str_ort_add_spiel', 'submit_add_spiel')" required />
 									</div>
 								</div>
 								<div class="form-group">
@@ -228,7 +228,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsort*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_ort" id="str_ort_add_trainingseinheit" value="" placeholder="Trainingsort" onkeyup="inputChecker('str_255', 'str_ort_add_trainingseinheit', 'submit_add_trainingseinheit')" required />
+										<input class="form-control" type="text" name="str_ort" id="str_ort_add_trainingseinheit" value="" placeholder="Trainingsort" onkeyup="inputChecker('str_200', 'str_ort_add_trainingseinheit', 'submit_add_trainingseinheit')" required />
 									</div>
 								</div>
 								<div class="form-group">
@@ -677,7 +677,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<?php /***Sparte-Edit***/?>
 				<div class="panel panel-default">
 					<div id="sparte_edit_glyph" onclick="change_chevron('#sparte_edit_glyph','#sparte_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion" href="#sparte_edit">
