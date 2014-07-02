@@ -1,0 +1,53 @@
+##################################################################################
+#                                                                                #
+#                                                                                #
+#                .rvuuJr;:                                                       #
+#              :7@B@@@B@Bur7i.                                                   #
+#           ,:v7,      ::   :i:                                                  #
+#         ...v,         ;:    .i:                                                #
+#        .,;2            L      ;L                                               #
+#       :@M@2           .J7:    .Bv         :J     jL. u,   ,vJuJr               #
+#       @BMkXr.        ii.:JSuv:,,S         rE   ;Ev       2k:. .7Mi             #
+#      .B@0kNL,iirrriuJ:.ivuuZM   U:        iF ,17     X. Lq      .:  iuLLjL     #
+#      :@@GOv        .SvJu15EM@  .Fi        iXYjqi     G, 0;               q7    #
+#      :8GB0          :@8MO@B@@  :X:        :Z.  q2    Z. u5       i  :7v7:5r    #
+#       Y.ui           7@B@@@@S .7N         rX    2E.  G:  0J    ,8j iB    kv    #
+#       71.Y.          .u:,.   Y:0v         iX     7Z: N,   72uuuU:   LuLJ7uj    #
+#       .F2i1:        i:     ..7@E.                                              #
+#        :PPrU7:.   .vi .:::::v@M:                                               #
+#         :1Gk@M8Nqq0,,:i:iiLZ@F.                                                #
+#           iSB@B@B@BOr7L5NMBq:                                                  #
+#             .ijqBB@B@B@GSr,                                                    #
+#                    ...                                                         #
+#                                                                                #
+#                                                                                #
+#		     Organisieren Sie mit KickersCalendar!			 #
+#										 #
+##################################################################################
+
+
+
+Benötigte Anforderungen:
+- Funktionsfähiger Apache Server mit PHP-Version 5.5.
+- Funktionsfähiger MySQL Server.
+- Xampp muss installiert sein und im C:\ Verzeichnis liegen.
+
+Installation:
+1) Wenn Ihr Computer nicht bereits den Anforderungen gerecht wird, so sorgen Sie jetzt dafür.
+2) Entpacken Sie die kica.zip.
+3) Den Ordner "kica" kopieren/verschieben Sie in das Verzeichnis: C:\xampp\htdocs.
+4) Legen Sie eine mySQL Datenbank mit dem Namen "kica" an und importieren Sie den Datenbank-Dump "kica.sql", 
+   sodass die Datenbank lauffähig ist.
+5) Entnehmen Sie die vHost Konfiguration der ebenso benannten Txt-File 
+   und fügen Sie diese am Ende der folgenden Datei: C:\xampp\apache\conf\extra\httpd-vhosts.conf ein
+	oder
+   Ersetzen Sie die vorher genannte Datei durch die gleichbenannte mitgelieferte httpd-vhosts.conf
+6) Führen Sie den Editor als Administrator aus und öffnen Sie die Datei: C:\Windows\System32\drivers\etc\hosts
+7) Fügen Sie in der "hosts" Datei folgendes ganz unten an:
+ 	127.0.0.1 kica.tld
+8) Starten Sie den Apache und MySQL Server
+9) Öffnen Sie den Browser und geben Sie die Adresse: "kica.tld" ein 
+   und 		Organisieren Sie mit KickersCalendar.
+
+
+KickersCalendar [KiCa]
