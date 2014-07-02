@@ -38,8 +38,8 @@ class Verwaltung extends Controller
         if (isset($_POST["submit_add_person"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->add_person($_POST["str_nachname"], $_POST["str_vorname"], $_POST["d_date"], $_POST["int_groesse"], $_POST["b_betreuer"], $_POST["int_tel"]);
+			header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
 		}
-		header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
 	public function edit_person()
     {
@@ -231,6 +231,7 @@ class Verwaltung extends Controller
         }
         //header('location: ' . URL . 'verwaltung/');
     }
+/*Turnier-Sparte*/
 	public function get_turnier_sparte()
 	{
 			$verwaltungs_model = $this->loadModel('VerwaltungsModel');
@@ -248,6 +249,12 @@ class Verwaltung extends Controller
             $verwaltungs_model->delete_turnier_sparte($_POST["tu_id"], $_POST["sparte_id"]);
         }
     }
+/*Sparte*/
+	public function get_sparte()
+    {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->get_sparte($_POST["sparte_id"]);
+    }
 	public function add_sparte()
     {
         if (isset($_POST["submit_add_sparte"])) {
@@ -256,11 +263,18 @@ class Verwaltung extends Controller
         }
         header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
-
-
-
-
+	
+	public function edit_sparte()
+    {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->edit_sparte($_POST["sparte_id"], $_POST["str_name"]);
+    }
+    public function delete_sparte()
+    {
+        if (isset($_POST["del_id"])) {
+            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
+            $verwaltungs_model->delete_sparte($_POST["del_id"]);
+        }
+    }
 }
-
-
 ?>

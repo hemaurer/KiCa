@@ -76,7 +76,8 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-4 col-md-4">
+									<div class="col-md-offset-4 col-md-4 formular-button">
+										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
 										<input type="submit" class="btn btn-primary" name="submit_add_person" id="submit_add_person" value="Speichern" />
 									</div>
 								</div>
@@ -171,7 +172,8 @@
 									<script> $('#timepicker1').timepicker({showMeridian: false, defaultTime: false});</script>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-4 col-md-4">
+									<div class="col-md-offset-4 col-md-4 formular-button">
+										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
 										<input type="submit" class="btn btn-primary" name="submit_add_spiel" value="Speichern"/>
 									</div>
 								</div>
@@ -197,7 +199,8 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-4 col-md-4">
+									<div class="col-md-offset-4 col-md-4 formular-button">
+										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
 										<input class="btn btn-primary" type="submit" name="submit_add_mannschaft" value="Speichern" />
 									</div>
 								</div>
@@ -270,7 +273,8 @@
 									<script> $('#timepicker2').timepicker({showMeridian: false, defaultTime: false});</script>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-4 col-md-4">
+									<div class="col-md-offset-4 col-md-4 formular-button">
+										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
 										<input class="btn btn-primary" type="submit" name="submit_add_trainingseinheit" value="Speichern" />
 									</div>
 								</div>
@@ -316,7 +320,8 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-4 col-md-4">
+									<div class="col-md-offset-4 col-md-4 formular-button">
+										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
 										<input class="btn btn-primary" type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
 									</div>
 								</div>
@@ -377,7 +382,8 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-4 col-md-4">
+									<div class="col-md-offset-4 col-md-4 formular-button">
+										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
 										<input class="btn btn-primary" type="submit" name="submit_add_turnier" value="Speichern" />
 									</div>
 								</div>
@@ -404,7 +410,8 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-md-offset-4 col-md-4">
+									<div class="col-md-offset-4 col-md-4 formular-button">
+										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
 										<input class="btn btn-primary" type="submit" name="submit_add_sparte" value="Speichern" />
 									</div>
 								</div>
@@ -665,6 +672,38 @@
 								} ?>
 
 
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<?php /***Sparte-Edit***/?>
+				<div class="panel panel-default">
+					<div id="sparte_edit_glyph" onclick="change_chevron('#sparte_edit_glyph','#sparte_edit_glyph_span')" class="panel-heading collapsed" data-toggle="collapse" data-parent="#edit-accordion" href="#sparte_edit">
+						<h4 class="panel-title">
+							<a class="collapse_title" >Sparte bearbeiten</a><div id="sparte_edit_glyph_span" class="collapse_chevron"><span class="glyphicon glyphicon-chevron-left"></span></div>
+						</h4>
+					</div>
+					<div id="sparte_edit" class="panel-collapse collapse">
+						<div class="panel-body">
+							<h3>Liste aller Sparten</h3>
+							<table class="table">
+								<thead style="background-color: #ddd; font-weight: bold;">
+									<tr>
+										<td>Spartenname</td>
+										<td align="right" width="1%">Bearbeiten</td>
+										<td align="right" width="1%">Löschen</td>
+									</tr>
+								</thead>
+								<tbody>
+								<?php foreach ($sparten as $sparte) { ?>
+									<tr>
+										<td><?php if (isset($sparte->name)) echo $sparte->name; ?></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('2','sparte','<?php echo $sparte->sparte_id; ?>','<?php echo $sparte->name; ?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>
+										<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModal('3','sparte','<?php echo $sparte->sparte_id; ?>','<?php echo $sparte->name; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
+									</tr>
+								<?php } ?>
 								</tbody>
 							</table>
 						</div>

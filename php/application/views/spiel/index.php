@@ -84,7 +84,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-md-offset-3 col-md-6">
+					<div class="col-md-offset-3 col-md-6 formular-button">
 						<input class="btn btn-default" type="submit" name="submit_abort" value="Abbrechen" />
 						<input class="btn btn-primary" type="submit" name="submit_edit_aufstellung" value="Speichern" />
 					</div>

@@ -25,6 +25,10 @@ table {
 .btn-right{
     float: right;
 }
+
+.formular-button{
+	text-align: right;
+}
 /*Bootstrap Overwrite*/
 
 .glyphicon{

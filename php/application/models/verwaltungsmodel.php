@@ -983,11 +983,36 @@ class VerwaltungsModel
         $query->execute();
         return $query->fetchAll();
     }
+	public function get_sparte($sparte_id)
+    {
+		$sql = "SELECT name AS Name FROM sparte WHERE sparte_id=?";
+        $query = $this->db->prepare($sql);
+		$query->execute(array($sparte_id));
+        $result = json_encode($query->fetchAll());
+        $json_string = substr($result, 1 , (strlen($result)-2));
+
+        echo $json_string;
+        return $result;
+    }
 	public function add_sparte($str_name)
     {
         $sql = "INSERT INTO sparte (name) VALUES (:name)";
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name));
     }
-	
+	public function edit_sparte($sparte_id, $str_name)
+    {	
+		$sql = "UPDATE sparte SET name=? WHERE sparte_id=?";
+		$query = $this->db->prepare($sql);
+		$query->execute(array($str_name, $sparte_id));
+		echo true;
+	}
+    public function delete_sparte($sparte_id)
+    {
+        $sql = "DELETE FROM sparte WHERE sparte_id =?";
+        $query = $this->db->prepare($sql);
+        $query->execute(array($sparte_id));
+		echo true;
+    }
+
 }?>
