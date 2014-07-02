@@ -172,14 +172,9 @@
 									<script> $('#timepicker1').timepicker({showMeridian: false, defaultTime: false});</script>
 								</div>
 								<div class="form-group">
-<<<<<<< HEAD
 									<div class="col-md-offset-4 col-md-4 formular-button">
 										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
-										<input type="submit" class="btn btn-primary" name="submit_add_spiel" value="Speichern"/>
-=======
-									<div class="col-md-offset-4 col-md-4">
 										<input type="submit" class="btn btn-primary" name="submit_add_spiel" id="submit_add_spiel" value="Speichern"/>
->>>>>>> origin/master
 									</div>
 								</div>
 							</form>
@@ -204,14 +199,9 @@
 									</div>
 								</div>
 								<div class="form-group">
-<<<<<<< HEAD
 									<div class="col-md-offset-4 col-md-4 formular-button">
 										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
-										<input class="btn btn-primary" type="submit" name="submit_add_mannschaft" value="Speichern" />
-=======
-									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-primary" type="submit" name="submit_add_mannschaft" id="submit_add_mannschaft" value="Speichern" />
->>>>>>> origin/master
 									</div>
 								</div>
 							</form>
@@ -283,14 +273,9 @@
 									<script> $('#timepicker2').timepicker({showMeridian: false, defaultTime: false});</script>
 								</div>
 								<div class="form-group">
-<<<<<<< HEAD
 									<div class="col-md-offset-4 col-md-4 formular-button">
 										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
-										<input class="btn btn-primary" type="submit" name="submit_add_trainingseinheit" value="Speichern" />
-=======
-									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-primary" type="submit" name="submit_add_trainingseinheit" id="submit_add_trainingseinheit" value="Speichern" />
->>>>>>> origin/master
 									</div>
 								</div>
 							</form>
@@ -335,14 +320,9 @@
 									</div>
 								</div>
 								<div class="form-group">
-<<<<<<< HEAD
 									<div class="col-md-offset-4 col-md-4 formular-button">
 										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
-										<input class="btn btn-primary" type="submit" name="submit_add_trainingsgruppe" value="Speichern" />
-=======
-									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-primary" type="submit" name="submit_add_trainingsgruppe" id="submit_add_trainingsgruppe" value="Speichern" />
->>>>>>> origin/master
 									</div>
 								</div>
 							</form>
@@ -402,14 +382,9 @@
 									</div>
 								</div>
 								<div class="form-group">
-<<<<<<< HEAD
 									<div class="col-md-offset-4 col-md-4 formular-button">
 										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
-										<input class="btn btn-primary" type="submit" name="submit_add_turnier" value="Speichern" />
-=======
-									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-primary" type="submit" name="submit_add_turnier" id="submit_add_turnier" value="Speichern" />
->>>>>>> origin/master
 									</div>
 								</div>
 							</form>
@@ -435,14 +410,9 @@
 									</div>
 								</div>
 								<div class="form-group">
-<<<<<<< HEAD
 									<div class="col-md-offset-4 col-md-4 formular-button">
 										<a class="btn btn-default"  role="button" href="<?php echo URL . 'verwaltung/' ?>" >Abbrechen</a>
-										<input class="btn btn-primary" type="submit" name="submit_add_sparte" value="Speichern" />
-=======
-									<div class="col-md-offset-4 col-md-4">
 										<input class="btn btn-primary" type="submit" name="submit_add_sparte" id="submit_add_sparte" value="Speichern" />
->>>>>>> origin/master
 									</div>
 								</div>
 							</form>
