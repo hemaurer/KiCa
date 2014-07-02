@@ -51,13 +51,13 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Groesse</label>
 									<div class="col-md-4">
-										<input class="form-control" type="number" name="int_groesse" id="int_groesse_add_person" value="" onkeyup="inputChecker('groesse', 'int_groesse_add_person', 'submit_add_person')" placeholder="Beispiel in cm: 158" />
+										<input class="form-control" name="int_groesse" id="int_groesse_add_person" value="" onkeyup="inputChecker('groesse', 'int_groesse_add_person', 'submit_add_person')" placeholder="Beispiel in cm: 158" />
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Telefonnummer</label>
 									<div class="col-md-4">
-										<input class="form-control" type="number" name="int_tel" id="int_tel_add_person" value="" onkeyup="inputChecker('tel', 'int_tel_add_person', 'submit_add_person')" placeholder="Telefonnummer" />
+										<input class="form-control" name="int_tel" id="int_tel_add_person" value="" onkeyup="inputChecker('tel', 'int_tel_add_person', 'submit_add_person')" placeholder="Telefonnummer" />
 									</div>
 								</div>
 								<div class="form-group">
@@ -195,7 +195,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Mannschaftsname*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_name" id="str_mannschaft_add_mannschaft" value="" placeholder="Mannschaftsname" onkeyup="inputChecker('str_50', 'str_mannschaft_add_mannschaft', 'submit_add_mannschaft')" required />
+										<input class="form-control" type="text" name="str_name" id="str_name_add_mannschaft" value="" placeholder="Mannschaftsname" onkeyup="inputChecker('str_50', 'str_name_add_mannschaft', 'submit_add_mannschaft')" required />
 									</div>
 								</div>
 								<div class="form-group">
@@ -222,7 +222,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_name" id="str_trainingseinheit_add_trainingseinheit" value="" placeholder="Training" onkeyup="inputChecker('str_50', 'str_trainingseinheit_add_trainingseinheit', 'submit_add_trainingseinheit')" required />
+										<input class="form-control" type="text" name="str_name" id="str_name_add_trainingseinheit" value="" placeholder="Training" onkeyup="inputChecker('str_50', 'str_name_add_trainingseinheit', 'submit_add_trainingseinheit')" required />
 									</div>
 								</div>
 								<div class="form-group">
@@ -297,7 +297,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsgruppenname*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_name" id="str_trainingsgruppe_add_trainingsgruppe" value="" placeholder="Trainingsgruppenname" onkeyup="inputChecker('str_50', 'str_trainingsgruppe_add_trainingsgruppe', 'submit_add_trainingsgruppe')" required />
+										<input class="form-control" type="text" name="str_name" id="str_name_add_trainingsgruppe" value="" placeholder="Trainingsgruppenname" onkeyup="inputChecker('str_50', 'str_name_add_trainingsgruppe', 'submit_add_trainingsgruppe')" required />
 									</div>
 								</div>
 								<div class="form-group">
@@ -344,7 +344,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Turniername*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_name" id="str_turnier_add_turnier" value="" placeholder="Turniername" onkeyup="inputChecker('str_50', 'str_turnier_add_turnier', 'submit_add_turnier')" required />
+										<input class="form-control" type="text" name="str_name" id="str_name_add_turnier" value="" placeholder="Turniername" onkeyup="inputChecker('str_50', 'str_name_add_turnier', 'submit_add_turnier')" required />
 									</div>
 								</div>
 								<div class="form-group">
@@ -406,7 +406,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Sparte*</label>
 									<div class="col-md-4">
-										<input class="form-control" type="text" name="str_name" id="str_sparte_add_sparte" value="" placeholder="Sparte" onkeyup="inputChecker('str_50', 'str_sparte_add_sparte', 'submit_add_sparte')" required />
+										<input class="form-control" type="text" name="str_name" id="str_name_add_sparte" value="" placeholder="Sparte" onkeyup="inputChecker('str_50', 'str_name_add_sparte', 'submit_add_sparte')" required />
 									</div>
 								</div>
 								<div class="form-group">

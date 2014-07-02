@@ -81,7 +81,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">Spielort</label>
 							<div class="col-md-6">
-								<input class="form-control" type="text" name="str_ort" id="str_ort_edit_spiel" value="" placeholder="Spielort" required />
+								<input class="form-control" type="text" name="str_ort" id="str_ort_edit_spiel" value="" onkeyup="inputChecker('str_200', 'str_ort_edit_spiel', 'submit_edit_spiel')" placeholder="Spielort" required />
 							</div>
 						</div>
 						<div class="form-group">
@@ -133,7 +133,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">Turniername*</label>
 							<div class="col-md-6">
-								<input class="form-control" type="text" name="str_name" id="str_name_edit_turnier" value="" placeholder="Turniername" required />
+								<input class="form-control" type="text" name="str_name" id="str_name_edit_turnier" onkeyup="inputChecker('str_50', 'str_name_edit_turnier', 'submit_edit_turnier')" value="" placeholder="Turniername" required />
 							</div>
 						</div>
 						<div class="form-group">
@@ -237,13 +237,13 @@
 								<div class="form-group">
 									<label class="control-label col-md-4">Training(Name oder Beschreibung)*</label>
 									<div class="col-md-6">
-										<input class="form-control" type="text" name="str_name" id="str_name_edit_trainingseinheit" value="" placeholder="Training" required/>
+										<input class="form-control" type="text" name="str_name" id="str_name_edit_trainingseinheit" onkeyup="inputChecker('str_50', 'str_name_edit_trainingseinheit', 'submit_edit_trainingseinheit')" value="" placeholder="Training" required/>
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label col-md-4">Trainingsort*</label>
 									<div class="col-md-6">
-										<input class="form-control" type="text" name="str_ort" id="str_ort_edit_trainingseinheit" value="" placeholder="Trainingsort" required/>
+										<input class="form-control" type="text" name="str_ort" id="str_ort_edit_trainingseinheit" onkeyup="inputChecker('str_200', 'str_ort_edit_trainingseinheit', 'submit_edit_trainingseinheit')" value="" placeholder="Trainingsort" required/>
 									</div>
 								</div>
 								<div class="form-group">
@@ -309,7 +309,7 @@
 						<div class="form-group">
 							<label class="control-label col-md-4">Trainingsgruppe*</label>
 							<div class="col-md-6">
-								<input class="form-control" type="text" id="str_name_edit_trainingsgruppe" value="" placeholder="Trainingsgruppe" />
+								<input class="form-control" type="text" id="str_name_edit_trainingsgruppe" onkeyup="inputChecker('str_50', 'str_name_edit_trainingsgruppe', 'submit_edit_trainingsgruppe')" value="" placeholder="Trainingsgruppe" />
 							</div>
 						</div>
 						<div class="form-group">
