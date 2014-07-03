@@ -5,11 +5,6 @@ class Verwaltung extends Controller
 
     public function index()
     {
-        // simple message to show where you are
-        //echo 'Message from Controller: You are in the Controller: Verwaltung, using the method index().';
-
-        // load a model, perform an action, pass the returned data to a variable
-        // NOTE: please write the name of the model "LikeThis"
         $verwaltungs_model = $this->loadModel('VerwaltungsModel');
         $personen = $verwaltungs_model->get_alle_personen();
 		$spiele = $verwaltungs_model->get_alle_spiele();
@@ -43,12 +38,8 @@ class Verwaltung extends Controller
     }
 	public function edit_person()
     {
-
-        //if (isset($_POST["submit_edit_person"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->edit_person($_POST["p_id"], $_POST["str_nachname"], $_POST["str_vorname"], $_POST["d_date"], $_POST["int_groesse"], $_POST["b_betreuer"], $_POST["int_tel"]);
-        //}
-        //header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
 	public function reset_password()
 	{
@@ -59,11 +50,10 @@ class Verwaltung extends Controller
     {	@session_start();
 		if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 
-        if (isset($_POST["del_id"])) {
-            $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            $verwaltungs_model->delete_person($_POST["del_id"]);
-        }
-        //header('location: ' . URL . 'verwaltung/');
+			if (isset($_POST["del_id"])) {
+				$verwaltungs_model = $this->loadModel('VerwaltungsModel');
+				$verwaltungs_model->delete_person($_POST["del_id"]);
+			}
 		}
 		else{
 			echo "Diese Seite ist für Sie gesperrt";}
@@ -123,11 +113,8 @@ class Verwaltung extends Controller
     }
 	public function edit_mannschaft()
     {
-        //if (isset($_POST["submit_edit_mannschaft"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->edit_mannschaft($_POST["m_id"], $_POST["str_name"]);
-        //}
-        //header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
     public function delete_mannschaft()
     {
@@ -135,7 +122,6 @@ class Verwaltung extends Controller
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->delete_mannschaft($_POST["del_id"]);
         }
-        //header('location: ' . URL . 'verwaltung/');
     }
 
 /***Trainingseinheiten***/
@@ -190,7 +176,6 @@ class Verwaltung extends Controller
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->delete_trainingsgruppe($_POST["del_id"]);
         }
-        //header('location: ' . URL . 'verwaltung/');
     }
 
 /***Turnier***/
@@ -209,27 +194,19 @@ class Verwaltung extends Controller
     }
 	public function edit_turnier()
     {
-        //if (isset($_POST["submit_edit_turnier"])) {
             $verwaltungs_model = $this->loadModel('VerwaltungsModel');
 			if (isset ($_POST["arr_sparte_option"])){
             $verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["int_liga"], $_POST["arr_sparte_option"]);
 			}else{
 				$verwaltungs_model->edit_turnier($_POST["tu_id"], $_POST["str_name"], $_POST["int_liga"], null);
 			}
-        // }
-        // header('location: ' . URL . 'verwaltung/'); //Weiterleitung nach Ausführen der Methode
     }
     public function delete_turnier(/*$tu_id*/)
     {
-        // if (isset($tu_id)) {
-            // $verwaltungs_model = $this->loadModel('VerwaltungsModel');
-            // $verwaltungs_model->delete_turnier($tu_id);
-        // }
 		if (isset($_POST["del_id"])) {
 			$verwaltungs_model = $this->loadModel('VerwaltungsModel');
             $verwaltungs_model->delete_turnier($_POST["del_id"]);
         }
-        //header('location: ' . URL . 'verwaltung/');
     }
 /*Turnier-Sparte*/
 	public function get_turnier_sparte()

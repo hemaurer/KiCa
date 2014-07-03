@@ -667,11 +667,9 @@
 												<td align="center"><a  data-toggle="modal" data-target="#bs_Modal" onclick="toggleModalS('3','turnier_sparte','<?php echo $turnier->ID; ?>' ,'<?php echo $turnier_detail->sparte_id; ?>','<?php echo $turnier_detail->Sparte;?> aus <?php echo $turnier->Turnier; ?>')"><span class="glyphicon glyphicon-remove"></span></a></td>
 											</tr>
 								<?php 	}
-										}
+									}
 									}
 								} ?>
-
-
 								</tbody>
 							</table>
 						</div>
