@@ -72,8 +72,10 @@ class SpielModel
 		$pdf->AddPage();
 		$pdf->createHeader("Aufstellung");
 		$pdf->createSpielDetails($this->get_Spiel($s_id));
-		$arr_header = array (0 => "Name", 1 => "anwesend?");
+		if (count($arr_anwesend) > 0) {
+			$arr_header = array (0 => "Name", 1 => "anwesend?");
 		$pdf->ShowList($arr_header,$arr_data);
+		}
 		$pdf->Output();
 	}
 	

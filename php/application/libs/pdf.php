@@ -103,7 +103,11 @@ class PDF extends FPDF {
 		$this->Ln(5);
 		$this->Cell(35);
 		$this->Cell(35,6,"Ergebnis",0,0,'L');
-		$this->Cell(50,6,utf8_decode($arr_details->Heimtore.":".$arr_details->Auswaertstore),0,0,'L');
+		if ($arr_details->Heimtore != null ) {
+			$this->Cell(50,6,utf8_decode($arr_details->Heimtore.":".$arr_details->Auswaertstore),0,0,'L');
+		} else {
+			$this->Cell(50,6,"",0,0,'L');
+		}
 		$this->Ln(5);
 		$this->Cell(35);
 		$this->Cell(35,6,"Spielart",0,0,'L');
