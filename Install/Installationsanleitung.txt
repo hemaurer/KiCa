@@ -31,23 +31,50 @@ Benötigte Anforderungen:
 - Funktionsfähiger Apache Server mit PHP-Version 5.5.
 - Funktionsfähiger MySQL Server.
 - Xampp muss installiert sein und im C:\ Verzeichnis liegen.
+- Funktionsfähiger aktueller Browser.
 
 Installation:
 1) Wenn Ihr Computer nicht bereits den Anforderungen gerecht wird, so sorgen Sie jetzt dafür.
 2) Entpacken Sie die kica.zip.
 3) Den Ordner "kica" kopieren/verschieben Sie in das Verzeichnis: C:\xampp\htdocs.
-4) Legen Sie eine mySQL Datenbank mit dem Namen "kica" an und importieren Sie den Datenbank-Dump "kica.sql", 
-   sodass die Datenbank lauffähig ist.
-5) Entnehmen Sie die vHost Konfiguration der ebenso benannten Txt-File 
-   und fügen Sie diese am Ende der folgenden Datei: C:\xampp\apache\conf\extra\httpd-vhosts.conf ein
+4) Importieren Sie den Datenbank-Dump "kica mit Testdaten.sql" in Ihre MySQL Datenbank Verwaltungssoftware (z.B. phpmyadmin), 
+   sodass die Datenbank lauffähig ist. Wie der Name sagt sind in diesem Datenbank-Dump Testdaten enthalten.
+   Wollen Sie eine neue Datenbank ohne Daten, so importieren Sie den Dump "kica.sql". Es ist dabei besonders wichtig,
+   dass die erste Mannschaft die angelegt wird die eigene ist!!
+   Beide Datenbank-Dumps legen eine Datenbank und alle Tabellen an, sodass hier kein weiterer Schritt nötig ist.
+   Die Datenbanken befinden sich im Ordner "DB"
+
+Im folgenden gibt es zwei Möglichkeiten a) und b) der folgenden Schritte. Entscheiden Sie sich für einen Weg und führen
+Sie diesen vollständig durch. Das mischen der Wege führt zu Problemen 
+
+5a) Entnehmen Sie die vHost Konfiguration der ebenso benannten Txt-File 
+    und fügen Sie diese am Ende der folgenden Datei: C:\xampp\apache\conf\extra\httpd-vhosts.conf ein
 	oder
-   Ersetzen Sie die vorher genannte Datei durch die gleichbenannte mitgelieferte httpd-vhosts.conf
-6) Führen Sie den Editor als Administrator aus und öffnen Sie die Datei: C:\Windows\System32\drivers\etc\hosts
-7) Fügen Sie in der "hosts" Datei folgendes ganz unten an:
+    Ersetzen Sie die vorher genannte Datei durch die gleichbenannte mitgelieferte httpd-vhosts.conf
+6a) Führen Sie den Editor als Administrator aus und öffnen Sie die Datei: C:\Windows\System32\drivers\etc\hosts
+7a) Fügen Sie in der "hosts" Datei folgendes ganz unten an:
  	127.0.0.1 kica.tld
-8) Starten Sie den Apache und MySQL Server
-9) Öffnen Sie den Browser und geben Sie die Adresse: "kica.tld" ein 
-   und 		Organisieren Sie mit KickersCalendar.
+8a) Öffnen Sie die Datei "*\php\application\config\config.php" und definieren Sie die variable "URL" in Zeile 21 als 
+    "http://kica.tld/" wenn nicht schon geschehen. Beispiel der Zeile 21: define('URL', 'http://kica.tld/');
+8b) Öffnen Sie die Datei "*\php\application\config\config.php" und definieren Sie die variable "URL" in Zeile 21 als 
+    
+    "http://localhost/kica/"
+    
+    oder 
+    
+    "http://IP-Addresse/kica/" 
+
+    wobei "IP-Adresse" die IP-Adresse ihres Gerätes im lokalen Netzwerk darstellt.
+    Beispiel der Zeile 21: define('URL', 'http://192.168.0.2/kica/');
+
+9) Konfigurieren Sie die Datenbank in der "config.php" Datei. Haben Sie die Datenbank-Dump mit Testdaten gewählt, so ist der
+   'DB_NAME': kica_test. Wenn nicht handelt es sich beim 'DB_NAME' um "kica". DB_USER und DB_PASS haben Sie persönlich
+   vergeben, dementsprechhend füllen Sie diese aus. Das Beispiel befindet sich bereits in der "config.php"
+
+10) Starten Sie den Apache und MySQL Server
+
+11) Öffnen Sie den Browser und geben Sie die Adresse: "kica.tld" ein 
+    und Organisieren Sie mit >KickersCalendar<.
 
 
 KickersCalendar [KiCa]
