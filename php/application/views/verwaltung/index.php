@@ -498,8 +498,8 @@
 										<td><?php if (isset($spiel->Auswaerts)) echo $spiel->Auswaerts; ?></td>
 										<td><?php if ((isset($spiel->Heimtore)) && (isset($spiel->Auswaertstore))) echo $spiel->Heimtore." : ".$spiel->Auswaertstore; ?></td>
 										<td><?php if (isset($spiel->Sparte)) echo $spiel->Sparte; ?></td>
-										<td><?php if (isset($spiel->Turnier)){ if ($spiel->Turnier == "Freundschaftsspiel") { echo "Fr.spiel";}else{ echo $spiel->Turnier; } }?></td>
-										<td><?php if (isset($spiel->Status)){ if ($spiel->Status == "Freundschaftsspiel") { echo "Fr.spiel";}else{ echo $spiel->Status; } }?></td>
+										<td><?php if (isset($spiel->Turnier)){ if ($spiel->Turnier == "Freundschaftsspiel") { echo "F-Spiel";}else{ echo $spiel->Turnier; } }?></td>
+										<td><?php if (isset($spiel->Status)){ if ($spiel->Status == "Freundschaftsspiel") { echo "F-Spiel";}else{ echo $spiel->Status; } }?></td>
 										<td><?php if (isset($spiel->Ort)) echo $spiel->Ort; ?></td>
 										<td><?php if (isset($spiel->Uhrzeit)){$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.y H:i');} ?></td>
 										<td align="center"><a  data-toggle="modal" data-target="#spiel_Modal" onclick="toggleModal('2','spiel','<?php echo $spiel->s_id; ?>','<?php echo $spiel->Heim; ?> gegen <?php echo $spiel->Auswaerts;?>')"><span class="glyphicon glyphicon-pencil"></span></a></td>

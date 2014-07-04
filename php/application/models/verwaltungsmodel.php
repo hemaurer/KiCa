@@ -85,6 +85,7 @@ class VerwaltungsModel
 			$str_user = $person->username;
 		}else if(($str_vorname == null) && ($str_nachname != null)){
 			$str_vorname =	$person->v_name;
+			$str_nachname = trim($str_nachname);
 			$str_user = $str_vorname.".".$str_nachname;
 			/*Benutzername prüfen ob bereits vorhanden*/
 			$sql = "SELECT username FROM person";
@@ -103,6 +104,7 @@ class VerwaltungsModel
 			}
 		}else if(($str_vorname != null) && ($str_nachname == null)){
 			$str_nachname =	$person->name;
+			$str_vorname = trim($str_vorname);
 			$str_user = $str_vorname.".".$str_nachname;
 			/*Benutzername prüfen ob bereits vorhanden*/
 			$sql = "SELECT username FROM person";
@@ -121,6 +123,8 @@ class VerwaltungsModel
 			}
 		}else
 		{
+			$str_vorname = trim($str_vorname);
+			$str_nachname = trim($str_nachname);
 			$str_user = $str_vorname.".".$str_nachname;
 			if (!($str_user == $person->username)){
 				/*Benutzername prüfen ob bereits vorhanden*/
@@ -216,7 +220,7 @@ class VerwaltungsModel
         return $result;
     }
 	/* Neues Spiel hinzufügen */
-	public function add_spiel($str_ort, $str_heim, $str_auswaerts, $int_h_tore, $int_a_tore, $str_stat_name, $d_date, $d_time, $str_tu_name, $str_sparte_name)
+	public function add_spiel($str_ort, $str_heim, $str_auswaerts, $str_stat_name, $d_date, $d_time, $str_tu_name, $str_sparte_name)
     {
 		/**Heimmannschaft auslesen und ID aus Datenbank heraussuchen und Array splitten**/
 		$sql = "Select m_id FROM mannschaft WHERE  name = ?"; 	
@@ -266,9 +270,9 @@ class VerwaltungsModel
 		$d_zeit = $d_obj->format('Y-m-d H:i:s'); 
 		
 		/**Neues Spiel in Datenbank schreiben**/
-        $sql = "INSERT INTO spiel (ort, heim, auswaerts, h_tore, a_tore, stat_id, zeit, tu_id, sparte_id) VALUES (:ort, :heim, :auswaerts, :h_tore, :a_tore, :stat_id, :zeit, :tu_id, :sparte_id)";
+        $sql = "INSERT INTO spiel (ort, heim, auswaerts, stat_id, zeit, tu_id, sparte_id) VALUES (:ort, :heim, :auswaerts, :stat_id, :zeit, :tu_id, :sparte_id)";
         $query = $this->db->prepare($sql);
-        $query->execute(array(':ort' => $str_ort, ':heim' => $int_heim, ':auswaerts' => $int_auswaerts, ':h_tore' => $int_h_tore, ':a_tore' => $int_a_tore, ':stat_id' => $int_stat_id, ':zeit' => $d_zeit, ':tu_id' => $int_tu_id, ':sparte_id' => $int_sparte_id));
+        $query->execute(array(':ort' => $str_ort, ':heim' => $int_heim, ':auswaerts' => $int_auswaerts, ':stat_id' => $int_stat_id, ':zeit' => $d_zeit, ':tu_id' => $int_tu_id, ':sparte_id' => $int_sparte_id));
     }
 	/* Spiel anhand der ID editieren */
 	public function edit_spiel($s_id, $str_ort, $str_heim, $str_auswaerts, $int_h_tore, $int_a_tore, $str_stat_name, $d_date, $d_time, $str_tu_name, $str_sparte_name)
@@ -285,25 +289,33 @@ class VerwaltungsModel
 		}
 		
 		/**Wenn Heim null wird der Heim von db genommen**/
-		if ($str_heim == 0){
+		if ($str_heim == "0"){
 			$int_heim = $spiel->heim;
 		}else{
 			/*Mannschaft ID auslesen*/
 			$sql = "SELECT m_id FROM mannschaft WHERE name=?";
 			$query = $this->db->prepare($sql);
 			$query->execute(array($str_heim));
-			$int_heim = $query->fetch(PDO::FETCH_OBJ);
+			// $int_heim = $query->fetch(PDO::FETCH_OBJ);
+			$arr_heim_id = $query->fetchAll();					
+			foreach($arr_heim_id as $int_heim){				
+				$int_heim = $int_heim->m_id;				
+			};
 		}
 	
 		/**Wenn Auswaerts null wird der Auswaerts von db genommen**/
-		if ($str_auswaerts == 0){
+		if ($str_auswaerts == "0"){
 			$int_auswaerts = $spiel->auswaerts;
 		}else{
 			/*Mannschaft ID auslesen*/
 			$sql = "SELECT m_id FROM mannschaft WHERE name=?";
 			$query = $this->db->prepare($sql);
 			$query->execute(array($str_auswaerts));
-			$int_auswaerts = $query->fetch(PDO::FETCH_OBJ);
+			// $int_auswaerts = $query->fetch(PDO::FETCH_OBJ);
+			$arr_auswaerts_id = $query->fetchAll();					
+			foreach($arr_auswaerts_id as $int_auswaerts){				
+				$int_auswaerts = $int_auswaerts->m_id;				
+			};
 		}
 		
 		/**Tore auf null checken**/
@@ -313,7 +325,7 @@ class VerwaltungsModel
 		if ($int_a_tore == null){
 			$int_a_tore = $spiel->a_tore;
 		}
-		/*Mannschaft ID auslesen*/
+		/*Status ID auslesen*/
 		$sql = "SELECT stat_id FROM status WHERE status=?";
 		$query = $this->db->prepare($sql);
 		$query->execute(array($str_stat_name));
@@ -343,23 +355,32 @@ class VerwaltungsModel
 			$sql = "SELECT tu_id FROM turnier WHERE name=?";
 			$query = $this->db->prepare($sql);
 			$query->execute(array($str_tu_name));
-			$int_tu_id = $query->fetch(PDO::FETCH_OBJ);
+			// $int_tu_id = $query->fetch(PDO::FETCH_OBJ);
+			$arr_tu_id = $query->fetchAll();					
+			foreach($arr_tu_id as $int_tu_id){				
+				$int_tu_id = $int_tu_id->tu_id;	
+			};
 		}
 		
 		/**Sparte auf 0 checken**/
 		if ($str_sparte_name == 0){
 			$int_sparte_id = $spiel->sparte_id;
 		}else{
-			/*Turnier ID auslesen*/
-			$sql = "SELECT tu_id FROM turnier WHERE name=?";
+			/*Sparte ID auslesen*/
+			$sql = "SELECT sparte_id FROM sparte WHERE name=?";
 			$query = $this->db->prepare($sql);
 			$query->execute(array($str_sparte_name));
-			$int_sparte_id = $query->fetch(PDO::FETCH_OBJ);
+			// $int_sparte_id = $query->fetch(PDO::FETCH_OBJ);
+			$arr_sparte_id = $query->fetchAll();					
+			foreach($arr_sparte_id as $int_sparte_id){				
+				$int_sparte_id = $int_sparte_id->sparte_id;				
+			};
 		}
 		
 		$sql = "UPDATE spiel SET ort=?, heim=?, auswaerts=?, h_tore=?, a_tore=?, stat_id=?, zeit=?, tu_id=?, sparte_id=? WHERE s_id=?";
 		$query = $this->db->prepare($sql);
 		$query->execute(array($str_ort, $int_heim, $int_auswaerts, $int_h_tore, $int_a_tore, $int_stat_id->stat_id, $d_zeit, $int_tu_id, $int_sparte_id, $s_id));
+		
 		echo true;
 	}
 	/* Spiel anhand ID löschen */
@@ -423,12 +444,12 @@ class VerwaltungsModel
 			der letzte Spielort der Heimmanschaft ausgelesen und zurückgegeben*/
 		if ($nextSelectId == "str_auswaerts".$index){
 			/*letzten Spielort auslesen*/
-			if ($index == 1){
+			// if ($index == 1){
 				$sql = "Select spiel.ort AS Ort FROM spiel JOIN mannschaft as heim ON spiel.heim = heim.m_id WHERE  heim.name = '".$str_heimValue."' ORDER BY zeit DESC LIMIT 1";	
 				$query = $this->db->prepare($sql);						
 				$query->execute();					
 				$arr_letzter_spielort = $query->fetchAll();
-			}
+			// }
 			$sql = "SELECT mannschaft.name AS value FROM mannschaft RIGHT JOIN mannschaft_turnier_sparte ON mannschaft_turnier_sparte.m_id = mannschaft.m_id WHERE mannschaft_turnier_sparte.sparte_id = ".$int_sparte_id." AND mannschaft_turnier_sparte.tu_id = ".$int_tu_id." AND mannschaft.name <> '".$str_heimValue."' ORDER BY mannschaft.name ASC";
 			$query = $this->db->prepare($sql);
 			$query->execute();
@@ -606,33 +627,10 @@ class VerwaltungsModel
         $query = $this->db->prepare($sql);
         $query->execute(array(':name' => $str_name, ':ort' => $str_ort, ':zeit' => $d_zeit, ':trainer' => $int_trainer, ':tg_id' => $int_tg_id->tg_id));
 		
-		/*ID der angelegten Trainingseinheit heraussuchen*/
-		$sql = "Select tr_id FROM trainingseinheit WHERE name=?";	
-		$query = $this->db->prepare($sql);						
-		$query->execute(array($str_name));					
-		$int_tr_id = $query->fetch(PDO::FETCH_OBJ);
-		
-		/*Teilnehmer der Trainingsgruppe auslesen und in abwesenheitsliste speichern*/
-		$sql = "Select p_id FROM teilnehmer_tg WHERE tg_id=?";	
-		$query = $this->db->prepare($sql);						
-		$query->execute(array($int_tg_id->tg_id));					
-		$arr_teilnehmer = $query->fetchAll();					
-		foreach($arr_teilnehmer as $teilnehmer){				
-			$sql = "INSERT INTO abwesenheit (tr_id, p_id) VALUES (:tr_id, :p_id)";
-			$query = $this->db->prepare($sql);
-			$query->execute(array(':tr_id' => $int_tr_id->tr_id, ':p_id' => $teilnehmer->p_id));
-		
-		};
     }
 	/* Trainingseinheit anhand der ID editieren */
 	public function edit_trainingseinheit($tr_id, $str_name, $str_ort, $d_date, $d_time, $str_tg, $int_trainer)
     {
-		/**Vergleichsdaten**/
-		$sql = "SELECT * FROM trainingseinheit WHERE tr_id=?";
-        $query = $this->db->prepare($sql);
-        $query->execute(array($tr_id));
-		$trainingseinheit = $query->fetch(PDO::FETCH_OBJ);
-		
 		/**Trainingsgruppe auslesen und ID aus Datenbank auslesen und Array splitten**/
 		$sql = "Select tg_id FROM trainingsgruppe WHERE name=?";	
 		$query = $this->db->prepare($sql);						
@@ -707,7 +705,6 @@ class VerwaltungsModel
 			$query->execute(array($str_name));
 			$trainingsgruppe = $query->fetch(PDO::FETCH_OBJ);
 			
-			/*egal wieviele Personen gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
 			if (is_array($arr_teilnehmer_option)) {
 				foreach($arr_teilnehmer_option as $option){
 							
@@ -737,7 +734,6 @@ class VerwaltungsModel
 		/*Nur wenn eine Person (Checkbox) gewählt wurde, wird auch eine Verknüpfung erstellt.*/
 		if(isset($arr_teilnehmer_option)){
 			
-			/*egal wieviele Personen gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
 			if (is_array($arr_teilnehmer_option)) {
 				foreach($arr_teilnehmer_option as $option){
 							
@@ -816,7 +812,6 @@ class VerwaltungsModel
 			$query->execute(array($str_name));
 			$turnier = $query->fetch(PDO::FETCH_OBJ);
 			
-			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
 			if (is_array($arr_sparte_option)) {
 				foreach($arr_sparte_option as $option){
 					/*Sparten ID auslesen*/
@@ -854,7 +849,6 @@ class VerwaltungsModel
 		/*Nur wenn eine Sparte (Checkbox) gewählt wurde, wird auch eine Verknüpfung erstellt.*/
 		if(isset($arr_sparte_option)){
 			
-			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
 			if (is_array($arr_sparte_option)) {
 				foreach($arr_sparte_option as $option){
 			
@@ -871,14 +865,6 @@ class VerwaltungsModel
 	/* Turnier und Verknüpfungen löschen */
     public function delete_turnier($tu_id)
     {
-		/* Verknüpfungen mit Sparte löschen */
-	    $sql = "DELETE FROM turnier_sparte WHERE tu_id =?";
-        $query = $this->db->prepare($sql);
-        $query->execute(array($tu_id));
-		/* Verknüpfungen mit Mannschaft und Sparte löschen */
-		$sql = "DELETE FROM mannschaft_turnier_sparte WHERE tu_id =?";
-        $query = $this->db->prepare($sql);
-        $query->execute(array($tu_id));
 		/* Turnier selbst löschen */
         $sql = "DELETE FROM turnier WHERE tu_id =?";
         $query = $this->db->prepare($sql);
@@ -895,16 +881,13 @@ class VerwaltungsModel
 		$query->execute(array($tu_id, $sparte_id));
         $mannschaft_sparte_result = $query->fetchAll();
 		
-		/* Gewinner der Verknüpfung aus Turnier-Sparte auslesen */
-		$sql = "SELECT turnier_sparte.gewinner AS Gewinner_Id FROM turnier_sparte WHERE turnier_sparte.tu_id=? AND turnier_sparte.sparte_id=?";
+		/* Gewinner auslesen */
+		$sql = "SELECT mannschaft.name AS Gewinner
+					FROM mannschaft
+					JOIN turnier_sparte ON turnier_sparte.gewinner = mannschaft.m_id
+					WHERE turnier_sparte.tu_id = ? AND turnier_sparte.sparte_id = ?";
         $query = $this->db->prepare($sql);
 		$query->execute(array($tu_id, $sparte_id));
-		$gewinner_id_result = $query->fetch(PDO::FETCH_OBJ);
-		
-		/* Mannschaftsname auslesen */
-		$sql = "SELECT mannschaft.name AS Gewinner FROM mannschaft WHERE mannschaft.m_id=?";
-        $query = $this->db->prepare($sql);
-		$query->execute(array($gewinner_id_result->Gewinner_Id));
 		$gewinner_result = $query->fetchAll();
 		
 		/* Gewinner und Mannschaften als json-Array zurückgeben */
@@ -935,7 +918,7 @@ class VerwaltungsModel
 			$query->execute(array($int_gewinner->m_id, $tu_id, $sparte_id));
 		}
 		if(isset($arr_mannschaft_option)){			
-			/*egal wieviele Sparten gewählt wurden, handelt es sich immer um einen Array, deswegen erübrigt sich diese Abfrage eigentlich*/
+			
 			if (is_array($arr_mannschaft_option)) {
 				foreach($arr_mannschaft_option as $option){
 					
