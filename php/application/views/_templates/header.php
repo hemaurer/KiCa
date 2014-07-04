@@ -135,7 +135,7 @@
 											        $_SESSION = array();
 											        session_destroy();
 							       	?>
-							       			<label id="lbl_loginFehler">Ihr Benutzername und Passwort stimmen nicht überein.</label>
+							       			<label id="lbl_loginFehler">Ihr Benutzername oder Passwort stimmt nicht.</label>
 					       			<?php
 								       		}
 								       	}
