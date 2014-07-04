@@ -119,8 +119,8 @@
 				<!-- die restliche Navigation, bzw. Submenu von "Login" -->
 					<ul id="login" class="dropdown-menu">
 
-						<!-- Wenn man nicht eingeloggt ist, das Login-Formular in der Navigation anzeigen -->
 						<?php
+							// Wenn man nicht eingeloggt ist, das Login-Formular in der Navigation anzeigen
 							if (!isset($_SESSION['user_login_status'])){
 						?>
 
@@ -149,14 +149,14 @@
 						<?php }
 						?>
 
-						<!-- Wenn man eingeloggt ist, die Profilseite und den Logout Button unter Login anzeigen -->
 						<?php
+							// Wenn man eingeloggt ist, die Profilseite und den Logout Button unter Login anzeigen
 							if (isset($_SESSION['user_login_status']) AND $_SESSION['user_login_status'] == 1){
 						?>
 
 							<li><a href="<?php echo URL; ?>profil/">Profil</a></li>
-						<!-- Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen -->
 							<?php
+								// Wenn man eingeloggt ist und Adminrechte hat, die Verwaltungsseite als Option anzeigen
 								if (isset($_SESSION['user_login_status']) AND $_SESSION['betreuer'] == 1){
 							?>
 								<li class="divider"></li>

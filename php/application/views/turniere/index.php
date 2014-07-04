@@ -4,7 +4,6 @@
 if(isset(Application::$parm_1) && isset(Application::$parm_2)){
 	?>
 <div class="container">
-	<!-- Beinhaltet alle Daten zu eintragen -->
 
 	<!-- Die Überschrift des Inhalts mit der Sparte -->
 	<div id="spartenText">
