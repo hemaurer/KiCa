@@ -119,6 +119,11 @@ table {
     margin-top: 30px;
 }
 
+.btn_spartenButton{
+    left: auto !important;
+    right: 0 !important;
+}
+
 #calendar{
     text-align: center;
     margin-right: auto;

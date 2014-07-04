@@ -43,7 +43,7 @@
 			 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
 			    <span class="spartenDropdownName" value=""> <?php echo $spartenDaten[0]->Sparte; ?> </span> <span class="caret"></span>
 	 		 </button>
-				 <ul class="dropdown-menu" role="menu">
+				 <ul class="dropdown-menu btn_spartenButton" role="menu">
 	          		<?php
 						// Sparten aus der DB laden und in der Liste anzeigen
 						// Model wird bereits in header.php angesprochen, deshalb muss nur noch ausgelesen werden

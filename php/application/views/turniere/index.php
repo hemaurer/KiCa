@@ -43,7 +43,7 @@ if(isset(Application::$parm_1) && isset(Application::$parm_2)){
 					?>
 				</span> <span class="caret"></span>
 			 </button>
-				 <ul class="dropdown-menu" role="menu">
+				 <ul class="dropdown-menu btn_spartenButton" role="menu">
 					<?php
 							// Turniere aus der DB laden und in der Liste anzeigen
 							// Freundschaftsspiel wird ganz oben angezeigt
@@ -100,7 +100,7 @@ if(isset(Application::$parm_1) && isset(Application::$parm_2)){
 					echo "<h4>".$str_status."</h4>";
 				}
 				echo "<table class='table'><tr>";
-				echo '<td class="termin-details" colspan="2">';								
+				echo '<td class="termin-details" colspan="2">';
 					if (isset($spiel->Uhrzeit)) {$date = new DateTime($spiel->Uhrzeit); echo $date->format('d.m.Y - H:i')." Uhr";};
 					if (isset($spiel->Ort)) echo "</br>".$spiel->Ort;
 				echo "</td>";
