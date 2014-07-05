@@ -1,4 +1,4 @@
--- --------------------------------------------------------
+﻿-- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server Version:               5.5.28 - MySQL Community Server (GPL)
 -- Server Betriebssystem:        Win64
@@ -77,14 +77,14 @@ CREATE TABLE IF NOT EXISTS `mannschaft_turnier_sparte` (
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `p_id` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) NOT NULL,
-  `v_name` varchar(30) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `v_name` varchar(50) NOT NULL,
   `geb_datum` date NOT NULL,
   `groesse` tinyint(4) unsigned DEFAULT NULL,
   `bild` varchar(100) DEFAULT NULL,
   `betreuer` tinyint(1) unsigned zerofill NOT NULL,
   `tel` varchar(50) DEFAULT NULL,
-  `username` varchar(30) NOT NULL,
+  `username` varchar(105) NOT NULL,
   `password` varchar(60) NOT NULL,
   PRIMARY KEY (`p_id`),
   UNIQUE KEY `username` (`username`)
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `sparte` (
 DROP TABLE IF EXISTS `spiel`;
 CREATE TABLE IF NOT EXISTS `spiel` (
   `s_id` int(10) NOT NULL AUTO_INCREMENT,
-  `ort` varchar(255) NOT NULL,
+  `ort` varchar(200) NOT NULL,
   `heim` int(10) NOT NULL,
   `auswaerts` int(10) NOT NULL,
   `h_tore` tinyint(4) DEFAULT NULL,
@@ -245,6 +245,20 @@ INSERT INTO abwesenheit
 	SELECT trainingseinheit.tr_id, NEW.p_id
    FROM trainingseinheit
    WHERE trainingseinheit.tg_id = NEW.tg_id AND trainingseinheit.zeit > NOW();
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Exportiere Struktur von Trigger kica.AutoInsertFreundschaft
+DROP TRIGGER IF EXISTS `AutoInsertFreundschaft`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `AutoInsertFreundschaft` AFTER INSERT ON `mannschaft` FOR EACH ROW BEGIN
+INSERT INTO mannschaft_turnier_sparte
+SELECT New.m_id, turnier.tu_id, sparte.sparte_id
+FROM sparte,turnier
+WHERE turnier.name ='Freundschaftsspiel';
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
