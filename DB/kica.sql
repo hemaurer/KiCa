@@ -1,4 +1,4 @@
-﻿-- --------------------------------------------------------
+-- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server Version:               5.5.28 - MySQL Community Server (GPL)
 -- Server Betriebssystem:        Win64
@@ -443,11 +443,13 @@ DROP TRIGGER IF EXISTS `UpdateTraining`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `UpdateTraining` AFTER UPDATE ON `trainingseinheit` FOR EACH ROW BEGIN
-DELETE FROM abwesenheit WHERE abwesenheit.tr_id = NEW.tr_id;
-INSERT INTO abwesenheit
-	SELECT NEW.tr_id, teilnehmer_tg.p_id
-	FROM teilnehmer_tg
-	WHERE teilnehmer_tg.tg_id = NEW.tg_id;
+IF OLD.tg_id <> NEW.tg_id THEN
+	DELETE FROM abwesenheit WHERE abwesenheit.tr_id = NEW.tr_id;
+	INSERT INTO abwesenheit
+		SELECT NEW.tr_id, teilnehmer_tg.p_id
+		FROM teilnehmer_tg
+		WHERE teilnehmer_tg.tg_id = NEW.tg_id;
+END IF;
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
